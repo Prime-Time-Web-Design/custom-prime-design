@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { client } from "@/tina/__generated__/client";
-import HomeContent from "./home/HomeContent";
+import { client } from "../../tina/__generated__/client";
+import HomeContent, { HomeSchema } from "./home/HomeContent";
 
 // Use Edge Runtime for faster execution
 export const runtime = "edge";
@@ -14,32 +14,16 @@ export const metadata: Metadata = {
   description: "Welcome to our website",
 };
 
-// Default data for when TinaCMS isn't configured
-const defaultData = {
-  home: {
-    title: "Welcome to Our Website",
-    description:
-      "Discover our amazing products and services designed to help you achieve your goals.",
-    hero: {
-      heading: "Transform Your Business",
-      subheading:
-        "We provide innovative solutions to help your business grow and succeed in today's digital world.",
-      buttonText: "Get Started",
-      buttonLink: "/contact",
-    },
-  },
-};
-
 export default async function Home() {
   let data;
 
   try {
-    const result = await client.queries.home({ relativePath: "home.yaml" });
-    data = result.data;
+    const result = await client.queries.page({ relativePath: "home.yaml" });
+    data = result;
+    console.log("the data", data);
   } catch (error) {
     console.error("Error fetching home data:", error);
-    data = defaultData;
   }
 
-  return <HomeContent data={data} />;
+  return <HomeContent {...(data as HomeSchema)} />;
 }
