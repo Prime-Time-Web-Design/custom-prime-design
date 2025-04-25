@@ -1,0 +1,15 @@
+query NavigationQuery {
+  global(relativePath: "main-nav.yaml") {
+    navigation {
+      mainNav {
+        label
+        href
+        subItems {
+          label
+          href
+          icon
+        }
+      }
+    }
+  }
+}

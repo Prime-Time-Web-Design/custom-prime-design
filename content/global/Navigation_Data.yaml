@@ -1,0 +1,11 @@
+navigation:
+  mainNav:
+    - label: Services
+      href: /services
+      subItems:
+        - label: Couples Therapy
+          href: /services/couples-therapy
+          icon: HeartHandshake
+        - label: Individual Therapy
+          href: /services/individual-therapy
+          icon: Heart

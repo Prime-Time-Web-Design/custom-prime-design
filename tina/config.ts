@@ -1,11 +1,15 @@
 import { defineConfig } from "tinacms";
+import { globalSchema } from "./schema/global";
+import { pageSchema } from "./schema/page";
+import { postSchema } from "./schema/post";
+import homeSchema from "./schema/home";
+import * as dotenv from "dotenv";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
+// Load environment variables
+dotenv.config({ path: ".env.local" });
+
+// Your hosting provider
+const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
   branch,
@@ -25,40 +29,12 @@ export default defineConfig({
       publicFolder: "public",
     },
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
-      {
-        name: "page",
-        label: "Pages",
-        path: "content/pages",
-        format: "yaml",
-        fields: [{ name: "subtitle", label: "Subtitle", type: "string" }],
-      },
-      {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
-        ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
-        },
-      },
+      ...globalSchema.collections,
+      ...pageSchema.collections,
+      ...postSchema.collections,
+      ...homeSchema.collections,
     ],
   },
 });

@@ -1,0 +1,7 @@
+title: "Welcome to Our Website"
+description: "Discover our amazing products and services designed to help you achieve your goals."
+hero:
+  heading: "Transform Your Business"
+  subheading: "We provide innovative solutions to help your business grow and succeed in today's digital world."
+  buttonText: "Get Started"
+  buttonLink: "/contact"

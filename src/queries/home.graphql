@@ -1,0 +1,12 @@
+query HomeQuery {
+  home(relativePath: "home.yaml") {
+    title
+    description
+    hero {
+      heading
+      subheading
+      buttonText
+      buttonLink
+    }
+  }
+}
