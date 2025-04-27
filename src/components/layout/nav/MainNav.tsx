@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
 import { MainNavProps } from "./header.types";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import * as LucideIcons from "lucide-react";
-
+import Image from "next/image";
 const getIconComponent = (iconName: string) => {
   const IconComponent = (
     LucideIcons as unknown as Record<
@@ -32,7 +33,16 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
         <div className="flex flex-1">
           <span className="text-xl font-semibold text-accent-text">
             {/* {logoText} */}
-            Prime Therapy
+            <Link href="/">
+              <Image
+                src="/logo.svg" // assuming it's in the /public folder
+                alt="Prime Time Web Design Logo"
+                width={10} // or whatever size looks good
+                height={10}
+                className="h-auto w-auto cursor-pointer"
+                priority // load immediately (optional but good for logos)
+              />
+            </Link>
           </span>
         </div>
 
