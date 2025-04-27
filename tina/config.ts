@@ -4,8 +4,10 @@ import { pageSchema } from "./schema/page";
 import { postSchema } from "./schema/post";
 import * as dotenv from "dotenv";
 
-// Load environment variables
-dotenv.config({ path: ".env.local" });
+// Only load environment variables in non-browser environments
+if (typeof window === "undefined") {
+  dotenv.config({ path: ".env.local" });
+}
 
 export default defineConfig({
   branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main",

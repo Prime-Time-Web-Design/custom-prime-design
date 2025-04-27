@@ -9,21 +9,14 @@ import {
 import { ArrowBigRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import MainNav from "./MainNav";
-import { useNavigation } from "@/providers/NavigationProvider";
+import { useLayout } from "../layout-context";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { navigation, isLoading, error } = useNavigation();
+  const { globalSettings } = useLayout();
+  const navigation = globalSettings!.navigation!;
 
   console.log(navigation);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error loading navigation</div>;
-  }
 
   return (
     <header className="sticky top-0 z-50 shadow-md bg-[var(--color-text)] rounded-xl mt-2.5 mx-2.5">
@@ -36,7 +29,7 @@ export const Header = () => {
       </div>
 
       {/* Main Navigation Header */}
-      <MainNav navigation={navigation} logoText="Prime Therapy" />
+      <MainNav navigation={navigation} />
 
       <div className="flex justify-end lg:hidden">
         <button
@@ -89,15 +82,15 @@ export const Header = () => {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-[var(--color-secondary-hover)]">
                 <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-[var(--color-text)] hover:bg-[var(--color-secondary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                  {/* {navigation.map((item) => ( */}
+                  <Link
+                    // key={item.label}
+                    href={"/"}
+                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-[var(--color-text)] hover:bg-[var(--color-secondary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                  >
+                    {/* {item.label} */} Hey
+                  </Link>
+                  {/* ))} */}
                   <Link
                     href="/log-in"
                     className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-[var(--color-text)] transition duration-200"

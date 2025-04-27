@@ -1,5 +1,11 @@
 navigation:
   mainNav:
+    - label: About
+      href: /
+      subItems:
+        - label: Meet Our Team
+          href: /about
+          icon: Users
     - label: Services
       href: /services
       subItems:

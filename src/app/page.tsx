@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { client } from "../../tina/__generated__/client";
 import HomeContent, { HomeSchema } from "./home/HomeContent";
+import Layout from "@/components/layout/Layout";
 
 // Use Edge Runtime for faster execution
 export const runtime = "edge";
@@ -20,10 +21,15 @@ export default async function Home() {
   try {
     const result = await client.queries.page({ relativePath: "home.yaml" });
     data = result;
-    console.log("the data", data);
   } catch (error) {
     console.error("Error fetching home data:", error);
   }
 
-  return <HomeContent {...(data as HomeSchema)} />;
+  // return <HomeContent {...(data as HomeSchema)} />;
+
+  return (
+    <Layout>
+      <HomeContent {...(data as HomeSchema)} />
+    </Layout>
+  );
 }

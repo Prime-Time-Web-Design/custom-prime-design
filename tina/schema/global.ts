@@ -35,13 +35,14 @@ export const globalSchema = defineSchema({
                   type: "string",
                   name: "href",
                   label: "Link",
-                  required: true,
+                  required: false,
                 },
                 {
                   type: "object",
                   name: "subItems",
                   label: "Sub Items",
                   list: true,
+                  required: false,
                   fields: [
                     {
                       type: "string",
@@ -59,6 +60,7 @@ export const globalSchema = defineSchema({
                       type: "string",
                       name: "icon",
                       label: "Icon",
+                      required: false,
                       options: lucideIconNames,
                     },
                   ],
