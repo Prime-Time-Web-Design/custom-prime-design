@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactNode } from "react";
 
 interface SectionProps extends React.HTMLProps<HTMLElement> {
@@ -11,7 +12,7 @@ export const Section: React.FC<SectionProps> = ({
   ...props
 }) => {
   return (
-    <div className={background || "bg-default"}>
+    <div className={background || "bg-[--color-primary] text-[--color-text]"}>
       <section className="py-12 mx-auto max-w-7xl px-6" {...props}>
         {children}
       </section>

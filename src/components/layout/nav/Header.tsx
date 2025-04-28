@@ -6,10 +6,11 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { ArrowBigRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import MainNav from "./MainNav";
 import { useLayout } from "../layout-context";
+import AlertBanner from "./AlertBanner";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,22 +20,15 @@ export const Header = () => {
   console.log(navigation);
 
   return (
-    <header className="sticky top-0 z-50 shadow-md bg-[var(--color-text)] rounded-xl mt-2.5 mx-2.5">
-      {/* Top Announcement Banner */}
-      <div className="bg-[var(--color-secondary)] py-2 text-sm text-[var(--color-text)] flex items-center justify-center rounded-t-lg">
-        <p className="mr-4">Most insured members have a $0 copay. Learn more</p>
-        <Link href="#" className="font-semibold hover:underline">
-          Learn More <ArrowBigRight className="inline h-4 w-4" />
-        </Link>
-      </div>
-
-      {/* Main Navigation Header */}
+    <header className="sticky top-0 z-50 shadow-md bg-[var(--color-bg)] rounded-xl mt-2.5 mx-2.5">
+      <AlertBanner />
       <MainNav navigation={navigation} />
 
-      <div className="flex justify-end lg:hidden">
+      {/* Mobile Menu Button */}
+      <div className="flex justify-end lg:hidden absolute top-4 right-4">
         <button
           type="button"
-          className="-m-2.5 inline-flex items-center justify-center bg-accent-text rounded-md p-2.5 text-[var(--color-text)] hover:bg-[var(--color-primary-hover)]"
+          className="inline-flex items-center justify-center rounded-xl p-2.5 text-[var(--color-text)] bg-[var(--color-bg-contrast)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-green)] transition duration-200"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <span className="sr-only">Open main menu</span>
@@ -42,7 +36,6 @@ export const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu (using Headless UI Dialog) */}
       <Transition
         show={mobileMenuOpen}
         as={Dialog}
@@ -59,20 +52,19 @@ export const Header = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-[var(--color-bg)]/80" />
+            <div className="fixed inset-0 bg-[var(--color-pink-dark)]/80 backdrop-blur-sm" />
           </TransitionChild>
 
-          <div className="fixed inset-y-0 left-0 z-50 w-full overflow-y-auto bg-[var(--color-bg)] px-6 py-6">
+          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-[var(--color-navy)] p-6 shadow-xl">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
-                <span className="sr-only">Prime Therapy</span>
-                <span className="text-xl font-bold text-[var(--color-primary)]">
+                <span className="text-xl font-bold text-[var(--color-yellow)]">
                   Prime Therapy
                 </span>
               </Link>
               <button
                 type="button"
-                className="-m-2.5 rounded-md p-2.5 text-[var(--color-text)]"
+                className="rounded-xl p-2.5 text-[var(--color-yellow)] hover:bg-[var(--color-mint-light)] hover:text-[var(--color-green)] transition duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
@@ -80,28 +72,44 @@ export const Header = () => {
               </button>
             </div>
             <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-[var(--color-secondary-hover)]">
+              <div className="-my-6 divide-y divide-[var(--color-accent)]">
                 <div className="space-y-2 py-6">
-                  {/* {navigation.map((item) => ( */}
-                  <Link
-                    // key={item.label}
-                    href={"/"}
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-[var(--color-text)] hover:bg-[var(--color-secondary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                  >
-                    {/* {item.label} */} Hey
-                  </Link>
-                  {/* ))} */}
+                  {/* {navigation.mainNav?.map((item) => (
+                    <div key={item.label} className="py-2">
+                      <Link
+                        href={item.href ?? "#"}
+                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[var(--color-yellow)] hover:bg-[var(--color-mint-light)] hover:text-[var(--color-green)] transition duration-200"
+                      >
+                        {item.label}
+                      </Link>
+                      {item.subItems && item.subItems.length > 0 && (
+                        <div className="mt-2 space-y-2 pl-4">
+                          {item.subItems.map((subItem) => (
+                            <Link
+                              key={subItem.label}
+                              href={subItem.href}
+                              className="block rounded-lg px-3 py-2 text-sm font-medium text-[var(--color-yellow)] hover:bg-[var(--color-mint-light)] hover:text-[var(--color-green)] transition duration-200"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))} */}
+                </div>
+                <div className="py-6">
                   <Link
                     href="/log-in"
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-[var(--color-text)] transition duration-200"
+                    className="block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[var(--color-yellow)] hover:bg-[var(--color-mint-light)] hover:text-[var(--color-green)] transition duration-200"
                   >
                     Log in
                   </Link>
                   <Link
                     href="/book-now"
-                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 bg-[var(--color-primary)] text-[var(--color-text)] hover:bg-[var(--color-primary-hover)]"
+                    className="mt-4 block rounded-lg bg-[var(--color-green)] px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-[var(--color-green-light)] hover:text-[var(--color-navy)] transition duration-200"
                   >
-                    Book now
+                    Find a Therapist
                   </Link>
                 </div>
               </div>

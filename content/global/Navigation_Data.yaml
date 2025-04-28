@@ -3,15 +3,46 @@ navigation:
     - label: About
       href: /
       subItems:
+        - label: Our Mission
+          href: /about/our-mission
+          icon: Shrub
+          variant: small
+        - label: Our Philosophy
+          href: /about/philosophy
+          icon: Omega
+          variant: small
         - label: Meet Our Team
           href: /about
           icon: Users
+          variant: small
+    - label: Pricing
+      subItems:
+        - label: Membership
+          href: /membership
+          icon: User2
+          variant: large
+        - label: Insurance
+          href: /insurance
+          icon: Shield
+          variant: large
     - label: Services
       href: /services
       subItems:
+        - label: Virtual Therapy
+          href: /about/virtual-therapy
+          icon: Monitor
+          variant: small
+        - label: Organizations & Groups
+          href: /about/organization-group-therapy
+          icon: Users
+          variant: small
         - label: Couples Therapy
           href: /services/couples-therapy
           icon: HeartHandshake
+          variant: small
         - label: Individual Therapy
           href: /services/individual-therapy
           icon: Heart
+          variant: small
+    - label: Blog
+    - label: Quick Start

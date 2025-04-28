@@ -25,8 +25,6 @@ export default async function Home() {
     console.error("Error fetching home data:", error);
   }
 
-  // return <HomeContent {...(data as HomeSchema)} />;
-
   return (
     <Layout>
       <HomeContent {...(data as HomeSchema)} />

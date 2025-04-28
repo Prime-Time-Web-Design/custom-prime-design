@@ -33,6 +33,7 @@ export type SubItem = {
   label: string;
   href: string;
   icon?: string | null;
+  variant?: string | null;
 };
 
 export type NavigationItem = {

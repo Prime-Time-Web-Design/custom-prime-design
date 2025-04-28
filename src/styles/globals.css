@@ -1,23 +1,68 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: oklch(0.45 0.11 142); /* Olive green */
-  --color-text: oklch(0.97 0.01 255); /* Light gray */
-  --color-primary: oklch(0.55 0.15 220); /* Blue */
-  --color-primary-hover: oklch(0.65 0.12 220); /* Lighter blue */
-  --color-secondary: oklch(0.75 0.10 230); /* Light blue */
-  --color-secondary-hover: oklch(0.97 0.01 255); /* Lightest gray */
-  --color-accent: #c5d3cc; /* Soft green */
-  --color-accent-text: #2f5d50; /* Dark forest green */
+  --color-calming-blue: #A7C7E7;
+  --color-calming-blue-light: #D1E9FF;
+  --color-calming-blue-dark: #7895B2;
+
+  --color-soft-turquoise: #77DDE7;
+  --color-soft-turquoise-light: #B4F0F5;
+  --color-soft-turquoise-dark: #5CB3B7;
+
+  --color-soft-lavender: #D5D5E8;
+  --color-soft-lavender-light: #E8E8F5;
+  --color-soft-lavender-dark: #A6A6C0;
+
+  --color-soft-apricot: #FFCBA4; /* Soft, muted apricot */
+  --color-soft-apricot-light: #FFD8B8;
+  --color-soft-apricot-dark: #E6B380;
+
+  --color-very-light-gray: #F8F8FF;
+  --color-deep-slate: #2F4F4F;
+
+  /* Semantic roles for convenience */
+  --color-bg: var(--color-very-light-gray);
+  --color-bg-contrast: var(--color-deep-slate);
+  --color-text: var(--color-deep-slate);
+  --color-primary: var(--color-calming-blue);
+  --color-primary-hover: var(--color-calming-blue-light);
+  --color-secondary: var(--color-soft-turquoise);
+  --color-secondary-hover: var(--color-soft-turquoise-light);
+  --color-accent: var(--color-soft-lavender);
+  --color-accent-hover: var(--color-soft-lavender-light);
+  --color-tertiary: var(--color-soft-apricot);
+  --color-tertiary-hover: var(--color-soft-apricot-light);
 }
 
 [data-theme="light"] {
-  --color-bg: oklch(0.97 0.01 255); /* Light gray */
-  --color-text: oklch(0.45 0.11 142); /* Olive green */
-  --color-primary: oklch(0.55 0.15 220); /* Blue */
-  --color-primary-hover: oklch(0.65 0.12 220); /* Lighter blue */
-  --color-secondary: oklch(0.75 0.10 230); /* Light blue */
-  --color-secondary-hover: oklch(0.45 0.11 142); /* Olive green */
-  --color-accent: #c5d3cc; /* Soft green */
-  --color-accent-text: #2f5d50; /* Dark forest green */
+  --color-calming-blue: #A7C7E7;
+  --color-calming-blue-light: #D1E9FF;
+  --color-calming-blue-dark: #7895B2;
+
+  --color-soft-turquoise: #77DDE7;
+  --color-soft-turquoise-light: #B4F0F5;
+  --color-soft-turquoise-dark: #93bf6c;
+
+  --color-soft-lavender: #D5D5E8;
+  --color-soft-lavender-light: #E8E8F5;
+  --color-soft-lavender-dark: #A6A6C0;
+
+  --color-soft-apricot: #FFCBA4; /* Soft, muted apricot */
+  --color-soft-apricot-light: #FFD8B8;
+  --color-soft-apricot-dark: #E6B380;
+
+  --color-very-light-gray: #F8F8FF;
+  --color-deep-slate: #2F4F4F;
+
+  --color-bg: var(--color-very-light-gray);
+  --color-bg-contrast: var(--color-deep-slate);
+  --color-text: var(--color-deep-slate);
+  --color-primary: var(--color-calming-blue);
+  --color-primary-hover: var(--color-calming-blue-light);
+  --color-secondary: var(--color-soft-turquoise);
+  --color-secondary-hover: var(--color-soft-turquoise-light);
+  --color-accent: var(--color-soft-lavender);
+  --color-accent-hover: var(--color-soft-lavender-light);
+  --color-tertiary: var(--color-soft-apricot);
+  --color-tertiary-hover: var(--color-soft-apricot-light);
 }

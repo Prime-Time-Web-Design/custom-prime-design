@@ -63,6 +63,13 @@ export const globalSchema = defineSchema({
                       required: false,
                       options: lucideIconNames,
                     },
+                    {
+                      type: "string",
+                      name: "variant",
+                      label: "Variant",
+                      required: false,
+                      options: ["large", "small"],
+                    },
                   ],
                 },
               ],
