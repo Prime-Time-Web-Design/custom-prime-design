@@ -15,7 +15,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
       {/* Main Navigation Header */}
 
       <nav
-        className="mx-auto flex items-center p-2 lg:px-16 text-[var(--color-text)] shadow-md rounded-2xl"
+        className="mx-auto flex items-center lg:p-2 lg:px-16 text-[var(--color-text)] shadow-md lg:rounded-2xl"
         aria-label="Global"
       >
         {/* Desktop Layout: Single flex container */}
