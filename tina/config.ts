@@ -3,13 +3,25 @@ import { globalSchema } from "./schema/global";
 import { pageSchema } from "./schema/page";
 import { postSchema } from "./schema/post";
 
-export default defineConfig({
-  branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main",
+// Your local configs
+const localMode = {
+  clientId: null,
+  token: null,
+  branch: "main",
+  local: true,
+};
 
-  // Get this from tina.io
+// Your production configs
+const productionMode = {
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
   token: process.env.TINA_TOKEN,
+  branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main",
+};
+
+export default defineConfig({
+  ...(process.env.NEXT_PUBLIC_USE_LOCAL_CLIENT === "1"
+    ? localMode
+    : productionMode),
 
   build: {
     outputFolder: "admin", // This will still build the local admin UI

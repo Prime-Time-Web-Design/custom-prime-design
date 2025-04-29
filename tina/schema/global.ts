@@ -70,6 +70,12 @@ export const globalSchema = defineSchema({
                       required: false,
                       options: ["large", "small"],
                     },
+                    {
+                      type: "string",
+                      name: "description",
+                      label: "Description",
+                      required: false,
+                    },
                   ],
                 },
               ],

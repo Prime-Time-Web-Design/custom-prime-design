@@ -34,6 +34,7 @@ export type SubItem = {
   href: string;
   icon?: string | null;
   variant?: string | null;
+  description?: string | null;
 };
 
 export type NavigationItem = {

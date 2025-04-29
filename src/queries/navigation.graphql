@@ -8,6 +8,8 @@ query NavigationQuery {
           label
           href
           icon
+          variant
+          description
         }
       }
     }

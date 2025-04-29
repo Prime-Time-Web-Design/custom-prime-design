@@ -9,8 +9,11 @@ export const getIconComponent = (
 ) => {
   if (!iconName) return null;
 
+  // Remove 'Lucide' prefix if present
+  const cleanIconName = iconName.replace(/^Lucide/, "");
+
   // Convert icon name to PascalCase to match Lucide component names
-  const pascalCaseName = iconName
+  const pascalCaseName = cleanIconName
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join("");
@@ -22,7 +25,7 @@ export const getIconComponent = (
 
   if (!IconComponent) {
     console.warn(
-      `Icon "${iconName}" not found in Lucide icons. Available icons:`,
+      `Icon "${cleanIconName}" not found in Lucide icons. Available icons:`,
       Object.keys(LucideIcons)
     );
     return null;
@@ -30,7 +33,7 @@ export const getIconComponent = (
 
   return (
     <IconComponent
-      className={`inline h-4 w-4 ${
+      className={`inline h-5 w-5 ${
         backgroundColor ? `bg-[${backgroundColor}]` : ""
       }`}
     />

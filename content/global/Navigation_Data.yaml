@@ -7,24 +7,29 @@ navigation:
           href: /about/our-mission
           icon: Shrub
           variant: small
+          description: Transforming mental healthcare through accessible, personalized therapy solutions.
         - label: Our Philosophy
           href: /about/philosophy
           icon: Omega
           variant: small
+          description: Client-centered care that combines evidence-based practices with compassionate support.
         - label: Meet Our Team
           href: /about
           icon: Users
           variant: small
+          description: Get to know our dedicated team of experienced mental health professionals.
     - label: Pricing
       subItems:
         - label: Membership
           href: /membership
           icon: User2
           variant: large
+          description: Flexible membership plans designed to fit your therapy needs and budget.
         - label: Insurance
           href: /insurance
           icon: Shield
           variant: large
+          description: We work with major insurance providers to make therapy more accessible.
     - label: Services
       href: /services
       subItems:
@@ -32,17 +37,21 @@ navigation:
           href: /about/virtual-therapy
           icon: Monitor
           variant: small
+          description: Convenient, secure online therapy sessions from the comfort of your home.
         - label: Organizations & Groups
           href: /about/organization-group-therapy
           icon: Users
           variant: small
+          description: Specialized therapy solutions for organizations and group settings.
         - label: Couples Therapy
           href: /services/couples-therapy
-          icon: HeartHandshake
+          icon: Heart
           variant: small
+          description: Build stronger relationships with expert guidance and support.
         - label: Individual Therapy
           href: /services/individual-therapy
           icon: Heart
           variant: small
+          description: Personalized one-on-one therapy tailored to your unique needs.
     - label: Blog
     - label: Quick Start

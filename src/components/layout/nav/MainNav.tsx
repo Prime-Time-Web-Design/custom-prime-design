@@ -37,7 +37,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
             </span>
           </div>
           {/* Nav Items */}
-          <div className="flex items-center gap-x-8">
+          <div className="flex items-center gap-x-4">
             {navItems
               .filter(
                 (item): item is NonNullable<typeof item> =>
@@ -72,6 +72,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                                   title={subitem.label}
                                   icon={subitem.icon ?? undefined}
                                   variant={subitem.variant ?? undefined}
+                                  description={subitem.description ?? undefined}
                                 />
                               </Link>
                             ))}
