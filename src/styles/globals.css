@@ -18,10 +18,12 @@
   --color-soft-apricot-dark: #E6B380;
 
   --color-very-light-gray: #F8F8FF;
+  --color-medium-slate: #828CA9;
   --color-deep-slate: #2F4F4F;
 
   /* Semantic roles for convenience */
   --color-bg: var(--color-very-light-gray);
+  --color-bg-medium: var(--color-medium-slate);
   --color-bg-contrast: var(--color-deep-slate);
   --color-text: var(--color-deep-slate);
   --color-primary: var(--color-calming-blue);

@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({
   variant = "small",
 }) => {
   const baseStyles =
-    "rounded-lg flex items-start w-full transition-colors duration-200 border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-accent)]";
+    "rounded-lg flex items-start w-full transition-colors duration-200 border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-bg-medium)]";
   const largeStyles =
     "bg-[var(--color-bg)] text-[var(--color-text)] flex-col p-6 min-h-[120px] text-lg hover:text-[var(--color-text)] gap-3";
   const smallStyles =
@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({
           {title}
         </h3>
         {description && (
-          <p className="text-xs text-[var(--color-text)] opacity-80 line-clamp-2 font-medium">
+          <p className="text-xs text-[var(--color-text)] opacity-80 font-medium">
             {description}
           </p>
         )}

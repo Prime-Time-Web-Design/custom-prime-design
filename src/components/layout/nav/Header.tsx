@@ -6,6 +6,8 @@ import { useLayout } from "../layout-context";
 import AlertBanner from "./AlertBanner";
 import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
+import Image from "next/image";
+import mobileLogo from "../../../../public/logo.svg";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,15 +21,7 @@ export const Header = () => {
         <div className="flex-shrink-0">
           <span className="text-2xl font-semibold text-[var(--color-text)]">
             <Link href="/">
-              {/* <Image
-                src="/logo.svg"
-                alt="Prime Time Web Design Logo"
-                width={10}
-                height={10}
-                className="h-auto w-auto cursor-pointer"
-                priority
-              /> */}
-              Prime Time
+              <Image src={mobileLogo} width={80} height={40} alt="Logo" />
             </Link>
           </span>
         </div>
@@ -47,7 +41,7 @@ export const Header = () => {
           </Link>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-xl p-2 text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] transition duration-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl p-2 text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] transition duration-200"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="sr-only">Open main menu</span>

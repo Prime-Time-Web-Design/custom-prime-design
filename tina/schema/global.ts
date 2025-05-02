@@ -75,6 +75,13 @@ export const globalSchema = defineSchema({
                       name: "description",
                       label: "Description",
                       required: false,
+                      ui: {
+                        validate: (value) => {
+                          if (value && value.length > 80) {
+                            return "Description must be 80 characters or less";
+                          }
+                        },
+                      },
                     },
                   ],
                 },

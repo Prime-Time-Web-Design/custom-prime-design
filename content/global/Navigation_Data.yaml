@@ -7,37 +7,38 @@ navigation:
           href: /about/our-mission
           icon: Shrub
           variant: small
-          description: Transforming mental healthcare through accessible, personalized therapy solutions.
+          description: >-
+            Transforming mental healthcare through personalized therapy
+            solutions
         - label: Our Philosophy
           href: /about/philosophy
           icon: Omega
           variant: small
-          description: Client-centered care that combines evidence-based practices with compassionate support.
+          description: >-
+            Combining the power of evidence-based practice with compassionate
+            support
         - label: Meet Our Team
           href: /about
           icon: Users
           variant: small
-          description: Get to know our dedicated team of experienced mental health professionals.
-    - label: Pricing
-      subItems:
-        - label: Membership
-          href: /membership
-          icon: User2
-          variant: large
-          description: Flexible membership plans designed to fit your therapy needs and budget.
-        - label: Insurance
-          href: /insurance
-          icon: Shield
-          variant: large
-          description: We work with major insurance providers to make therapy more accessible.
+          description: >-
+            Get to know our dedicated team of experienced mental health
+            professionals
     - label: Services
       href: /services
       subItems:
+        - label: Individual Therapy
+          href: /services/individual-therapy
+          icon: Heart
+          variant: small
+          description: Personalized one-on-one therapy tailored to your unique needs.
         - label: Virtual Therapy
           href: /about/virtual-therapy
           icon: Monitor
           variant: small
-          description: Convenient, secure online therapy sessions from the comfort of your home.
+          description: >-
+            Convenient, secure online therapy sessions from the comfort of your
+            home.
         - label: Organizations & Groups
           href: /about/organization-group-therapy
           icon: Users
@@ -48,10 +49,21 @@ navigation:
           icon: Heart
           variant: small
           description: Build stronger relationships with expert guidance and support.
-        - label: Individual Therapy
-          href: /services/individual-therapy
-          icon: Heart
-          variant: small
-          description: Personalized one-on-one therapy tailored to your unique needs.
+    - label: Pricing
+      subItems:
+        - label: Membership
+          href: /membership
+          icon: User2
+          variant: large
+          description: >-
+            Flexible membership plans designed to fit your therapy needs and
+            budget.
+        - label: Insurance
+          href: /insurance
+          icon: Shield
+          variant: large
+          description: >-
+            We work with major insurance providers to make therapy more
+            accessible.
     - label: Blog
     - label: Quick Start
