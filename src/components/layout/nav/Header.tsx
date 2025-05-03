@@ -7,7 +7,7 @@ import AlertBanner from "./AlertBanner";
 import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
-import mobileLogo from "../../../../public/logo.svg";
+import mobileLogo from "../../../../public/mobileLogo.svg";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,7 +21,7 @@ export const Header = () => {
         <div className="flex-shrink-0">
           <span className="text-2xl font-semibold text-[var(--color-text)] ">
             <Link href="/">
-              <Image src={mobileLogo} width={80} height={40} alt="Logo" />
+              <Image src={mobileLogo} width={120} height={40} alt="Logo" />
             </Link>
           </span>
         </div>

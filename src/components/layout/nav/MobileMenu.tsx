@@ -6,7 +6,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import Link from "next/link";
 import { MainNavProps } from "./header.types";
 import Image from "next/image";
@@ -96,8 +96,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                         className="group"
                         onClick={() => handleDetailsClick(item.label)}
                       >
-                        <summary className="list-none flex cursor-pointer rounded-lg px-3 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
+                        <summary className="list-none flex cursor-pointer items-center rounded-lg px-3 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
                           {item?.label}
+                          <ChevronDown
+                            className={`ml-2 h-4 w-4 text-primary transition-transform duration-200 group-open:rotate-180`}
+                          />
                         </summary>
                         <div className="mt-2 pl-4 space-y-2">
                           {item?.subItems.map((subItem) => (
