@@ -1,13 +1,13 @@
-import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { type PageBlocks } from "../../tina/__generated__/types";
+// import { TinaMarkdown } from "tinacms/dist/rich-text";
+// import { type PageBlocks } from "../../../tina/__generated__/types";
 import Image from "next/image";
 import hero from "../../../public/hero.jpg"; // Adjust the path to your image
 
-interface HeroBlockProps {
-  data: PageBlocks;
-}
+// interface HeroBlockProps {
+//   data: object;
+// }
 
-export const HeroBlock = ({ data }: HeroBlockProps) => {
+export const HeroBlock = () => {
   return (
     <section className="relative w-full min-h-[80vh] bg-[var(--color-very-light-gray)]">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-24">
@@ -15,10 +15,10 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
           {/* Text Content - Full width on mobile, half width on desktop */}
           <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
-              {data.headline || "Space to figure things out"}
+              {"Space to figure things out"}
             </h1>
             <div className="prose prose-lg text-[var(--color-medium-slate)]">
-              {data.description && <TinaMarkdown content={data.description} />}
+              {/* {<TinaMarkdown content={[{ type: "paragraph", children: [{ type: "text", text: "A comforting Description" }] }]} />} */}
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <button className="px-8 py-3 rounded-full bg-[var(--color-calming-blue)] hover:bg-[var(--color-calming-blue-light)] text-white font-medium transition-colors">
@@ -92,7 +92,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             {/* {data.image && ( */}
             <Image
               src={hero}
-              alt={data.imageAlt || "Hero illustration"}
+              alt={"Hero illustration"}
               className="w-full h-auto rounded-lg shadow-xl"
             />
             {/* )} */}

@@ -13,7 +13,8 @@ export type HomeSchema = {
 };
 
 export default function HomeContent(data: HomeSchema) {
-  const { title, description, hero } = data.data.page;
+  // const { title, description, hero } = data.data.page;
+  console.log("use data", data);
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function HomeContent(data: HomeSchema) {
           </a>
         </section>
       </div> */}
-      <HeroBlock data={{}} />
+      <HeroBlock />
     </>
   );
 }
