@@ -19,7 +19,7 @@ export const Header = () => {
       <AlertBanner />
       <div className="flex items-center justify-between px-4 py-2 lg:hidden">
         <div className="flex-shrink-0">
-          <span className="text-2xl font-semibold text-[var(--color-text)] focus:outline-[var(--color-secondary)] focus:outline-1">
+          <span className="text-2xl font-semibold text-[var(--color-text)] ">
             <Link href="/">
               <Image src={mobileLogo} width={80} height={40} alt="Logo" />
             </Link>

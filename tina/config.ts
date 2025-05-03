@@ -15,7 +15,7 @@ const localMode = {
 const productionMode = {
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
-  branch: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main",
+  branch: "main",
 };
 
 export default defineConfig({
