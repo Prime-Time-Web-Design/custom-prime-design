@@ -3,9 +3,6 @@ import { client } from "../../tina/__generated__/client";
 import HomeContent, { HomeSchema } from "./home/HomeContent";
 import Layout from "@/components/layout/Layout";
 
-// Use Edge Runtime for faster execution
-export const runtime = "edge";
-
 // Revalidate every hour
 export const revalidate = 3600;
 
