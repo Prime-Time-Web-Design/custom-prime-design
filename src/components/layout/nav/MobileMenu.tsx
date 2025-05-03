@@ -88,7 +88,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   <div key={item?.label} className="py-2">
                     {item?.subItems && item?.subItems.length > 0 ? (
                       <details
-                        ref={(el) => (detailsRefs.current[item.label] = el)}
+                        ref={(el: HTMLDetailsElement | null) => {
+                          if (item.label) {
+                            detailsRefs.current[item.label] = el;
+                          }
+                        }}
                         className="group"
                         onClick={() => handleDetailsClick(item.label)}
                       >
