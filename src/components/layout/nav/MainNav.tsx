@@ -63,7 +63,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                     <Popover className="relative">
                       {({ open }) => (
                         <>
-                          <PopoverButton className=" text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none">
+                          <PopoverButton className=" text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer ">
                             <div className="flex items-center gap-2">
                               {item.label}
                               <ChevronDown
@@ -86,7 +86,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                   <Link
                     key={item.label}
                     href={item.href ?? "#"}
-                    className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                    className="text-base font-semibold focus:outline-[var(--color-secondary)] focus:outline-1 text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                   >
                     {item.label}
                   </Link>
@@ -96,13 +96,13 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
           <div className="flex items-center gap-x-4">
             <Link
               href="/log-in"
-              className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+              className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 "
             >
               Log in
             </Link>
             <Link
               href="/book-now"
-              className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200"
+              className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-[var(--color-secondary)]  transition duration-200"
             >
               Find a Therapist
             </Link>

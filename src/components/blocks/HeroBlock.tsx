@@ -1,7 +1,7 @@
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { type PageBlocks } from "../../tina/__generated__/types";
 import Image from "next/image";
-import hero from "../../../public/hero.avif"; // Adjust the path to your image
+import hero from "../../../public/hero.jpg"; // Adjust the path to your image
 
 interface HeroBlockProps {
   data: PageBlocks;
