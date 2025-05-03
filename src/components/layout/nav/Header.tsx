@@ -29,7 +29,7 @@ export const Header = () => {
         <div className="flex items-center gap-x-2">
           <Link
             href="/log-in"
-            className="rounded-lg bg-transparent px-3 py-1.5 text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+            className="hidden lg:block rounded-lg bg-transparent px-3 py-1.5 text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
           >
             Log in
           </Link>
