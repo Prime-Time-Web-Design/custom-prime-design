@@ -1,182 +1,50 @@
+"use client";
 import Link from "next/link";
+import { useLayout } from "../layout-context";
 
 export const Footer = () => {
+  const { globalSettings } = useLayout();
+  const navigation = globalSettings?.navigation;
+
   return (
     <footer className="bg-[var(--color-bg-contrast)] text-[var(--color-very-light-gray)]">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* All about section */}
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-lg font-semibold mb-4">All about Tend</h2>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/faq"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/leadership"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Leadership
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/press"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Press
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/insurance"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Insurance
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/careers"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Careers
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Locations section */}
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-lg font-semibold mb-4">Locations</h2>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/locations/nyc"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  New York City
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/dc"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Washington DC Metro
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/atlanta"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Atlanta
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/boston"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Boston
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/connecticut"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Connecticut
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/locations/nashville"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Nashville
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services section */}
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-lg font-semibold mb-4">Services</h2>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/services"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  All Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/exam"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Dental Exam
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/invisalign"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Invisalign® Aligners
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/veneers"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Veneers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/whitening"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Whitening
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/implants"
-                  className="hover:text-[var(--color-calming-blue-light)]"
-                >
-                  Implants
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Dynamic Navigation Items */}
+          {navigation?.mainNav
+            ?.filter((item) => item)
+            .map((navItem) => (
+              <div key={navItem?.label} className="col-span-2 md:col-span-1">
+                <h2 className="text-lg font-semibold mb-4">{navItem?.label}</h2>
+                <ul className="space-y-3">
+                  {navItem?.subItems ? (
+                    // Render sub-items if they exist
+                    navItem.subItems
+                      .filter((item) => item)
+                      .map((subItem) => (
+                        <li key={subItem?.label}>
+                          <Link
+                            href={subItem?.href || "#"}
+                            className="hover:text-[var(--color-calming-blue-light)]"
+                          >
+                            {subItem?.label}
+                          </Link>
+                        </li>
+                      ))
+                  ) : (
+                    // Render single link if no sub-items
+                    <li>
+                      <Link
+                        href={navItem?.href || "#"}
+                        className="hover:text-[var(--color-calming-blue-light)]"
+                      >
+                        {navItem?.label}
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            ))}
 
           {/* Contact section */}
           <div className="col-span-2 md:col-span-1">
