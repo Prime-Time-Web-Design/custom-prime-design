@@ -63,7 +63,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                     <Popover className="relative">
                       {({ open }) => (
                         <>
-                          <PopoverButton className=" text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer ">
+                          <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none focus:text-[var(--color-primary)]">
                             <div className="flex items-center gap-2">
                               {item.label}
                               <ChevronDown
@@ -73,7 +73,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                               />
                             </div>
                           </PopoverButton>
-                          <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl">
+                          <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl focus:outline-none">
                             <div className="p-4 flex flex-col gap-2 min-w-[280px]">
                               {renderSubItems(item.subItems)}
                             </div>
@@ -86,7 +86,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                   <Link
                     key={item.label}
                     href={item.href ?? "#"}
-                    className="text-base font-semibold focus:outline-[var(--color-secondary)] focus:outline-1 text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                    className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
                   >
                     {item.label}
                   </Link>
@@ -96,13 +96,13 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
           <div className="flex items-center gap-x-4">
             <Link
               href="/log-in"
-              className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 "
+              className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
             >
               Log in
             </Link>
             <Link
               href="/book-now"
-              className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-[var(--color-secondary)]  transition duration-200"
+              className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm transition duration-200 focus:outline-none focus:text-[var(--color-bg)]"
             >
               Find a Therapist
             </Link>

@@ -87,6 +87,59 @@ export const globalSchema = defineSchema({
                 },
               ],
             },
+            {
+              type: "object",
+              name: "footer",
+              label: "Footer Settings",
+              fields: [
+                {
+                  type: "object",
+                  name: "contact",
+                  label: "Contact Information",
+                  fields: [
+                    {
+                      type: "string",
+                      name: "phone",
+                      label: "Phone Number",
+                    },
+                    {
+                      type: "string",
+                      name: "textNumber",
+                      label: "Text Number",
+                    },
+                    {
+                      type: "string",
+                      name: "email",
+                      label: "Email Address",
+                    },
+                  ],
+                },
+                {
+                  type: "object",
+                  name: "social",
+                  label: "Social Media",
+                  list: true,
+                  fields: [
+                    {
+                      type: "string",
+                      name: "platform",
+                      label: "Platform",
+                      options: ["facebook", "instagram", "twitter", "linkedin"],
+                    },
+                    {
+                      type: "string",
+                      name: "url",
+                      label: "URL",
+                    },
+                  ],
+                },
+                {
+                  type: "string",
+                  name: "companyName",
+                  label: "Company Name",
+                },
+              ],
+            },
           ],
         },
       ],
