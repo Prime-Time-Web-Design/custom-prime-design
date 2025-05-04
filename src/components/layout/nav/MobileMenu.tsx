@@ -79,7 +79,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 <div className="p-6">
                   <div className="flex items-center justify-between">
                     <Link href="/">
-                      <Image src={mobileLogo} width={120} height={40} alt="Logo" />
+                      <Image src={mobileLogo} width={120} height={40} alt="Logo" priority />
                     </Link>
                     <button
                       type="button"
