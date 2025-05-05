@@ -11,6 +11,7 @@ interface FeaturedContentCardProps {
   description: string;
   ctaText: string;
   ctaLink: string;
+  layout?: "vertical" | "horizontal"; // New prop for layout
 }
 
 const FeaturedContentCard: React.FC<FeaturedContentCardProps> = ({
@@ -19,10 +20,20 @@ const FeaturedContentCard: React.FC<FeaturedContentCardProps> = ({
   description,
   ctaText,
   ctaLink,
+  layout = "vertical", // Default to vertical
 }) => {
+  const isHorizontal = layout === "horizontal";
   return (
-    <div className="bg-[var(--color-bg)] border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-bg-medium)] rounded-xl overflow-hidden transition-colors duration-200">
-      <div className="relative w-full h-48">
+    <div
+      className={`bg-[var(--color-bg)] border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-bg-medium)] rounded-xl overflow-hidden transition-colors duration-200 ${
+        isHorizontal ? "flex flex-row h-48" : "flex flex-col"
+      }`}
+    >
+      <div
+        className={`relative ${
+          isHorizontal ? "w-48 h-full min-w-48" : "w-full h-48"
+        }`}
+      >
         <Image
           src={image.src}
           alt={image.alt}
@@ -30,7 +41,7 @@ const FeaturedContentCard: React.FC<FeaturedContentCardProps> = ({
           className="object-cover rounded-xl"
         />
       </div>
-      <div className="p-6">
+      <div className={`p-6 ${isHorizontal ? "flex-1" : ""}`}>
         <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
           {title}
         </h3>
