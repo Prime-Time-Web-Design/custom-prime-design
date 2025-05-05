@@ -1,20 +1,16 @@
 import React, { PropsWithChildren } from "react";
 import { LayoutProvider } from "./layout-context";
-import client from "../../../tina/__generated__/client";
 import { Header } from "./nav/Header";
 import Footer from "./nav/Footer";
+import { GlobalQuery } from "../../../tina/__generated__/types";
 
 type LayoutProps = PropsWithChildren & {
-  rawPageData?: unknown;
+  globalData: { data: { global: GlobalQuery["global"] } };
 };
 
-export default async function Layout({ children, rawPageData }: LayoutProps) {
-  const { data: globalData } = await client.queries.global({
-    relativePath: "Navigation_Data.yaml",
-  });
-
+export default function Layout({ children, globalData }: LayoutProps) {
   return (
-    <LayoutProvider globalSettings={globalData.global} pageData={rawPageData}>
+    <LayoutProvider globalSettings={globalData.data.global} pageData={null}>
       <div className="min-h-screen">
         <Header />
         <main className="overflow-x-hidden">{children}</main>

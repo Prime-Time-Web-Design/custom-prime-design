@@ -4,18 +4,18 @@ import React, { ReactNode } from "react";
 interface SectionProps extends React.HTMLProps<HTMLElement> {
   background?: string;
   children: ReactNode;
+  className?: string;
 }
 
 export const Section: React.FC<SectionProps> = ({
   children,
   background,
+  className = "",
   ...props
 }) => {
   return (
-    <div className={background || "bg-[--color-primary] text-[--color-text]"}>
-      <section className="py-12 mx-auto max-w-7xl px-6" {...props}>
-        {children}
-      </section>
-    </div>
+    <section className={`w-full ${background || ""} ${className}`} {...props}>
+      {children}
+    </section>
   );
 };

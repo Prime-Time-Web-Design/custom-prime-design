@@ -1,20 +1,25 @@
-
 import "./../styles/globals.css";
+import Layout from "@/components/layout/Layout";
+import client from "../../tina/__generated__/client";
 
-export default async function RootLayout({
-  children,
-}: {
+export interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+  params?: {
+    urlSegments?: string[];
+  };
+}
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const globalData = await client.queries.global({
+    relativePath: "Navigation_Data.yaml",
+  });
+
   return (
     <html lang="en">
       <body>
-        {/* <NavigationProvider> */}
         <div className="min-h-screen flex flex-col">
-          <main className="flex-grow">{children}</main>
-          {/* Footer can be added here */}
+          <Layout globalData={globalData}>{children}</Layout>
         </div>
-        {/* </NavigationProvider> */}
       </body>
     </html>
   );
