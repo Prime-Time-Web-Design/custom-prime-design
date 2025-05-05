@@ -47,11 +47,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
   return (
     <Transition show={isOpen} as={React.Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-[100]"
-        onClose={onClose}
-      >
+      <Dialog as="div" className="relative z-[100]" onClose={onClose}>
         <TransitionChild
           as={React.Fragment}
           enter="transition-opacity ease-out duration-300"
@@ -79,7 +75,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 <div className="p-6">
                   <div className="flex items-center justify-between">
                     <Link href="/">
-                      <Image src={mobileLogo} width={120} height={40} alt="Logo" priority />
+                      <Image
+                        src={mobileLogo}
+                        width={120}
+                        height={40}
+                        alt="Logo"
+                      />
                     </Link>
                     <button
                       type="button"
