@@ -11,21 +11,48 @@ interface PageParams {
   params: { urlSegments: string[] };
 }
 
+// Function to check if the path should be excluded
+const isExcludedPath = (urlSegments: string[]): boolean => {
+  // Exclude paths starting with _next or other known build/static prefixes
+  return urlSegments[0] === "_next";
+};
+
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const filepath = params.urlSegments.join("/");
+  // Await params as before
+  const awaitedParams = await params;
+
+  // Check if the path should be excluded
+  if (isExcludedPath(awaitedParams.urlSegments)) {
+    // Return a generic not found metadata for excluded paths
+    return {
+      title: "Not Found",
+      description: "",
+    };
+  }
+
+  const filepath = awaitedParams.urlSegments.join("/");
 
   try {
     const result = await client.queries.page({
       relativePath: `${filepath}.yaml`,
     });
 
+    // Check if data and page exist before accessing properties
+    if (!result.data || !result.data.page) {
+      return {
+        title: "Page Not Found",
+        description: "The page you're looking for doesn't exist.",
+      };
+    }
+
     return {
       title: result.data.page.title,
       description: result.data.page.description,
     };
-  } catch {
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
     return {
       title: "Page Not Found",
       description: "The page you're looking for doesn't exist.",
@@ -34,12 +61,26 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageParams) {
-  const filepath = params.urlSegments.join("/");
+  // Await params as before
+  const awaitedParams = await params;
+
+  // Check if the path should be excluded
+  if (isExcludedPath(awaitedParams.urlSegments)) {
+    // For excluded paths, trigger a 404
+    notFound();
+  }
+
+  const filepath = awaitedParams.urlSegments.join("/");
 
   try {
     const result = await client.queries.page({
       relativePath: `${filepath}.yaml`,
     });
+
+    // Check if data and page exist before passing to ClientPage or calling notFound
+    if (!result.data || !result.data.page) {
+      notFound();
+    }
 
     return (
       <Section>
@@ -50,7 +91,8 @@ export default async function Page({ params }: PageParams) {
         />
       </Section>
     );
-  } catch {
+  } catch (error) {
+    console.error("Error fetching page data:", error);
     notFound();
   }
 }

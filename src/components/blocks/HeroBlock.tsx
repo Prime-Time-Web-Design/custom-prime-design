@@ -15,33 +15,35 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
   return (
     <Section
       background="bg-[var(--color-very-light-gray)]"
-      className="min-h-[80vh] py-12 md:py-24"
+      className="min-h-[80vh] flex items-center"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-          <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
-              {heroData?.heading}
-            </h1>
-            <div className="prose prose-lg text-[var(--color-medium-slate)]">
-              {heroData?.subheading}
+      <div className="w-full py-12 md:py-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+            <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
+                {heroData?.heading}
+              </h1>
+              <div className="prose prose-lg text-[var(--color-medium-slate)]">
+                {heroData?.subheading}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a
+                  href={heroData?.buttonLink}
+                  className="px-8 py-3 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-bg-contrast)] font-medium transition-colors"
+                >
+                  {heroData?.buttonText}
+                </a>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a
-                href={heroData?.buttonLink}
-                className="px-8 py-3 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-bg-contrast)] font-medium transition-colors"
-              >
-                {heroData?.buttonText}
-              </a>
-            </div>
-          </div>
 
-          <div className="w-full md:w-1/2">
-            <Image
-              src={hero}
-              alt="Hero illustration"
-              className="w-full h-auto rounded-lg shadow-xl"
-            />
+            <div className="w-full md:w-1/2">
+              <Image
+                src={hero}
+                alt="Hero illustration"
+                className="w-full h-auto rounded-lg shadow-xl"
+              />
+            </div>
           </div>
         </div>
       </div>
