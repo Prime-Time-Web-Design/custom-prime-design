@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
   const baseStyles =
     "rounded-lg flex items-start w-full transition-colors duration-200 border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-bg-medium)]";
   const largeStyles =
-    "bg-[var(--color-bg)] text-[var(--color-text)] flex-col p-6 min-h-[120px] text-lg hover:text-[var(--color-text)] gap-3";
+    "bg-[var(--color-bg)] text-[var(--color-text)] flex-col p-6 min-h-[120px] text-lg hover:text-[var(--color-text)] gap-3 min-w-[300px] max-w-[340px]";
   const smallStyles =
     "bg-[var(--color-bg)] text-[var(--color-text)] py-2.5 px-3 flex items-center gap-3 text-base min-w-[320px]";
   const iconComponent = icon ? getIconComponent(icon) : null;

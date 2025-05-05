@@ -10,16 +10,6 @@ export type NavigationData = {
   };
 };
 
-// export type HomeSchema = {
-//   data: {
-//     page: PageQuery["page"];
-//   };
-//   variables: {
-//     relativePath: string;
-//   };
-//   query: string;
-// };
-
 export type HeaderProps = {
   navigation: GlobalQuery["global"]["navigation"];
 };
@@ -37,9 +27,22 @@ export type SubItem = {
   description?: string | null;
 };
 
+export type FeaturedCard = {
+  image: {
+    src: string;
+    alt: string;
+  };
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  layout?: "vertical" | "horizontal";
+};
+
 export type NavigationItem = {
   __typename: "GlobalNavigationMainNav";
   label: string;
   href: string;
   subItems?: Array<SubItem | null> | null;
+  featuredCards?: Array<FeaturedCard | null> | null;
 };

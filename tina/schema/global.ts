@@ -39,6 +39,64 @@ export const globalSchema = defineSchema({
                 },
                 {
                   type: "object",
+                  name: "featuredCards",
+                  label: "Featured Cards",
+                  list: true,
+                  fields: [
+                    {
+                      type: "object",
+                      name: "image",
+                      label: "Image",
+                      fields: [
+                        {
+                          type: "string",
+                          name: "src",
+                          label: "Image Source",
+                          required: true,
+                        },
+                        {
+                          type: "string",
+                          name: "alt",
+                          label: "Alt Text",
+                          required: true,
+                        },
+                      ],
+                    },
+                    {
+                      type: "string",
+                      name: "title",
+                      label: "Title",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "description",
+                      label: "Description",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "ctaText",
+                      label: "CTA Text",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "ctaLink",
+                      label: "CTA Link",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "layout",
+                      label: "Layout",
+                      options: ["vertical", "horizontal"],
+                      required: false,
+                    },
+                  ],
+                },
+                {
+                  type: "object",
                   name: "subItems",
                   label: "Sub Items",
                   list: true,

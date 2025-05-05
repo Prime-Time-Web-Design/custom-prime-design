@@ -1,24 +1,31 @@
 "use client";
 import React from "react";
-import { MainNavProps, NavigationItem, SubItem } from "./header.types";
+import { MainNavProps, SubItem, FeaturedCard } from "./header.types";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/molecules/Card";
+import FeaturedContentCard from "@/components/molecules/FeaturedContentCard";
 import Image from "next/image";
 import logo from "../../../../public/logo.svg"; // Adjust the path to your logo image
+import { mapFeaturedCards } from "./nav.helpers";
 
 export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
   const { navigation } = props;
-  const navItems = navigation?.mainNav || [];
+  const navItems =
+    navigation?.mainNav?.filter(
+      (item): item is NonNullable<typeof item> => !!item && !!item.label
+    ) || [];
 
   const renderSubItems = (
     subItems: Array<SubItem | null> | null | undefined
   ) => {
     if (!subItems?.length) return null;
-
     return subItems
-      .filter((subitem): subitem is SubItem => subitem !== null)
+      .filter(
+        (subitem): subitem is SubItem =>
+          !!subitem && !!subitem.label && !!subitem.href
+      )
       .map((subitem) => (
         <Link
           key={subitem.label}
@@ -33,6 +40,16 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
           />
         </Link>
       ));
+  };
+
+  const renderFeaturedCards = (
+    featuredCards: import("../../../../tina/__generated__/types").GlobalNavigationMainNav["featuredCards"]
+  ) => {
+    const mapped = mapFeaturedCards(featuredCards);
+    if (!mapped.length) return null;
+    return mapped
+      .filter((card): card is FeaturedCard => card !== null)
+      .map((card, idx) => <FeaturedContentCard key={idx} {...card} />);
   };
 
   return (
@@ -52,46 +69,49 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
             </span>
           </div>
           <div className="flex items-center gap-x-4">
-            {navItems
-              .filter(
-                (item): item is NavigationItem =>
-                  item !== null && item !== undefined
-              )
-              .map((item) =>
-                item.subItems?.length ? (
-                  <div key={item.label}>
-                    <Popover className="relative">
-                      {({ open }) => (
-                        <>
-                          <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none ">
-                            <div className="flex items-center gap-2">
-                              {item.label}
-                              <ChevronDown
-                                className={`inline h-4 w-4 transition-transform duration-200 ${
-                                  open ? "rotate-180" : ""
-                                }`}
-                              />
-                            </div>
-                          </PopoverButton>
-                          <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl focus:outline-none">
-                            <div className="p-4 flex flex-col gap-2 min-w-[280px]">
+            {navItems.map((item) =>
+              item.subItems?.length || item.featuredCards?.length ? (
+                <div key={item.label}>
+                  <Popover className="relative">
+                    {({ open }) => (
+                      <>
+                        <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none">
+                          <div className="flex items-center gap-2">
+                            {item.label}
+                            <ChevronDown
+                              className={`inline h-4 w-4 transition-transform duration-200 ${
+                                open ? "rotate-180" : ""
+                              }`}
+                            />
+                          </div>
+                        </PopoverButton>
+                        <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl focus:outline-none">
+                          <div className="p-4 flex flex-row gap-x-4 relative">
+                            <div className="flex flex-col gap-2 flex-1">
                               {renderSubItems(item.subItems)}
                             </div>
-                          </PopoverPanel>
-                        </>
-                      )}
-                    </Popover>
-                  </div>
-                ) : (
-                  <Link
-                    key={item.label}
-                    href={item.href ?? "#"}
-                    className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
+                            {item.featuredCards &&
+                              item.featuredCards.length > 0 && (
+                                <div className="flex flex-col gap-2 min-w-[240px] pl-4 border-l border-[var(--color-accent-hover)]">
+                                  {renderFeaturedCards(item.featuredCards)}
+                                </div>
+                              )}
+                          </div>
+                        </PopoverPanel>
+                      </>
+                    )}
+                  </Popover>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href ?? "#"}
+                  className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </div>
           <div className="flex items-center gap-x-4">
             <Link

@@ -12,7 +12,8 @@ import mobileLogo from "../../../../public/mobileLogo.svg";
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { globalSettings } = useLayout();
-  const navigation = globalSettings!.navigation!;
+  const navigation = globalSettings?.navigation;
+  if (!navigation) return null;
 
   return (
     <header className="sticky top-0 z-50 shadow-md bg-[var(--color-bg)] lg:rounded-xl lg:mt-2.5 lg:mx-2.5">
