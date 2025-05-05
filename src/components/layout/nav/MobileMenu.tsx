@@ -80,6 +80,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                         width={120}
                         height={40}
                         alt="Logo"
+                        priority
                       />
                     </Link>
                     <button

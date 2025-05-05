@@ -63,7 +63,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
                     <Popover className="relative">
                       {({ open }) => (
                         <>
-                          <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none focus:text-[var(--color-primary)]">
+                          <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none ">
                             <div className="flex items-center gap-2">
                               {item.label}
                               <ChevronDown
