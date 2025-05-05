@@ -8,7 +8,7 @@ import ClientPage from "./client-page";
 export const revalidate = 300;
 
 interface PageParams {
-  params: { urlSegments: string[] };
+  params: Promise<{ urlSegments: string[] }>;
 }
 
 // Function to check if the path should be excluded
