@@ -1,4 +1,3 @@
-import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import client from "../../../tina/__generated__/client";
@@ -7,40 +6,33 @@ import ClientPage from "./client-page";
 
 export const revalidate = 300;
 
-interface PageParams {
-  params: Promise<{ urlSegments: string[] }>;
-}
+const EXCLUDED_PREFIXES = ["_next", "api", "admin"];
 
-// Function to check if the path should be excluded
-const isExcludedPath = (urlSegments: string[]): boolean => {
-  // Exclude paths starting with _next or other known build/static prefixes
-  return urlSegments[0] === "_next";
-};
+const isExcludedPath = (urlSegments: string[]): boolean =>
+  EXCLUDED_PREFIXES.includes(urlSegments[0]);
 
 export async function generateMetadata({
   params,
-}: PageParams): Promise<Metadata> {
-  // Await params as before
-  const awaitedParams = await params;
+}: {
+  params: { urlSegments: string[] };
+}): Promise<Metadata> {
+  const { urlSegments } = await params;
 
-  // Check if the path should be excluded
-  if (isExcludedPath(awaitedParams.urlSegments)) {
-    // Return a generic not found metadata for excluded paths
+  if (isExcludedPath(urlSegments)) {
     return {
       title: "Not Found",
       description: "",
     };
   }
 
-  const filepath = awaitedParams.urlSegments.join("/");
+  const filepath = urlSegments.join("/");
 
   try {
     const result = await client.queries.page({
       relativePath: `${filepath}.yaml`,
     });
 
-    // Check if data and page exist before accessing properties
-    if (!result.data || !result.data.page) {
+    if (!result.data?.page) {
       return {
         title: "Page Not Found",
         description: "The page you're looking for doesn't exist.",
@@ -52,7 +44,7 @@ export async function generateMetadata({
       description: result.data.page.description,
     };
   } catch (error) {
-    console.error("Error fetching metadata:", error);
+    console.error("Metadata error:", error);
     return {
       title: "Page Not Found",
       description: "The page you're looking for doesn't exist.",
@@ -60,25 +52,25 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params }: PageParams) {
-  // Await params as before
-  const awaitedParams = await params;
+export default async function Page({
+  params,
+}: {
+  params: { urlSegments: string[] };
+}) {
+  const { urlSegments } = await params;
 
-  // Check if the path should be excluded
-  if (isExcludedPath(awaitedParams.urlSegments)) {
-    // For excluded paths, trigger a 404
+  if (isExcludedPath(urlSegments)) {
     notFound();
   }
 
-  const filepath = awaitedParams.urlSegments.join("/");
+  const filepath = urlSegments.join("/");
 
   try {
     const result = await client.queries.page({
       relativePath: `${filepath}.yaml`,
     });
 
-    // Check if data and page exist before passing to ClientPage or calling notFound
-    if (!result.data || !result.data.page) {
+    if (!result.data?.page) {
       notFound();
     }
 
@@ -92,7 +84,7 @@ export default async function Page({ params }: PageParams) {
       </Section>
     );
   } catch (error) {
-    console.error("Error fetching page data:", error);
+    console.error("Page error:", error);
     notFound();
   }
 }
@@ -100,34 +92,25 @@ export default async function Page({ params }: PageParams) {
 export async function generateStaticParams() {
   try {
     let pages = await client.queries.pageConnection();
-    const allPages = {
-      data: {
-        pageConnection: {
-          edges: [...(pages.data.pageConnection.edges || [])],
-        },
-      },
-    };
+    const allPages = [...(pages.data.pageConnection.edges || [])];
 
+    // Loop to fetch additional pages if there are more
     while (pages.data.pageConnection.pageInfo?.hasNextPage) {
-      const nextPages = await client.queries.pageConnection({
+      pages = await client.queries.pageConnection({
         after: pages.data.pageConnection.pageInfo.endCursor,
       });
 
-      if (!nextPages.data.pageConnection.edges?.length) break;
-
-      allPages.data.pageConnection.edges.push(
-        ...nextPages.data.pageConnection.edges
-      );
-      pages = nextPages;
+      if (!pages.data.pageConnection.edges?.length) break;
+      allPages.push(...pages.data.pageConnection.edges);
     }
 
-    return allPages.data.pageConnection.edges
+    return allPages
       .filter((edge): edge is NonNullable<typeof edge> => Boolean(edge?.node))
       .map((edge) => ({
         urlSegments: edge.node!._sys.breadcrumbs,
       }));
   } catch (error) {
-    console.error("Error generating static params:", error);
+    console.error("Static param generation error:", error);
     return [];
   }
 }

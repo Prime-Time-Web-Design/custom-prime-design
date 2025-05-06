@@ -85,7 +85,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     </Link>
                     <button
                       type="button"
-                      className="rounded-xl p-2.5 text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                      className="rounded-xl cursor-pointer p-2.5 text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                       onClick={onClose}
                     >
                       <span className="sr-only">Close menu</span>
