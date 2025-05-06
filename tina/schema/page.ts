@@ -8,58 +8,65 @@ export const pageSchema = defineSchema({
       path: "content/pages",
       format: "yaml",
       fields: [
-        {
-          name: "title",
-          label: "Title",
-          type: "string",
-          required: true,
-        },
+        { name: "title", label: "Title", type: "string", required: true },
         {
           name: "description",
           label: "Description",
           type: "string",
           required: true,
-          ui: {
-            component: "textarea",
-          },
+          ui: { component: "textarea" },
         },
-        {
-          name: "subtitle",
-          label: "Subtitle",
-          type: "string",
-        },
+        { name: "subtitle", label: "Subtitle", type: "string" },
+
         {
           type: "object",
-          label: "Hero Section",
-          name: "hero",
-          fields: [
+          list: true, // ← important
+          name: "blocks",
+          label: "Page Blocks",
+          templates: [
             {
-              type: "string",
-              label: "Heading",
-              name: "heading",
-              required: true,
+              name: "hero",
+              label: "Hero Section",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  required: true,
+                },
+                {
+                  type: "string",
+                  name: "subheading",
+                  label: "Subheading",
+                  ui: { component: "textarea" },
+                },
+                {
+                  type: "string",
+                  name: "buttonText",
+                  label: "Button Text",
+                  required: true,
+                },
+                {
+                  type: "string",
+                  name: "buttonLink",
+                  label: "Button Link",
+                  required: true,
+                },
+              ],
             },
             {
-              type: "string",
-              label: "Subheading",
-              name: "subheading",
-              required: true,
-              ui: {
-                component: "textarea",
-              },
+              name: "text",
+              label: "Rich Text",
+              fields: [
+                {
+                  type: "rich-text",
+                  name: "body",
+                  label: "Body Content",
+                  isBody: true,
+                },
+              ],
             },
-            {
-              type: "string",
-              label: "Button Text",
-              name: "buttonText",
-              required: true,
-            },
-            {
-              type: "string",
-              label: "Button Link",
-              name: "buttonLink",
-              required: true,
-            },
+            // …more block templates as you need
           ],
         },
       ],

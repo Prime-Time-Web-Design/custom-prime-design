@@ -1,9 +1,10 @@
 title: "Prime Time Web Design"
-description: "Discover our amazing products and services designed to help you achieve your goals."
-hero:
-  heading: "Expand Your Impact.
-Empower More Healing."
-  subheading: "You are changing lives — one conversation at a time.
-We craft websites that reflect your mission, build trust at first glance, and help more people find the support they are searching for."
-  buttonText: "Book a Free Consultation"
-  buttonLink: "/contact"
+description: "Discover our amazing products and services…"
+blocks:
+  - _template: "hero"
+    heading: "Expand Your Impact. Empower More Healing."
+    subheading: |
+      You are changing lives — one conversation at a time.
+      We craft websites that reflect your mission…
+    buttonText: "Book a Free Consultation"
+    buttonLink: "/contact"

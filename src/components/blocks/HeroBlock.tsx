@@ -1,16 +1,14 @@
 import Image from "next/image";
-import hero from "../../../public/hero.jpg";
-import { PageQuery } from "../../../tina/__generated__/types";
+import heroImg from "../../../public/hero.jpg";
+import { PageBlocksHero } from "../../../tina/__generated__/types";
 import { Section } from "../layout/Section";
 
 interface HeroBlockProps {
-  data: {
-    hero?: PageQuery["page"]["hero"];
-  };
+  data: PageBlocksHero;
 }
 
 export const HeroBlock = ({ data }: HeroBlockProps) => {
-  const { hero: heroData } = data;
+  const { heading, subheading, buttonText, buttonLink } = data;
 
   return (
     <Section
@@ -22,24 +20,23 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
-                {heroData?.heading}
+                {heading}
               </h1>
               <div className="prose prose-lg text-[var(--color-medium-slate)]">
-                {heroData?.subheading}
+                {subheading}
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <a
-                  href={heroData?.buttonLink}
+                  href={buttonLink}
                   className="px-8 py-3 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-bg-contrast)] font-medium transition-colors"
                 >
-                  {heroData?.buttonText}
+                  {buttonText}
                 </a>
               </div>
             </div>
-
             <div className="w-full md:w-1/2">
               <Image
-                src={hero}
+                src={heroImg}
                 alt="Hero illustration"
                 className="w-full h-auto rounded-lg shadow-xl"
               />
