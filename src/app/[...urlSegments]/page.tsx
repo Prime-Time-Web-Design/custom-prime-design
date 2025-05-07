@@ -17,7 +17,7 @@ export async function generateMetadata({
   params: { urlSegments: string[] };
 }): Promise<Metadata> {
   // REMOVE await here
-  const { urlSegments } = params;
+  const { urlSegments } = await params;
 
   if (isExcludedPath(urlSegments)) {
     return {
@@ -59,7 +59,7 @@ export default async function Page({
   params: { urlSegments: string[] };
 }) {
   // REMOVE await here
-  const { urlSegments } = params;
+  const { urlSegments } = await params;
 
   if (isExcludedPath(urlSegments)) {
     notFound();
