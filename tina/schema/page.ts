@@ -66,7 +66,44 @@ export const pageSchema = defineSchema({
                 },
               ],
             },
-            // …more block templates as you need
+            {
+              name: "carouselBlock",
+              label: "Carousel Block",
+              fields: [
+                {
+                  type: "object",
+                  list: true,
+                  name: "slides",
+                  label: "Slides",
+                  fields: [
+                    { type: "image", name: "src", label: "Image URL" },
+                    { type: "string", name: "alt", label: "Alt Text" },
+                    {
+                      type: "string",
+                      name: "caption",
+                      label: "Caption",
+                      required: false,
+                    },
+                  ],
+                },
+                {
+                  type: "boolean",
+                  name: "options_loop", // <-- alphanumeric only
+                  nameOverride: "options.loop", // <-- writes `options.loop` in your YAML/JSON
+                  label: "Loop Slides",
+                  description: "Enable infinite looping",
+                  required: false,
+                },
+                {
+                  type: "number",
+                  name: "autoplayInterval",
+                  label: "Autoplay Interval (ms)",
+                  description:
+                    "Time between auto-scroll (leave blank to disable)",
+                  required: false,
+                },
+              ],
+            },
           ],
         },
       ],

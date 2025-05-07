@@ -1,10 +1,24 @@
-title: "Prime Time Web Design"
-description: "Discover our amazing products and services…"
+title: Prime Time Web Design
+description: Discover our amazing products and services…
 blocks:
-  - _template: "hero"
-    heading: "Expand Your Impact. Empower More Healing."
+  - heading: Expand Your Impact. Empower More Healing.
     subheading: |
       You are changing lives — one conversation at a time.
       We craft websites that reflect your mission…
-    buttonText: "Book a Free Consultation"
-    buttonLink: "/contact"
+    buttonText: Book a Free Consultation
+    buttonLink: /contact
+    _template: hero
+  - slides:
+      - src: /adventureforthesoul.jpg
+        alt: Journey to The Peak
+        caption: Journey to the Peak
+      - src: /aniket-deole-T-tOgjWZ0fQ-unsplash.jpg
+        alt: El Capitan
+        caption: 'The Best Views, are powerful therapy'
+      - src: /hero.jpg
+        alt: Paddling Towards A Future
+        caption: 'In the reflection of your pain, you’ll discover your own wisdom'
+      - src: /featuredCardImage.png
+        alt: Beauty In Nature
+        caption: To change the world within is to rewrite the very nature of reality
+    _template: carouselBlock
