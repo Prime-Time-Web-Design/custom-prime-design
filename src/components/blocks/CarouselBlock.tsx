@@ -198,7 +198,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                     )}
 
                     {/* Star Rating - Always show 5 stars by default */}
-                    <StarRating rating={slide.rating || 5} />
+                    <StarRating rating={5} />
 
                     {/* Client Name and Type */}
                     <div className="flex items-center mt-auto">
