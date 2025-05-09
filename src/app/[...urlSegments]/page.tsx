@@ -3,10 +3,13 @@ import client from "../../../tina/__generated__/client";
 import { Section } from "@/components/layout/Section";
 import ClientPage from "./client-page";
 
-const EXCLUDED_PREFIXES = ["_next", "api", "admin"];
+const EXCLUDED_PREFIXES = ["_next", "api", "admin", "favicon.ico", "robots.txt"];
 
 function isExcludedPath(urlSegments: string[]): boolean {
-  return EXCLUDED_PREFIXES.includes(urlSegments[0]);
+  // Exclude if the first segment matches, or if the full path matches a static asset
+  const first = urlSegments[0];
+  const full = urlSegments.join("/");
+  return EXCLUDED_PREFIXES.includes(first) || EXCLUDED_PREFIXES.includes(full);
 }
 
 interface PageProps {

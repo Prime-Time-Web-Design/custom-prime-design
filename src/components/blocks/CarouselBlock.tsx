@@ -12,6 +12,16 @@ import Autoplay from "embla-carousel-autoplay";
 // import { ScrollTween } from 'embla-carousel-scroll-tween';
 import { PageBlocksCarouselBlock } from "../../../tina/__generated__/types";
 
+// Helper function to ensure image paths are correctly formed
+const normalizeSrc = (src: string): string => {
+  // If the path doesn't start with http/https and doesn't start with /, add /
+  if (!src.startsWith("http") && !src.startsWith("/")) {
+    return `/${src}`;
+  }
+  // If it's already an absolute URL or starts with /, return as is
+  return src;
+};
+
 interface CarouselBlockProps {
   data: PageBlocksCarouselBlock;
   className?: string; // Optional external classes for the block container
@@ -131,11 +141,13 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                 <div className="relative w-full h-0 pb-[66.66%]">
                   {/* Aspect Ratio Box (3:2) - Adjust pb-% for different ratios */}
                   <Image
-                    src={slide.src}
+                    src={normalizeSrc(slide.src)}
                     alt={slide.alt || `Slide ${idx + 1}`}
                     fill
                     // Apply rounded corners and shadow
                     className="rounded-xl md:rounded-2xl lg:rounded-3xl shadow-lg object-cover"
+                    // Add unoptimized prop for external URLs and better debugging
+                    unoptimized={slide.src.startsWith("http")}
                   />
                 </div>
               )}
