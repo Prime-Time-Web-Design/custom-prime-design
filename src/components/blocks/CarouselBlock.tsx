@@ -6,15 +6,7 @@ import type { AutoplayType } from "embla-carousel-autoplay";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { PageBlocksCarouselBlock } from "../../../tina/__generated__/types";
-
-// Helper function to ensure image paths are correctly formed
-const normalizeSrc = (src: string): string => {
-  if (!src.startsWith("http") && !src.startsWith("/")) {
-    return `/${src}`;
-  }
-  return src;
-};
-
+import { normalizeSrc } from "@/lib/utils";
 // Star Rating Component
 const StarRating = ({ rating = 5 }: { rating?: number }) => {
   // Ensure rating is between 0 and 5

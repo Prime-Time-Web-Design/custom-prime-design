@@ -4,16 +4,16 @@ import {
   PageBlocks,
   PageBlocksCarouselBlock,
   PageBlocksHero,
-  PageBlocksText,
+  PageBlocksRichTextBlock,
 } from "../../../tina/__generated__/types";
 import HeroBlock from "./HeroBlock";
-import { TextBlock } from "./TextBlock"; // your stub or real TextBlock
+import RichTextBlock from "./RichTextBlock";
 import { CarouselBlock } from "./CarouselBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
   PageBlocksHero: PageBlocksHero;
-  PageBlocksText: PageBlocksText;
+  PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
 };
 
@@ -23,7 +23,7 @@ type BlockComponentMap = {
 
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
-  PageBlocksText: TextBlock,
+  PageBlocksRichTextBlock: RichTextBlock,
   PageBlocksCarouselBlock: CarouselBlock,
 };
 

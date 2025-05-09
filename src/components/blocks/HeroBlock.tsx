@@ -16,7 +16,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
       className="min-h-[80vh] flex items-center"
     >
       <div className="w-full py-12 md:py-24 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">

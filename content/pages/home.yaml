@@ -8,6 +8,25 @@ blocks:
     buttonText: Book a Free Consultation
     buttonLink: /contact
     _template: hero
+  - heading: How It Works
+    subheading: Start your journey to healing today
+    features:
+      - src: /undraw_professional-woman-avatar_ivds.svg
+        title: Book an assessment
+        description: >
+          Fill out our form and book in your assessment at a convenient time for
+          you
+      - src: /undraw_avatars_xsfb.svg
+        title: We match you with a therapist
+        description: >
+          After your assessment, we will match you with the right therapist for
+          your particular needs
+      - src: /undraw_coffee-time_98vi.svg
+        title: Start Healing
+        description: >
+          Once you’ve been matched, you can begin regular therapy sessions for
+          as long as needed
+    _template: richTextBlock
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:

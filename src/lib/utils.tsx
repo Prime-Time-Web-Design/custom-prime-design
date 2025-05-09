@@ -39,3 +39,10 @@ export const getIconComponent = (
     />
   );
 };
+
+export const normalizeSrc = (src: string): string => {
+  if (!src.startsWith("http") && !src.startsWith("/")) {
+    return `/${src}`;
+  }
+  return src;
+};

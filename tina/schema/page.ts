@@ -55,14 +55,39 @@ export const pageSchema = defineSchema({
               ],
             },
             {
-              name: "text",
-              label: "Rich Text",
+              name: "richTextBlock",
+              label: "Rich Text Block",
               fields: [
                 {
-                  type: "rich-text",
-                  name: "body",
-                  label: "Body Content",
-                  isBody: true,
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  required: true,
+                },
+                { type: "string", name: "subheading", label: "Subheading" },
+                {
+                  type: "object",
+                  name: "features",
+                  label: "Features",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({ label: item.title || "Feature" }),
+                  },
+                  fields: [
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "illustration",
+                      description: "Image for the feature (optional)",
+                    },
+                    { type: "string", name: "title", label: "Title" },
+                    {
+                      type: "rich-text",
+                      name: "description",
+                      label: "Description",
+                      isBody: true,
+                    },
+                  ],
                 },
               ],
             },
