@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-// Import useEmblaCarousel from the react wrapper
 import useEmblaCarousel from "embla-carousel-react";
-// Import EmblaOptionsType and EmblaCarouselType from the core 'embla-carousel' package using 'import type'
 import type { EmblaOptionsType, EmblaCarouselType } from "embla-carousel";
-// Import AutoplayType so we can conditionally include the plugin
 import type { AutoplayType } from "embla-carousel-autoplay";
 
 import Image from "next/image";
@@ -14,25 +11,49 @@ import { PageBlocksCarouselBlock } from "../../../tina/__generated__/types";
 
 // Helper function to ensure image paths are correctly formed
 const normalizeSrc = (src: string): string => {
-  // If the path doesn't start with http/https and doesn't start with /, add /
   if (!src.startsWith("http") && !src.startsWith("/")) {
     return `/${src}`;
   }
-  // If it's already an absolute URL or starts with /, return as is
   return src;
+};
+
+// Helper for star ratings
+const StarRating = ({ rating = 5 }: { rating?: number }) => {
+  return (
+    <div className="flex items-center mb-4">
+      {[...Array(5)].map((_, i) => (
+        <svg
+          key={i}
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-secondary"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
 };
 
 interface CarouselBlockProps {
   data: PageBlocksCarouselBlock;
-  className?: string; // Optional external classes for the block container
+  className?: string;
 }
 
 export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   data,
   className,
 }) => {
-  const { slides, autoplayInterval, options_loop } = data;
+  const {
+    slides = [],
+    autoplayInterval,
+    options_loop,
+    blockTitle,
+    blockSubtitle,
+  } = data;
 
+  console.log("CarouselBlock data:", data);
   const loopOption = options_loop ?? false;
   // Ensure autoplayInterval is a number, default to 0 if null/undefined/negative
   const autoplayDelay =
@@ -42,23 +63,19 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
   // Embla Options for centered view and spacing
   const emblaOptions: EmblaOptionsType = {
-    loop: loopOption, // boolean
-    align: "center", // Center the active slide
-    slidesToScroll: 1, // Scroll one slide at a time
-    // Using CSS gap via Tailwind for spacing (applied to the container div)
-    // containScroll: 'trimSnaps', // Optional: keeps the carousel contained without exposing extra space at ends
+    loop: loopOption,
+    align: "center",
+    slidesToScroll: 1,
   };
 
   // Conditionally add Autoplay plugin if delay is set
-  const plugins: AutoplayType /* | ScrollTween */[] = [];
+  const plugins: AutoplayType[] = [];
   if (autoplayDelay > 0) {
     plugins.push(Autoplay({ delay: autoplayDelay, stopOnInteraction: false }));
   }
-  // If you want to add ScrollTween plugin later:
-  // plugins.push(ScrollTween());
 
   // Initialize Embla Carousel with options and plugins
-  const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins); // Use the plugins array
+  const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins);
 
   // State for navigation buttons and pagination dots
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -67,7 +84,6 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   // Update scroll capabilities and selected index
-  // Replace 'any' with 'EmblaCarouselType'
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
     setScrollSnaps(emblaApi.scrollSnapList());
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -75,7 +91,6 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     setCanScrollNext(emblaApi.canScrollNext());
   }, []);
 
-  // Replace 'any' with 'EmblaCarouselType'
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
     setCanScrollPrev(emblaApi.canScrollPrev());
@@ -88,7 +103,6 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     onInit(emblaApi); // Initial state update
 
     // Listen for events to update state
-    // Embla's event listeners should now correctly type the api parameter
     emblaApi.on("init", onInit);
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onInit); // Handle window resize
@@ -123,59 +137,102 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   }
 
   return (
-    // Keep bg-bg-contrast as per your latest code
-    <div className={`relative py-16 sm:py-20 bg-bg-contrast ${className}`}>
-      {/* Embla Viewport */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        {/* Embla Container - Use Tailwind gap for spacing */}
-        <div className="flex gap-6 md:gap-8 lg:gap-10">
-          {slides.map((slide, idx) => (
-            // Embla Slide - flex-shrink-0 needed.
-            // Keep the reduced widths for smaller slides
-            // w-[55%] on small, md:w-[40%] on medium, lg:w-[30%] on large screens
-            <div
-              className="relative flex-shrink-0 w-[55%] md:w-[40%] lg:w-[30%]"
-              key={idx}
-            >
-              {slide && slide.src && (
-                <div className="relative w-full h-0 pb-[66.66%]">
-                  {/* Aspect Ratio Box (3:2) - Adjust pb-% for different ratios */}
-                  <Image
-                    src={normalizeSrc(slide.src)}
-                    alt={slide.alt || `Slide ${idx + 1}`}
-                    fill
-                    // Apply rounded corners and shadow
-                    className="rounded-xl md:rounded-2xl lg:rounded-3xl shadow-lg object-cover"
-                    // Add unoptimized prop for external URLs and better debugging
-                    unoptimized={slide.src.startsWith("http")}
-                  />
+    <div className={`relative py-16 sm:py-20 bg-bg ${className}`}>
+      {/* Section Title and Subtitle */}
+      {(blockTitle || blockSubtitle) && (
+        <div className="text-center mb-12">
+          {blockTitle && (
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+              {blockTitle}
+            </h2>
+          )}
+          {blockSubtitle && (
+            <p className="text-lg text-accent-dark max-w-3xl mx-auto">
+              {blockSubtitle}
+            </p>
+          )}
+        </div>
+      )}
+
+      <div className="overflow-hidden mx-auto px-8" ref={emblaRef}>
+        <div className="flex gap-12 py-4">
+          {slides.map((slide, idx) => {
+            if (!slide) return null;
+
+            return (
+              <div
+                className="relative flex-shrink-0 w-full lg:w-[40%] px-2"
+                key={idx}
+              >
+                <div className="bg-primary-hover rounded-xl shadow-lg p-8 h-full flex">
+                  {/* Left side - Image */}
+                  <div className="hidden md:block relative w-52 h-52 rounded-lg overflow-hidden mr-8 flex-shrink-0">
+                    {slide.src && (
+                      <Image
+                        src={normalizeSrc(slide.src)}
+                        alt={slide.alt || `${slide.clientName || "Client"}`}
+                        fill
+                        className="object-cover"
+                        unoptimized={slide.src.startsWith("http")}
+                      />
+                    )}
+                  </div>
+
+                  {/* Right side - Content */}
+                  <div className="flex flex-col w-full">
+                    {/* Rating Stars */}
+                    <StarRating />
+
+                    {/* Testimonial Text */}
+                    {slide.testimonialText && (
+                      <div className="flex-grow mb-6">
+                        <p className="text-text-dark text-lg md:text-xl font-medium">
+                          {slide.testimonialText}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Client Name and Type */}
+                    <div className="flex items-center">
+                      {/* Mobile only image */}
+                      <div className="md:hidden relative w-12 h-12 rounded-full overflow-hidden mr-4 flex-shrink-0 border border-secondary">
+                        {slide.src && (
+                          <Image
+                            src={normalizeSrc(slide.src)}
+                            alt={slide.alt || `${slide.clientName || "Client"}`}
+                            fill
+                            className="object-cover"
+                            unoptimized={slide.src.startsWith("http")}
+                          />
+                        )}
+                      </div>
+
+                      <div>
+                        {slide.clientName && (
+                          <h4 className="font-semibold text-primary text-lg">
+                            {slide.clientName}
+                          </h4>
+                        )}
+                        {slide.clientType && (
+                          <p className="text-accent-dark">{slide.clientType}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              )}
-              {/* Keep caption text styling as in your latest code */}
-              {slide && slide.caption && (
-                <p className="mt-4 text-center text-[var(--color-bg)] text-lg px-2">
-                  {" "}
-                  {/* Using text-[var(--color-bg)] as in your last code */}
-                  {slide.caption}
-                </p>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Navigation and Pagination Container */}
-      {/* Increased top margin for more separation */}
       <div className="flex justify-center items-center mt-10 space-x-4">
-        {/* Navigation Buttons - Hide if loop is enabled */}
         {!loopOption && (
           <>
-            {/* Prev Button */}
             <button
               onClick={scrollPrev}
               disabled={!canScrollPrev}
-              // Keep button colors as in your latest code (bg-accent, text-bg-medium)
-              className="w-12 h-12 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50"
+              className="w-12 h-12 rounded-full bg-primary-hover text-bg-medium flex items-center justify-center shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-primary focus:outline-none focus:ring focus:ring-bg-medium focus:ring-opacity-50"
               aria-label="Previous slide"
             >
               <svg
@@ -194,11 +251,9 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
               </svg>
             </button>
 
-            {/* Next Button */}
             <button
               onClick={scrollNext}
               disabled={!canScrollNext}
-              // Keep button colors as in your latest code (bg-accent, text-bg-medium)
               className="w-12 h-12 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50"
               aria-label="Next slide"
             >
@@ -220,19 +275,15 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
           </>
         )}
 
-        {/* Pagination Dots */}
         <div className="flex space-x-3">
-          {" "}
-          {/* Increased space between dots */}
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              // Keep dot colors as in your latest code (bg-secondary, bg-accent-hover)
               className={`w-3 h-3 rounded-full transition-colors focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 ${
                 index === selectedIndex
-                  ? "bg-secondary" // Active dot color as in your last code (bg-secondary)
-                  : "bg-accent-hover hover:opacity-75" // Inactive dot color as in your last code (bg-accent-hover)
+                  ? "bg-secondary"
+                  : "bg-accent-hover hover:opacity-75"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

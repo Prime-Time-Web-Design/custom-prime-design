@@ -20,7 +20,7 @@ export const pageSchema = defineSchema({
 
         {
           type: "object",
-          list: true, // ← important
+          list: true,
           name: "blocks",
           label: "Page Blocks",
           templates: [
@@ -71,28 +71,85 @@ export const pageSchema = defineSchema({
               label: "Carousel Block",
               fields: [
                 {
+                  type: "string",
+                  name: "blockTitle",
+                  label: "Block Title",
+                  description: "Main heading for the testimonials section",
+                },
+                {
+                  type: "string",
+                  name: "blockSubtitle",
+                  label: "Block Subtitle",
+                  ui: { component: "textarea" },
+                  description: "Descriptive text below the main heading",
+                },
+                {
                   type: "object",
                   list: true,
                   name: "slides",
-                  label: "Slides",
+                  label: "Testimonial Slides",
                   fields: [
-                    { type: "image", name: "src", label: "Image URL" },
-                    { type: "string", name: "alt", label: "Alt Text" },
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "Client Photo",
+                      description: "Profile photo of the client (optional)",
+                    },
                     {
                       type: "string",
-                      name: "caption",
-                      label: "Caption",
-                      required: false,
+                      name: "alt",
+                      label: "Alt Text",
+                      description: "Description of the photo for accessibility",
                     },
+                    {
+                      type: "string",
+                      name: "testimonialText",
+                      label: "Testimonial Text",
+                      ui: { component: "textarea" },
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "clientName",
+                      label: "Client Name",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "clientType",
+                      label: "Client Type",
+                      description:
+                        "Client description, position, or service they received",
+                    },
+                    // ——— Fixed Rating Field ———
+                    // {
+                    //   type: "number",
+                    //   name: "rating",
+                    //   label: "Rating",
+                    //   description: "Client rating from 1–5",
+                    //   required: true,
+                    //   // native numeric limits:
+                    //   min: 1,
+                    //   max: 5,
+                    //   // top-level validator,
+                    //   // Tina calls this with the plain number value
+                    //   validate: (value) => {
+                    //     if (typeof value !== "number") {
+                    //       return "Rating must be a number";
+                    //     }
+                    //     if (value < 1 || value > 5) {
+                    //       return "Rating must be between 1 and 5";
+                    //     }
+                    //   },
+                    // },
                   ],
                 },
                 {
                   type: "boolean",
-                  name: "options_loop", // <-- alphanumeric only
-                  nameOverride: "options.loop", // <-- writes `options.loop` in your YAML/JSON
+                  name: "options_loop",
+                  nameOverride: "options.loop",
                   label: "Loop Slides",
                   description: "Enable infinite looping",
-                  required: false,
                 },
                 {
                   type: "number",
@@ -100,13 +157,15 @@ export const pageSchema = defineSchema({
                   label: "Autoplay Interval (ms)",
                   description:
                     "Time between auto-scroll (leave blank to disable)",
-                  required: false,
                 },
               ],
             },
+            // ... other block templates ...
           ],
         },
+        // ... other top-level page fields ...
       ],
     },
+    // ... other collections ...
   ],
 });

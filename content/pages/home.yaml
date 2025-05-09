@@ -8,17 +8,29 @@ blocks:
     buttonText: Book a Free Consultation
     buttonLink: /contact
     _template: hero
-  - slides:
+  - blockTitle: 'Finding Your Path: Client Stories'
+    blockSubtitle: 'Real experiences of hope, healing, and positive change.'
+    slides:
       - src: /adventureforthesoul.jpg
         alt: Journey to The Peak
-        caption: Journey to the Peak
+        testimonialText: >-
+          My therapist helped me slowly find glimmers of hope and reconnect with
+          parts of myself I thought were lost forever. I'm not 'cured,' but I
+          have joy, purpose, and the strength to keep moving forward. It's been
+          life-changing.
+        clientName: Joanna Ferguson
+        clientType: 'Individual Therapy '
       - src: /aniket-deole-T-tOgjWZ0fQ-unsplash.jpg
         alt: El Capitan
-        caption: 'The Best Views, are powerful therapy'
-      - src: /hero.jpg
-        alt: Paddling Towards A Future
-        caption: 'In the reflection of your pain, you’ll discover your own wisdom'
+        testimonialText: >-
+          It wasn't easy work, but the difference is incredible. My
+          relationships are healthier, more open, and I feel so much more
+          connected to the people I love.
+        clientName: Matt Henderson
+        clientType: Couples Therapy
       - src: /featuredCardImage.png
         alt: Beauty In Nature
-        caption: To change the world within is to rewrite the very nature of reality
+        testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
+        clientName: Charles Woodford
+        clientType: Individual Therapy
     _template: carouselBlock

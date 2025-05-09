@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --color-light-gray-white: #F8F8FF;
   --color-calming-blue: #A7C7E7;
   --color-calming-blue-light: #D1E9FF;
   --color-calming-blue-dark: #7895B2;
@@ -23,6 +24,7 @@
 
   /* Semantic roles for convenience */
   --color-bg: var(--color-very-light-gray);
+  --color-bg-light: var(--color-very-light-gray);
   --color-bg-medium: var(--color-medium-slate);
   --color-bg-contrast: var(--color-deep-slate);
   --color-text: var(--color-deep-slate);
