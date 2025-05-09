@@ -5,8 +5,6 @@ import type { AutoplayType } from "embla-carousel-autoplay";
 
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
-// Assuming you might want the tween/parallax effect later, importing it here
-// import { ScrollTween } from 'embla-carousel-scroll-tween';
 import { PageBlocksCarouselBlock } from "../../../tina/__generated__/types";
 
 // Helper function to ensure image paths are correctly formed
@@ -17,19 +15,24 @@ const normalizeSrc = (src: string): string => {
   return src;
 };
 
-// Helper for star ratings
+// Star Rating Component
 const StarRating = ({ rating = 5 }: { rating?: number }) => {
+  // Ensure rating is between 0 and 5
+  const safeRating = Math.min(5, Math.max(0, rating));
+
   return (
-    <div className="flex items-center mb-4">
+    <div className="flex items-center space-x-1 mb-2">
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-secondary"
+          className={`h-4 w-4 ${
+            i < safeRating ? "text-yellow-400" : "text-gray-300"
+          }`}
           viewBox="0 0 20 20"
           fill="currentColor"
         >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ))}
     </div>
@@ -53,33 +56,37 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     blockSubtitle,
   } = data;
 
-  console.log("CarouselBlock data:", data);
-  const loopOption = options_loop ?? false;
-  // Ensure autoplayInterval is a number, default to 0 if null/undefined/negative
+  const loopOption = options_loop ?? true; // Default to true for better experience
+  // Ensure autoplayInterval is a number, default to 5000 if null/undefined/negative
   const autoplayDelay =
     typeof autoplayInterval === "number" && autoplayInterval > 0
       ? autoplayInterval
-      : 0;
+      : 5000; // Default to 5 seconds
 
   // Embla Options for centered view and spacing
   const emblaOptions: EmblaOptionsType = {
     loop: loopOption,
     align: "center",
     slidesToScroll: 1,
+    dragFree: false,
+    containScroll: "trimSnaps",
+    skipSnaps: false,
+    inViewThreshold: 0.8, // Ensures item is mostly in view before snapping
   };
 
-  // Conditionally add Autoplay plugin if delay is set
-  const plugins: AutoplayType[] = [];
-  if (autoplayDelay > 0) {
-    plugins.push(Autoplay({ delay: autoplayDelay, stopOnInteraction: false }));
-  }
+  // Add Autoplay plugin by default with reasonable settings
+  const plugins: AutoplayType[] = [
+    Autoplay({
+      delay: autoplayDelay,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  ];
 
   // Initialize Embla Carousel with options and plugins
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins);
 
-  // State for navigation buttons and pagination dots
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
+  // State for pagination dots
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
@@ -87,19 +94,15 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
     setScrollSnaps(emblaApi.scrollSnapList());
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
   }, []);
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
   }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
-    // Pass the correctly typed emblaApi to the handlers
+
     onInit(emblaApi); // Initial state update
 
     // Listen for events to update state
@@ -113,16 +116,18 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onInit);
     };
-  }, [emblaApi, onInit, onSelect]); // Keep dependencies as they are
+  }, [emblaApi, onInit, onSelect]);
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
   );
+
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi]
   );
+
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
@@ -137,36 +142,38 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   }
 
   return (
-    <div className={`relative py-16 sm:py-20 bg-bg ${className}`}>
-      {/* Section Title and Subtitle */}
+    <div className={`relative py-12 sm:py-16 bg-bg ${className}`}>
+      {/* Section Title and Subtitle with better alignment */}
       {(blockTitle || blockSubtitle) && (
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 max-w-3xl mx-auto px-4">
           {blockTitle && (
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
               {blockTitle}
             </h2>
           )}
           {blockSubtitle && (
-            <p className="text-lg text-accent-dark max-w-3xl mx-auto">
-              {blockSubtitle}
-            </p>
+            <p className="text-lg text-accent-dark">{blockSubtitle}</p>
           )}
         </div>
       )}
 
-      <div className="overflow-hidden mx-auto px-8" ref={emblaRef}>
-        <div className="flex gap-12 py-4">
+      {/* Carousel Container with improved spacing */}
+      <div
+        className="relative mx-auto max-w-7xl px-8 md:px-12 lg:px-16"
+        ref={emblaRef}
+      >
+        <div className="flex py-4">
           {slides.map((slide, idx) => {
             if (!slide) return null;
 
             return (
               <div
-                className="relative flex-shrink-0 w-full lg:w-[40%] px-2"
+                className="relative flex-shrink-0 w-[95%] md:w-[80%] lg:w-[560px] mx-3 md:mx-4"
                 key={idx}
               >
-                <div className="bg-primary-hover rounded-xl shadow-lg p-8 h-full flex">
-                  {/* Left side - Image */}
-                  <div className="hidden md:block relative w-52 h-52 rounded-lg overflow-hidden mr-8 flex-shrink-0">
+                <div className="bg-primary-hover rounded-xl shadow-lg p-6 h-full flex flex-col md:flex-row items-start">
+                  {/* Left side - Image (desktop) - Adjusted size to prevent overlap */}
+                  <div className="hidden md:block relative w-32 h-32 rounded-lg overflow-hidden mr-6 flex-shrink-0 border border-gray-200 self-center">
                     {slide.src && (
                       <Image
                         src={normalizeSrc(slide.src)}
@@ -174,28 +181,29 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                         fill
                         className="object-cover"
                         unoptimized={slide.src.startsWith("http")}
+                        sizes="128px"
                       />
                     )}
                   </div>
 
                   {/* Right side - Content */}
-                  <div className="flex flex-col w-full">
-                    {/* Rating Stars */}
-                    <StarRating />
-
-                    {/* Testimonial Text */}
+                  <div className="flex flex-col w-full overflow-hidden">
+                    {/* Testimonial Text - removed line clamp to avoid cutting off */}
                     {slide.testimonialText && (
-                      <div className="flex-grow mb-6">
-                        <p className="text-text-dark text-lg md:text-xl font-medium">
-                          {slide.testimonialText}
+                      <div className="mb-4">
+                        <p className="text-text-dark text-base font-medium">
+                          &ldquo;{slide.testimonialText}&rdquo;
                         </p>
                       </div>
                     )}
 
+                    {/* Star Rating - Always show 5 stars by default */}
+                    <StarRating rating={slide.rating || 5} />
+
                     {/* Client Name and Type */}
-                    <div className="flex items-center">
+                    <div className="flex items-center mt-auto">
                       {/* Mobile only image */}
-                      <div className="md:hidden relative w-12 h-12 rounded-full overflow-hidden mr-4 flex-shrink-0 border border-secondary">
+                      <div className="md:hidden relative w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0 border border-secondary">
                         {slide.src && (
                           <Image
                             src={normalizeSrc(slide.src)}
@@ -203,18 +211,21 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                             fill
                             className="object-cover"
                             unoptimized={slide.src.startsWith("http")}
+                            sizes="40px"
                           />
                         )}
                       </div>
 
                       <div>
                         {slide.clientName && (
-                          <h4 className="font-semibold text-primary text-lg">
+                          <h4 className="font-semibold text-primary text-sm md:text-base">
                             {slide.clientName}
                           </h4>
                         )}
                         {slide.clientType && (
-                          <p className="text-accent-dark">{slide.clientType}</p>
+                          <p className="text-accent-dark text-xs md:text-sm">
+                            {slide.clientType}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -226,61 +237,35 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
         </div>
       </div>
 
-      <div className="flex justify-center items-center mt-10 space-x-4">
-        {!loopOption && (
-          <>
-            <button
-              onClick={scrollPrev}
-              disabled={!canScrollPrev}
-              className="w-12 h-12 rounded-full bg-primary-hover text-bg-medium flex items-center justify-center shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-primary focus:outline-none focus:ring focus:ring-bg-medium focus:ring-opacity-50"
-              aria-label="Previous slide"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
+      {/* Controls - with better spacing */}
+      <div className="flex justify-center items-center mt-8 space-x-4">
+        <button
+          onClick={scrollPrev}
+          className="w-10 h-10 rounded-full bg-primary-hover text-bg-medium flex items-center justify-center shadow-md hover:bg-primary focus:outline-none focus:ring focus:ring-bg-medium focus:ring-opacity-50 transition-colors"
+          aria-label="Previous slide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
 
-            <button
-              onClick={scrollNext}
-              disabled={!canScrollNext}
-              className="w-12 h-12 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50"
-              aria-label="Next slide"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </>
-        )}
-
-        <div className="flex space-x-3">
+        <div className="flex space-x-2">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              className={`w-3 h-3 rounded-full transition-colors focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 ${
+              className={`w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 ${
                 index === selectedIndex
                   ? "bg-secondary"
                   : "bg-accent-hover hover:opacity-75"
@@ -289,6 +274,27 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
             />
           ))}
         </div>
+
+        <button
+          onClick={scrollNext}
+          className="w-10 h-10 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 transition-colors"
+          aria-label="Next slide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );
