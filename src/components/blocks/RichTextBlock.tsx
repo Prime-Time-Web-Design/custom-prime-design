@@ -13,7 +13,7 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
   console.log("RichTextBlock data:", data);
   console.log("Features:", features);
   return (
-    <div className="px-4 py-8 bg-bg-contrast">
+    <div className="px-4 py-12 bg-bg-contrast">
       {heading && (
         <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[var(--color-bg-light)] text-center">
           {heading}
@@ -63,7 +63,7 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
               </h3>
               <p
                 data-tina-field
-                className="max-w-[30%] text-[var(--color-bg-light)] mx-auto text-sm font-body"
+                className="max-w-[40%] text-[var(--color-bg-light)] mx-auto text-sm font-body"
               >
                 <TinaMarkdown content={f?.description} />
               </p>

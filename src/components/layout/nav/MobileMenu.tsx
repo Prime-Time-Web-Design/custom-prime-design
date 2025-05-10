@@ -72,7 +72,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
               leaveTo="-translate-y-full"
             >
               <DialogPanel className="relative bg-[var(--color-bg)] overflow-y-auto">
-                <div className="p-6">
+                <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <Link href="/">
                       <Image
@@ -85,7 +85,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     </Link>
                     <button
                       type="button"
-                      className="rounded-xl cursor-pointer p-2.5 text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                      className="rounded-xl cursor-pointer p-3 text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                       onClick={onClose}
                     >
                       <span className="sr-only">Close menu</span>
@@ -93,8 +93,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     </button>
                   </div>
 
-                  <nav className="mt-6 flow-root">
-                    <div className="space-y-2">
+                  <nav className="mt-8 flow-root">
+                    <div className="space-y-3">
                       {navItems.map((item) => (
                         <div key={item?.label} className="py-2">
                           {item?.subItems && item?.subItems.length > 0 ? (
@@ -107,19 +107,19 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                               className="group"
                               onClick={() => handleDetailsClick(item.label)}
                             >
-                              <summary className="list-none flex cursor-pointer items-center rounded-lg px-3 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
+                              <summary className="list-none flex cursor-pointer items-center rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
                                 {item?.label}
                                 <ChevronDown
-                                  className={`ml-2 h-4 w-4 text-primary transition-transform duration-200 group-open:rotate-180`}
+                                  className={`ml-2 h-5 w-5 text-primary transition-transform duration-200 group-open:rotate-180`}
                                 />
                               </summary>
-                              <div className="mt-2 pl-4 space-y-2">
+                              <div className="mt-3 pl-6 space-y-3">
                                 {item?.subItems.map((subItem) => (
                                   <Link
                                     key={subItem?.label}
                                     href={subItem?.href ?? "#"}
                                     onClick={onClose}
-                                    className="block rounded-lg px-3 py-2 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                                    className="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                                   >
                                     {subItem?.label}
                                   </Link>
@@ -130,7 +130,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                             <Link
                               href={item?.href ?? "#"}
                               onClick={onClose}
-                              className="block rounded-lg px-3 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                              className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                             >
                               {item?.label}
                             </Link>
@@ -139,18 +139,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                       ))}
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-[var(--color-accent)]">
+                    <div className="mt-8 pt-6 border-t border-[var(--color-accent)]">
                       <Link
                         href="/log-in"
                         onClick={onClose}
-                        className="block rounded-lg px-3 py-2.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                        className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                       >
                         Log in
                       </Link>
                       <Link
                         href="/book-now"
                         onClick={onClose}
-                        className="mt-4 block rounded-lg bg-[var(--color-primary)] px-3 py-2.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] transition duration-200"
+                        className="mt-4 block rounded-lg bg-[var(--color-primary)] px-4 py-3.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] transition duration-200"
                       >
                         Find a Therapist
                       </Link>
