@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Download, X } from "lucide-react";
+import { MoveRight, X } from "lucide-react";
 
 const AlertBanner: React.FC = () => {
   const [isVisible, setIsVisible] = React.useState(true);
@@ -18,9 +18,9 @@ const AlertBanner: React.FC = () => {
           className="bg-bg-contrast hover:bg- text-bg-bg hover:text-shadow-bg-contrast font-medium py-1 px-3 rounded-md transition duration-200 text-sm"
         >
           <div className="flex items-center gap-2">
-            <div>Download Now</div>
+            <div>Learn More</div>
             <div>
-              <Download className="h-4 w-4" />
+              <MoveRight className="h-4 w-4" />
             </div>
           </div>
         </Link>
