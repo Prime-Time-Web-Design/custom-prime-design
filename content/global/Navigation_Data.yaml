@@ -1,3 +1,7 @@
+alertBanner:
+  alertLabel: 7 Critical Website Mistakes Costing You Therapy Clients
+  alertLink: /landing-page
+  alertLinkText: Learn More
 navigation:
   mainNav:
     - label: About
@@ -8,8 +12,8 @@ navigation:
             alt: Featured Card Image
           title: See How Therapists Like You Are Growing
           description: >-
-            Read success stories from therapists who have used
-            our templates to attract more clients and save time.
+            Read success stories from therapists who have used our templates to
+            attract more clients and save time.
           ctaText: Read Success Stories
           ctaLink: /testimonials
           layout: vertical

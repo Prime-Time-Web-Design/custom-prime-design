@@ -16,6 +16,31 @@ export const globalSchema = defineSchema({
       fields: [
         {
           type: "object",
+          name: "alertBanner",
+          label: "Alert Banner",
+          fields: [
+            {
+              type: "string",
+              name: "alertLabel",
+              label: "Alert Label",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "alertLink",
+              label: "Alert Link",
+              required: true,
+            },
+            {
+              type: "string",
+              name: "alertLinkText",
+              label: "Alert Link Text",
+              required: true,
+            },
+          ],
+        },
+        {
+          type: "object",
           name: "navigation",
           label: "Navigation",
           fields: [

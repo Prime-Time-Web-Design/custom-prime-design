@@ -22,6 +22,19 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     relativePath: "Navigation_Data.yaml",
   });
 
+  // Debug the data from Tina CMS
+  console.log(
+    "Global data from Tina:",
+    JSON.stringify(
+      {
+        alertBanner: globalData.data.global.alertBanner,
+        hasNavigation: !!globalData.data.global.navigation,
+      },
+      null,
+      2
+    )
+  );
+
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body>

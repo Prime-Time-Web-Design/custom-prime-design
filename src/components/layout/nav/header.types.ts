@@ -18,6 +18,10 @@ export type MainNavProps = {
   navigation: GlobalQuery["global"]["navigation"];
 };
 
+export type AlertBannerProps = {
+  alertBanner: GlobalQuery["global"]["alertBanner"];
+};
+
 export type SubItem = {
   __typename: "GlobalNavigationMainNavSubItems";
   label: string;

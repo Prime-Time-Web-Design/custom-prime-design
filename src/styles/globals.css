@@ -41,12 +41,14 @@
   --color-very-light-gray: #F8F8FF;
   --color-medium-slate: #828CA9;
   --color-deep-slate: #2F4F4F;
+  --color-deep-slate-light: #426F6F;
 
   /* Semantic roles for convenience */
   --color-bg: var(--color-very-light-gray);
   --color-bg-light: var(--color-very-light-gray);
   --color-bg-medium: var(--color-medium-slate);
   --color-bg-contrast: var(--color-deep-slate);
+  --color-bg-contrast-light: var(--color-deep-slate-light);
   --color-text: var(--color-deep-slate);
   --color-primary: var(--color-calming-blue);
   --color-primary-hover: var(--color-calming-blue-light);

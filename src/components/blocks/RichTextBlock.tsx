@@ -10,8 +10,7 @@ interface RichTextBlockProps {
 
 export const RichTextBlock = ({ data }: RichTextBlockProps) => {
   const { heading, subheading, features } = data;
-  console.log("RichTextBlock data:", data);
-  console.log("Features:", features);
+
   return (
     <div className="px-4 py-12 bg-bg-contrast">
       {heading && (
@@ -61,12 +60,12 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
               <h3 className="text-lg font-medium mb-1 text-[var(--color-secondary-hover)]">
                 {f?.title}
               </h3>
-              <p
+              <div
                 data-tina-field
                 className="max-w-[40%] text-[var(--color-bg-light)] mx-auto text-sm font-body"
               >
                 <TinaMarkdown content={f?.description} />
-              </p>
+              </div>
             </div>
           );
         })}

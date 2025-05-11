@@ -8,7 +8,13 @@ export const pageSchema = defineSchema({
       path: "content/pages",
       format: "yaml",
       fields: [
-        { name: "title", label: "Title", type: "string", required: true },
+        {
+          name: "title",
+          label: "Title",
+          type: "string",
+          required: true,
+          isTitle: true,
+        },
         {
           name: "description",
           label: "Description",
@@ -16,8 +22,11 @@ export const pageSchema = defineSchema({
           required: true,
           ui: { component: "textarea" },
         },
-        { name: "subtitle", label: "Subtitle", type: "string" },
-
+        {
+          name: "subtitle",
+          label: "Subtitle",
+          type: "string",
+        },
         {
           type: "object",
           list: true,
@@ -146,27 +155,6 @@ export const pageSchema = defineSchema({
                       description:
                         "Client description, position, or service they received",
                     },
-                    // ——— Fixed Rating Field ———
-                    // {
-                    //   type: "number",
-                    //   name: "rating",
-                    //   label: "Rating",
-                    //   description: "Client rating from 1–5",
-                    //   required: true,
-                    //   // native numeric limits:
-                    //   min: 1,
-                    //   max: 5,
-                    //   // top-level validator,
-                    //   // Tina calls this with the plain number value
-                    //   validate: (value) => {
-                    //     if (typeof value !== "number") {
-                    //       return "Rating must be a number";
-                    //     }
-                    //     if (value < 1 || value > 5) {
-                    //       return "Rating must be between 1 and 5";
-                    //     }
-                    //   },
-                    // },
                   ],
                 },
                 {
@@ -185,12 +173,20 @@ export const pageSchema = defineSchema({
                 },
               ],
             },
-            // ... other block templates ...
           ],
         },
-        // ... other top-level page fields ...
       ],
+      ui: {
+        router: ({ document }) => `/pages/${document._sys.filename}`,
+        filename: {
+          slugify: (values) =>
+            values?.title
+              ?.toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-") // kebab-case
+              .replace(/^-+|-+$/g, "") // trim hyphens
+              .slice(0, 50) || "untitled",
+        },
+      },
     },
-    // ... other collections ...
   ],
 });

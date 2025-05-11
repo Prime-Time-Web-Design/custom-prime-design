@@ -13,11 +13,15 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { globalSettings } = useLayout();
   const navigation = globalSettings?.navigation;
+  const alertBanner = globalSettings?.alertBanner;
+
+  // console.log("alertBanner", alertBanner);
+
   if (!navigation) return null;
 
   return (
     <header className="sticky top-0 z-50 shadow-md bg-[var(--color-bg)] lg:rounded-xl lg:mt-2.5 lg:mx-2.5">
-      <AlertBanner />
+      {alertBanner && <AlertBanner alertBanner={alertBanner} />}
       <div className="flex items-center justify-between px-4 py-2 lg:hidden">
         <div className="flex-shrink-0">
           <span className="text-2xl font-semibold text-[var(--color-text)] ">
