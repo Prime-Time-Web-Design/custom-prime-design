@@ -1,12 +1,51 @@
 query HomeQuery {
-  home(relativePath: "home.yaml") {
+  page(relativePath: "home.yaml") {
     title
     description
-    hero {
-      heading
-      subheading
-      buttonText
-      buttonLink
+    template
+    headerBlocks {
+      __typename
+      ... on PageBlocksHero {
+        heading
+        subheading
+        buttonText
+        buttonLink
+        _template
+      }
+    }
+    blocks {
+      __typename
+      ... on PageBlocksHero {
+        heading
+        subheading
+        buttonText
+        buttonLink
+        _template
+      }
+      ... on PageBlocksRichTextBlock {
+        heading
+        subheading
+        features {
+          src
+          title
+          description
+        }
+        _template
+      }
+      ... on PageBlocksCarouselBlock {
+        blockTitle
+        blockSubtitle
+        slides {
+          src
+          alt
+          testimonialText
+          clientName
+          clientType
+        }
+        options_loop
+        autoplayInterval
+        _template
+      }
     }
   }
 }

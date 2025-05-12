@@ -21,6 +21,7 @@ type BlockComponentMap = {
   [K in keyof PageBlockMap]: React.ComponentType<{ data: PageBlockMap[K] }>;
 };
 
+// Direct import of components instead of using dynamic imports
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
   PageBlocksRichTextBlock: RichTextBlock,

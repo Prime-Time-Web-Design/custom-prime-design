@@ -23,9 +23,60 @@ export const pageSchema = defineSchema({
           ui: { component: "textarea" },
         },
         {
+          name: "template",
+          label: "Page Template",
+          type: "string",
+          options: [
+            { label: "Standard Page", value: "standard" },
+            { label: "Landing Page", value: "landing" },
+            { label: "Service Page", value: "service" },
+            { label: "Contact Page", value: "contact" },
+          ],
+          description: "Select the template to use for this page",
+          required: true,
+        },
+        {
           name: "subtitle",
           label: "Subtitle",
           type: "string",
+        },
+        {
+          name: "headerBlocks",
+          label: "Header Section Blocks",
+          type: "object",
+          list: true,
+          templates: [
+            {
+              name: "hero",
+              label: "Hero Section",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  required: true,
+                },
+                {
+                  type: "string",
+                  name: "subheading",
+                  label: "Subheading",
+                  ui: { component: "textarea" },
+                },
+                {
+                  type: "string",
+                  name: "buttonText",
+                  label: "Button Text",
+                  required: true,
+                },
+                {
+                  type: "string",
+                  name: "buttonLink",
+                  label: "Button Link",
+                  required: true,
+                },
+              ],
+            },
+          ],
         },
         {
           type: "object",

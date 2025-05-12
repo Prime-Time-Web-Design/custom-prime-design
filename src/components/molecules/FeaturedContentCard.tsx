@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import featuredCardImage from "../../../public/featuredCardImage.png"; // Adjust the path to your image
 
 interface FeaturedContentCardProps {
   image: {
@@ -40,7 +39,7 @@ const FeaturedContentCard: React.FC<FeaturedContentCardProps> = ({
         }`}
       >
         <Image
-          src={featuredCardImage}
+          src={image.src}
           alt={image.alt}
           fill
           className="object-cover rounded-xl"

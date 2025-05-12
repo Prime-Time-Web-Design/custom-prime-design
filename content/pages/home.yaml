@@ -1,5 +1,6 @@
 title: Prime Time Web Design
 description: Discover our amazing products and services…
+template: standard
 blocks:
   - heading: Expand Your Impact. Empower More Healing.
     subheading: |
@@ -27,8 +28,8 @@ blocks:
           Once you’ve been matched, you can begin regular therapy sessions for
           as long as needed
     _template: richTextBlock
-  - blockTitle: 'Finding Your Path: Client Stories'
-    blockSubtitle: 'Real experiences of hope, healing, and positive change.'
+  - blockTitle: "Finding Your Path: Client Stories"
+    blockSubtitle: "Real experiences of hope, healing, and positive change."
     slides:
       - src: /adventureforthesoul.jpg
         alt: Journey to The Peak
@@ -38,7 +39,7 @@ blocks:
           have joy, purpose, and the strength to keep moving forward. It's been
           life-changing.
         clientName: Joanna Ferguson
-        clientType: 'Individual Therapy '
+        clientType: "Individual Therapy "
       - src: /aniket-deole-T-tOgjWZ0fQ-unsplash.jpg
         alt: El Capitan
         testimonialText: >-
@@ -49,7 +50,7 @@ blocks:
         clientType: Couples Therapy
       - src: /featuredCardImage.png
         alt: Beauty In Nature
-        testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
+        testimonialText: " I still have anxious moments, but now I feel equipped to handle them. I've found a sense of peace and control I didn't think was possible."
         clientName: Charles Woodford
         clientType: Individual Therapy
     _template: carouselBlock

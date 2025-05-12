@@ -1,8 +1,9 @@
 "use client";
 import { useTina } from "tinacms/dist/react";
-import { Blocks } from "../../components/blocks";
 import { PageQuery } from "../../../tina/__generated__/types";
 import ErrorBoundary from "../../lib/ErrorBoundary";
+import { Templates } from "../../components/templates";
+import { ensureValidBlocks } from "../../lib/template-utils";
 
 export interface ClientPageProps {
   data: {
@@ -16,9 +17,18 @@ export interface ClientPageProps {
 
 export default function ClientPage(props: ClientPageProps) {
   const { data } = useTina({ ...props });
+
+  // Prepare the page data for the template system
+  const pageData = {
+    ...data?.page,
+    blocks: ensureValidBlocks(data?.page?.blocks),
+    // Ensure headerBlocks is available (even if empty)
+    headerBlocks: [],
+  };
+
   return (
     <ErrorBoundary>
-      <Blocks blocks={data?.page?.blocks} />
+      <Templates data={pageData} />
     </ErrorBoundary>
   );
 }

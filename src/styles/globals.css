@@ -17,6 +17,21 @@
   .font-body {
     font-family: var(--font-inter), sans-serif;
   }
+  
+  /* Add GPU acceleration for all animated/transitioning elements */
+  * {
+    backface-visibility: hidden;
+  }
+  
+  /* Use more performant transform properties for transitions */
+  .transition, 
+  .transition-colors,
+  .transition-opacity,
+  .transition-transform,
+  .transition-all {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
 }
 
 

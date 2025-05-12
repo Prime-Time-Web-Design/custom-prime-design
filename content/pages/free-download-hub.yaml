@@ -1,0 +1,14 @@
+title: Free Download Hub
+description: >-
+  Access valuable free resources designed to help you grow your therapy practice
+  — guides, checklists, and more, all in one place.
+template: landing
+subtitle: 7 Critical Website Mistakes Costing You Therapy Clients
+blocks:
+  - heading: 7 Critical Website Mistakes Costing You Therapy Clients
+    subheading: >-
+      Discover the 7 website mistakes that are quietly costing you therapy
+      clients—and how to fix them fast.
+    buttonText: Grab the guide
+    buttonLink: /download/website-mistakes-guide
+    _template: hero
