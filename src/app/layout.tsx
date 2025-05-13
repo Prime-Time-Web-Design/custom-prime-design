@@ -1,7 +1,7 @@
 import "./../styles/globals.css";
 import Layout from "@/components/layout/Layout";
 import client from "../../tina/__generated__/client";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
 export interface RootLayoutProps {
   children: React.ReactNode;

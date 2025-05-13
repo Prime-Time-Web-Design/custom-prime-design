@@ -22,12 +22,16 @@ export const OptimizedImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Try to load WebP version first, then optimized, then original
-  const webpSrc = src.startsWith("/")
+  const webpSrc = src.startsWith("/optimized/")
+    ? src.replace(/\.[^/.]+$/, ".webp") // If already in optimized dir, just change extension
+    : src.startsWith("/")
     ? `/optimized${src.substring(0, src.lastIndexOf("."))}.webp`
     : `/optimized/${src.substring(0, src.lastIndexOf("."))}.webp`;
 
   // Optimized version path
-  const optimizedSrc = src.startsWith("/")
+  const optimizedSrc = src.startsWith("/optimized/")
+    ? src // If already referring to optimized dir, use as is
+    : src.startsWith("/")
     ? `/optimized${src}`
     : `/optimized/${src}`;
 
@@ -35,25 +39,53 @@ export const OptimizedImage = ({
   const originalSrc = src.startsWith("http") ? src : src;
 
   useEffect(() => {
+    // Debug image paths in development
+    if (process.env.NODE_ENV === "development") {
+      console.log("Image loading attempt with paths:", {
+        original: src,
+        webp: webpSrc,
+        optimized: optimizedSrc,
+        fallback: fallbackSrc,
+      });
+    }
+
     // First try WebP
     const webpImg = new window.Image();
     webpImg.src = webpSrc;
 
     webpImg.onload = () => {
       setImgSrc(webpSrc);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Successfully loaded WebP image:", webpSrc);
+      }
       return;
     };
 
     webpImg.onerror = () => {
+      if (process.env.NODE_ENV === "development") {
+        console.log(
+          "WebP image failed to load, trying optimized:",
+          optimizedSrc
+        );
+      }
       // If WebP fails, try optimized version
       const img = new window.Image();
       img.src = optimizedSrc;
 
       img.onload = () => {
         setImgSrc(optimizedSrc);
+        if (process.env.NODE_ENV === "development") {
+          console.log("Successfully loaded optimized image:", optimizedSrc);
+        }
       };
 
       img.onerror = () => {
+        if (process.env.NODE_ENV === "development") {
+          console.log(
+            "Optimized image failed to load, trying original:",
+            originalSrc
+          );
+        }
         // Fall back to original if optimized doesn't exist
         setImgSrc(originalSrc);
       };

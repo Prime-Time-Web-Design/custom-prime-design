@@ -3,7 +3,7 @@ import { Blocks } from "../blocks";
 import { Section } from "../layout/Section";
 import { TemplateProps } from "./index";
 import { ensureValidBlocks } from "../../lib/template-utils";
-import Image from "../molecules/OptimizedImage";
+import Image from "next/image"; // Changed from OptimizedImage to Next.js Image
 
 // Lazy load the fallback header component
 const DefaultHeader = lazy(() => import("../molecules/DefaultHeader"));
@@ -19,17 +19,12 @@ export default function LandingTemplate({
   return (
     <div className="landing-template">
       {/* Custom header with special styling and optimized background image */}
-      <div className="landing-header relative">
+      <div className="landing-header relative h-[50vh] w-full">
         <Image
-          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.webp"
+          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.jpg"
           alt="Landing Page Background"
           fill
           className="object-cover object-center"
-          onError={(e) => {
-            // Fallback to JPEG if WebP is not available
-            e.currentTarget.src =
-              "/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.jpg";
-          }}
           priority // Mark as high priority LCP image
         />
       </div>
