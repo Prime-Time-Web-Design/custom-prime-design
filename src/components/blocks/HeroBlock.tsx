@@ -1,5 +1,4 @@
 import Image from "next/image";
-import heroImg from "../../../public/hero.jpg";
 import { PageBlocksHero } from "../../../tina/__generated__/types";
 import { Section } from "../layout/Section";
 
@@ -36,9 +35,14 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src={heroImg}
+                src="/optimized/hero.jpg"
                 alt="Hero illustration"
+                width={1200}
+                height={800}
+                priority
                 className="w-full h-auto rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={80}
               />
             </div>
           </div>

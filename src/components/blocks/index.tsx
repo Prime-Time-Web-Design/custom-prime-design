@@ -1,14 +1,16 @@
 "use client";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import {
   PageBlocks,
   PageBlocksCarouselBlock,
   PageBlocksHero,
   PageBlocksRichTextBlock,
 } from "../../../tina/__generated__/types";
-import HeroBlock from "./HeroBlock";
-import RichTextBlock from "./RichTextBlock";
-import { CarouselBlock } from "./CarouselBlock";
+
+// Lazy load all block components
+const HeroBlock = lazy(() => import("./HeroBlock"));
+const RichTextBlock = lazy(() => import("./RichTextBlock"));
+const CarouselBlock = lazy(() => import("./CarouselBlock"));
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
@@ -21,7 +23,7 @@ type BlockComponentMap = {
   [K in keyof PageBlockMap]: React.ComponentType<{ data: PageBlockMap[K] }>;
 };
 
-// Direct import of components instead of using dynamic imports
+// Use lazy loaded components
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
   PageBlocksRichTextBlock: RichTextBlock,
@@ -49,6 +51,7 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
  *  - Narrows T to the specific union member (PageBlocksHero or PageBlocksText)
  *  - Picks the correct component from BLOCK_COMPONENTS
  *  - Passes block straight through, properly typed
+ *  - Wraps in Suspense for lazy loading
  */
 function renderBlock<T extends PageBlocks>(block: T, idx: number) {
   const typename = block.__typename as keyof BlockComponentMap;
@@ -56,5 +59,14 @@ function renderBlock<T extends PageBlocks>(block: T, idx: number) {
     data: T;
   }>;
 
-  return <Component key={idx} data={block} />;
+  return (
+    <Suspense
+      key={idx}
+      fallback={
+        <div className="h-48 w-full animate-pulse bg-gray-100 rounded"></div>
+      }
+    >
+      <Component data={block} />
+    </Suspense>
+  );
 }

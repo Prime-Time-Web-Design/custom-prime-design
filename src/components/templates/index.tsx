@@ -1,8 +1,10 @@
-import React from "react";
-import LandingTemplate from "./LandingTemplate";
-import ServiceTemplate from "./ServiceTemplate";
-import ContactTemplate from "./ContactTemplate";
-import StandardTemplate from "./StandardTemplate";
+import React, { lazy, Suspense } from "react";
+
+// Lazy load all template components
+const LandingTemplate = lazy(() => import("./LandingTemplate"));
+const ServiceTemplate = lazy(() => import("./ServiceTemplate"));
+const ContactTemplate = lazy(() => import("./ContactTemplate"));
+const StandardTemplate = lazy(() => import("./StandardTemplate"));
 
 // Define more specific types for blocks
 export interface Block {
@@ -23,7 +25,7 @@ export interface TemplateProps {
   children?: React.ReactNode;
 }
 
-// Map of template components (no dynamic imports)
+// Map of template components (using lazy loaded components)
 const TEMPLATE_COMPONENTS = {
   landing: LandingTemplate,
   service: ServiceTemplate,
@@ -41,6 +43,12 @@ export function Templates({ data, children }: TemplateProps) {
     TEMPLATE_COMPONENTS[templateName as keyof typeof TEMPLATE_COMPONENTS] ||
     StandardTemplate;
 
-  // Directly render the template without Suspense or lazy loading
-  return <TemplateComponent data={data}>{children}</TemplateComponent>;
+  // Render the template with Suspense for lazy loading
+  return (
+    <Suspense
+      fallback={<div className="min-h-screen bg-gray-50 animate-pulse"></div>}
+    >
+      <TemplateComponent data={data}>{children}</TemplateComponent>
+    </Suspense>
+  );
 }

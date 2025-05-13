@@ -2,11 +2,13 @@
   "name": "custom-design-template",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "NEXT_PUBLIC_USE_LOCAL_CLIENT=1 tinacms dev -c \"next dev\"",
     "build": "NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
@@ -16,6 +18,8 @@
     "next": "^14.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sharp": "^0.34.1",
+    "svgo": "^3.3.2",
     "tinacms": "^2.7.5"
   },
   "devDependencies": {

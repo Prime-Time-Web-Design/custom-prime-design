@@ -1,0 +1,52 @@
+/**
+ * Utility functions for handling Tina blocks and page templates
+ */
+
+/**
+ * Safely converts Tina blocks to the format expected by the Blocks component
+ * This allows us to be more flexible with the data structure
+ */
+
+export function ensureValidBlocks(blocks: unknown) {
+  if (!blocks) return [];
+
+  // Convert any null values to empty arrays
+  if (blocks === null) return [];
+
+  // If it's already an array, validate and clean each block
+  if (Array.isArray(blocks)) {
+    return blocks
+      .filter((block) => block !== null) // Filter out null blocks
+      .map((block) => {
+        // Handle image paths if needed
+        if (block && typeof block === 'object') {
+          // Process each block based on its type
+          return cleanBlockData(block);
+        }
+        return block;
+      });
+  }
+
+  // If it's something else, return an empty array
+  return [];
+}
+
+/**
+ * Clean up block data to prevent issues with invalid paths or missing properties
+ */
+function cleanBlockData(block: Record<string, unknown>): Record<string, unknown> {
+  if (!block) return block;
+  
+  // Make a copy of the block to avoid mutations
+  const cleanedBlock = { ...block };
+  
+  // Process image fields if they exist
+  if (cleanedBlock.src && typeof cleanedBlock.src === 'string') {
+    // Ensure image paths are valid and prefixed correctly
+    if (!cleanedBlock.src.startsWith('/') && !cleanedBlock.src.startsWith('http')) {
+      cleanedBlock.src = `/${cleanedBlock.src}`;
+    }
+  }
+  
+  return cleanedBlock;
+}

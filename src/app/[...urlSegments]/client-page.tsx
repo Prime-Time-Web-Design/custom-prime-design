@@ -18,12 +18,25 @@ export interface ClientPageProps {
 export default function ClientPage(props: ClientPageProps) {
   const { data } = useTina({ ...props });
 
-  // Prepare the page data for the template system
+  // Safely handle data to prevent errors with missing or malformed data
+  if (!data || !data.page) {
+    console.error("No data or page data available");
+    return (
+      <ErrorBoundary>
+        <div className="p-8 text-center">
+          <h2 className="text-2xl font-bold mb-4">Content Not Available</h2>
+          <p>The requested page content could not be loaded.</p>
+        </div>
+      </ErrorBoundary>
+    );
+  }
+
+  // Prepare the page data for the template system with proper fallbacks
   const pageData = {
-    ...data?.page,
-    blocks: ensureValidBlocks(data?.page?.blocks),
+    ...data.page,
+    blocks: ensureValidBlocks(data.page?.blocks),
     // Ensure headerBlocks is available (even if empty)
-    headerBlocks: [],
+    headerBlocks: ensureValidBlocks(data.page?.headerBlocks || []),
   };
 
   return (

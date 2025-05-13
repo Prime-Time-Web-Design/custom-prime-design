@@ -23,10 +23,17 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   try {
+    console.log("Attempting to fetch home page data: home.yaml");
     const result = await client.queries.page({
       relativePath: "home.yaml",
     });
 
+    if (!result.data?.page) {
+      console.error("No home page data found for home.yaml");
+      return <div>Error loading home page content</div>;
+    }
+
+    console.log("Successfully loaded home page: home.yaml");
     return (
       <Section>
         <ClientPage

@@ -1,8 +1,12 @@
-import { ReactNode } from "react";
+import React, { ReactNode, lazy, Suspense } from "react";
 import { Blocks } from "../blocks";
 import { Section } from "../layout/Section";
 import { TemplateProps } from "./index";
 import { ensureValidBlocks } from "../../lib/template-utils";
+import Image from "../molecules/OptimizedImage";
+
+// Lazy load the fallback header component
+const DefaultHeader = lazy(() => import("../molecules/DefaultHeader"));
 
 interface LandingTemplateProps extends TemplateProps {
   children?: ReactNode;
@@ -14,61 +18,31 @@ export default function LandingTemplate({
 }: LandingTemplateProps) {
   return (
     <div className="landing-template">
-      {/* Custom header with special styling */}
-      <div
-        className="landing-header relative bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/aniket-deole-T-tOgjWZ0fQ-unsplash.jpg')",
-        }}
-      >
-        {/* Render the header blocks if they exist */}
-        {data?.headerBlocks && data.headerBlocks.length > 0 ? (
-          <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-        ) : (
-          <Section className="py-20 text-center px-2">
-            <div>
-              {/* Badge */}
-              <div className="inline-block px-4 py-2 rounded-full bg-tertiary text-[var(--color-deep-slate)] mb-6 text-sm font-medium">
-                Website Optimization Guide
-              </div>
-
-              {/* Main heading with larger font and dark text color */}
-              <div className="max-w-3xl mx-auto">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 text-black">
-                  Transform Your Therapy Website Into A Client-Converting
-                  Machine
-                </h1>
-
-                {/* Descriptive text */}
-                <p className="text-xl text-black mb-10">
-                  Learn the proven strategies used by successful therapists to
-                  create engaging websites that build trust and attract ideal
-                  clients.
-                </p>
-
-                {/* Buttons container */}
-                <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-                  {/* First button - Download Guide */}
-                  <a
-                    href="/download-guide"
-                    className="bg-[var(--color-soft-turquoise)] text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-turquoise-light)] transition-colors"
-                  >
-                    Download Free Guide
-                  </a>
-
-                  {/* Second button - Schedule Consultation */}
-                  <a
-                    href="/consultation"
-                    className="bg-[var(--color-soft-lavender)] text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-lavender-light)] transition-colors"
-                  >
-                    Schedule Consultation
-                  </a>
-                </div>
-              </div>
-            </div>
-          </Section>
-        )}
+      {/* Custom header with special styling and optimized background image */}
+      <div className="landing-header relative">
+        <Image
+          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.webp"
+          alt="Landing Page Background"
+          fill
+          className="object-cover object-center"
+          onError={(e) => {
+            // Fallback to JPEG if WebP is not available
+            e.currentTarget.src =
+              "/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.jpg";
+          }}
+          priority // Mark as high priority LCP image
+        />
       </div>
+      {/* Render the header blocks if they exist, otherwise lazy load the fallback */}
+      {data?.headerBlocks && data.headerBlocks.length > 0 ? (
+        <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
+      ) : (
+        <Suspense
+          fallback={<div className="h-72 animate-pulse bg-gray-200"></div>}
+        >
+          <DefaultHeader />
+        </Suspense>
+      )}
 
       {/* Main content blocks - dynamic from Tina */}
       <Section className="main-content-section bg-gradient-to-b from-[var(--color-very-light-gray)] to-[var(--color-soft-lavender-light)] py-16">
@@ -84,7 +58,7 @@ export default function LandingTemplate({
           </p>
           <a
             href="/contact"
-            className="bg-white text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-apricot-light)] hover:text-[var(--color-deep-slate)] transition-colors"
+            className="bg-tertiary text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-apricot-light)] hover:text-[var(--color-deep-slate)] transition-colors"
           >
             Book a Free Consultation
           </a>

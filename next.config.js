@@ -13,22 +13,36 @@ const nextConfig = {
     });
     return config;
   },
-  productionBrowserSourceMaps: true,
+  productionBrowserSourceMaps: false, // Disable source maps in production for smaller bundle
   images: {
-    domains: [],
-    unoptimized: process.env.NODE_ENV === 'development',
-    // Add more configuration options for images to improve loading
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    formats: ['image/webp'],
+    domains: ["localhost", "via.placeholder.com"], // Allow local and placeholder images
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 64, 96, 128, 256],
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Font optimization should be at the top level
+  // Font optimization 
   optimizeFonts: true,
-  // Add experimental flag to minimize flickering with React 18
-  experimental: {
-    // Reduces client-side rendering flickering
-    scrollRestoration: true,
-  }
+  // Compression
+  compress: true,
+  // Cache improvements
+  httpAgentOptions: {
+    keepAlive: true,
+  },
+  // Cache static assets
+  staticPageGenerationTimeout: 120,
+  // Enable SWC minification for better performance
+  swcMinify: true,
 };
 
-module.exports = nextConfig;
+// Export for ES modules
+export default nextConfig;

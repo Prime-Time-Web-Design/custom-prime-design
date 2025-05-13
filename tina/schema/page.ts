@@ -228,7 +228,18 @@ export const pageSchema = defineSchema({
         },
       ],
       ui: {
-        router: ({ document }) => `/pages/${document._sys.filename}`,
+        router: ({ document }) => {
+          // Check if the filename is a valid YAML file before generating a route
+          if (
+            (document._sys.filename &&
+              document._sys.filename.endsWith(".yaml")) ||
+            /^[a-z0-9-]+$/.test(document._sys.filename)
+          ) {
+            return `/pages/${document._sys.filename}`;
+          }
+          // Skip URL generation for non-YAML files or invalid filenames
+          return "";
+        },
         filename: {
           slugify: (values) =>
             values?.title
