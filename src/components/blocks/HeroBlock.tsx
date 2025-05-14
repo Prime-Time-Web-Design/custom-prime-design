@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PageBlocksHero } from "../../../tina/__generated__/types";
 import { Section } from "../layout/Section";
+import { heroImagePlaceholder } from "@/lib/preload-utils";
 
 interface HeroBlockProps {
   data: PageBlocksHero;
@@ -35,16 +36,16 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src="/optimized/hero.jpg"
+                src="/optimized/hero.webp"
                 alt="Hero illustration"
                 width={1200}
                 height={800}
                 priority
                 className="w-full h-auto rounded-lg shadow-xl"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                quality={80}
+                quality={90}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+                blurDataURL={heroImagePlaceholder}
               />
             </div>
           </div>

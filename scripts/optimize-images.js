@@ -77,11 +77,26 @@ async function processImage(filePath) {
       return;
     }
     
-    // Create WebP version
+    // Create WebP version with higher quality for hero images
+    const webpQuality = nameWithoutExt === 'hero' ? 90 : imageSettings.webp.quality;
     const webpOutputPath = path.join(optimizedDir, `${nameWithoutExt}.webp`);
     await sharp(filePath)
-      .webp(imageSettings.webp)
+      .webp({ quality: webpQuality })
       .toFile(webpOutputPath);
+    
+    // Generate tiny placeholder for blur effect (10px wide, base64 encoded)
+    if (nameWithoutExt === 'hero') {
+      const placeholderBuffer = await sharp(filePath)
+        .resize(10) // Tiny size for placeholder
+        .webp({ quality: 20 })
+        .toBuffer();
+      
+      // Log placeholder as base64 for easy copy-paste to code
+      const placeholderBase64 = `data:image/webp;base64,${placeholderBuffer.toString('base64')}`;
+      console.log(`\nBlur placeholder for ${fileName}:`);
+      console.log(placeholderBase64);
+      console.log('\nYou can use this as a blurDataURL in Next.js Image component\n');
+    }
     
     // Log results
     const newStats = fs.statSync(outputPath);

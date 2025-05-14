@@ -7,7 +7,7 @@ export default function DefaultHeader() {
       {/* Background Image Container */}
       <div className="absolute inset-0">
         <Image
-          src="/optimized/nighttimecontrast.webp"
+          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.webp"
           alt="Night time contrast background"
           fill
           priority

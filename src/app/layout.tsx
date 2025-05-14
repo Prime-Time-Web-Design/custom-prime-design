@@ -44,7 +44,7 @@ const playfair = Playfair_Display({
 //   },
 // };
 
-// // Generate HTTP headers for better caching and performance
+// Generate HTTP headers for better caching and performance
 // export async function generateMetadata() {
 //   return {
 //     ...metadata,
@@ -56,23 +56,31 @@ const playfair = Playfair_Display({
 //     },
 //   };
 // }
+// }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const globalData = await client.queries.global({
     relativePath: "Navigation_Data.yaml",
   });
 
+  // Statically define the preload tag
+  const preloadHeroImage =
+    '<link rel="preload" href="/optimized/hero.webp" as="image" type="image/webp" crossorigin="anonymous" />';
+
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {/* Preload critical assets */}
-        {/* <link
-          rel="preload"
-          href="/optimized/hero.jpg"
-          as="image"
-          type="image/jpeg"
-        /> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+        {/* Inject the preload tag using dangerouslySetInnerHTML to avoid Next.js JS overhead */}
+        <div dangerouslySetInnerHTML={{ __html: preloadHeroImage }} />
       </head>
       <body>
         <div className="min-h-screen flex flex-col">
