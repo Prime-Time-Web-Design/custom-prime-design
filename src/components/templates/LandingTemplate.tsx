@@ -1,12 +1,11 @@
-import React, { ReactNode, lazy, Suspense } from "react";
+import React, { ReactNode } from "react";
 import { Blocks } from "../blocks";
 import { Section } from "../layout/Section";
 import { TemplateProps } from "./index";
 import { ensureValidBlocks } from "../../lib/template-utils";
-import Image from "next/image"; // Changed from OptimizedImage to Next.js Image
 
-// Lazy load the fallback header component
-const DefaultHeader = lazy(() => import("../molecules/DefaultHeader"));
+// Import header directly to prevent flickering
+import DefaultHeader from "../molecules/DefaultHeader";
 
 interface LandingTemplateProps extends TemplateProps {
   children?: ReactNode;
@@ -18,25 +17,11 @@ export default function LandingTemplate({
 }: LandingTemplateProps) {
   return (
     <div className="landing-template">
-      {/* Custom header with special styling and optimized background image */}
-      <div className="landing-header relative h-[50vh] w-full">
-        <Image
-          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.jpg"
-          alt="Landing Page Background"
-          fill
-          className="object-cover object-center"
-          priority // Mark as high priority LCP image
-        />
-      </div>
-      {/* Render the header blocks if they exist, otherwise lazy load the fallback */}
+      {/* Render the header blocks if they exist, otherwise use the fallback */}
       {data?.headerBlocks && data.headerBlocks.length > 0 ? (
         <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
       ) : (
-        <Suspense
-          fallback={<div className="h-72 animate-pulse bg-gray-200"></div>}
-        >
-          <DefaultHeader />
-        </Suspense>
+        <DefaultHeader />
       )}
 
       {/* Main content blocks - dynamic from Tina */}

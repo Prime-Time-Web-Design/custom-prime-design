@@ -43,6 +43,8 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                 className="w-full h-auto rounded-lg shadow-xl"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 quality={80}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
               />
             </div>
           </div>
