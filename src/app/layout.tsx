@@ -66,12 +66,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {/* Preload critical assets */}
-        <link
+        {/* <link
           rel="preload"
           href="/optimized/hero.jpg"
           as="image"
           type="image/jpeg"
-        />
+        /> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
       </head>
       <body>
