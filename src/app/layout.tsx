@@ -63,10 +63,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     relativePath: "Navigation_Data.yaml",
   });
 
-  // Statically define the preload tag
-  const preloadHeroImage =
-    '<link rel="preload" href="/optimized/hero.webp" as="image" type="image/webp" crossorigin="anonymous" />';
-
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
@@ -79,8 +75,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
-        {/* Inject the preload tag using dangerouslySetInnerHTML to avoid Next.js JS overhead */}
-        <div dangerouslySetInnerHTML={{ __html: preloadHeroImage }} />
+        {/* Preload hero image */}
+        <link
+          rel="preload"
+          href="/optimized/hero.webp"
+          as="image"
+          type="image/webp"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <div className="min-h-screen flex flex-col">

@@ -124,7 +124,7 @@ export const MainNav: React.FC<MainNavProps> = (props: MainNavProps) => {
               href="/book-now"
               className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm transition duration-200 focus:outline-none focus:text-[var(--color-bg)]"
             >
-              Find a Therapist
+              Book Now
             </Link>
           </div>
         </div>

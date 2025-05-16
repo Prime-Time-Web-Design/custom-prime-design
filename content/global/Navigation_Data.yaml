@@ -8,7 +8,7 @@ navigation:
       href: /
       featuredCards:
         - image:
-            src: /images/featuredCardImage.png
+            src: /optimized/featuredCardImage.webp
             alt: Featured Card Image
           title: See How Therapists Like You Are Growing
           description: >-

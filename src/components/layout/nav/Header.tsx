@@ -42,7 +42,7 @@ export const Header = () => {
             href="/book-now"
             className="rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200"
           >
-            Find a Therapist
+            Book Now
           </Link>
           <button
             type="button"
