@@ -35,6 +35,9 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
               key={idx}
               className="flex flex-col items-center justify-evenly rounded-lg shadow-lg p-3 mx-auto my-2 transition-transform hover:-translate-y-1 hover:shadow-2xl border border-[var(--color-primary-hover)] min-h-[330px] max-w-[210px] w-full"
             >
+              <div className="absolute top-2 left-2 h-6 w-6 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-semibold text-sm">
+                {idx + 1}
+              </div>
               <div className="mb-3 flex items-center justify-center">
                 {hasValidImage ? (
                   <div className="h-[110px] w-[110px] flex items-center justify-center bg-[var(--color-primary)] bg-opacity-10 rounded-full overflow-hidden shadow-md">
