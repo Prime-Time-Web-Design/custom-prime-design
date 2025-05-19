@@ -112,6 +112,13 @@ export const pageSchema = defineSchema({
                   label: "Button Link",
                   required: true,
                 },
+                {
+                  type: "image",
+                  name: "src",
+                  label: "Hero Image",
+                  description: "Image for the hero section (optional)",
+                  required: true,
+                },
               ],
             },
             {

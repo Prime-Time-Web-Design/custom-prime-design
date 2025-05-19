@@ -8,7 +8,7 @@ interface HeroBlockProps {
 }
 
 export const HeroBlock = ({ data }: HeroBlockProps) => {
-  const { heading, subheading, buttonText, buttonLink } = data;
+  const { heading, subheading, buttonText, buttonLink, src } = data;
 
   return (
     <Section
@@ -36,7 +36,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src="/optimized/hero.webp"
+                src={src}
                 alt="Hero illustration"
                 width={1200}
                 height={800}

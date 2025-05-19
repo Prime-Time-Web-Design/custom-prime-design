@@ -11,4 +11,5 @@ blocks:
       clients—and how to fix them fast.
     buttonText: Grab the guide
     buttonLink: /download/website-mistakes-guide
+    src: /nighttimecontrast.jpg
     _template: hero

@@ -10,8 +10,8 @@ import {
 // Import all blocks directly to prevent flickering
 // This is better for core/essential components that appear above the fold
 import { HeroBlock } from "./HeroBlock";
-import { RichTextBlock } from "./RichTextBlock";
 import { CarouselBlock } from "./CarouselBlock";
+import { HowItWorksBlock } from "./HowItWorksBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
@@ -27,7 +27,7 @@ type BlockComponentMap = {
 // Use lazy loaded components
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
-  PageBlocksRichTextBlock: RichTextBlock,
+  PageBlocksRichTextBlock: HowItWorksBlock, // Use the new HowItWorksBlock instead of RichTextBlock
   PageBlocksCarouselBlock: CarouselBlock,
 };
 
