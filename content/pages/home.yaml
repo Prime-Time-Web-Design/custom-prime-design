@@ -44,7 +44,7 @@ blocks:
     imageLeft: true
     imageSrc: /optimized/featuredCardImage.webp
     imageAlt: Healing is a Journey
-    backgroundColor: bg-primary-hover
+    backgroundColor: bg-soft-turquoise-light
     _template: ctaBlock
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
