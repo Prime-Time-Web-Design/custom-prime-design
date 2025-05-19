@@ -8,7 +8,8 @@
     "build": "NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build",
     "start": "next start",
     "lint": "next lint",
-    "optimize-images": "node scripts/optimize-images.js"
+    "optimize-images": "node scripts/optimize-images.js",
+    "sync:content": "node scripts/refresh-tina.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",

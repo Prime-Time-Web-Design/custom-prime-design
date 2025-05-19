@@ -54,7 +54,6 @@ export const pageSchema = defineSchema({
                   type: "string",
                   name: "heading",
                   label: "Heading",
-                  required: true,
                 },
                 {
                   type: "string",
@@ -66,13 +65,11 @@ export const pageSchema = defineSchema({
                   type: "string",
                   name: "buttonText",
                   label: "Button Text",
-                  required: true,
                 },
                 {
                   type: "string",
                   name: "buttonLink",
                   label: "Button Link",
-                  required: true,
                 },
               ],
             },
@@ -85,6 +82,71 @@ export const pageSchema = defineSchema({
           label: "Page Blocks",
           templates: [
             {
+              name: "ctaBlock",
+              label: "CTA Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                },
+                {
+                  type: "string",
+                  name: "subheading",
+                  label: "Subheading",
+                },
+                {
+                  type: "rich-text",
+                  name: "content",
+                  label: "Content",
+                  description:
+                    "Text content shown on one side of the CTA block",
+                },
+                {
+                  type: "string",
+                  name: "buttonText",
+                  label: "Button Text",
+                },
+                {
+                  type: "string",
+                  name: "buttonLink",
+                  label: "Button Link",
+                },
+                {
+                  type: "boolean",
+                  name: "imageLeft",
+                  label: "Image on Left Side",
+                  description:
+                    "Toggle to switch image position between left and right sides",
+                  ui: {
+                    defaultValue: true,
+                  },
+                },
+                {
+                  type: "image",
+                  name: "imageSrc",
+                  label: "Image",
+                  description: "Image for the CTA section (optional)",
+                },
+                {
+                  type: "string",
+                  name: "imageAlt",
+                  label: "Image Alt Text",
+                  description: "Alternative text for the image",
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description:
+                    "CSS class for the background color (e.g., bg-bg-contrast)",
+                  ui: {
+                    defaultValue: "bg-bg-contrast",
+                  },
+                },
+              ],
+            },
+            {
               name: "hero",
               label: "Hero Section",
               fields: [
@@ -92,7 +154,6 @@ export const pageSchema = defineSchema({
                   type: "string",
                   name: "heading",
                   label: "Heading",
-                  required: true,
                 },
                 {
                   type: "string",
@@ -104,20 +165,17 @@ export const pageSchema = defineSchema({
                   type: "string",
                   name: "buttonText",
                   label: "Button Text",
-                  required: true,
                 },
                 {
                   type: "string",
                   name: "buttonLink",
                   label: "Button Link",
-                  required: true,
                 },
                 {
                   type: "image",
                   name: "src",
                   label: "Hero Image",
                   description: "Image for the hero section (optional)",
-                  required: true,
                 },
               ],
             },
@@ -129,7 +187,6 @@ export const pageSchema = defineSchema({
                   type: "string",
                   name: "heading",
                   label: "Heading",
-                  required: true,
                 },
                 { type: "string", name: "subheading", label: "Subheading" },
                 {

@@ -3,6 +3,7 @@ import React from "react";
 import {
   PageBlocks,
   PageBlocksCarouselBlock,
+  PageBlocksCtaBlock,
   PageBlocksHero,
   PageBlocksRichTextBlock,
 } from "../../../tina/__generated__/types";
@@ -11,13 +12,16 @@ import {
 // This is better for core/essential components that appear above the fold
 import { HeroBlock } from "./HeroBlock";
 import { CarouselBlock } from "./CarouselBlock";
-import { HowItWorksBlock } from "./HowItWorksBlock";
+// import { HowItWorksBlock } from "./HowItWorksBlock";
+import RichTextBlock from "./RichTextBlock";
+import { CTABlock } from "./CTABlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
   PageBlocksHero: PageBlocksHero;
   PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
+  PageBlocksCtaBlock: PageBlocksCtaBlock;
 };
 
 type BlockComponentMap = {
@@ -27,8 +31,9 @@ type BlockComponentMap = {
 // Use lazy loaded components
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
-  PageBlocksRichTextBlock: HowItWorksBlock, // Use the new HowItWorksBlock instead of RichTextBlock
+  PageBlocksRichTextBlock: RichTextBlock, // Use the new HowItWorksBlock instead of RichTextBlock
   PageBlocksCarouselBlock: CarouselBlock,
+  PageBlocksCtaBlock: CTABlock,
 };
 
 interface BlocksProps {

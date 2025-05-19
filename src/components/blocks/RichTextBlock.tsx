@@ -12,7 +12,7 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
   const { heading, subheading, features } = data;
 
   return (
-    <div className="px-4 py-12 bg-bg-contrast">
+    <div className="px-4 py-16 bg-bg-contrast">
       {heading && (
         <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[var(--color-bg-light)] text-center">
           {heading}
@@ -24,23 +24,26 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
         </p>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-w-7xl mx-auto">
         {features?.map((f, idx) => {
           // Only try to render image if src exists and is not empty
           const hasValidImage =
             f?.src && typeof f.src === "string" && f.src.trim() !== "";
 
           return (
-            <div key={idx} className="text-center">
-              <div className="mx-auto mb-2 inline-flex items-center justify-center rounded  p-3">
+            <div
+              key={idx}
+              className="flex flex-col items-center justify-evenly rounded-lg shadow-lg p-3 mx-auto my-2 transition-transform hover:-translate-y-1 hover:shadow-2xl border border-[var(--color-primary-hover)] min-h-[330px] max-w-[210px] w-full"
+            >
+              <div className="mb-3 flex items-center justify-center">
                 {hasValidImage ? (
-                  <div className="h-[200px] w-[200px] flex items-center justify-center bg-primary-hover rounded-full overflow-hidden">
-                    <div className="flex items-center justify-center h-[150px] w-[150px]">
+                  <div className="h-[110px] w-[110px] flex items-center justify-center bg-[var(--color-primary)] bg-opacity-10 rounded-full overflow-hidden shadow-md">
+                    <div className="flex items-center justify-center h-[80px] w-[80px]">
                       <Image
                         alt={f.title || "Illustration"}
                         src={normalizeSrc(f.src ?? "")}
-                        height={100}
-                        width={100}
+                        height={72}
+                        width={72}
                         className="object-contain"
                         onError={(e) => {
                           // Fallback if image fails to load
@@ -51,18 +54,18 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="h-[200px] w-[200px] flex items-center justify-center text-[var(--color-bg-light)] rounded-full">
+                  <div className="h-[110px] w-[110px] flex items-center justify-center text-[var(--color-primary)] bg-[var(--color-primary)] bg-opacity-10 rounded-full shadow-md text-2xl">
                     ✦
                   </div>
                 )}
               </div>
 
-              <h3 className="text-lg font-medium mb-1 text-[var(--color-secondary-hover)]">
+              <h3 className="text-base font-semibold mb-1 text-[var(--color-secondary-hover)] text-center">
                 {f?.title}
               </h3>
               <div
                 data-tina-field
-                className="max-w-[40%] text-[var(--color-bg-light)] mx-auto text-sm font-body"
+                className="text-[var(--color-bg)] text-xs font-body text-center max-w-[95%] mx-auto"
               >
                 <TinaMarkdown content={f?.description} />
               </div>

@@ -19,7 +19,7 @@ const StarRating = ({ rating = 5 }: { rating?: number }) => {
           key={i}
           xmlns="http://www.w3.org/2000/svg"
           className={`h-4 w-4 ${
-            i < safeRating ? "text-yellow-400" : "text-gray-300"
+            i < safeRating ? "text-tertiary" : "text-gray-300"
           }`}
           viewBox="0 0 20 20"
           fill="currentColor"
