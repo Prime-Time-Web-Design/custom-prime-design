@@ -27,7 +27,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <a
-                  href={buttonLink}
+                  href={buttonLink ?? "#"}
                   className="px-8 py-3 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-bg-contrast)] font-medium transition-colors"
                 >
                   {buttonText}
@@ -36,7 +36,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
             <div className="w-full md:w-1/2">
               <Image
-                src={src}
+                src={src ?? ""}
                 alt="Hero illustration"
                 width={1200}
                 height={800}
