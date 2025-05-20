@@ -150,9 +150,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                       <Link
                         href="/book-now"
                         onClick={onClose}
-                        className="mt-4 block rounded-lg bg-[var(--color-primary)] px-4 py-3.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] transition duration-200"
+                        className="mt-4 inline-block rounded-lg bg-[var(--color-primary)] px-4 py-3.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] transition duration-200 whitespace-nowrap"
                       >
-                        Find a Therapist
+                        Book Now
                       </Link>
                     </div>
                   </nav>

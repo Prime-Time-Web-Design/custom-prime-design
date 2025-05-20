@@ -37,7 +37,7 @@ export const Footer = () => {
   const footer = navigation?.footer;
 
   return (
-    <footer className="bg-[#2B5C6B] text-[#7ffaf7] relative overflow-hidden">
+    <footer className="bg-bg-contrast text-secondary relative overflow-hidden">
       {/* Concentric circles background */}
       <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 pointer-events-none z-0">
         <svg
@@ -46,9 +46,27 @@ export const Footer = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          <circle cx="800" cy="0" r="400" fill="#AFFFFA" fillOpacity="0.7" />
-          <circle cx="800" cy="0" r="320" fill="#AFFFFA" fillOpacity="0.5" />
-          <circle cx="800" cy="0" r="240" fill="#AFFFFA" fillOpacity="0.3" />
+          <circle
+            cx="800"
+            cy="0"
+            r="400"
+            fill="var(--color-secondary)"
+            fillOpacity="0.7"
+          />
+          <circle
+            cx="800"
+            cy="0"
+            r="320"
+            fill="var(--color-secondary)"
+            fillOpacity="0.5"
+          />
+          <circle
+            cx="800"
+            cy="0"
+            r="240"
+            fill="var(--color-secondary)"
+            fillOpacity="0.3"
+          />
         </svg>
       </div>
       <div className="relative z-10 mx-auto py-12 px-4 w-full max-w-7xl flex flex-col lg:flex-row items-start justify-center gap-12 lg:gap-16">
@@ -90,7 +108,7 @@ export const Footer = () => {
                     <li key={subItem?.label}>
                       <Link
                         href={subItem?.href || "#"}
-                        className="block font-medium text-base text-[#7ffaf7] hover:text-white transition-colors pl-1 py-1 rounded"
+                        className="block font-medium text-base text-secondary hover:text-white transition-colors pl-1 py-1 rounded"
                       >
                         {subItem?.label}
                       </Link>
@@ -100,7 +118,7 @@ export const Footer = () => {
                   <li>
                     <Link
                       href={navItem?.href || "#"}
-                      className="block font-medium text-base text-[#7ffaf7] hover:text-white transition-colors pl-1 py-1 rounded"
+                      className="block font-medium text-base text-secondary hover:text-white transition-colors pl-1 py-1 rounded"
                     >
                       {navItem?.label}
                     </Link>
@@ -111,8 +129,8 @@ export const Footer = () => {
           ))}
         </div>
       </div>
-      <div className="relative z-10 my-4 pt-8 border-t border-[#7ffaf7]">
-        <p className="text-center text-sm text-[#7ffaf7]">
+      <div className="relative z-10 my-4 pt-8 border-t border-secondary">
+        <p className="text-center text-sm text-secondary">
           © {new Date().getFullYear()}{" "}
           {footer?.companyName || "Prime Time Web Design"}. All rights reserved.
         </p>
