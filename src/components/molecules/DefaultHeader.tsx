@@ -1,9 +1,10 @@
 import { Section } from "../layout/Section";
 import Image from "next/image";
+import { headerBackgroundPlaceholder } from "../../lib/preload-utils";
 
 export default function DefaultHeader() {
   return (
-    <div className="bg-[var(--color-calming-blue-dark)] relative">
+    <div className="relative">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <Image
@@ -11,6 +12,8 @@ export default function DefaultHeader() {
           alt="Background pattern"
           fill
           className="object-cover"
+          placeholder="blur"
+          blurDataURL={headerBackgroundPlaceholder}
           priority
         />
       </div>
