@@ -41,8 +41,8 @@ blocks:
       empathetic counseling professionals.
     buttonText: Start Healing Today
     buttonLink: /quick-start
-    imageLeft: true
-    imageSrc: /optimized/featuredCardImage.webp
+    imageLeft: false
+    imageSrc: ''
     imageAlt: Healing is a Journey
     backgroundColor: bg-soft-turquoise-light
     _template: ctaBlock

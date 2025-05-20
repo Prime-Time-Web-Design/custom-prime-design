@@ -21,7 +21,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
                 {heading?.split(" ").slice(0, -1).join(" ")}
-                <span className="block italic font-serif">
+                <span className="block italic">
                   {heading?.split(" ").slice(-1)[0]}.
                 </span>
               </h1>

@@ -56,9 +56,7 @@ export const CTABlock = ({ data }: CTABlockProps) => {
           <div className="w-1/2 h-px bg-[var(--color-bg-contrast-light)] opacity-20 my-4 md:hidden"></div>
 
           {/* Vertical divider for desktop */}
-          {hasImage && (
-            <div className="hidden md:block w-0.5 h-[250px] mr-2 bg-[var(--color-bg-contrast)] opacity-20"></div>
-          )}
+          <div className="hidden md:block w-0.5 h-[250px] mr-2 bg-[var(--color-bg-contrast)] opacity-20"></div>
 
           {/* Right side: CTA Content */}
           <div className="w-full md:w-1/2 flex flex-col">

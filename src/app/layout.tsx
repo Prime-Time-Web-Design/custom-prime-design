@@ -10,18 +10,13 @@ export interface RootLayoutProps {
   };
 }
 
-import { Montserrat, Playfair_Display } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
+  display: "optional", // Changed from swap to optional for better performance
+  preload: true, // Explicitly preload the font
 });
 
 // Add metadata for better SEO and performance
@@ -64,7 +59,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   });
 
   return (
-    <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${montserrat.variable}`}>
       <head>
         {/* Preload critical assets */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
