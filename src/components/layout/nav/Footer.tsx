@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useLayout } from "../layout-context";
+import Image from "next/image";
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   switch (platform) {
@@ -36,108 +37,85 @@ export const Footer = () => {
   const footer = navigation?.footer;
 
   return (
-    <footer className="bg-[var(--color-bg-contrast)] text-[var(--color-very-light-gray)]">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Dynamic Navigation Items */}
-          {navigation?.mainNav
-            ?.filter((item) => item)
-            .map((navItem) => (
-              <div key={navItem?.label} className="col-span-2 md:col-span-1">
-                <h2 className="text-lg font-semibold mb-4">{navItem?.label}</h2>
-                <ul className="space-y-3">
-                  {navItem?.subItems ? (
-                    navItem.subItems
-                      .filter((item) => item)
-                      .map((subItem) => (
-                        <li key={subItem?.label}>
-                          <Link
-                            href={subItem?.href || "#"}
-                            className="hover:text-[var(--color-calming-blue-light)]"
-                          >
-                            {subItem?.label}
-                          </Link>
-                        </li>
-                      ))
-                  ) : (
-                    <li>
-                      <Link
-                        href={navItem?.href || "#"}
-                        className="hover:text-[var(--color-calming-blue-light)]"
-                      >
-                        {navItem?.label}
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </div>
+    <footer className="bg-[#2B5C6B] text-[#7ffaf7] relative overflow-hidden">
+      {/* Concentric circles background */}
+      <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 pointer-events-none z-0">
+        <svg
+          viewBox="0 0 800 800"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full"
+        >
+          <circle cx="800" cy="0" r="400" fill="#AFFFFA" fillOpacity="0.7" />
+          <circle cx="800" cy="0" r="320" fill="#AFFFFA" fillOpacity="0.5" />
+          <circle cx="800" cy="0" r="240" fill="#AFFFFA" fillOpacity="0.3" />
+        </svg>
+      </div>
+      <div className="relative z-10 mx-auto py-12 px-4 w-full max-w-7xl flex flex-col lg:flex-row items-start justify-center gap-12 lg:gap-16">
+        {/* Logo and Social */}
+        <div className="flex flex-col items-center gap-4 flex-shrink-0 w-full lg:w-auto mb-8 lg:mb-0">
+          <Image
+            src="/logo.svg"
+            alt="Logo"
+            width={120}
+            height={80}
+            className="h-20 w-auto mx-auto"
+          />
+          <div className="flex gap-4 mt-2">
+            {footer?.social?.map((social, idx) => (
+              <a
+                key={idx}
+                href={social?.url ?? "#"}
+                aria-label={social?.platform || undefined}
+                className="hover:text-white transition-colors"
+              >
+                <SocialIcon platform={social?.platform || "default"} />
+              </a>
             ))}
-
-          {/* Contact section */}
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-lg font-semibold mb-4">Questions?</h2>
-            <ul className="space-y-3">
-              {footer?.contact?.phone && (
-                <li className="flex items-center">
-                  <span className="font-semibold">Call:</span>
-                  <a
-                    href={`tel:${footer.contact.phone}`}
-                    className="ml-2 hover:text-[var(--color-calming-blue-light)]"
-                  >
-                    {footer.contact.phone}
-                  </a>
-                </li>
-              )}
-              {footer?.contact?.textNumber && (
-                <li className="flex items-center">
-                  <span className="font-semibold">Text:</span>
-                  <a
-                    href={`sms:${footer.contact.textNumber}`}
-                    className="ml-2 hover:text-[var(--color-calming-blue-light)]"
-                  >
-                    {footer.contact.textNumber}
-                  </a>
-                </li>
-              )}
-              {footer?.contact?.email && (
-                <li>
-                  <span className="font-semibold block">Email:</span>
-                  <a
-                    href={`mailto:${footer.contact.email}`}
-                    className="hover:text-[var(--color-calming-blue-light)]"
-                  >
-                    {footer.contact.email}
-                  </a>
-                </li>
-              )}
-              {footer?.social && footer.social.length > 0 && (
-                <li>
-                  <span className="font-semibold block mb-2">Social:</span>
-                  <div className="flex space-x-4">
-                    {footer.social.map((social, index) => (
-                      <a
-                        key={index}
-                        href={social?.url ?? "#"}
-                        className="hover:text-[var(--color-calming-blue-light)]"
-                        aria-label={social?.platform || undefined}
-                      >
-                        <SocialIcon platform={social?.platform || "default"} />
-                      </a>
-                    ))}
-                  </div>
-                </li>
-              )}
-            </ul>
           </div>
         </div>
-
-        <div className="mt-8 pt-8 border-t border-[var(--color-calming-blue-dark)]">
-          <p className="text-center text-sm">
-            © {new Date().getFullYear()}{" "}
-            {footer?.companyName || "Prime Time Web Design"}. All rights
-            reserved.
-          </p>
+        {/* Navigation Columns */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 w-full max-w-3xl justify-items-center">
+          {navigation?.mainNav?.filter(Boolean).map((navItem) => (
+            <div
+              key={navItem?.label}
+              className="flex flex-col items-start w-full"
+            >
+              <h2 className="text-xl font-extrabold mb-3 text-white tracking-wide uppercase">
+                {navItem?.label}
+              </h2>
+              <ul className="space-y-2 w-full">
+                {navItem?.subItems ? (
+                  navItem.subItems.filter(Boolean).map((subItem) => (
+                    <li key={subItem?.label}>
+                      <Link
+                        href={subItem?.href || "#"}
+                        className="block font-medium text-base text-[#7ffaf7] hover:text-white transition-colors pl-1 py-1 rounded"
+                      >
+                        {subItem?.label}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>
+                    <Link
+                      href={navItem?.href || "#"}
+                      className="block font-medium text-base text-[#7ffaf7] hover:text-white transition-colors pl-1 py-1 rounded"
+                    >
+                      {navItem?.label}
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+          ))}
         </div>
+      </div>
+      <div className="relative z-10 my-4 pt-8 border-t border-[#7ffaf7]">
+        <p className="text-center text-sm text-[#7ffaf7]">
+          © {new Date().getFullYear()}{" "}
+          {footer?.companyName || "Prime Time Web Design"}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

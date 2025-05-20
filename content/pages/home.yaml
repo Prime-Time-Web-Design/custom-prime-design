@@ -46,6 +46,40 @@ blocks:
     imageAlt: Healing is a Journey
     backgroundColor: bg-soft-turquoise-light
     _template: ctaBlock
+  - title: 'We have therapists that specialize in:'
+    services:
+      - name: Organizations & Groups
+        slug: /services/group-therapy
+      - name: Anger Management
+        slug: /services/anger-management
+      - name: Children's Therapy
+        slug: /services/child-therapy
+      - name: EMDR Therapy
+        slug: /services/emdr
+      - name: Therapy For Military
+        slug: /services/military-therapy
+      - name: Trauma
+        slug: /services/trauma
+      - name: Stress & Burnout
+        slug: /services/stress
+      - name: Family Therapy
+        slug: /services/family-therapy
+      - name: Depression
+        slug: /services/depression
+      - name: Couples Therapy
+        slug: /services/couples-therapy
+      - name: Anxiety
+        slug: /services/anxiety
+      - name: Individual Therapy
+        slug: /services/individual-therapy
+    ctaText: Find Your Therapist
+    ctaLink: /about/staff
+    ctaContent: >-
+      Don’t see what you’re looking for? We can help with a wide variety of
+      challenges. Find your PTWD location to learn what your local PTWD
+      therapists specialize in and more!
+    backgroundColor: bg-calming-blue-dark
+    _template: serviceListingBlock
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:

@@ -10,21 +10,21 @@ export interface RootLayoutProps {
   };
 }
 
-import { Inter, Playfair_Display } from "next/font/google";
+import { Montserrat, Playfair_Display } from "next/font/google";
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap", // Add font-display: swap for better performance
+  variable: "--font-montserrat",
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-  display: "swap", // Add font-display: swap for better performance
+  display: "swap",
 });
 
-// Add metadata for better SEO and performance hints
+// Add metadata for better SEO and performance
 // export const metadata: Metadata = {
 //   title: "Custom Prime Design",
 //   description:
@@ -64,7 +64,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   });
 
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
       <head>
         {/* Preload critical assets */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

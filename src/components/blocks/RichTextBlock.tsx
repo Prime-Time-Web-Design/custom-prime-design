@@ -63,12 +63,12 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
                 )}
               </div>
 
-              <h3 className="text-base font-semibold mb-1 text-[var(--color-secondary-hover)] text-center">
+              <h3 className="text-lg font-semibold mb-1 text-[var(--color-secondary-hover)] text-center">
                 {f?.title}
               </h3>
               <div
                 data-tina-field
-                className="text-[var(--color-bg)] text-xs font-body text-center max-w-[95%] mx-auto"
+                className="text-[var(--color-bg)] text-sm font-body text-center max-w-[95%] mx-auto"
               >
                 <TinaMarkdown content={f?.description} />
               </div>

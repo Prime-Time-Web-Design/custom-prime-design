@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
 import {
   PageBlocks,
   PageBlocksCarouselBlock,
   PageBlocksCtaBlock,
   PageBlocksHero,
   PageBlocksRichTextBlock,
+  PageBlocksServiceListingBlock,
 } from "../../../tina/__generated__/types";
 
 // Import all blocks directly to prevent flickering
@@ -15,6 +15,7 @@ import { CarouselBlock } from "./CarouselBlock";
 // import { HowItWorksBlock } from "./HowItWorksBlock";
 import RichTextBlock from "./RichTextBlock";
 import { CTABlock } from "./CTABlock";
+import ServiceListingBlock from "./ServiceListingBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
@@ -22,6 +23,7 @@ type PageBlockMap = {
   PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
   PageBlocksCtaBlock: PageBlocksCtaBlock;
+  PageBlocksServiceListingBlock: PageBlocksServiceListingBlock; // Using any as a placeholder until the type is generated
 };
 
 type BlockComponentMap = {
@@ -34,6 +36,7 @@ const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksRichTextBlock: RichTextBlock, // Use the new HowItWorksBlock instead of RichTextBlock
   PageBlocksCarouselBlock: CarouselBlock,
   PageBlocksCtaBlock: CTABlock,
+  PageBlocksServiceListingBlock: ServiceListingBlock,
 };
 
 interface BlocksProps {

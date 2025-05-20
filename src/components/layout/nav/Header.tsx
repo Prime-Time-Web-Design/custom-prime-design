@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import MainNav from "./MainNav";
 import { useLayout } from "../layout-context";
@@ -11,17 +11,40 @@ import mobileLogo from "../../../../public/mobileLogo.svg";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { globalSettings } = useLayout();
   const navigation = globalSettings?.navigation;
   const alertBanner = globalSettings?.alertBanner;
 
-  // console.log("alertBanner", alertBanner);
+  // Add scroll event listener to detect when page is scrolled
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   if (!navigation) return null;
 
   return (
-    <header className="sticky top-0 z-50 shadow-md bg-[var(--color-bg)] lg:rounded-xl lg:mt-2.5 lg:mx-2.5">
-      {alertBanner && <AlertBanner alertBanner={alertBanner} />}
+    <header
+      className={`sticky top-0 z-50 shadow-md bg-[var(--color-bg)] transition-all duration-300 ${
+        isScrolled
+          ? "lg:rounded-none lg:rounded-b-xl lg:mt-0"
+          : "lg:rounded-xl lg:mt-2.5"
+      } lg:mx-4`}
+    >
+      {alertBanner && (
+        <AlertBanner alertBanner={alertBanner} isScrolled={isScrolled} />
+      )}
       <div className="flex items-center justify-between px-4 py-2 lg:hidden">
         <div className="flex-shrink-0">
           <span className="text-2xl font-semibold text-[var(--color-text)] ">

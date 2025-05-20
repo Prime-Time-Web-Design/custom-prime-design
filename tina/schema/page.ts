@@ -288,6 +288,84 @@ export const pageSchema = defineSchema({
                 },
               ],
             },
+            {
+              name: "serviceListingBlock",
+              label: "Service Listing Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "title",
+                  label: "Block Title",
+                  description: "Main heading for the services section",
+                  ui: {
+                    defaultValue: "We have therapists that specialize in:",
+                  },
+                },
+                {
+                  type: "object",
+                  list: true,
+                  name: "services",
+                  label: "Services",
+                  ui: {
+                    itemProps: (item) => ({ label: item.name || "Service" }),
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "name",
+                      label: "Service Name",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "slug",
+                      label: "Service Page Link",
+                      description:
+                        "URL to the service page (e.g., /services/anxiety)",
+                      required: true,
+                    },
+                  ],
+                },
+                {
+                  type: "string",
+                  name: "ctaText",
+                  label: "CTA Button Text",
+                  description: "Text for the call-to-action button",
+                  ui: {
+                    defaultValue: "Find Your Ellie",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "ctaLink",
+                  label: "CTA Button Link",
+                  description: "URL for the call-to-action button",
+                  ui: {
+                    defaultValue: "/locations",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "ctaContent",
+                  label: "CTA Content",
+                  description: "Text shown above the CTA button",
+                  ui: {
+                    component: "textarea",
+                    defaultValue:
+                      "Don't see what you're looking for? We can help with a wide range of challenges. Find your Ellie location to learn what your local Ellie therapists specialize in and more!",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description: "CSS class for background color",
+                  ui: {
+                    defaultValue: "bg-[var(--color-bg-secondary)]",
+                  },
+                },
+              ],
+            },
           ],
         },
       ],

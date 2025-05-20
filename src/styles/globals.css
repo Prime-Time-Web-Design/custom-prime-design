@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
 @layer base {
-  html {
-    font-family: var(--font-inter), sans-serif;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-playfair), serif;
+  html, body {
+    font-family: var(--font-montserrat), sans-serif;
   }
 
   /* optional: override a class if needed */
   .font-heading {
-    font-family: var(--font-playfair), serif;
+    font-family: var(--font-montserrat), sans-serif;
   }
 
   .font-body {
-    font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-montserrat), sans-serif;
   }
   
   /* Add GPU acceleration for all animated/transitioning elements */
