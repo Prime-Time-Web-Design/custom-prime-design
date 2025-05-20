@@ -41,7 +41,7 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
                 <Link
                   key={service.slug}
                   href={service.slug || "#"}
-                  className="bg-[#B2F8F0] bg-opacity-90 hover:bg-opacity-100 text-[var(--color-text)] font-medium rounded-lg p-5 text-center group relative overflow-hidden hover:shadow-md transition-all duration-300"
+                  className="bg-secondary-hover bg-opacity-90 hover:bg-opacity-100 text-[var(--color-text)] font-medium rounded-lg p-5 text-center group relative overflow-hidden hover:shadow-md transition-all duration-300"
                   style={{
                     transitionProperty: "background, box-shadow, transform",
                   }}
