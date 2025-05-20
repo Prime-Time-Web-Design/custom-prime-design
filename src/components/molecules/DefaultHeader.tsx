@@ -1,49 +1,35 @@
 import { Section } from "../layout/Section";
-import Image from "next/image";
 
 export default function DefaultHeader() {
   return (
-    <div className="relative min-h-[80vh]">
-      {/* Background Image Container */}
-      <div className="absolute inset-0">
-        <Image
-          src="/optimized/aniket-deole-T-tOgjWZ0fQ-unsplash.webp"
-          alt="Night time contrast background"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover brightness-50"
-          quality={70}
-        />
-      </div>
-
+    <div className="bg-[var(--color-calming-blue-dark)] relative">
       {/* Content Section */}
-      <Section className="py-20 text-center px-2 relative z-10 min-h-[80vh] flex items-center">
-        <div className="w-full">
+      <Section className="py-16 text-center px-4 relative z-10">
+        <div className="w-full max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-block px-4 py-2 rounded-full bg-tertiary text-[var(--color-deep-slate)] mb-6 text-sm font-medium">
+          <div className="inline-block px-4 py-2 rounded-full bg-tertiary text-[var(--color-deep-slate)] mb-4 text-sm font-medium">
             Website Optimization Guide
           </div>
 
-          {/* Main heading with larger font and dark text color */}
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+          {/* Main heading with cleaner styling */}
+          <div className="mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--color-deep-slate)]">
               Transform Your Therapy Website Into A Client-Converting Machine
             </h1>
 
             {/* Descriptive text */}
-            <p className="text-xl text-gray-200 mb-10">
+            <p className="text-lg text-[var(--color-deep-slate)] mb-8 max-w-3xl mx-auto">
               Learn the proven strategies used by successful therapists to
               create engaging websites that build trust and attract ideal
               clients.
             </p>
 
             {/* Buttons container */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               {/* First button - Download Guide */}
               <a
                 href="/download-guide"
-                className="bg-[var(--color-soft-turquoise)] text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-turquoise-light)] transition-colors"
+                className="bg-white text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-sm"
               >
                 Download Free Guide
               </a>
@@ -51,7 +37,7 @@ export default function DefaultHeader() {
               {/* Second button - Schedule Consultation */}
               <a
                 href="/consultation"
-                className="bg-[var(--color-soft-lavender)] text-[var(--color-deep-slate)] px-8 py-3 rounded-lg font-bold hover:bg-[var(--color-soft-lavender-light)] transition-colors"
+                className="bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition-colors shadow-sm"
               >
                 Schedule Consultation
               </a>
