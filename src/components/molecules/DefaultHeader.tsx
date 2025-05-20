@@ -1,8 +1,20 @@
 import { Section } from "../layout/Section";
+import Image from "next/image";
 
 export default function DefaultHeader() {
   return (
     <div className="bg-[var(--color-calming-blue-dark)] relative">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <Image
+          src="/fe2a3d52-02ee-48c4-8d8d-d09741328f27.jpg.svg"
+          alt="Background pattern"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
       {/* Content Section */}
       <Section className="py-16 text-center px-4 relative z-10">
         <div className="w-full max-w-4xl mx-auto">
@@ -13,12 +25,12 @@ export default function DefaultHeader() {
 
           {/* Main heading with cleaner styling */}
           <div className="mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--color-deep-slate)]">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary-hover">
               Transform Your Therapy Website Into A Client-Converting Machine
             </h1>
 
             {/* Descriptive text */}
-            <p className="text-lg text-[var(--color-deep-slate)] mb-8 max-w-3xl mx-auto">
+            <p className="text-lg text-primary font-medium mb-8 max-w-3xl mx-auto">
               Learn the proven strategies used by successful therapists to
               create engaging websites that build trust and attract ideal
               clients.
