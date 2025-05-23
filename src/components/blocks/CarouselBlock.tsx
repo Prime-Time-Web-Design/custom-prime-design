@@ -7,11 +7,10 @@ import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { PageBlocksCarouselBlock } from "../../../tina/__generated__/types";
 import { normalizeSrc } from "@/lib/utils";
-// Star Rating Component
-const StarRating = ({ rating = 5 }: { rating?: number }) => {
-  // Ensure rating is between 0 and 5
-  const safeRating = Math.min(5, Math.max(0, rating));
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
+const StarRating = ({ rating = 5 }: { rating?: number }) => {
+  const safeRating = Math.min(5, Math.max(0, rating));
   return (
     <div className="flex items-center space-x-1 mb-2">
       {[...Array(5)].map((_, i) => (
@@ -48,78 +47,103 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     blockSubtitle,
   } = data;
 
-  const loopOption = options_loop ?? true; // Default to true for better experience
-  // Ensure autoplayInterval is a number, default to 5000 if null/undefined/negative
+  const isTablet = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  const loopOption = options_loop ?? true;
   const autoplayDelay =
     typeof autoplayInterval === "number" && autoplayInterval > 0
       ? autoplayInterval
-      : 5000; // Default to 5 seconds
+      : 5000;
 
-  // Embla Options for centered view and spacing
   const emblaOptions: EmblaOptionsType = {
     loop: loopOption,
-    align: "center",
+    align: "start", // Changed from "center" to "start"
     slidesToScroll: 1,
     dragFree: false,
     containScroll: "trimSnaps",
     skipSnaps: false,
-    inViewThreshold: 0.8, // Ensures item is mostly in view before snapping
+    inViewThreshold: 0.8,
   };
 
-  // Add Autoplay plugin by default with reasonable settings
   const plugins: AutoplayType[] = [
     Autoplay({
       delay: autoplayDelay,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
+      playOnInit: true, // Ensure autoplay starts when the carousel initializes
+      rootNode: (emblaRoot) => emblaRoot.parentElement, // Use the parent element for detecting mouse events
     }),
   ];
 
-  // Initialize Embla Carousel with options and plugins
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins);
-
-  // State for pagination dots
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-  // Update scroll capabilities and selected index
-  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList());
-    setSelectedIndex(emblaApi.selectedScrollSnap());
+  const onInit = useCallback((emblaApiInstance: EmblaCarouselType) => {
+    setScrollSnaps(emblaApiInstance.scrollSnapList());
+    setSelectedIndex(emblaApiInstance.selectedScrollSnap());
   }, []);
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap());
+  const onSelect = useCallback((emblaApiInstance: EmblaCarouselType) => {
+    setSelectedIndex(emblaApiInstance.selectedScrollSnap());
   }, []);
 
+  // Effect for initial setup and persistent event listeners
   useEffect(() => {
     if (!emblaApi) return;
 
-    onInit(emblaApi); // Initial state update
+    onInit(emblaApi); // Initial call to set state
 
-    // Listen for events to update state
-    emblaApi.on("init", onInit);
     emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onInit); // Handle window resize
+    emblaApi.on("reInit", onInit); // Called after emblaApi.reInit() completes
 
-    // Cleanup
+    // Cleanup listeners when component unmounts or emblaApi/callbacks change
     return () => {
-      emblaApi.off("init", onInit);
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onInit);
     };
   }, [emblaApi, onInit, onSelect]);
 
+  // Effect to restart autoplay when breakpoints change
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    // Force a reinitialization when breakpoints change
+    emblaApi.reInit();
+
+    // Explicitly tell all plugins to restart, particularly focusing on Autoplay
+    const handlePluginInit = () => {
+      // Give it a small delay to ensure the carousel has fully initialized
+      setTimeout(() => {
+        // Access autoplay plugin (if it exists)
+        const pluginApi = emblaApi.plugins();
+        if (pluginApi.autoplay) {
+          // Stop and restart
+          pluginApi.autoplay.stop();
+          pluginApi.autoplay.play();
+        }
+      }, 50);
+    };
+
+    // Run immediately and also hook into the reInit event
+    handlePluginInit();
+    emblaApi.on("reInit", handlePluginInit);
+
+    // Clean up
+    return () => {
+      emblaApi.off("reInit", handlePluginInit);
+    };
+  }, [emblaApi, isTablet, isDesktop]);
+
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
   );
-
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi]
   );
-
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
@@ -135,7 +159,6 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
   return (
     <div className={`relative py-12 sm:py-16 bg-bg ${className}`}>
-      {/* Section Title and Subtitle with better alignment */}
       {(blockTitle || blockSubtitle) && (
         <div className="text-center mb-10 max-w-3xl mx-auto px-4">
           {blockTitle && (
@@ -149,72 +172,88 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
         </div>
       )}
 
-      {/* Carousel Container with improved spacing */}
       <div
-        className="relative mx-auto max-w-7xl px-8 md:px-12 lg:px-16"
-        ref={emblaRef}
+        className="relative mx-auto px-4 sm:px-6 lg:px-8"
+        // ref={emblaRef} // ref moved to embla__viewport
       >
-        <div className="flex py-4">
-          {slides.map((slide, idx) => {
-            if (!slide) return null;
+        <div
+          className="embla__viewport overflow-hidden w-full"
+          ref={emblaRef}
+          key={`${isTablet}-${isDesktop}`} // Added key to force re-mount on breakpoint change
+        >
+          <div className="embla__container flex">
+            {" "}
+            {/* Changed class, removed py-4 */}
+            {slides.map((slide, idx) => {
+              if (!slide) return null;
 
-            // Define a palette of your brand colors to rotate through
-            const bgColors = [
-              "bg-[var(--color-primary)]",
-              "bg-[var(--color-accent)]",
+              const bgColors = [
+                "bg-[var(--color-primary)]",
+                "bg-[var(--color-accent)]",
+                "bg-[var(--color-secondary-hover)]",
+              ];
+              const bgColor = bgColors[idx % bgColors.length];
 
-              "bg-[var(--color-secondary-hover)]",
-            ];
-            const bgColor = bgColors[idx % bgColors.length];
+              // Determine flex basis for responsive slides
+              const flexBasis = isDesktop
+                ? "23%" // Further adjusted for narrower cards on desktop
+                : isTablet
+                ? "30%" // Further adjusted for narrower cards on tablet
+                : "100%";
 
-            return (
-              <div
-                key={idx}
-                className={`flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden w-[320px] mx-3 md:mx-4 min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
-              >
-                {/* Top: Image, cropped, with background color and padding */}
-                <div className="w-full h-48 flex items-end justify-center relative p-4 pb-0">
-                  {slide.src && (
-                    <Image
-                      src={normalizeSrc(slide.src)}
-                      alt={slide.alt || `${slide.clientName || "Client"}`}
-                      fill
-                      className="object-cover object-top rounded-lg"
-                      unoptimized={slide.src.startsWith("http")}
-                      sizes="320px"
-                      style={{ inset: 0 }}
-                    />
-                  )}
-                </div>
-                {/* Bottom: Quote and Name, on solid color */}
+              return (
                 <div
-                  className={`flex flex-col flex-1 p-5 text-text bg-opacity-90 relative`}
+                  key={idx}
+                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden mx-2 sm:mx-3 min-h-[300px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
+                  style={{
+                    flex: `0 0 ${flexBasis}`,
+                    maxWidth: flexBasis, // Ensure slide does not exceed flexBasis
+                  }}
                 >
-                  {slide.testimonialText && (
-                    <p className="mb-4 text-sm font-medium leading-relaxed text-center">
-                      “{slide.testimonialText}”
-                    </p>
-                  )}
-                  {slide.clientName && (
-                    <div className="mt-auto text-left">
-                      <div className="font-bold text-base inline-block">
-                        {slide.clientName}
+                  <div className="w-full h-36 sm:h-44 md:h-48 lg:h-48 flex items-end justify-center relative p-4 pb-0">
+                    {slide.src && (
+                      <Image
+                        src={normalizeSrc(slide.src)}
+                        alt={slide.alt || `${slide.clientName || "Client"}`}
+                        fill
+                        className="object-cover object-top rounded-lg"
+                        unoptimized={slide.src.startsWith("http")}
+                        sizes={
+                          isDesktop
+                            ? "(min-width: 1024px) 25vw" // Adjusted for narrower cards
+                            : isTablet
+                            ? "(min-width: 768px) 33vw" // Adjusted for narrower cards
+                            : "100vw"
+                        }
+                        style={{ inset: 0 }}
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-col flex-1 p-5 text-text bg-opacity-90 relative">
+                    {slide.testimonialText && (
+                      <p className="mb-4 text-sm font-medium leading-relaxed text-center">
+                        “{slide.testimonialText}”
+                      </p>
+                    )}
+                    {slide.clientName && (
+                      <div className="mt-auto text-left">
+                        <div className="font-bold text-base inline-block">
+                          {slide.clientName}
+                        </div>
+                        <div className="mt-2 flex justify-start">
+                          <StarRating rating={5} />
+                        </div>
+                        <div className="h-1 w-20 mt-1 rounded bg-bg" />
                       </div>
-                      {/* Star Rating between name and underline */}
-                      <div className="mt-2 flex justify-start">
-                        <StarRating rating={5} />
-                      </div>
-                      <div className="h-1 w-20 mt-1 rounded bg-bg" />
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Controls - with better spacing */}
       <div className="flex justify-center items-center mt-8 space-x-4">
         <button
           onClick={scrollPrev}

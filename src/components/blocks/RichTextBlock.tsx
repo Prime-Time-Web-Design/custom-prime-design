@@ -42,7 +42,7 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
               </div>
 
               {/* Icon/Shape - outside/overlapping card, fixed size, styled, now transitions with card */}
-              <div className="absolute -top-6 left-4 z-30 group-hover:-translate-y-2 group-hover:shadow-2xl transition-all duration-300">
+              <div className="absolute -top-6 left-4 z-30 group-hover:-translate-y-2 group-hover:shadow-2xl transition-all duration-300 rounded-xl">
                 <div className="h-16 w-16 flex items-center justify-center bg-bg shadow-lg rounded-xl border border-gray-200 overflow-hidden">
                   {hasValidImage ? (
                     <Image
@@ -67,9 +67,10 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
               >
                 {/* Card Content */}
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold mb-2 text-[var(--color-text)] text-left select-none">
+                  <h3 className="text-lg font-bold mb-1 text-[var(--color-text)] text-left select-none">
                     {f?.title}
                   </h3>
+                  <div className="h-1 w-30 mb-2 rounded bg-bg" />
                   <div
                     data-tina-field
                     className="text-[var(--color-text)] text-base font-body text-left max-w-[95%] select-none"

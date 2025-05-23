@@ -2,6 +2,8 @@ import React, { PropsWithChildren } from "react";
 import { LayoutProvider } from "./layout-context";
 import { Header } from "./nav/Header";
 import Footer from "./nav/Footer";
+
+// Import the generated types for proper typing
 import { GetGlobalQuery } from "@/lib/__generated__/types";
 
 type LayoutProps = PropsWithChildren & {

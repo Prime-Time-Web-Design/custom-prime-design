@@ -17,7 +17,7 @@ export async function PageLoader({ relativePath, children }: PageLoaderProps) {
   try {
     const data = await getPageData(relativePath);
 
-    if (!data?.page) {
+    if (!data) {
       console.error(`No page data found for: ${relativePath}`);
       notFound();
     }

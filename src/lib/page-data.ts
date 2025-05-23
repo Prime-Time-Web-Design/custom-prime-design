@@ -1,8 +1,17 @@
-import client from "../../tina/__generated__/client";
 import { unstable_cache } from "next/cache";
+import client from "../../tina/__generated__/client";
 
-// We need to use a more generic type to avoid TypeScript errors
-type TinaPageData = Record<string, unknown>;
+// Define a type that matches the expected PageData structure from PageClientWrapper
+interface PageData {
+  page?: {
+    title?: string;
+    description?: string;
+    blocks?: unknown[];
+    headerBlocks?: unknown[];
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
 
 /**
  * Helper function to get page data with custom GraphQL fragments
@@ -11,17 +20,17 @@ type TinaPageData = Record<string, unknown>;
  */
 export async function getPageData(
   relativePath: string
-): Promise<TinaPageData | null> {
+): Promise<PageData | null> {
   if (!relativePath) {
     console.error("getPageData called with empty relativePath!");
     return null;
   }
   try {
-    // Use Tina client with the proper request format
+    // For now, let's stick with the original Tina client to avoid breaking changes
     const result = await client.queries.page({
       relativePath: relativePath,
     });
-    return result.data as TinaPageData;
+    return result.data as PageData;
   } catch (error: any) {
     console.error(`Error fetching data for ${relativePath}:`, error);
     if (error && error.response && error.response.errors) {
@@ -36,15 +45,15 @@ export async function getPageData(
  * Uses Next.js unstable_cache for persistent caching between requests
  */
 // const getPageDataWithCache = unstable_cache(
-//   async (relativePath: string): Promise<TinaPageData | null> => {
+//   async (relativePath: string): Promise<PageData | null> => {
 //     try {
 //       // Use Tina client with the proper request format
 //       const result = await client.queries.page({
 //         relativePath: relativePath,
 //       });
 
-//       return result.data as TinaPageData;
-//     } catch (error) {
+//       return result.data as PageData;
+//     } catch (error: unknown) {
 //       console.error(`Error fetching data for ${relativePath}:`, error);
 //       return null;
 //     }

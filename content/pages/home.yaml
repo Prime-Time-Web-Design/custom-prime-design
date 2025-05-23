@@ -109,4 +109,5 @@ blocks:
         clientName: Charles Woodford
         clientType: Individual Therapy
     options.loop: true
+    autoplayInterval: 2
     _template: carouselBlock

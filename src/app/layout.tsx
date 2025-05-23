@@ -1,7 +1,6 @@
 import "./../styles/globals.css";
 import Layout from "@/components/layout/Layout";
 import client from "../../tina/__generated__/client";
-import { GetGlobalQuery, GetGlobalDocument } from "@/lib/__generated__/types";
 // import { Metadata } from "next";
 
 export interface RootLayoutProps {
@@ -55,13 +54,11 @@ const montserrat = Montserrat({
 // }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  // Use your custom GetGlobal query document and types
-  const { data } = await client.request<GetGlobalQuery>(
-    { query: GetGlobalDocument.loc!.source.body },
-    {}
-  );
-
-  // data.global is typed as GetGlobalQuery["global"]
+  // Use Tina client directly - it should handle environment switching during build
+  const result = await client.queries.global({
+    relativePath: "Navigation_Data.yaml",
+  });
+  const data = result.data;
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <head>
