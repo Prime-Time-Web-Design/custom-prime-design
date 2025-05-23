@@ -158,69 +158,54 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
           {slides.map((slide, idx) => {
             if (!slide) return null;
 
+            // Define a palette of your brand colors to rotate through
+            const bgColors = [
+              "bg-[var(--color-primary)]",
+              "bg-[var(--color-accent)]",
+
+              "bg-[var(--color-secondary-hover)]",
+            ];
+            const bgColor = bgColors[idx % bgColors.length];
+
             return (
               <div
-                className="relative flex-shrink-0 w-[95%] md:w-[80%] lg:w-[560px] mx-3 md:mx-4"
                 key={idx}
+                className={`flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden w-[320px] mx-3 md:mx-4 min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
               >
-                <div className="bg-primary-hover rounded-xl shadow-lg p-6 h-full flex flex-col md:flex-row items-start">
-                  {/* Left side - Image (desktop) - Adjusted size to prevent overlap */}
-                  <div className="hidden md:block relative w-32 h-32 rounded-lg overflow-hidden mr-6 flex-shrink-0 border border-gray-200 self-center">
-                    {slide.src && (
-                      <Image
-                        src={normalizeSrc(slide.src)}
-                        alt={slide.alt || `${slide.clientName || "Client"}`}
-                        fill
-                        className="object-cover"
-                        unoptimized={slide.src.startsWith("http")}
-                        sizes="128px"
-                      />
-                    )}
-                  </div>
-
-                  {/* Right side - Content */}
-                  <div className="flex flex-col w-full overflow-hidden">
-                    {/* Testimonial Text - removed line clamp to avoid cutting off */}
-                    {slide.testimonialText && (
-                      <div className="mb-4">
-                        <p className="text-text-dark text-base font-medium">
-                          &ldquo;{slide.testimonialText}&rdquo;
-                        </p>
+                {/* Top: Image, cropped, with background color and padding */}
+                <div className="w-full h-48 flex items-end justify-center relative p-4 pb-0">
+                  {slide.src && (
+                    <Image
+                      src={normalizeSrc(slide.src)}
+                      alt={slide.alt || `${slide.clientName || "Client"}`}
+                      fill
+                      className="object-cover object-top rounded-lg"
+                      unoptimized={slide.src.startsWith("http")}
+                      sizes="320px"
+                      style={{ inset: 0 }}
+                    />
+                  )}
+                </div>
+                {/* Bottom: Quote and Name, on solid color */}
+                <div
+                  className={`flex flex-col flex-1 p-5 text-text bg-opacity-90 relative`}
+                >
+                  {slide.testimonialText && (
+                    <p className="mb-4 text-sm font-medium leading-relaxed text-center">
+                      “{slide.testimonialText}”
+                    </p>
+                  )}
+                  {slide.clientName && (
+                    <div className="mt-auto text-left">
+                      <div className="font-bold text-base inline-block">
+                        {slide.clientName}
                       </div>
-                    )}
-
-                    {/* Star Rating - Always show 5 stars by default */}
-                    <StarRating rating={5} />
-
-                    {/* Client Name and Type */}
-                    <div className="flex items-center mt-auto">
-                      {/* Mobile only image */}
-                      <div className="md:hidden relative w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0 border border-secondary">
-                        {slide.src && (
-                          <Image
-                            src={normalizeSrc(slide.src)}
-                            alt={slide.alt || `${slide.clientName || "Client"}`}
-                            fill
-                            className="object-cover"
-                            unoptimized={slide.src.startsWith("http")}
-                            sizes="40px"
-                          />
-                        )}
-                      </div>
-
-                      <div>
-                        {slide.clientName && (
-                          <h4 className="font-semibold text-primary text-sm md:text-base">
-                            {slide.clientName}
-                          </h4>
-                        )}
-                        {slide.clientType && (
-                          <p className="text-accent-dark text-xs md:text-sm">
-                            {slide.clientType}
-                          </p>
-                        )}
-                      </div>
+                      <div className="h-1 w-10 mt-1 rounded bg-bg" />
                     </div>
+                  )}
+                  {/* Star Rating in bottom right */}
+                  <div className="absolute bottom-4 right-4">
+                    <StarRating rating={5} />
                   </div>
                 </div>
               </div>
