@@ -12,7 +12,7 @@ body {
   --bar-width: 60px;
   --bar-height: 8px;
   --hamburger-gap: 6px;
-  --foreground: #7895B2;
+  --foreground: #2F4F4F;
   --background: white;
   --hamburger-margin: 8px;
   --animation-timing: 200ms ease-in-out;
@@ -34,7 +34,7 @@ body {
 }
 
 .hamburger-menu:has(input:checked) {
-  --foreground: #7895B2;
+  --foreground: #2F4F4F;
   --background: white;
 }
 
