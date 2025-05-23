@@ -12,33 +12,49 @@ type TinaPageData = Record<string, unknown>;
 export async function getPageData(
   relativePath: string
 ): Promise<TinaPageData | null> {
-  return getPageDataWithCache(relativePath);
+  if (!relativePath) {
+    console.error("getPageData called with empty relativePath!");
+    return null;
+  }
+  try {
+    // Use Tina client with the proper request format
+    const result = await client.queries.page({
+      relativePath: relativePath,
+    });
+    return result.data as TinaPageData;
+  } catch (error: any) {
+    console.error(`Error fetching data for ${relativePath}:`, error);
+    if (error && error.response && error.response.errors) {
+      console.error("GraphQL errors:", error.response.errors);
+    }
+    return null;
+  }
 }
 
 /**
  * Cached version of getPageData with server-side caching
  * Uses Next.js unstable_cache for persistent caching between requests
  */
-const getPageDataWithCache = unstable_cache(
-  async (relativePath: string): Promise<TinaPageData | null> => {
-    try {
-      // Use Tina client with the proper request format
-      const result = await client.queries.page({
-        relativePath: relativePath,
-      });
+// const getPageDataWithCache = unstable_cache(
+//   async (relativePath: string): Promise<TinaPageData | null> => {
+//     try {
+//       // Use Tina client with the proper request format
+//       const result = await client.queries.page({
+//         relativePath: relativePath,
+//       });
 
-      return result.data as TinaPageData;
-    } catch (error) {
-      console.error(`Error fetching data for ${relativePath}:`, error);
-      return null;
-    }
-  },
-  ["page-data", "tina"], // Add more specific cache keys
-  {
-    revalidate: 3600, // Revalidate cache every hour
-    tags: ["tina-content", "page-content"], // Multiple tags for better invalidation control
-  }
-);
+//       return result.data as TinaPageData;
+//     } catch (error) {
+//       console.error(`Error fetching data for ${relativePath}:`, error);
+//       return null;
+//     }
+//   },
+//   ["page-data", "tina"], // Add more specific cache keys
+//   {
+//     revalidate: 3600, // Revalidate cache every hour
+//     tags: ["tina-content", "page-content"], // Multiple tags for better invalidation control
+//   }
+// );
 
 /**
  * Get all available page paths from Tina CMS

@@ -78,6 +78,14 @@ blocks:
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:
+      - src: /optimized/nighttimecontrast.webp
+        alt: Happy Wins
+        testimonialText: >-
+          The darkness felt absolute, a weight I thought would never lift. But
+          step by tiny step, with the right support and a fierce commitment to
+          healing, I found my way back to the light.
+        clientName: John McCabbot
+        clientType: EMDR Therapy
       - src: /adventureforthesoul.jpg
         alt: Journey to The Peak
         testimonialText: >-
@@ -100,4 +108,5 @@ blocks:
         testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
         clientName: Charles Woodford
         clientType: Individual Therapy
+    options.loop: true
     _template: carouselBlock

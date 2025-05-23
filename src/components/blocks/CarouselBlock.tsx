@@ -200,13 +200,13 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                       <div className="font-bold text-base inline-block">
                         {slide.clientName}
                       </div>
-                      <div className="h-1 w-10 mt-1 rounded bg-bg" />
+                      {/* Star Rating between name and underline */}
+                      <div className="mt-2 flex justify-start">
+                        <StarRating rating={5} />
+                      </div>
+                      <div className="h-1 w-20 mt-1 rounded bg-bg" />
                     </div>
                   )}
-                  {/* Star Rating in bottom right */}
-                  <div className="absolute bottom-4 right-4">
-                    <StarRating rating={5} />
-                  </div>
                 </div>
               </div>
             );
