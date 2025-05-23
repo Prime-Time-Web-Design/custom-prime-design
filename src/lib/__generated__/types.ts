@@ -901,7 +901,7 @@ export type GetPageQueryVariables = Exact<{
 }>;
 
 
-export type GetPageQuery = { __typename?: 'Query', page: { __typename?: 'Page', title: string, blocks?: Array<{ __typename?: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename?: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename?: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, imageSrc?: string | null, imageAlt?: string | null, backgroundColor?: string | null } | { __typename?: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, src?: string | null } | { __typename?: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename?: 'PageBlocksRichTextBlockFeatures', src?: string | null, title?: string | null, description?: any | null } | null> | null } | { __typename?: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename?: 'PageBlocksServiceListingBlockServices', name: string, slug: string } | null> | null } | null> | null } };
+export type GetPageQuery = { __typename?: 'Query', page: { __typename?: 'Page', title: string, description: string, template: string, subtitle?: string | null, headerBlocks?: Array<{ __typename?: 'PageHeaderBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null, blocks?: Array<{ __typename?: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename?: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename?: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, imageSrc?: string | null, imageAlt?: string | null, backgroundColor?: string | null } | { __typename?: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, src?: string | null } | { __typename?: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename?: 'PageBlocksRichTextBlockFeatures', src?: string | null, title?: string | null, description?: any | null } | null> | null } | { __typename?: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename?: 'PageBlocksServiceListingBlockServices', name: string, slug: string } | null> | null } | null> | null } };
 
 export const AlertBannerFieldsFragmentDoc = gql`
     fragment AlertBannerFields on GlobalAlertBanner {
@@ -1074,6 +1074,17 @@ export const GetPageDocument = gql`
     query GetPage($relativePath: String!) {
   page(relativePath: $relativePath) {
     title
+    description
+    template
+    subtitle
+    headerBlocks {
+      ... on PageHeaderBlocksHero {
+        heading
+        subheading
+        buttonText
+        buttonLink
+      }
+    }
     blocks {
       ... on PageBlocksHero {
         ...PageHeroBlockFields
