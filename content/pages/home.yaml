@@ -18,11 +18,6 @@ blocks:
         description: >
           Fill out our form and book in your assessment at a convenient time for
           you
-      - src: /undraw_completed_0sqh.svg
-        title: Choose A Service
-        description: >
-          We provide specialized, group, and family therapy options. Choose a
-          service or let us guide your decision
       - src: /undraw_avatars_xsfb.svg
         title: We match you with a therapist
         description: >
