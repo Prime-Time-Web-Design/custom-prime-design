@@ -1,16 +1,8 @@
 "use client";
 import React, { useRef, useEffect } from "react";
-import {
-  Dialog,
-  DialogPanel,
-  Transition,
-  TransitionChild,
-} from "@headlessui/react";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { MainNavProps } from "./header.types";
-import Image from "next/image";
-import mobileLogo from "../../../../public/mobileLogo.svg";
 
 interface MobileMenuProps extends MainNavProps {
   isOpen: boolean;
@@ -46,122 +38,53 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   }, [isOpen]);
 
   return (
-    <Transition show={isOpen} as={React.Fragment}>
-      <Dialog as="div" className="relative z-[100]" onClose={onClose}>
-        <TransitionChild
-          as={React.Fragment}
-          enter="transition-opacity ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="transition-opacity ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-[var(--color-bg-contrast)]/80 backdrop-blur-sm" />
-        </TransitionChild>
-
-        <div className="fixed inset-0 z-[100] lg:hidden overflow-hidden">
-          <div className="min-h-full">
-            <TransitionChild
-              as={React.Fragment}
-              enter="transform transition ease-out duration-300"
-              enterFrom="-translate-y-full"
-              enterTo="translate-y-0"
-              leave="transform transition ease-in duration-200"
-              leaveFrom="translate-y-0"
-              leaveTo="-translate-y-full"
-            >
-              <DialogPanel className="relative bg-[var(--color-bg)] overflow-y-auto">
-                <div className="px-6 py-4">
-                  <div className="flex items-center justify-between">
-                    <Link href="/">
-                      <Image
-                        src={mobileLogo}
-                        width={120}
-                        height={40}
-                        alt="Logo"
-                        priority
-                      />
-                    </Link>
-                    <button
-                      type="button"
-                      className="rounded-xl cursor-pointer p-3 text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                      onClick={onClose}
-                    >
-                      <span className="sr-only">Close menu</span>
-                      <X className="h-6 w-6" aria-hidden="true" />
-                    </button>
+    <div className="px-6 py-4">
+      <nav className="mt-8 flow-root">
+        <div className="space-y-3">
+          {navItems.map((item) => (
+            <div key={item?.label} className="py-2">
+              {item?.subItems && item?.subItems.length > 0 ? (
+                <details
+                  ref={(el: HTMLDetailsElement | null) => {
+                    if (item.label) {
+                      detailsRefs.current[item.label] = el;
+                    }
+                  }}
+                  className="group"
+                  onClick={() => handleDetailsClick(item.label)}
+                >
+                  <summary className="list-none flex cursor-pointer items-center rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
+                    {item?.label}
+                    <ChevronDown
+                      className={`ml-2 h-5 w-5 text-primary transition-transform duration-200 group-open:rotate-180`}
+                    />
+                  </summary>
+                  <div className="mt-3 pl-6 space-y-3">
+                    {item?.subItems.map((subItem) => (
+                      <Link
+                        key={subItem?.label}
+                        href={subItem?.href ?? "#"}
+                        onClick={onClose}
+                        className="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                      >
+                        {subItem?.label}
+                      </Link>
+                    ))}
                   </div>
-
-                  <nav className="mt-8 flow-root">
-                    <div className="space-y-3">
-                      {navItems.map((item) => (
-                        <div key={item?.label} className="py-2">
-                          {item?.subItems && item?.subItems.length > 0 ? (
-                            <details
-                              ref={(el: HTMLDetailsElement | null) => {
-                                if (item.label) {
-                                  detailsRefs.current[item.label] = el;
-                                }
-                              }}
-                              className="group"
-                              onClick={() => handleDetailsClick(item.label)}
-                            >
-                              <summary className="list-none flex cursor-pointer items-center rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
-                                {item?.label}
-                                <ChevronDown
-                                  className={`ml-2 h-5 w-5 text-primary transition-transform duration-200 group-open:rotate-180`}
-                                />
-                              </summary>
-                              <div className="mt-3 pl-6 space-y-3">
-                                {item?.subItems.map((subItem) => (
-                                  <Link
-                                    key={subItem?.label}
-                                    href={subItem?.href ?? "#"}
-                                    onClick={onClose}
-                                    className="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                                  >
-                                    {subItem?.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            </details>
-                          ) : (
-                            <Link
-                              href={item?.href ?? "#"}
-                              onClick={onClose}
-                              className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                            >
-                              {item?.label}
-                            </Link>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-8 pt-6 border-t border-[var(--color-accent)]">
-                      <Link
-                        href="/log-in"
-                        onClick={onClose}
-                        className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
-                      >
-                        Log in
-                      </Link>
-                      <Link
-                        href="/book-now"
-                        onClick={onClose}
-                        className="mt-4 inline-block rounded-lg bg-[var(--color-primary)] px-4 py-3.5 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] transition duration-200 whitespace-nowrap"
-                      >
-                        Book Now
-                      </Link>
-                    </div>
-                  </nav>
-                </div>
-              </DialogPanel>
-            </TransitionChild>
-          </div>
+                </details>
+              ) : (
+                <Link
+                  href={item?.href ?? "#"}
+                  onClick={onClose}
+                  className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                >
+                  {item?.label}
+                </Link>
+              )}
+            </div>
+          ))}
         </div>
-      </Dialog>
-    </Transition>
+      </nav>
+    </div>
   );
 };

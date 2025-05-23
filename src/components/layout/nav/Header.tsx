@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
+// import { Menu } from "lucide-react";
 import MainNav from "./MainNav";
 import { useLayout } from "../layout-context";
 import AlertBanner from "./AlertBanner";
@@ -8,6 +8,7 @@ import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
 import mobileLogo from "../../../../public/mobileLogo.svg";
+import HamburgerMenu from "@/components/molecules/HamburgerMenu";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,7 +17,6 @@ export const Header = () => {
   const navigation = globalSettings?.navigation;
   const alertBanner = globalSettings?.alertBanner;
 
-  // Add scroll event listener to detect when page is scrolled
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -26,9 +26,13 @@ export const Header = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    new AbortController();
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    window.addEventListener("scroll", handleScroll, { signal });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      controller.abort();
     };
   }, []);
 
@@ -67,24 +71,31 @@ export const Header = () => {
           >
             Book Now
           </Link>
-          <button
+          {/* <button
             type="button"
             className="cursor-pointer inline-flex items-center justify-center rounded-xl p-2 text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] transition duration-200"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="sr-only">Open main menu</span>
             <Menu className="h-5 w-5" aria-hidden="true" />
-          </button>
+          </button> */}
+          <HamburgerMenu>
+            <MobileMenu
+              navigation={navigation}
+              isOpen={mobileMenuOpen}
+              onClose={() => setMobileMenuOpen(false)}
+            />
+          </HamburgerMenu>
         </div>
       </div>
 
       <MainNav navigation={navigation} />
 
-      <MobileMenu
+      {/* <MobileMenu
         navigation={navigation}
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
-      />
+      /> */}
     </header>
   );
 };
