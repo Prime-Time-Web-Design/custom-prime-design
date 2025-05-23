@@ -30,10 +30,11 @@ type BlockComponentMap = {
   [K in keyof PageBlockMap]: React.ComponentType<{ data: PageBlockMap[K] }>;
 };
 
-// Use lazy loaded components
+// Use eagerly loaded components for above-the-fold content
+// This prevents flickering by ensuring components are available immediately
 const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksHero: HeroBlock,
-  PageBlocksRichTextBlock: RichTextBlock, // Use the new HowItWorksBlock instead of RichTextBlock
+  PageBlocksRichTextBlock: RichTextBlock,
   PageBlocksCarouselBlock: CarouselBlock,
   PageBlocksCtaBlock: CTABlock,
   PageBlocksServiceListingBlock: ServiceListingBlock,

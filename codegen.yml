@@ -1,0 +1,8 @@
+schema: ./tina/__generated__/schema.gql
+documents: ./src/lib/tina-queries.gql
+generates:
+  ./src/lib/__generated__/types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request

@@ -1,16 +1,23 @@
-import client from "../../tina/__generated__/client";
-import { Section } from "@/components/layout/Section";
-import ClientPage from "./[...urlSegments]/client-page";
+import { getPageData } from "@/lib/page-data";
+import { PageLoader } from "@/components/page/PageLoader";
+
+// Define a type for the page data structure based on the schema
+interface PageData {
+  page?: {
+    title?: string;
+    description?: string;
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
 
 export async function generateMetadata() {
   try {
-    const result = await client.queries.page({
-      relativePath: "home.yaml",
-    });
+    const data = (await getPageData("home.yaml")) as PageData;
 
     return {
-      title: result.data?.page?.title || "Home",
-      description: result.data?.page?.description || "Welcome to our website",
+      title: data?.page?.title || "Home",
+      description: data?.page?.description || "Welcome to our website",
     };
   } catch (error) {
     console.error("Home page metadata error:", error);
@@ -21,30 +28,10 @@ export async function generateMetadata() {
   }
 }
 
+/**
+ * Home page component using the optimized PageLoader pattern
+ * This provides consistent behavior with other pages and leverages the caching system
+ */
 export default async function HomePage() {
-  try {
-    console.log("Attempting to fetch home page data: home.yaml");
-    const result = await client.queries.page({
-      relativePath: "home.yaml",
-    });
-
-    if (!result.data?.page) {
-      console.error("No home page data found for home.yaml");
-      return <div>Error loading home page content</div>;
-    }
-
-    console.log("Successfully loaded home page: home.yaml");
-    return (
-      <Section>
-        <ClientPage
-          data={result.data}
-          variables={{ relativePath: "home.yaml" }}
-          query={result.query}
-        />
-      </Section>
-    );
-  } catch (error) {
-    console.error("Home page error:", error);
-    return <div>Error loading home page</div>;
-  }
+  return <PageLoader relativePath="home.yaml" />;
 }

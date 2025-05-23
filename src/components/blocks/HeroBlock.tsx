@@ -39,18 +39,21 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
             <div className="w-full md:w-1/2">
               <div className="relative">
-                <Image
-                  src={src ?? ""}
-                  alt="Hero illustration"
-                  width={1200}
-                  height={800}
-                  priority
-                  className="w-full h-auto object-cover rounded-xl shadow-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={90}
-                  placeholder="blur"
-                  blurDataURL={heroImagePlaceholder}
-                />
+                {src ? (
+                  <Image
+                    src={src}
+                    alt="Hero illustration"
+                    width={1200}
+                    height={800}
+                    priority={true}
+                    loading="eager"
+                    className="w-full h-auto object-cover rounded-xl shadow-xl"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={90}
+                    placeholder="blur"
+                    blurDataURL={heroImagePlaceholder}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

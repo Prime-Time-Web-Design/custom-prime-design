@@ -1,52 +1,21 @@
-import { GlobalQuery } from "../../../../tina/__generated__/types";
-
-export type NavigationData = {
-  data: {
-    global: {
-      navigation: {
-        mainNav: NavigationItem[];
-      };
-    };
-  };
-};
-
-export type HeaderProps = {
-  navigation: GlobalQuery["global"]["navigation"];
-};
+import { GetGlobalQuery } from "@/lib/__generated__/types";
 
 export type MainNavProps = {
-  navigation: GlobalQuery["global"]["navigation"];
+  navigation: NonNullable<GetGlobalQuery["global"]["navigation"]>;
 };
 
-export type AlertBannerProps = {
-  alertBanner: GlobalQuery["global"]["alertBanner"];
-};
+export type SubItem = NonNullable<
+  NonNullable<GetGlobalQuery["global"]>["navigation"]
+>["mainNav"] extends (infer T)[] | null | undefined
+  ? T extends { subItems?: (infer S)[] | null }
+    ? S
+    : never
+  : never;
 
-export type SubItem = {
-  __typename: "GlobalNavigationMainNavSubItems";
-  label: string;
-  href: string;
-  icon?: string | null;
-  variant?: string | null;
-  description?: string | null;
-};
-
-export type FeaturedCard = {
-  image: {
-    src: string;
-    alt: string;
-  };
-  title: string;
-  description: string;
-  ctaText: string;
-  ctaLink: string;
-  layout?: "vertical" | "horizontal";
-};
-
-export type NavigationItem = {
-  __typename: "GlobalNavigationMainNav";
-  label: string;
-  href: string;
-  subItems?: Array<SubItem | null> | null;
-  featuredCards?: Array<FeaturedCard | null> | null;
-};
+export type FeaturedCard = NonNullable<
+  NonNullable<GetGlobalQuery["global"]>["navigation"]
+>["mainNav"] extends (infer T)[] | null | undefined
+  ? T extends { featuredCards?: (infer F)[] | null }
+    ? F
+    : never
+  : never;

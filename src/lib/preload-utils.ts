@@ -75,3 +75,56 @@ export function getPlaceholderForImage(imagePath: string): string {
   // Default placeholder for other images
   return lightBlurPlaceholder;
 }
+
+/**
+ * Preload critical images to prevent layout shifts
+ * @param imagePath Path to the image to preload
+ */
+export function preloadImage(imagePath: string) {
+  if (typeof window !== "undefined") {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = imagePath;
+    document.head.appendChild(link);
+  }
+}
+
+/**
+ * SSR/CSR-safe image preloader for Next.js
+ * On the server, returns a preload <link> string for Head. On the client, injects a preload link.
+ * @param imagePath Path to the image to preload
+ * @param type Image mime type (default: image/webp)
+ * @returns For SSR: string for <Head> dangerouslySetInnerHTML, for CSR: void
+ */
+export function robustPreloadImage(
+  imagePath: string,
+  type: string = "image/webp"
+) {
+  if (typeof window === "undefined") {
+    // SSR: return string for <Head>
+    return `<link rel="preload" href="${imagePath}" as="image" type="${type}" />`;
+  } else {
+    // CSR: inject link if not already present
+    if (!document.querySelector(`link[rel='preload'][href='${imagePath}']`)) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = imagePath;
+      link.type = type;
+      document.head.appendChild(link);
+    }
+  }
+}
+
+/**
+ * Utility to get the correct image type for preloading
+ */
+export function getImageMimeType(imagePath: string): string {
+  if (imagePath.endsWith(".webp")) return "image/webp";
+  if (imagePath.endsWith(".jpg") || imagePath.endsWith(".jpeg"))
+    return "image/jpeg";
+  if (imagePath.endsWith(".png")) return "image/png";
+  if (imagePath.endsWith(".svg")) return "image/svg+xml";
+  return "image/*";
+}

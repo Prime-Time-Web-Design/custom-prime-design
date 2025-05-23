@@ -1,0 +1,205 @@
+# --- Global Schema Fragments ---
+
+# Fragment for the Alert Banner fields
+fragment AlertBannerFields on GlobalAlertBanner {
+  alertLabel
+  alertLink
+  alertLinkText
+}
+
+# Fragment for a generic Image (src and alt)
+# This fragment is specifically typed to `GlobalNavigationMainNavFeaturedCardsImage`
+# If you have other image types, you might need more specific fragments or a more generic one
+# if Tina's type system allows a common interface.
+fragment GenericImageFields on GlobalNavigationMainNavFeaturedCardsImage {
+  src
+  alt
+}
+
+# Fragment for a Featured Card
+fragment FeaturedCardFields on GlobalNavigationMainNavFeaturedCards {
+  image {
+    ...GenericImageFields
+  }
+  title
+  description
+  ctaText
+  ctaLink
+  layout
+}
+
+# Fragment for a Sub Navigation Item
+fragment SubNavItemFields on GlobalNavigationMainNavSubItems {
+  label
+  href
+  icon
+  variant
+  description
+}
+
+# Fragment for a Main Navigation Item
+fragment MainNavItemFields on GlobalNavigationMainNav {
+  label
+  href
+  featuredCards {
+    ...FeaturedCardFields
+  }
+  subItems {
+    ...SubNavItemFields
+  }
+}
+
+# Fragment for Contact Information in the Footer
+fragment FooterContactFields on GlobalNavigationFooterContact {
+  phone
+  textNumber
+  email
+}
+
+# Fragment for Social Media Links in the Footer
+fragment FooterSocialFields on GlobalNavigationFooterSocial {
+  platform
+  url
+}
+
+# Fragment for the entire Footer Settings
+fragment FooterSettingsFields on GlobalNavigationFooter {
+  contact {
+    ...FooterContactFields
+  }
+  social {
+    ...FooterSocialFields
+  }
+  companyName
+}
+
+# --- Page Schema Block Fragments ---
+
+# Fragment for the Hero Block (from Page blocks)
+fragment PageHeroBlockFields on PageBlocksHero {
+  heading
+  subheading
+  buttonText
+  buttonLink
+  src
+}
+
+# Fragment for the CTA Block
+fragment CtaBlockFields on PageBlocksCtaBlock {
+  heading
+  subheading
+  content
+  buttonText
+  buttonLink
+  imageLeft
+  imageSrc
+  imageAlt
+  backgroundColor
+}
+
+# Fragment for a single Feature within a Rich Text Block
+fragment RichTextFeatureFields on PageBlocksRichTextBlockFeatures {
+  src
+  title
+  description
+}
+
+# Fragment for the Rich Text Block itself
+fragment RichTextBlockFields on PageBlocksRichTextBlock {
+  heading
+  subheading
+  features {
+    ...RichTextFeatureFields
+  }
+}
+
+# Fragment for a single Carousel Slide
+fragment CarouselSlideFields on PageBlocksCarouselBlockSlides {
+  src
+  alt
+  testimonialText
+  clientName
+  clientType
+}
+
+# Fragment for the Carousel Block itself
+fragment CarouselBlockFields on PageBlocksCarouselBlock {
+  blockTitle
+  blockSubtitle
+  slides {
+    ...CarouselSlideFields
+  }
+  options_loop
+  autoplayInterval
+}
+
+# Fragment for a single Service within a Service Listing Block
+fragment ServiceListingServiceFields on PageBlocksServiceListingBlockServices {
+  name
+  slug
+}
+
+# Fragment for the Service Listing Block itself
+fragment ServiceListingBlockFields on PageBlocksServiceListingBlock {
+  title
+  services {
+    ...ServiceListingServiceFields
+  }
+  ctaText
+  ctaLink
+  ctaContent
+  backgroundColor
+}
+
+# --- Queries using your fragments ---
+
+# Query for global navigation and footer
+query GetGlobal {
+  global(relativePath: "Navigation_Data.yaml") {
+    alertBanner {
+      ...AlertBannerFields
+    }
+    navigation {
+      mainNav {
+        ...MainNavItemFields
+      }
+      footer {
+        ...FooterSettingsFields
+      }
+    }
+  }
+}
+
+query GetPage($relativePath: String!) {
+  page(relativePath: $relativePath) {
+    title
+    description
+    template
+    subtitle
+    headerBlocks {
+      ... on PageHeaderBlocksHero {
+        heading
+        subheading
+        buttonText
+        buttonLink
+      }
+    }
+    blocks {
+      ... on PageBlocksHero {
+        ...PageHeroBlockFields
+      }
+      ... on PageBlocksCtaBlock {
+        ...CtaBlockFields
+      }
+      ... on PageBlocksRichTextBlock {
+        ...RichTextBlockFields
+      }
+      ... on PageBlocksCarouselBlock {
+        ...CarouselBlockFields
+      }
+      ... on PageBlocksServiceListingBlock {
+        ...ServiceListingBlockFields
+      }
+    }
+  }
+}

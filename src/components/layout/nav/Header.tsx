@@ -14,6 +14,7 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { globalSettings } = useLayout();
+  // Updated for new structure:
   const navigation = globalSettings?.navigation;
   const alertBanner = globalSettings?.alertBanner;
 

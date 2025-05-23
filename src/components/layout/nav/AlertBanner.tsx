@@ -2,10 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import { MoveRight, X } from "lucide-react";
-import { GlobalAlertBanner } from "../../../../tina/__generated__/types";
+import { GetGlobalQuery } from "@/lib/__generated__/types";
 
 interface AlertBannerProps {
-  alertBanner: GlobalAlertBanner;
+  alertBanner: NonNullable<GetGlobalQuery["global"]["alertBanner"]>;
   isScrolled: boolean;
 }
 

@@ -1,6 +1,7 @@
 import "./../styles/globals.css";
 import Layout from "@/components/layout/Layout";
 import client from "../../tina/__generated__/client";
+import { GetGlobalQuery, GetGlobalDocument } from "@/lib/__generated__/types";
 // import { Metadata } from "next";
 
 export interface RootLayoutProps {
@@ -54,10 +55,13 @@ const montserrat = Montserrat({
 // }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const globalData = await client.queries.global({
-    relativePath: "Navigation_Data.yaml",
-  });
+  // Use your custom GetGlobal query document and types
+  const { data } = await client.request<GetGlobalQuery>(
+    { query: GetGlobalDocument.loc!.source.body },
+    {}
+  );
 
+  // data.global is typed as GetGlobalQuery["global"]
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <head>
@@ -70,18 +74,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 
-        {/* Preload hero image */}
+        {/* Preload hero image for best LCP, static tag to avoid hydration mismatch */}
         <link
           rel="preload"
           href="/optimized/hero.webp"
           as="image"
           type="image/webp"
-          crossOrigin="anonymous"
         />
       </head>
       <body>
         <div className="min-h-screen flex flex-col">
-          <Layout globalData={globalData}>{children}</Layout>
+          <Layout globalData={data.global}>{children}</Layout>
         </div>
       </body>
     </html>

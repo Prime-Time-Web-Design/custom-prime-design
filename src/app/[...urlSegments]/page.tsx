@@ -1,7 +1,16 @@
 import { notFound } from "next/navigation";
-import client from "../../../tina/__generated__/client";
-import { Section } from "@/components/layout/Section";
-import ClientPage from "./client-page";
+import { getPageData, isValidPagePath, getStaticParams } from "@/lib/page-data";
+import { PageLoader } from "@/components/page/PageLoader";
+
+// Define a type for the page data structure based on the schema
+interface PageData {
+  page?: {
+    title?: string;
+    description?: string;
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
 
 const EXCLUDED_PREFIXES = [
   "_next",
@@ -30,22 +39,23 @@ export async function generateMetadata({ params }: PageProps) {
       description: "The page you're looking for doesn't exist.",
     };
   }
+
   const filepath = urlSegments.join("/");
+
   try {
-    const result = await client.queries.page({
-      relativePath: `${filepath}.yaml`,
-    });
-    if (!result.data?.page) {
+    const data = (await getPageData(`${filepath}.yaml`)) as PageData;
+
+    if (!data?.page) {
       return {
         title: "Not Found",
         description: "The page you're looking for doesn't exist.",
       };
     }
+
     return {
-      title: result.data.page.title || "Page Not Found",
+      title: data.page.title ?? "Page Not Found",
       description:
-        result.data.page.description ||
-        "The page you're looking for doesn't exist.",
+        data.page?.description || "The page you're looking for doesn't exist.",
     };
   } catch {
     return {
@@ -57,42 +67,28 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function Page({ params }: PageProps) {
   const urlSegments = params?.urlSegments || [];
+
   if (isExcludedPath(urlSegments)) {
     notFound();
   }
+
   const filepath = urlSegments.join("/");
 
   // Validate that we're only trying to fetch YAML files
   // This prevents attempts to fetch image files or other non-content files
-  const validFilePath = /^[a-z0-9\-\/]+$/i.test(filepath);
-  if (!validFilePath) {
+  if (!isValidPagePath(filepath)) {
     console.error(`Invalid filepath requested: ${filepath}`);
     notFound();
   }
 
-  try {
-    console.log(`Attempting to fetch page data for: ${filepath}.yaml`);
-    const result = await client.queries.page({
-      relativePath: `${filepath}.yaml`,
-    });
+  // Use optimized PageLoader component with proper caching
+  return <PageLoader relativePath={`${filepath}.yaml`} />;
+}
 
-    if (!result.data?.page) {
-      console.error(`No page data found for: ${filepath}.yaml`);
-      notFound();
-    }
-
-    console.log(`Successfully loaded page: ${filepath}.yaml`);
-    return (
-      <Section>
-        <ClientPage
-          data={result.data}
-          variables={{ relativePath: `${filepath}.yaml` }}
-          query={result.query}
-        />
-      </Section>
-    );
-  } catch (error) {
-    console.error(`Page error for ${filepath}.yaml:`, error);
-    notFound();
-  }
+/**
+ * Generate static paths for all pages at build time
+ * This improves performance by pre-rendering pages
+ */
+export async function generateStaticParams() {
+  return await getStaticParams();
 }

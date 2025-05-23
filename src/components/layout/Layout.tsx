@@ -2,19 +2,20 @@ import React, { PropsWithChildren } from "react";
 import { LayoutProvider } from "./layout-context";
 import { Header } from "./nav/Header";
 import Footer from "./nav/Footer";
-import { GlobalQuery } from "../../../tina/__generated__/types";
+import { GetGlobalQuery } from "@/lib/__generated__/types";
 
 type LayoutProps = PropsWithChildren & {
-  globalData: { data: { global: GlobalQuery["global"] } };
+  globalData: GetGlobalQuery["global"];
 };
 
 export default function Layout({ children, globalData }: LayoutProps) {
   return (
-    <LayoutProvider globalSettings={globalData.data.global} pageData={null}>
+    <LayoutProvider globalSettings={globalData} pageData={null}>
       <div className="min-h-screen">
         <Header />
         <main className="overflow-x-hidden">{children}</main>
         <Footer />
+        {/* <ScriptLoader /> */}
       </div>
     </LayoutProvider>
   );
