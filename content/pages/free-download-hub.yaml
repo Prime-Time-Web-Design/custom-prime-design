@@ -5,6 +5,17 @@ description: >-
 template: landing
 subtitle: 7 Critical Website Mistakes Costing You Therapy Clients
 blocks:
+  - heading: Are You Unknowingly Turning Away Your Ideal Clients Online?
+    content: >
+      Many talented therapists have websites that, instead of attracting
+      clients, subtly create barriers. These aren't always obvious technical
+      glitches; often, they're nuanced mistakes in messaging, design, or user
+      experience that can make a potential client click away. Before they even
+      get a chance to understand how you can help, they're gone. This guide
+      illuminates those hidden pitfalls.
+    imageLeft: false
+    backgroundColor: bg-accent-hover
+    _template: ctaBlock
   - heading: 7 Critical Website Mistakes Costing You Therapy Clients
     subheading: >-
       Discover the 7 website mistakes that are quietly costing you therapy

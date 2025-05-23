@@ -44,7 +44,7 @@ blocks:
     imageLeft: false
     imageSrc: ''
     imageAlt: Healing is a Journey
-    backgroundColor: bg-soft-turquoise-light
+    backgroundColor: bg-bg
     _template: ctaBlock
   - title: 'We have therapists that specialize in:'
     services:
