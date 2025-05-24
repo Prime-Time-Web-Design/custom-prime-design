@@ -100,7 +100,8 @@ export const getAllPagePaths = unstable_cache(
  * @returns Whether the path is valid
  */
 export function isValidPagePath(path: string): boolean {
-  return /^[a-z0-9\-\/]+$/i.test(path);
+  // Only allow a-z, 0-9, dash, slash, and optionally .yaml at the end
+  return /^[a-z0-9\-\/]+(\.yaml)?$/i.test(path);
 }
 
 /**
