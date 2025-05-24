@@ -1,7 +1,7 @@
 import { defineConfig } from "tinacms";
-import { globalSchema } from "./schema/global";
-import { pageSchema } from "./schema/page";
-import { postSchema } from "./schema/post";
+import { globalSchema } from "./global";
+import { pageSchema } from "./page";
+import { postSchema } from "./post";
 
 // Your local configs
 const localMode = {
