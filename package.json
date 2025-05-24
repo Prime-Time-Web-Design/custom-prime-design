@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "NEXT_PUBLIC_USE_LOCAL_CLIENT=1 tinacms dev -c \"next dev\"",
-    "build": "NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build",
+    "build": "NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build", 
     "start": "next start",
     "lint": "next lint",
     "optimize-images": "node scripts/optimize-images.js",
-    "sync:content": "node scripts/refresh-tina.js",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "sync:content": "node scripts/refresh-tina.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
@@ -27,11 +26,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@graphql-codegen/cli": "^5.0.6",
-    "@graphql-codegen/import-types-preset": "^3.0.0",
-    "@graphql-codegen/typescript": "^4.1.6",
-    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
-    "@graphql-codegen/typescript-operations": "^4.6.1",
     "@tailwindcss/postcss": "^4",
     "@tinacms/cli": "^1.9.7",
     "@types/node": "^20.17.30",
