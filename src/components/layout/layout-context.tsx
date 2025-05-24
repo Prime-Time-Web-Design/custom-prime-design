@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useContext, createContext } from "react";
-import { GetGlobalQuery } from "@/lib/__generated__/types";
+import { GlobalSettings } from "@/lib/component-types";
 
 interface LayoutState {
-  globalSettings: GetGlobalQuery["global"] | undefined;
+  globalSettings: GlobalSettings | undefined;
   setGlobalSettings: React.Dispatch<
-    React.SetStateAction<GetGlobalQuery["global"] | undefined>
+    React.SetStateAction<GlobalSettings | undefined>
   >;
   pageData: unknown;
   setPageData: React.Dispatch<React.SetStateAction<unknown>>;
@@ -27,7 +27,7 @@ export const useLayout = () => {
 
 interface LayoutProviderProps {
   children: React.ReactNode;
-  globalSettings: GetGlobalQuery["global"] | undefined;
+  globalSettings: GlobalSettings | undefined;
   pageData: unknown;
 }
 
@@ -37,7 +37,7 @@ export const LayoutProvider = ({
   pageData: initialPageData,
 }: LayoutProviderProps) => {
   const [globalSettings, setGlobalSettings] = useState<
-    GetGlobalQuery["global"] | undefined
+    GlobalSettings | undefined
   >(initialGlobalSettings);
   const [pageData, setPageData] = useState<unknown>(initialPageData);
 

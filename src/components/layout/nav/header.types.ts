@@ -1,21 +1,16 @@
-import { GetGlobalQuery } from "@/lib/__generated__/types";
+import {
+  MainNavItem,
+  SubNavItem,
+  FeaturedCard as LocalFeaturedCard,
+  FooterSettings,
+} from "@/lib/component-types";
 
 export type MainNavProps = {
-  navigation: NonNullable<GetGlobalQuery["global"]["navigation"]>;
+  navigation: {
+    mainNav?: MainNavItem[];
+    footer?: FooterSettings;
+  };
 };
 
-export type SubItem = NonNullable<
-  NonNullable<GetGlobalQuery["global"]>["navigation"]
->["mainNav"] extends (infer T)[] | null | undefined
-  ? T extends { subItems?: (infer S)[] | null }
-    ? S
-    : never
-  : never;
-
-export type FeaturedCard = NonNullable<
-  NonNullable<GetGlobalQuery["global"]>["navigation"]
->["mainNav"] extends (infer T)[] | null | undefined
-  ? T extends { featuredCards?: (infer F)[] | null }
-    ? F
-    : never
-  : never;
+export type SubItem = SubNavItem;
+export type FeaturedCard = LocalFeaturedCard;

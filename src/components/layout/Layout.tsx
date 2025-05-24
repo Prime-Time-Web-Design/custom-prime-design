@@ -4,15 +4,15 @@ import { Header } from "./nav/Header";
 import Footer from "./nav/Footer";
 
 // Import the generated types for proper typing
-import { GetGlobalQuery } from "@/lib/__generated__/types";
+import { GlobalSettings } from "@/lib/component-types";
 
 type LayoutProps = PropsWithChildren & {
-  globalData: GetGlobalQuery["global"];
+  globalSettings: GlobalSettings | undefined;
 };
 
-export default function Layout({ children, globalData }: LayoutProps) {
+export default function Layout({ children, globalSettings }: LayoutProps) {
   return (
-    <LayoutProvider globalSettings={globalData} pageData={null}>
+    <LayoutProvider globalSettings={globalSettings} pageData={null}>
       <div className="min-h-screen">
         <Header />
         <main className="overflow-x-hidden">{children}</main>

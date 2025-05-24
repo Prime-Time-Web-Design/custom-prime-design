@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "NEXT_PUBLIC_USE_LOCAL_CLIENT=1 tinacms dev -c \"next dev\"",
-    "build": "NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build", 
+    "build": "NODE_OPTIONS=\"--max-old-space-size=8192\" NEXT_PUBLIC_USE_LOCAL_CLIENT=0 tinacms build && next build", 
     "start": "next start",
     "lint": "next lint",
     "optimize-images": "node scripts/optimize-images.js",

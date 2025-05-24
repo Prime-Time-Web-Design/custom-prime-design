@@ -1,6 +1,6 @@
 import "./../styles/globals.css";
 import Layout from "@/components/layout/Layout";
-import client from "../../tina/__generated__/client";
+import { fetchGlobalSettings } from "@/lib/global-data";
 // import { Metadata } from "next";
 
 export interface RootLayoutProps {
@@ -54,11 +54,7 @@ const montserrat = Montserrat({
 // }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  // Use Tina client directly - it should handle environment switching during build
-  const result = await client.queries.global({
-    relativePath: "Navigation_Data.yaml",
-  });
-  const data = result.data;
+  const globalSettings = await fetchGlobalSettings();
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <head>
@@ -81,7 +77,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body>
         <div className="min-h-screen flex flex-col">
-          <Layout globalData={data.global}>{children}</Layout>
+          <Layout globalSettings={globalSettings}>{children}</Layout>
         </div>
       </body>
     </html>
