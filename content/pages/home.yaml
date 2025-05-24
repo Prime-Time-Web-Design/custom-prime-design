@@ -78,35 +78,35 @@ blocks:
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:
-      - src: /optimized/nighttimecontrast.webp
+      - src: /optimized/cecep-rahmat-yKQe3Rtemqs-unsplash.webp
         alt: Happy Wins
         testimonialText: >-
           The darkness felt absolute, a weight I thought would never lift. But
           step by tiny step, with the right support and a fierce commitment to
           healing, I found my way back to the light.
-        clientName: John McCabbot
+        clientName: Nicole Patterson
         clientType: EMDR Therapy
-      - src: /adventureforthesoul.jpg
+      - src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
         alt: Journey to The Peak
         testimonialText: >-
           My therapist helped me slowly find glimmers of hope and reconnect with
           parts of myself I thought were lost forever. I'm not 'cured,' but I
           have joy, purpose, and the strength to keep moving forward. It's been
           life-changing.
-        clientName: Joanna Ferguson
+        clientName: Jonah Ferguson
         clientType: 'Individual Therapy '
-      - src: /aniket-deole-T-tOgjWZ0fQ-unsplash.jpg
-        alt: El Capitan
+      - src: /optimized/mina-rad-AEVUFpDGxZM-unsplash.webp
+        alt: Glad to be here
         testimonialText: >-
           It wasn't easy work, but the difference is incredible. My
           relationships are healthier, more open, and I feel so much more
           connected to the people I love.
         clientName: Matt Henderson
         clientType: Couples Therapy
-      - src: /featuredCardImage.png
+      - src: /optimized/roger-martin-vixgG_H3CaA-unsplash.webp
         alt: Beauty In Nature
         testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
-        clientName: Charles Woodford
+        clientName: Cara Winfrey
         clientType: Individual Therapy
     options.loop: false
     _template: carouselBlock
