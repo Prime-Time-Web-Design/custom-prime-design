@@ -1,7 +1,7 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 
-// tina/schema/global.ts
+// tina/global.ts
 import { defineSchema } from "tinacms";
 import * as LucideIcons from "lucide-react";
 var lucideIconNames = Object.keys(LucideIcons).filter(
@@ -231,7 +231,7 @@ var globalSchema = defineSchema({
   ]
 });
 
-// tina/schema/page.ts
+// tina/page.ts
 import { defineSchema as defineSchema2 } from "tinacms";
 var pageSchema = defineSchema2({
   collections: [
@@ -610,7 +610,7 @@ var pageSchema = defineSchema2({
   ]
 });
 
-// tina/schema/post.ts
+// tina/post.ts
 import { defineSchema as defineSchema3 } from "tinacms";
 var postSchema = defineSchema3({
   collections: [
