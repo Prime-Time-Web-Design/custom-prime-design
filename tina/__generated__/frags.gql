@@ -1,0 +1,133 @@
+fragment GlobalParts on Global {
+  __typename
+  alertBanner {
+    __typename
+    alertLabel
+    alertLink
+    alertLinkText
+  }
+  navigation {
+    __typename
+    mainNav {
+      __typename
+      label
+      href
+      featuredCards {
+        __typename
+        image {
+          __typename
+          src
+          alt
+        }
+        title
+        description
+        ctaText
+        ctaLink
+        layout
+      }
+      subItems {
+        __typename
+        label
+        href
+        icon
+        variant
+        description
+      }
+    }
+    footer {
+      __typename
+      contact {
+        __typename
+        phone
+        textNumber
+        email
+      }
+      social {
+        __typename
+        platform
+        url
+      }
+      companyName
+    }
+  }
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  template
+  subtitle
+  headerBlocks {
+    __typename
+    ... on PageHeaderBlocksHero {
+      heading
+      subheading
+      buttonText
+      buttonLink
+    }
+  }
+  blocks {
+    __typename
+    ... on PageBlocksCtaBlock {
+      heading
+      subheading
+      content
+      buttonText
+      buttonLink
+      imageLeft
+      imageSrc
+      imageAlt
+      backgroundColor
+    }
+    ... on PageBlocksHero {
+      heading
+      subheading
+      buttonText
+      buttonLink
+      src
+    }
+    ... on PageBlocksRichTextBlock {
+      heading
+      subheading
+      features {
+        __typename
+        src
+        title
+        description
+      }
+    }
+    ... on PageBlocksCarouselBlock {
+      blockTitle
+      blockSubtitle
+      slides {
+        __typename
+        src
+        alt
+        testimonialText
+        clientName
+        clientType
+      }
+      options_loop
+      autoplayInterval
+    }
+    ... on PageBlocksServiceListingBlock {
+      title
+      services {
+        __typename
+        name
+        slug
+      }
+      ctaText
+      ctaLink
+      ctaContent
+      backgroundColor
+    }
+  }
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  body
+}
