@@ -66,15 +66,20 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     inViewThreshold: 0.8,
   };
 
-  const plugins: AutoplayType[] = [
-    Autoplay({
-      delay: autoplayDelay,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-      playOnInit: true, // Ensure autoplay starts when the carousel initializes
-      rootNode: (emblaRoot) => emblaRoot.parentElement, // Use the parent element for detecting mouse events
-    }),
-  ];
+  // --- Autoplay plugin setup ---
+  // Only enable autoplay on desktop, not on mobile
+  const enableAutoplay = isDesktop;
+  const plugins: AutoplayType[] = enableAutoplay
+    ? [
+        Autoplay({
+          delay: autoplayDelay,
+          stopOnInteraction: false,
+          stopOnMouseEnter: true,
+          playOnInit: true,
+          rootNode: (emblaRoot) => emblaRoot.parentElement,
+        }),
+      ]
+    : [];
 
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -89,52 +94,24 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     setSelectedIndex(emblaApiInstance.selectedScrollSnap());
   }, []);
 
-  // Effect for initial setup and persistent event listeners
   useEffect(() => {
     if (!emblaApi) return;
-
-    onInit(emblaApi); // Initial call to set state
-
+    onInit(emblaApi);
     emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onInit); // Called after emblaApi.reInit() completes
-
-    // Cleanup listeners when component unmounts or emblaApi/callbacks change
+    emblaApi.on("reInit", onInit);
     return () => {
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onInit);
     };
   }, [emblaApi, onInit, onSelect]);
 
-  // Effect to restart autoplay when breakpoints change
+  // Only reInit on desktop/tablet changes
   useEffect(() => {
     if (!emblaApi) return;
-
-    // Force a reinitialization when breakpoints change
-    emblaApi.reInit();
-
-    // Explicitly tell all plugins to restart, particularly focusing on Autoplay
-    const handlePluginInit = () => {
-      // Give it a small delay to ensure the carousel has fully initialized
-      setTimeout(() => {
-        // Access autoplay plugin (if it exists)
-        const pluginApi = emblaApi.plugins();
-        if (pluginApi.autoplay) {
-          // Stop and restart
-          pluginApi.autoplay.stop();
-          pluginApi.autoplay.play();
-        }
-      }, 50);
-    };
-
-    // Run immediately and also hook into the reInit event
-    handlePluginInit();
-    emblaApi.on("reInit", handlePluginInit);
-
-    // Clean up
-    return () => {
-      emblaApi.off("reInit", handlePluginInit);
-    };
-  }, [emblaApi, isTablet, isDesktop]);
+    if (isDesktop || isTablet) {
+      emblaApi.reInit();
+    }
+  }, [emblaApi, isDesktop, isTablet]);
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -196,9 +173,9 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
               // Determine flex basis for responsive slides
               const flexBasis = isDesktop
-                ? "23%" // Further adjusted for narrower cards on desktop
+                ? "24%" // Slightly wider for better centering
                 : isTablet
-                ? "30%" // Further adjusted for narrower cards on tablet
+                ? "32%" // Slightly wider for better centering
                 : "100%";
 
               return (
@@ -207,7 +184,9 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                   className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden mx-2 sm:mx-3 min-h-[300px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
                   style={{
                     flex: `0 0 ${flexBasis}`,
-                    maxWidth: flexBasis, // Ensure slide does not exceed flexBasis
+                    maxWidth: flexBasis,
+                    marginRight: isDesktop ? "1.5%" : isTablet ? "2%" : undefined, // Add a small right margin for spacing
+                    marginLeft: isDesktop ? "1.5%" : isTablet ? "2%" : undefined, // Add a small left margin for spacing
                   }}
                 >
                   <div className="w-full h-36 sm:h-44 md:h-48 lg:h-48 flex items-end justify-center relative p-4 pb-0">

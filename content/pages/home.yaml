@@ -108,6 +108,5 @@ blocks:
         testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
         clientName: Charles Woodford
         clientType: Individual Therapy
-    options.loop: true
-    autoplayInterval: 2
+    options.loop: false
     _template: carouselBlock
