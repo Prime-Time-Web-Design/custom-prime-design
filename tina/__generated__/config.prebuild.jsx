@@ -610,36 +610,6 @@ var pageSchema = defineSchema2({
   ]
 });
 
-// tina/post.ts
-import { defineSchema as defineSchema3 } from "tinacms";
-var postSchema = defineSchema3({
-  collections: [
-    {
-      name: "post",
-      label: "Posts",
-      path: "content/posts",
-      fields: [
-        {
-          type: "string",
-          name: "title",
-          label: "Title",
-          isTitle: true,
-          required: true
-        },
-        {
-          type: "rich-text",
-          name: "body",
-          label: "Body",
-          isBody: true
-        }
-      ],
-      ui: {
-        router: ({ document }) => `/demo/blog/${document._sys.filename}`
-      }
-    }
-  ]
-});
-
 // tina/config.ts
 var localMode = {
   clientId: null,
@@ -668,8 +638,8 @@ var config_default = defineConfig({
   schema: {
     collections: [
       ...globalSchema.collections,
-      ...pageSchema.collections,
-      ...postSchema.collections
+      ...pageSchema.collections
+      // ...postSchema.collections,
     ]
   }
 });

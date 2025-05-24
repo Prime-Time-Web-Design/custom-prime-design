@@ -58,14 +58,11 @@ type Query {
   globalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalFilter): GlobalConnection!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
-  post(relativePath: String): Post!
-  postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
 }
 
 input DocumentFilter {
   global: GlobalFilter
   page: PageFilter
-  post: PostFilter
 }
 
 type DocumentConnectionEdges {
@@ -91,7 +88,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Global | Page | Post | Folder
+union DocumentNode = Global | Page | Folder
 
 type GlobalAlertBanner {
   alertLabel: String!
@@ -452,30 +449,6 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
-type Post implements Node & Document {
-  title: String!
-  body: JSON
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input PostFilter {
-  title: StringFilter
-  body: RichTextFilter
-}
-
-type PostConnectionEdges {
-  cursor: String!
-  node: Post
-}
-
-type PostConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [PostConnectionEdges]
-}
-
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -486,21 +459,17 @@ type Mutation {
   createGlobal(relativePath: String!, params: GlobalMutation!): Global!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
-  updatePost(relativePath: String!, params: PostMutation!): Post!
-  createPost(relativePath: String!, params: PostMutation!): Post!
 }
 
 input DocumentUpdateMutation {
   global: GlobalMutation
   page: PageMutation
-  post: PostMutation
   relativePath: String
 }
 
 input DocumentMutation {
   global: GlobalMutation
   page: PageMutation
-  post: PostMutation
 }
 
 input GlobalAlertBannerMutation {
@@ -653,11 +622,6 @@ input PageMutation {
   subtitle: String
   headerBlocks: [PageHeaderBlocksMutation]
   blocks: [PageBlocksMutation]
-}
-
-input PostMutation {
-  title: String
-  body: JSON
 }
 
 schema {
