@@ -150,15 +150,23 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
       )}
 
       <div
-        className={`relative ${!isDesktop && !isTablet ? 'w-screen max-w-none px-0' : 'mx-auto px-4 sm:px-6 lg:px-8'}`}
+        className={`relative ${
+          !isDesktop && !isTablet
+            ? "w-screen max-w-none px-0"
+            : "mx-auto px-4 sm:px-6 lg:px-8"
+        }`}
       >
         <div
-          className={`embla__viewport overflow-hidden ${!isDesktop && !isTablet ? 'w-screen max-w-none px-0' : 'w-full'}`}
+          className={`embla__viewport overflow-hidden ${
+            !isDesktop && !isTablet ? "w-screen max-w-none px-0" : "w-full"
+          }`}
           ref={emblaRef}
           key={`${isTablet}-${isDesktop}`}
         >
           <div
-            className={`embla__container flex gap-4 ${isDesktop || isTablet ? 'justify-center' : 'justify-start'} w-auto`}
+            className={`embla__container flex gap-4 ${
+              isDesktop || isTablet ? "justify-center" : "justify-start"
+            } w-auto`}
           >
             {slides.map((slide, idx) => {
               if (!slide) return null;
@@ -187,13 +195,13 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
               return (
                 <div
                   key={idx}
-                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden min-h-[300px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
+                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden min-h-[220px] sm:min-h-[240px] md:min-h-[260px] lg:min-h-[280px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
                   style={{
                     flex: `0 0 ${flexBasis}`,
                     ...(slideMaxWidth ? { maxWidth: slideMaxWidth } : {}),
                   }}
                 >
-                  <div className="w-full h-32 sm:h-40 md:h-44 lg:h-44 flex items-end justify-center relative p-2 pb-0">
+                  <div className="w-full aspect-[4/3] flex items-end justify-center relative p-2 pb-0">
                     {slide.src && (
                       <Image
                         src={normalizeSrc(slide.src)}
