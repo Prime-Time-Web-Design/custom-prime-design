@@ -150,17 +150,16 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
       )}
 
       <div
-        className="relative mx-auto px-4 sm:px-6 lg:px-8"
-        // ref={emblaRef} // ref moved to embla__viewport
+        className={`relative ${!isDesktop && !isTablet ? 'w-screen max-w-none px-0' : 'mx-auto px-4 sm:px-6 lg:px-8'}`}
       >
         <div
-          className="embla__viewport overflow-hidden w-full"
+          className={`embla__viewport overflow-hidden ${!isDesktop && !isTablet ? 'w-screen max-w-none px-0' : 'w-full'}`}
           ref={emblaRef}
-          key={`${isTablet}-${isDesktop}`} // Added key to force re-mount on breakpoint change
+          key={`${isTablet}-${isDesktop}`}
         >
-          <div className="embla__container flex">
-            {" "}
-            {/* Changed class, removed py-4 */}
+          <div
+            className={`embla__container flex gap-4 ${isDesktop || isTablet ? 'justify-center' : 'justify-start'} w-auto`}
+          >
             {slides.map((slide, idx) => {
               if (!slide) return null;
 
@@ -172,24 +171,29 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
               const bgColor = bgColors[idx % bgColors.length];
 
               // Determine flex basis for responsive slides
-              const flexBasis = isDesktop
-                ? "24%" // Slightly wider for better centering
-                : isTablet
-                ? "32%" // Slightly wider for better centering
-                : "100%";
+              let flexBasis;
+              let slideMaxWidth;
+              if (isDesktop) {
+                flexBasis = "19%";
+                slideMaxWidth = flexBasis;
+              } else if (isTablet) {
+                flexBasis = "26%";
+                slideMaxWidth = flexBasis;
+              } else {
+                flexBasis = "90vw";
+                slideMaxWidth = undefined; // Allow overflow on mobile
+              }
 
               return (
                 <div
                   key={idx}
-                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden mx-2 sm:mx-3 min-h-[300px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
+                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden min-h-[300px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[360px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
                   style={{
                     flex: `0 0 ${flexBasis}`,
-                    maxWidth: flexBasis,
-                    marginRight: isDesktop ? "1.5%" : isTablet ? "2%" : undefined, // Add a small right margin for spacing
-                    marginLeft: isDesktop ? "1.5%" : isTablet ? "2%" : undefined, // Add a small left margin for spacing
+                    ...(slideMaxWidth ? { maxWidth: slideMaxWidth } : {}),
                   }}
                 >
-                  <div className="w-full h-36 sm:h-44 md:h-48 lg:h-48 flex items-end justify-center relative p-4 pb-0">
+                  <div className="w-full h-32 sm:h-40 md:h-44 lg:h-44 flex items-end justify-center relative p-2 pb-0">
                     {slide.src && (
                       <Image
                         src={normalizeSrc(slide.src)}
@@ -199,12 +203,12 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                         unoptimized={slide.src.startsWith("http")}
                         sizes={
                           isDesktop
-                            ? "(min-width: 1024px) 25vw" // Adjusted for narrower cards
+                            ? "(min-width: 1024px) 25vw"
                             : isTablet
-                            ? "(min-width: 768px) 33vw" // Adjusted for narrower cards
+                            ? "(min-width: 768px) 33vw"
                             : "100vw"
                         }
-                        style={{ inset: 0 }}
+                        style={{ inset: 0 }} // Remove width/height when using fill
                       />
                     )}
                   </div>
