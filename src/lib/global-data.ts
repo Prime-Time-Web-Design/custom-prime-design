@@ -1,5 +1,14 @@
 import client from "../../tina/__generated__/client";
-import { GlobalQuery } from "../../tina/__generated__/types";
+import {
+  GlobalNavigation,
+  GlobalNavigationMainNav,
+  GlobalNavigationMainNavFeaturedCards,
+  GlobalNavigationMainNavSubItems,
+  GlobalNavigationFooter,
+  GlobalNavigationFooterContact,
+  GlobalNavigationFooterSocial,
+  GlobalAlertBanner,
+} from "../../tina/__generated__/types";
 import {
   GlobalSettings,
   AlertBanner,
@@ -13,7 +22,7 @@ import {
 } from "./component-types";
 
 function mapAlertBanner(
-  alertBanner: GlobalQuery["global"]["alertBanner"]
+  alertBanner: GlobalAlertBanner | null | undefined
 ): AlertBanner | undefined {
   if (!alertBanner) return undefined;
   return {
@@ -23,65 +32,79 @@ function mapAlertBanner(
   };
 }
 
-function mapFeaturedCard(card: any): FeaturedCard {
+function mapFeaturedCard(
+  card: GlobalNavigationMainNavFeaturedCards | null | undefined
+): FeaturedCard {
   return {
     image: {
-      src: card.image?.src ?? "",
-      alt: card.image?.alt ?? "",
+      src: card?.image?.src ?? "",
+      alt: card?.image?.alt ?? "",
     },
-    title: card.title ?? "",
-    description: card.description ?? "",
-    ctaText: card.ctaText ?? "",
-    ctaLink: card.ctaLink ?? "",
-    layout: card.layout,
+    title: card?.title ?? "",
+    description: card?.description ?? "",
+    ctaText: card?.ctaText ?? "",
+    ctaLink: card?.ctaLink ?? "",
+    layout: card?.layout ?? undefined,
   };
 }
 
-function mapSubNavItem(item: any): SubNavItem {
+function mapSubNavItem(
+  item: GlobalNavigationMainNavSubItems | null | undefined
+): SubNavItem {
   return {
-    label: item.label ?? "",
-    href: item.href ?? "",
-    icon: item.icon,
-    variant: item.variant,
-    description: item.description,
+    label: item?.label ?? "",
+    href: item?.href ?? "",
+    icon: item?.icon ?? undefined,
+    variant: item?.variant ?? undefined,
+    description: item?.description ?? undefined,
   };
 }
 
-function mapMainNavItem(item: any): MainNavItem {
+function mapMainNavItem(
+  item: GlobalNavigationMainNav | null | undefined
+): MainNavItem {
   return {
-    label: item.label ?? "",
-    href: item.href,
-    featuredCards: item.featuredCards?.map(mapFeaturedCard),
-    subItems: item.subItems?.map(mapSubNavItem),
+    label: item?.label ?? "",
+    href: item?.href ?? undefined,
+    featuredCards: item?.featuredCards?.filter(Boolean).map(mapFeaturedCard),
+    subItems: item?.subItems?.filter(Boolean).map(mapSubNavItem),
   };
 }
 
-function mapFooterContact(contact: any): FooterContact {
+function mapFooterContact(
+  contact: GlobalNavigationFooterContact | null | undefined
+): FooterContact {
   return {
-    phone: contact?.phone,
-    textNumber: contact?.textNumber,
-    email: contact?.email,
+    phone: contact?.phone ?? undefined,
+    textNumber: contact?.textNumber ?? undefined,
+    email: contact?.email ?? undefined,
   };
 }
 
-function mapFooterSocial(social: any): FooterSocial {
+function mapFooterSocial(
+  social: GlobalNavigationFooterSocial | null | undefined
+): FooterSocial {
   return {
-    platform: social.platform ?? "",
-    url: social.url ?? "",
+    platform: social?.platform ?? "",
+    url: social?.url ?? "",
   };
 }
 
-function mapFooterSettings(footer: any): FooterSettings {
+function mapFooterSettings(
+  footer: GlobalNavigationFooter | null | undefined
+): FooterSettings {
   return {
     contact: mapFooterContact(footer?.contact),
-    social: footer?.social?.map(mapFooterSocial),
-    companyName: footer?.companyName,
+    social: footer?.social?.filter(Boolean).map(mapFooterSocial),
+    companyName: footer?.companyName ?? undefined,
   };
 }
 
-function mapNavigation(navigation: any): Navigation {
+function mapNavigation(
+  navigation: GlobalNavigation | null | undefined
+): Navigation {
   return {
-    mainNav: navigation?.mainNav?.map(mapMainNavItem),
+    mainNav: navigation?.mainNav?.filter(Boolean).map(mapMainNavItem),
     footer: mapFooterSettings(navigation?.footer),
   };
 }
