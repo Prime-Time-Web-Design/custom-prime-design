@@ -12,6 +12,18 @@ blocks:
         description: >
           In today’s fast-paced world, a sluggish website signals
           unprofessionalism and can cost you valuable client inquiries.
+      - src: /optimized/undraw_personal-website_kz7a.svg
+        title: Content Chaos
+        description: >
+          If your words aren't clear and empathetic, potential clients won't
+          feel you truly understand their struggles. Make your site a welcoming
+          space.
+      - src: /undraw_completed_0sqh.svg
+        title: Disjointed User Experience
+        description: >
+          Many times a practice website is missing a clean user experience.
+          Potential clients will feel friction when the site isn't built for
+          them.
     _template: richTextBlock
   - heading: 7 Critical Website Mistakes Costing You Therapy Clients
     subheading: >-
@@ -29,6 +41,8 @@ blocks:
       experience that can make a potential client click away. Before they even
       get a chance to understand how you can help, they're gone. This guide
       illuminates those hidden pitfalls.
+    buttonText: Book Free Consultation
+    buttonLink: /booking/free-consultation
     imageLeft: false
     backgroundColor: bg-accent-hover
     _template: ctaBlock

@@ -30,7 +30,7 @@ export default function LandingTemplate({
       </Section>
 
       {/* Custom call to action section - statically part of template */}
-      <Section className="cta-section py-16 bg-gradient-to-r from-[var(--color-calming-blue-dark)] to-[var(--color-soft-turquoise-dark)] text-white text-center">
+      {/* <Section className="cta-section py-16 bg-gradient-to-r from-[var(--color-calming-blue-dark)] to-[var(--color-soft-turquoise-dark)] text-white text-center">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-8">
@@ -43,7 +43,7 @@ export default function LandingTemplate({
             Book a Free Consultation
           </a>
         </div>
-      </Section>
+      </Section> */}
 
       {/* Render any children passed to the template */}
       {children && (
