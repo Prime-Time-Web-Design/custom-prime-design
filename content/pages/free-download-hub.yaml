@@ -5,6 +5,14 @@ description: >-
 template: landing
 subtitle: 7 Critical Website Mistakes Costing You Therapy Clients
 blocks:
+  - heading: 3 Reasons Your website is limiting your impact
+    features:
+      - src: /optimized/undraw_avatars_xsfb.svg
+        title: Slow Site Speed is painful
+        description: >
+          In today’s fast-paced world, a sluggish website signals
+          unprofessionalism and can cost you valuable client inquiries.
+    _template: richTextBlock
   - heading: 7 Critical Website Mistakes Costing You Therapy Clients
     subheading: >-
       Discover the 7 website mistakes that are quietly costing you therapy

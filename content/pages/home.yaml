@@ -105,8 +105,19 @@ blocks:
         clientType: Couples Therapy
       - src: /optimized/roger-martin-vixgG_H3CaA-unsplash.webp
         alt: Beauty In Nature
-        testimonialText: ' I still have anxious moments, but now I feel equipped to handle them. I''ve found a sense of peace and control I didn''t think was possible.'
+        testimonialText: >-
+          I still have anxious moments, but now I feel equipped to handle them.
+          I've found a sense of peace and control I didn't think was possible.
         clientName: Cara Winfrey
+        clientType: Individual Therapy
+      - src: /optimized/cecep-rahmat-yKQe3Rtemqs-unsplash.webp
+        alt: Renewed
+        testimonialText: >-
+          “My therapist helped me slowly find glimmers of hope and reconnect
+          with parts of myself I thought were lost forever. I'm not 'cured,' but
+          I have joy, purpose, and the strength to keep moving forward. It's
+          been life-changing.”
+        clientName: Serena Pollens
         clientType: Individual Therapy
     options.loop: false
     _template: carouselBlock
