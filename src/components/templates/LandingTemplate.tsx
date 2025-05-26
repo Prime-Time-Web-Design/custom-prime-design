@@ -25,7 +25,7 @@ export default function LandingTemplate({
       )}
 
       {/* Main content blocks - dynamic from Tina */}
-      <Section className="main-content-section bg-gradient-to-b from-[var(--color-very-light-gray)] to-[var(--color-soft-lavender-light)] py-16">
+      <Section className="main-content-section bg-gradient-to-b from-[var(--color-very-light-gray)] to-[var(--color-soft-lavender-light)]">
         <Blocks blocks={ensureValidBlocks(data?.blocks)} />
       </Section>
 
