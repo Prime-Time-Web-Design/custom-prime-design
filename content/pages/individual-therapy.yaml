@@ -1,0 +1,15 @@
+title: Individual Therapy
+description: This is the individual therapy page
+template: service
+subtitle: >-
+  Individual Therapy focuses on building a custom experience for you to heal and
+  grow
+blocks:
+  - heading: 'Individual Therapy: Support Just for You'
+    subheading: >-
+      Ready to explore your thoughts and feelings in a safe, confidential space?
+      We offer compassionate care tailored to your unique needs.
+    buttonText: Discover Your Therapist
+    buttonLink: /individual-therapy
+    src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
+    _template: hero

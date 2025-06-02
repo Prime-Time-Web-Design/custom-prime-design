@@ -3,7 +3,7 @@ description: >-
   Access valuable free resources designed to help you grow your therapy practice
   — guides, checklists, and more, all in one place.
 template: landing
-subtitle: 7 Critical Website Mistakes Costing You Therapy Clients
+subtitle: 3 Critical Website Mistakes Costing You Therapy Clients
 blocks:
   - heading: 3 Reasons Your website is limiting your impact
     features:
@@ -25,10 +25,10 @@ blocks:
           Potential clients will feel friction when the site isn't built for
           them.
     _template: richTextBlock
-  - heading: 7 Critical Website Mistakes Costing You Therapy Clients
+  - heading: 3 Critical Website Mistakes Costing You Therapy Clients
     subheading: >-
-      Discover the 7 website mistakes that are quietly costing you therapy
-      clients—and how to fix them fast.
+      Learn more about the 3 website mistakes that are quietly costing you
+      therapy clients—and how to fix them fast.
     buttonText: Grab the guide
     buttonLink: /download/website-mistakes-guide
     src: /optimized/nighttimecontrast.webp

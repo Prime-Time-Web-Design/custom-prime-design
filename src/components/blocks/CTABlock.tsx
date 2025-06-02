@@ -43,7 +43,7 @@ export const CTABlock = ({ data }: CTABlockProps) => {
             )}
 
             {heading && (
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[var(--color-deep-slate)]">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-text">
                 {heading}
               </h2>
             )}
@@ -55,7 +55,7 @@ export const CTABlock = ({ data }: CTABlockProps) => {
             )}
 
             {content && (
-              <div className="prose prose-lg text-[var(--color-medium-slate)] mb-8 max-w-2xl mx-auto">
+              <div className="prose prose-lg text-text mb-8 max-w-2xl mx-auto">
                 <TinaMarkdown content={content} />
               </div>
             )}

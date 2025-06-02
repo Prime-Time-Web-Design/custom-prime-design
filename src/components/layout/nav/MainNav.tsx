@@ -1,15 +1,12 @@
 "use client";
 import React from "react";
-import { MainNavProps, SubItem, FeaturedCard } from "./header.types";
+import { MainNavProps, SubItem } from "./header.types";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/molecules/Card";
-import FeaturedContentCard from "@/components/molecules/FeaturedContentCard";
 import Image from "next/image";
 import logo from "../../../../public/logo.svg";
-import { mapFeaturedCards } from "./nav.helpers";
-
 export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
   // navItems is always an array of non-null items
   const navItems = (navigation?.mainNav ?? []).filter(
@@ -34,50 +31,9 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
       ) : null
     );
 
-  const renderFeaturedCards = (
-    featuredCards: (FeaturedCard | null)[] | null | undefined
-  ) =>
-    (mapFeaturedCards(featuredCards) || [])
-      .filter((card): card is NonNullable<FeaturedCard> => {
-        if (!card) return false;
-        if (!card.image) return false;
-        if (typeof card.image.src !== "string") return false;
-        if (typeof card.image.alt !== "string") return false;
-        if (typeof card.title !== "string") return false;
-        if (typeof card.description !== "string") return false;
-        if (typeof card.ctaText !== "string") return false;
-        if (typeof card.ctaLink !== "string") return false;
-        // Only allow 'vertical' or 'horizontal' or undefined for layout
-        if (
-          card.layout !== undefined &&
-          card.layout !== "vertical" &&
-          card.layout !== "horizontal"
-        )
-          return false;
-        return true;
-      })
-      .map((card, idx) => (
-        <FeaturedContentCard
-          key={idx}
-          title={card.title}
-          description={card.description}
-          ctaText={card.ctaText}
-          ctaLink={card.ctaLink}
-          layout={
-            card.layout === "vertical" || card.layout === "horizontal"
-              ? card.layout
-              : undefined
-          }
-          image={{
-            src: card.image?.src || "",
-            alt: card.image?.alt || "",
-          }}
-        />
-      ));
-
   return (
     <nav
-      className="mx-auto flex items-center md:px-10 lg:p-2 lg:px-16 text-[var(--color-text)] shadow-md lg:rounded-2xl"
+      className="mx-auto flex items-center md:px-10 lg:p-2 lg:px-16 text-[var(--color-text)] shadow-md lg:rounded-xl"
       aria-label="Global"
     >
       <div className="hidden lg:flex w-full items-center justify-between">
@@ -110,12 +66,6 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                           <div className="flex flex-col gap-2 flex-1">
                             {renderSubItems(item.subItems)}
                           </div>
-                          {item.featuredCards &&
-                            item.featuredCards.length > 0 && (
-                              <div className="flex flex-col gap-2 min-w-[240px] pl-4 border-l border-[var(--color-accent-hover)]">
-                                {renderFeaturedCards(item.featuredCards)}
-                              </div>
-                            )}
                         </div>
                       </PopoverPanel>
                     </>

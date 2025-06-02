@@ -47,6 +47,8 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
     blockSubtitle,
   } = data;
 
+  console.log("slides", slides);
+
   const isTablet = useMediaQuery("(min-width: 768px)");
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -58,12 +60,12 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
 
   const emblaOptions: EmblaOptionsType = {
     loop: loopOption,
-    align: "start", // Changed from "center" to "start"
-    slidesToScroll: 1,
-    dragFree: false,
+    align: "center",
+    slidesToScroll: "auto",
+    dragFree: true,
     containScroll: "trimSnaps",
     skipSnaps: false,
-    inViewThreshold: 0.8,
+    inViewThreshold: 0.7,
   };
 
   // --- Autoplay plugin setup ---
@@ -135,11 +137,11 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   }
 
   return (
-    <div className={`relative py-12 sm:py-16 bg-bg ${className}`}>
+    <div className={`relative py-12 sm:py-16 bg-secondary-hover ${className}`}>
       {(blockTitle || blockSubtitle) && (
         <div className="text-center mb-10 max-w-3xl mx-auto px-4">
           {blockTitle && (
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
               {blockTitle}
             </h2>
           )}
@@ -149,25 +151,13 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
         </div>
       )}
 
-      <div
-        className={`relative ${
-          !isDesktop && !isTablet
-            ? "w-screen max-w-none px-0"
-            : "mx-auto px-4 sm:px-6 lg:px-8"
-        }`}
-      >
+      <div className="relative mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div
-          className={`embla__viewport overflow-hidden ${
-            !isDesktop && !isTablet ? "w-screen max-w-none px-0" : "w-full"
-          }`}
+          className="embla__viewport overflow-hidden w-full"
           ref={emblaRef}
           key={`${isTablet}-${isDesktop}`}
         >
-          <div
-            className={`embla__container flex gap-4 ${
-              isDesktop || isTablet ? "justify-center" : "justify-start"
-            } w-auto`}
-          >
+          <div className="embla__container flex w-auto pl-4 md:pl-8 py-1">
             {slides.map((slide, idx) => {
               if (!slide) return null;
 
@@ -182,61 +172,66 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
               let flexBasis;
               let slideMaxWidth;
               if (isDesktop) {
-                flexBasis = "19%";
-                slideMaxWidth = flexBasis;
+                flexBasis = "280px";
+                slideMaxWidth = "320px";
               } else if (isTablet) {
-                flexBasis = "26%";
-                slideMaxWidth = flexBasis;
+                flexBasis = "240px";
+                slideMaxWidth = "280px";
               } else {
-                flexBasis = "90vw";
-                slideMaxWidth = undefined; // Allow overflow on mobile
+                flexBasis = "85vw";
+                slideMaxWidth = "85vw"; // Consistent sizing on mobile
               }
 
               return (
                 <div
                   key={idx}
-                  className={`embla__slide flex flex-col p-3 justify-end rounded-xl shadow-lg overflow-hidden min-h-[220px] sm:min-h-[240px] md:min-h-[260px] lg:min-h-[280px] ${bgColor} transition-all duration-300 hover:shadow-2xl`}
+                  className="embla__slide mr-4 md:mr-6 flex-shrink-0 relative"
                   style={{
                     flex: `0 0 ${flexBasis}`,
-                    ...(slideMaxWidth ? { maxWidth: slideMaxWidth } : {}),
+                    maxWidth: slideMaxWidth,
                   }}
                 >
-                  <div className="w-full aspect-[4/3] flex items-end justify-center relative p-2 pb-0">
-                    {slide.src && (
-                      <Image
-                        src={normalizeSrc(slide.src)}
-                        alt={slide.alt || `${slide.clientName || "Client"}`}
-                        fill
-                        className="object-cover object-top rounded-lg"
-                        unoptimized={slide.src.startsWith("http")}
-                        sizes={
-                          isDesktop
-                            ? "(min-width: 1024px) 25vw"
-                            : isTablet
-                            ? "(min-width: 768px) 33vw"
-                            : "100vw"
-                        }
-                        style={{ inset: 0 }} // Remove width/height when using fill
-                      />
-                    )}
-                  </div>
-                  <div className="flex flex-col flex-1 p-5 text-text bg-opacity-90 relative">
-                    {slide.testimonialText && (
-                      <p className="mb-4 text-sm font-medium leading-relaxed text-center">
-                        “{slide.testimonialText}”
-                      </p>
-                    )}
-                    {slide.clientName && (
-                      <div className="mt-auto text-left">
-                        <div className="font-bold text-base inline-block">
-                          {slide.clientName}
+                  <div
+                    className={`h-full flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ${bgColor}`}
+                  >
+                    <div className="w-full aspect-[3/2] relative">
+                      {slide.src && (
+                        <Image
+                          src={normalizeSrc(slide.src)}
+                          alt={slide.alt || `${slide.clientName || "Client"}`}
+                          fill
+                          className="object-cover object-center"
+                          unoptimized={slide.src.startsWith("http")}
+                          sizes={
+                            isDesktop ? "320px" : isTablet ? "280px" : "85vw"
+                          }
+                          style={{ inset: 0 }}
+                        />
+                      )}
+                      {slide.clientType && (
+                        <div className="absolute bottom-2 right-2 bg-primary text-bg px-2 py-1 rounded text-xs font-medium shadow-md">
+                          {slide.clientType}
                         </div>
-                        <div className="mt-2 flex justify-start">
-                          <StarRating rating={5} />
+                      )}
+                    </div>
+                    <div className="flex flex-col flex-1 p-5 text-text relative bg-bg bg-opacity-95">
+                      {slide.testimonialText && (
+                        <p className="mb-4 text-sm font-medium leading-relaxed text-center">
+                          “{slide.testimonialText}”
+                        </p>
+                      )}
+                      {slide.clientName && (
+                        <div className="mt-auto text-left">
+                          <div className="font-bold text-base inline-block">
+                            {slide.clientName}
+                          </div>
+                          <div className="mt-2 flex justify-start">
+                            <StarRating rating={5} />
+                          </div>
+                          <div className="h-1 w-20 mt-1 rounded bg-secondary-hover" />
                         </div>
-                        <div className="h-1 w-20 mt-1 rounded bg-bg" />
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               );
