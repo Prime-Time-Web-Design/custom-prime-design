@@ -2,6 +2,7 @@ import Image from "next/image";
 import { PageBlocksHero } from "../../../tina/__generated__/types";
 import { Section } from "../layout/Section";
 import { heroImagePlaceholder } from "@/lib/preload-utils";
+import { useEffect, useState } from "react";
 
 interface HeroBlockProps {
   data: PageBlocksHero;
@@ -9,11 +10,17 @@ interface HeroBlockProps {
 
 export const HeroBlock = ({ data }: HeroBlockProps) => {
   const { heading, subheading, buttonText, buttonLink, src } = data;
+  const [isDownloadLink, setIsDownloadLink] = useState(false);
+  useEffect(() => {
+    if (buttonLink?.endsWith(".pdf")) {
+      setIsDownloadLink(true);
+    }
+  }, [buttonLink]);
 
   return (
     <Section
       background="bg-bg"
-      className="py-20 md:py-32 relative overflow-hidden"
+      className="py-16 md:py-20 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
@@ -30,6 +37,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a
                 href={buttonLink ?? "#"}
+                download={isDownloadLink}
                 className="px-8 py-3 rounded-xl bg-primary hover:bg-primary-hover text-[var(--color-deep-slate)] font-medium transition-colors"
               >
                 {buttonText}
