@@ -13,13 +13,17 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
     (item): item is NonNullable<typeof item> => !!item && !!item.label
   );
 
-  const renderSubItems = (subItems: (SubItem | null)[] | null | undefined) =>
+  const renderSubItems = (
+    subItems: (SubItem | null)[] | null | undefined,
+    close: () => void
+  ) =>
     (subItems ?? []).filter(Boolean).map((subitem) =>
       subitem && subitem.label && subitem.href ? (
         <Link
           key={subitem.label}
           href={subitem.href}
           className="block text-base font-semibold text-[var(--color-text)] hover:text-[var(--color-primary)]"
+          onClick={() => close()}
         >
           <Card
             title={subitem.label}
@@ -49,7 +53,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
             item.subItems?.length || item.featuredCards?.length ? (
               <div key={item.label}>
                 <Popover className="relative">
-                  {({ open }) => (
+                  {({ open, close }) => (
                     <>
                       <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none">
                         <div className="flex items-center gap-2">
@@ -64,7 +68,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                       <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl focus:outline-none">
                         <div className="p-4 flex flex-row gap-x-4 relative">
                           <div className="flex flex-col gap-2 flex-1">
-                            {renderSubItems(item.subItems)}
+                            {renderSubItems(item.subItems, close)}
                           </div>
                         </div>
                       </PopoverPanel>
