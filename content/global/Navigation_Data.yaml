@@ -48,19 +48,19 @@ navigation:
           variant: small
           description: Personalized one-on-one therapy tailored to your unique needs.
         - label: Virtual Therapy
-          href: /about/virtual-therapy
+          href: /virtual-therapy
           icon: Monitor
           variant: small
           description: >-
             Convenient, secure online therapy sessions from the comfort of your
             home.
         - label: Organizations & Groups
-          href: /about/organization-group-therapy
+          href: /group-therapy-organizational-wellness
           icon: Users
           variant: small
           description: Specialized therapy solutions for organizations and group settings.
         - label: Couples Therapy
-          href: /services/couples-therapy
+          href: /couples-therapy
           icon: Heart
           variant: small
           description: Build stronger relationships with expert guidance and support.

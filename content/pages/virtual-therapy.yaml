@@ -1,0 +1,13 @@
+title: Virtual Therapy
+description: 'Therapy On Your Terms: Virtual Sessions'
+template: service
+subtitle: 'Therapy On Your Terms: Virtual Sessions'
+blocks:
+  - heading: 'Therapy On Your Terms: Virtual Sessions'
+    subheading: >-
+      Access professional mental health support from the comfort and privacy of
+      your own space, wherever you are.
+    buttonText: Explore Virtual Therapy
+    buttonLink: /book-appointment
+    src: /optimized/roger-martin-vixgG_H3CaA-unsplash.webp
+    _template: hero

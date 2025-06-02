@@ -1,0 +1,13 @@
+title: Couples Therapy
+description: Rebuilding & Connecting
+template: service
+subtitle: Rebuilding & Connecting
+blocks:
+  - heading: 'Nurture Your Relationship: Couples Therapy'
+    subheading: >-
+      Strengthen communication, resolve conflicts, and deepen intimacy with
+      guidance tailored for you and your partner.
+    buttonText: Book a session
+    buttonLink: /book-appointment
+    src: /optimized/hero.webp
+    _template: hero

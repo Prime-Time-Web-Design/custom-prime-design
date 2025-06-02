@@ -1,0 +1,15 @@
+title: Group Therapy & Organizational Wellness
+description: >-
+  Foster connection, build coping skills, and enhance well-being through shared
+  experiences in a supportive group setting.
+template: service
+subtitle: 'Foster growth and connection within your group '
+blocks:
+  - heading: Group Therapy & Organizational Wellness
+    subheading: >-
+      Foster connection, build coping skills, and enhance well-being through
+      shared experiences in a supportive group setting.
+    buttonText: Discover Group Programs
+    buttonLink: /group-programs
+    src: /optimized/featuredCardImage.webp
+    _template: hero
