@@ -43,7 +43,7 @@ navigation:
       href: /services
       subItems:
         - label: Individual Therapy
-          href: /services/individual-therapy
+          href: /individual-therapy
           icon: Heart
           variant: small
           description: Personalized one-on-one therapy tailored to your unique needs.
