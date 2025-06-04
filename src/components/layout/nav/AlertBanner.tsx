@@ -6,20 +6,17 @@ import { GlobalAlertBanner } from "../../../../tina/__generated__/types";
 
 interface AlertBannerProps {
   alertBanner: GlobalAlertBanner;
-  isScrolled: boolean;
 }
 
 const AlertBanner: React.FC<AlertBannerProps> = (props) => {
   const [isVisible, setIsVisible] = React.useState(true);
   if (!isVisible) return null;
 
-  const { alertBanner, isScrolled } = props;
+  const { alertBanner } = props;
 
   return (
     <div
-      className={`relative bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] py-2 px-4 text-white transition-all duration-300 ${
-        isScrolled ? "lg:rounded-none" : "lg:rounded-t-xl"
-      } shadow-sm`}
+      className={`relative bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] py-2 px-4 text-white transition-all duration-300 shadow-sm`}
     >
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-screen-xl mx-auto px-2 relative">
         <span className="font-medium text-bg-contrast text-center sm:mb-0 text-sm ">

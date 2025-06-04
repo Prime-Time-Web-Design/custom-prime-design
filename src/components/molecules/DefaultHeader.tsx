@@ -4,7 +4,7 @@ export default function DefaultHeader() {
   return (
     <div className="relative bg-primary overflow-hidden">
       {/* Decorative badge floating at top left, with padding */}
-      <div className="absolute left-3 top-3 pl-6 pt-6 z-10">
+      <div className="absolute left-1 top-1  sm:left-3 sm:top-3 sm:pl-6 pl-3 pt-3 sm:pt-6 z-10">
         <span className="inline-block px-3 py-2 rounded-full bg-tertiary text-[var(--color-deep-slate)] text-sm font-medium shadow-lg tracking-wide">
           Website Optimization Guide
         </span>

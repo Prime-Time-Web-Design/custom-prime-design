@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import { Menu } from "lucide-react";
 import MainNav from "./MainNav";
 import { useLayout } from "../layout-context";
@@ -7,54 +7,28 @@ import AlertBanner from "./AlertBanner";
 import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
-import mobileLogo from "../../../../public/mobileLogo.svg";
+import mobileLogo from "../../../../public/logo.svg";
 import HamburgerMenu from "@/components/molecules/HamburgerMenu";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { globalSettings } = useLayout();
   // Updated for new structure:
   const navigation = globalSettings?.navigation;
   const alertBanner = globalSettings?.alertBanner;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    new AbortController();
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    window.addEventListener("scroll", handleScroll, { signal });
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
   if (!navigation) return null;
 
   return (
     <header
-      className={`sticky top-0 z-50 shadow-md bg-[var(--color-bg)] transition-all duration-300 ${
-        isScrolled
-          ? "lg:rounded-none lg:rounded-b-xl lg:mt-0"
-          : "lg:rounded-xl lg:mt-2.5"
-      } lg:mx-4`}
+      className={`sticky top-0 z-50 shadow-md bg-[var(--color-bg)] transition-all duration-300`}
     >
-      {alertBanner && (
-        <AlertBanner alertBanner={alertBanner} isScrolled={isScrolled} />
-      )}
+      {alertBanner && <AlertBanner alertBanner={alertBanner} />}
       <div className="flex items-center justify-between px-4 py-2 lg:hidden">
         <div className="flex-shrink-0">
           <span className="text-2xl font-semibold text-[var(--color-text)] ">
             <Link href="/">
-              <Image src={mobileLogo} width={120} height={40} alt="Logo" />
+              <Image src={mobileLogo} width={140} height={60} alt="Logo" />
             </Link>
           </span>
         </div>

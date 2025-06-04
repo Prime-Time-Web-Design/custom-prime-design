@@ -1,12 +1,24 @@
 "use client";
-import React, { useState, ReactNode, useEffect } from "react";
+import React, { useState, ReactNode, useEffect, createContext } from "react";
 import "../../styles/hamburger.css"; // Import the CSS file
+
+// Create a context for the menu functions
+export const MenuContext = createContext<{
+  closeMenu: () => void;
+}>({
+  closeMenu: () => {}, // Default no-op function
+});
 
 interface HamburgerMenuProps {
   children: ReactNode;
+  // Optional callback to receive state updates from the parent
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
-function HamburgerMenu({ children }: HamburgerMenuProps): JSX.Element {
+function HamburgerMenu({
+  children,
+  onOpenChange,
+}: HamburgerMenuProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
 
@@ -23,28 +35,43 @@ function HamburgerMenu({ children }: HamburgerMenuProps): JSX.Element {
     return () => window.removeEventListener("resize", updateHeaderHeight);
   }, []);
 
+  // Update the state and call the callback if provided
   const handleToggle = (): void => {
-    setIsOpen(!isOpen);
+    const newState = !isOpen;
+    setIsOpen(newState);
+    if (onOpenChange) {
+      onOpenChange(newState);
+    }
+  };
+
+  // Create the close menu function
+  const closeMenu = () => {
+    setIsOpen(false);
+    if (onOpenChange) {
+      onOpenChange(false);
+    }
   };
 
   return (
-    <div className="relative">
-      <label className="hamburger-menu cursor-pointer">
-        <input type="checkbox" checked={isOpen} onChange={handleToggle} />
-      </label>
-      <aside
-        className={`sidebar${isOpen ? " open" : ""}`}
-        style={{
-          top: headerHeight,
-          height: `calc(100vh - ${headerHeight}px)`,
-          background: "var(--color-bg)", // Ensure solid background
-        }}
-      >
-        <nav className="w-full h-full overflow-y-auto flex flex-col justify-start items-stretch px-6 py-8">
-          {children}
-        </nav>
-      </aside>
-    </div>
+    <MenuContext.Provider value={{ closeMenu }}>
+      <div className="relative">
+        <label className="hamburger-menu cursor-pointer">
+          <input type="checkbox" checked={isOpen} onChange={handleToggle} />
+        </label>
+        <aside
+          className={`sidebar${isOpen ? " open" : ""}`}
+          style={{
+            top: headerHeight,
+            height: `calc(100vh - ${headerHeight}px)`,
+            background: "var(--color-bg)", // Ensure solid background
+          }}
+        >
+          <nav className="w-full h-full overflow-y-auto flex flex-col justify-start items-stretch px-6 py-8">
+            {children}
+          </nav>
+        </aside>
+      </div>
+    </MenuContext.Provider>
   );
 }
 

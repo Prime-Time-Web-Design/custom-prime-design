@@ -1,8 +1,9 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { MainNavProps } from "./header.types";
+import { MenuContext } from "../../molecules/HamburgerMenu";
 
 interface MobileMenuProps extends MainNavProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   const navItems = navigation?.mainNav || [];
   const detailsRefs = useRef<{ [key: string]: HTMLDetailsElement | null }>({});
+  const { closeMenu } = useContext(MenuContext);
 
   const handleDetailsClick = (clickedLabel: string) => {
     // Close all other details elements when one is opened
@@ -51,7 +53,19 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     }
                   }}
                   className="group"
-                  onClick={() => handleDetailsClick(item.label)}
+                  onClick={(e) => {
+                    handleDetailsClick(item.label);
+
+                    // Check if the click was directly on an <a> tag (link) or its descendant
+                    const target = e.target as HTMLElement;
+                    if (
+                      target.tagName.toLowerCase() === "a" ||
+                      target.closest("a")
+                    ) {
+                      closeMenu();
+                      onClose();
+                    }
+                  }}
                 >
                   <summary className="list-none flex cursor-pointer items-center rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
                     {item?.label}
@@ -64,7 +78,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                       <Link
                         key={subItem?.label}
                         href={subItem?.href ?? "#"}
-                        onClick={onClose}
+                        onClick={() => {
+                          closeMenu(); // Close the hamburger menu using context
+                          onClose(); // Also call the original onClose for compatibility
+                        }}
                         className="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                       >
                         {subItem?.label}
@@ -75,7 +92,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
               ) : (
                 <Link
                   href={item?.href ?? "#"}
-                  onClick={onClose}
+                  onClick={() => {
+                    closeMenu(); // Close the hamburger menu using context
+                    onClose(); // Also call the original onClose for compatibility
+                  }}
                   className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
                 >
                   {item?.label}

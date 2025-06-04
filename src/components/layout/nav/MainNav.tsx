@@ -37,7 +37,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
 
   return (
     <nav
-      className="mx-auto flex items-center md:px-10 lg:p-2 lg:px-16 text-[var(--color-text)] shadow-md lg:rounded-xl"
+      className="mx-auto flex items-center md:px-10 lg:p-2 lg:px-16 text-[var(--color-text)] shadow-md"
       aria-label="Global"
     >
       <div className="hidden lg:flex w-full items-center justify-between">

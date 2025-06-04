@@ -26,7 +26,7 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto space-y-4 sm:space-y-0">
         {features?.map((f, idx) => {
           const hasValidImage =
             f?.src && typeof f.src === "string" && f.src.trim() !== "";
