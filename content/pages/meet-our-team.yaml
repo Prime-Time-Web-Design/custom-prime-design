@@ -1,0 +1,51 @@
+title: Meet Our Team
+description: 'Our PTWD therapy team is equipped and eager to help. '
+template: people
+subtitle: Find Your Strength. Find Your Therapist.
+peopleType: practitioners
+people:
+  - id: fab5bfcb-91a3-4819-b4e9-982c3332e3b3
+    name: Max Jones
+    title: LMHC
+    bio: >-
+      Max specializes in guiding individuals from the grip of trauma and anxiety
+      toward a place of empowerment. Using evidence-based methods like EMDR and
+      Cognitive Behavioral Therapy (CBT), he helps clients process painful
+      memories and build tangible skills for managing stress. 
+    image:
+      src: /optimized/mina-rad-AEVUFpDGxZM-unsplash.webp
+      alt: Max Jones
+    contact:
+      email: maxjones@fakeemail.com
+  - id: ec75fc2e-c2ec-4586-b6df-4e945faf2f64
+    name: Jenna Mitchell
+    title: 'Lead Therapist, LPC'
+    bio: >-
+      Jenna is dedicated to helping couples and individuals transform their
+      relationships. For those feeling distant or trapped in cycles of conflict,
+      she utilizes the Gottman Method and Emotionally Focused Therapy (EFT) to
+      foster deep understanding and rebuild trust. Her approach is
+      collaborative, empowering partners to improve communication, navigate
+      challenges, and rediscover intimacy.
+    image:
+      src: /optimized/linkedin-sales-solutions-NpyF7rjqmq4-unsplash.webp
+      alt: Jenna Mitchell
+    contact:
+      email: jennamitch@fakeemail.com
+      phone: '5163182009'
+  - id: 1a9fa9fc-2f43-4ecd-9cbf-ebcfaf30f149
+    name: Taylor Marks
+    title: LPC
+    bio: >-
+      Taylor works at the intersection of mental health and mindfulness, guiding
+      clients through burnout, stress, and periods of disconnection. He
+      integrates talk therapy with somatic (body-based) awareness to help you
+      move beyond just surviving. Kenji’s philosophy is that true well-being
+      comes from aligning your actions with your values, helping you quiet the
+      noise and connect with your inner compass.
+    image:
+      src: /optimized/christina-wocintechchat-com-50TkCaP8M3A-unsplash.webp
+      alt: Taylor Marks
+    contact:
+      email: taymarks@fakeemail.com
+      phone: '5467384556'

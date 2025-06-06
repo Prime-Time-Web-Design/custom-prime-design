@@ -235,6 +235,36 @@ type GlobalConnection implements Connection {
   edges: [GlobalConnectionEdges]
 }
 
+type PagePeopleImage {
+  src: String
+  alt: String
+}
+
+type PagePeopleContact {
+  email: String
+  phone: String
+  website: String
+}
+
+type PagePeopleSocial {
+  linkedin: String
+  twitter: String
+  instagram: String
+  facebook: String
+}
+
+type PagePeople {
+  id: String!
+  name: String!
+  title: String
+  bio: String
+  image: PagePeopleImage
+  contact: PagePeopleContact
+  social: PagePeopleSocial
+  specialties: [String]
+  location: String
+}
+
 type PageHeaderBlocksHero {
   heading: String
   subheading: String
@@ -313,11 +343,50 @@ type Page implements Node & Document {
   description: String!
   template: String!
   subtitle: String
+  peopleType: String
+  people: [PagePeople]
   headerBlocks: [PageHeaderBlocks]
   blocks: [PageBlocks]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input PagePeopleImageFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input PagePeopleContactFilter {
+  email: StringFilter
+  phone: StringFilter
+  website: StringFilter
+}
+
+input PagePeopleSocialFilter {
+  linkedin: StringFilter
+  twitter: StringFilter
+  instagram: StringFilter
+  facebook: StringFilter
+}
+
+input PagePeopleFilter {
+  id: StringFilter
+  name: StringFilter
+  title: StringFilter
+  bio: StringFilter
+  image: PagePeopleImageFilter
+  contact: PagePeopleContactFilter
+  social: PagePeopleSocialFilter
+  specialties: StringFilter
+  location: StringFilter
 }
 
 input PageHeaderBlocksHeroFilter {
@@ -340,13 +409,6 @@ input RichTextFilter {
 input BooleanFilter {
   eq: Boolean
   exists: Boolean
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input PageBlocksCtaBlockFilter {
@@ -434,6 +496,8 @@ input PageFilter {
   description: StringFilter
   template: StringFilter
   subtitle: StringFilter
+  peopleType: StringFilter
+  people: PagePeopleFilter
   headerBlocks: PageHeaderBlocksFilter
   blocks: PageBlocksFilter
 }
@@ -534,6 +598,36 @@ input GlobalMutation {
   navigation: GlobalNavigationMutation
 }
 
+input PagePeopleImageMutation {
+  src: String
+  alt: String
+}
+
+input PagePeopleContactMutation {
+  email: String
+  phone: String
+  website: String
+}
+
+input PagePeopleSocialMutation {
+  linkedin: String
+  twitter: String
+  instagram: String
+  facebook: String
+}
+
+input PagePeopleMutation {
+  id: String
+  name: String
+  title: String
+  bio: String
+  image: PagePeopleImageMutation
+  contact: PagePeopleContactMutation
+  social: PagePeopleSocialMutation
+  specialties: [String]
+  location: String
+}
+
 input PageHeaderBlocksHeroMutation {
   heading: String
   subheading: String
@@ -620,6 +714,8 @@ input PageMutation {
   description: String
   template: String
   subtitle: String
+  peopleType: String
+  people: [PagePeopleMutation]
   headerBlocks: [PageHeaderBlocksMutation]
   blocks: [PageBlocksMutation]
 }

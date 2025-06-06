@@ -31,6 +31,7 @@ export const pageSchema = defineSchema({
             { label: "Landing Page", value: "landing" },
             { label: "Service Page", value: "service" },
             { label: "Contact Page", value: "contact" },
+            { label: "People Listing", value: "people" },
           ],
           description: "Select the template to use for this page",
           required: true,
@@ -39,6 +40,134 @@ export const pageSchema = defineSchema({
           name: "subtitle",
           label: "Subtitle",
           type: "string",
+        },
+        {
+          name: "peopleType",
+          label: "People Type",
+          type: "string",
+          options: [
+            { label: "Team Members", value: "team" },
+            { label: "Clients", value: "clients" },
+            { label: "Practitioners", value: "practitioners" },
+          ],
+          description: "The type of people to display on this page",
+          ui: {
+            // @ts-expect-error - Tina CMS supports this but TypeScript doesn't recognize it
+            hidden: ({ values }) => values.template !== "people",
+          },
+        },
+        {
+          name: "people",
+          label: "People",
+          type: "object",
+          list: true,
+          ui: {
+            itemProps: (item) => ({ label: item.name || "Person" }),
+            // @ts-expect-error - Tina CMS supports this but TypeScript doesn't recognize it
+            hidden: ({ values }) => values.template !== "people",
+          },
+          fields: [
+            {
+              name: "id",
+              label: "ID",
+              type: "string",
+              required: true,
+            },
+            {
+              name: "name",
+              label: "Name",
+              type: "string",
+              required: true,
+            },
+            {
+              name: "title",
+              label: "Title / Position",
+              type: "string",
+            },
+            {
+              name: "bio",
+              label: "Biography",
+              type: "string",
+              ui: { component: "textarea" },
+            },
+            {
+              name: "image",
+              label: "Image",
+              type: "object",
+              fields: [
+                {
+                  name: "src",
+                  label: "Image Source",
+                  type: "image",
+                },
+                {
+                  name: "alt",
+                  label: "Alt Text",
+                  type: "string",
+                },
+              ],
+            },
+            {
+              name: "contact",
+              label: "Contact Information",
+              type: "object",
+              fields: [
+                {
+                  name: "email",
+                  label: "Email",
+                  type: "string",
+                },
+                {
+                  name: "phone",
+                  label: "Phone",
+                  type: "string",
+                },
+                {
+                  name: "website",
+                  label: "Website",
+                  type: "string",
+                },
+              ],
+            },
+            {
+              name: "social",
+              label: "Social Media",
+              type: "object",
+              fields: [
+                {
+                  name: "linkedin",
+                  label: "LinkedIn URL",
+                  type: "string",
+                },
+                {
+                  name: "twitter",
+                  label: "Twitter URL",
+                  type: "string",
+                },
+                {
+                  name: "instagram",
+                  label: "Instagram URL",
+                  type: "string",
+                },
+                {
+                  name: "facebook",
+                  label: "Facebook URL",
+                  type: "string",
+                },
+              ],
+            },
+            {
+              name: "specialties",
+              label: "Specialties",
+              type: "string",
+              list: true,
+            },
+            {
+              name: "location",
+              label: "Location",
+              type: "string",
+            },
+          ],
         },
         {
           name: "headerBlocks",

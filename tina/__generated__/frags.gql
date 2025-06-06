@@ -58,6 +58,34 @@ fragment PageParts on Page {
   description
   template
   subtitle
+  peopleType
+  people {
+    __typename
+    id
+    name
+    title
+    bio
+    image {
+      __typename
+      src
+      alt
+    }
+    contact {
+      __typename
+      email
+      phone
+      website
+    }
+    social {
+      __typename
+      linkedin
+      twitter
+      instagram
+      facebook
+    }
+    specialties
+    location
+  }
   headerBlocks {
     __typename
     ... on PageHeaderBlocksHero {
