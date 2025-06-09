@@ -1,6 +1,7 @@
 "use client";
 import {
   PageBlocks,
+  PageBlocksBannerBlock,
   PageBlocksCarouselBlock,
   PageBlocksCtaBlock,
   PageBlocksHero,
@@ -16,6 +17,7 @@ import { CarouselBlock } from "./CarouselBlock";
 import RichTextBlock from "./RichTextBlock";
 import { CTABlock } from "./CTABlock";
 import ServiceListingBlock from "./ServiceListingBlock";
+import BannerBlock from "./BannerBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
@@ -23,7 +25,8 @@ type PageBlockMap = {
   PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
   PageBlocksCtaBlock: PageBlocksCtaBlock;
-  PageBlocksServiceListingBlock: PageBlocksServiceListingBlock; // Using any as a placeholder until the type is generated
+  PageBlocksServiceListingBlock: PageBlocksServiceListingBlock;
+  PageBlocksBannerBlock: PageBlocksBannerBlock;
 };
 
 type BlockComponentMap = {
@@ -38,6 +41,7 @@ const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksCarouselBlock: CarouselBlock,
   PageBlocksCtaBlock: CTABlock,
   PageBlocksServiceListingBlock: ServiceListingBlock,
+  PageBlocksBannerBlock: BannerBlock,
 };
 
 interface BlocksProps {

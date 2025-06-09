@@ -720,6 +720,77 @@ var pageSchema = defineSchema2({
                   }
                 }
               ]
+            },
+            {
+              name: "bannerBlock",
+              label: "Banner Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "title",
+                  label: "Title",
+                  description: "Main title for the banner section"
+                },
+                {
+                  type: "string",
+                  name: "subtitle",
+                  label: "Subtitle",
+                  description: "Optional subtitle text for the banner",
+                  required: false
+                },
+                {
+                  type: "object",
+                  list: true,
+                  name: "benefits",
+                  label: "Benefits",
+                  ui: {
+                    itemProps: (item) => ({ label: item.heading || "Benefit" })
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "icon",
+                      label: "Icon",
+                      required: false,
+                      options: lucideIconNames
+                    },
+                    {
+                      type: "string",
+                      name: "heading",
+                      label: "Benefit Heading",
+                      required: true
+                    },
+                    {
+                      type: "string",
+                      name: "text",
+                      label: "Benefit Text",
+                      required: true,
+                      ui: { component: "textarea" }
+                    },
+                    {
+                      type: "string",
+                      name: "backgroundColor",
+                      label: "Background Color",
+                      description: "Card background color (e.g. #e6f3f1, rgb(x,y,z), or CSS variable)",
+                      required: false
+                    },
+                    {
+                      type: "string",
+                      name: "buttonText",
+                      label: "Button Text",
+                      description: "Optional button text (e.g. 'Learn More')",
+                      required: false
+                    },
+                    {
+                      type: "string",
+                      name: "buttonLink",
+                      label: "Button Link",
+                      description: "URL for the button",
+                      required: false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -336,7 +336,22 @@ type PageBlocksServiceListingBlock {
   backgroundColor: String
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock
+type PageBlocksBannerBlockBenefits {
+  icon: String
+  heading: String!
+  text: String!
+  backgroundColor: String
+  buttonText: String
+  buttonLink: String
+}
+
+type PageBlocksBannerBlock {
+  title: String
+  subtitle: String
+  benefits: [PageBlocksBannerBlockBenefits]
+}
+
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock
 
 type Page implements Node & Document {
   title: String!
@@ -483,12 +498,28 @@ input PageBlocksServiceListingBlockFilter {
   backgroundColor: StringFilter
 }
 
+input PageBlocksBannerBlockBenefitsFilter {
+  icon: StringFilter
+  heading: StringFilter
+  text: StringFilter
+  backgroundColor: StringFilter
+  buttonText: StringFilter
+  buttonLink: StringFilter
+}
+
+input PageBlocksBannerBlockFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  benefits: PageBlocksBannerBlockBenefitsFilter
+}
+
 input PageBlocksFilter {
   ctaBlock: PageBlocksCtaBlockFilter
   hero: PageBlocksHeroFilter
   richTextBlock: PageBlocksRichTextBlockFilter
   carouselBlock: PageBlocksCarouselBlockFilter
   serviceListingBlock: PageBlocksServiceListingBlockFilter
+  bannerBlock: PageBlocksBannerBlockFilter
 }
 
 input PageFilter {
@@ -701,12 +732,28 @@ input PageBlocksServiceListingBlockMutation {
   backgroundColor: String
 }
 
+input PageBlocksBannerBlockBenefitsMutation {
+  icon: String
+  heading: String
+  text: String
+  backgroundColor: String
+  buttonText: String
+  buttonLink: String
+}
+
+input PageBlocksBannerBlockMutation {
+  title: String
+  subtitle: String
+  benefits: [PageBlocksBannerBlockBenefitsMutation]
+}
+
 input PageBlocksMutation {
   ctaBlock: PageBlocksCtaBlockMutation
   hero: PageBlocksHeroMutation
   richTextBlock: PageBlocksRichTextBlockMutation
   carouselBlock: PageBlocksCarouselBlockMutation
   serviceListingBlock: PageBlocksServiceListingBlockMutation
+  bannerBlock: PageBlocksBannerBlockMutation
 }
 
 input PageMutation {

@@ -2,7 +2,7 @@ import { defineSchema } from "tinacms";
 import * as LucideIcons from "lucide-react";
 
 // Get all Lucide icon names
-const lucideIconNames = Object.keys(LucideIcons).filter(
+export const lucideIconNames = Object.keys(LucideIcons).filter(
   (name) => name !== "LucideIcon" && name !== "default"
 );
 

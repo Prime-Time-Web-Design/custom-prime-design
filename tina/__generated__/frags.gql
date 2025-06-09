@@ -151,5 +151,18 @@ fragment PageParts on Page {
       ctaContent
       backgroundColor
     }
+    ... on PageBlocksBannerBlock {
+      title
+      subtitle
+      benefits {
+        __typename
+        icon
+        heading
+        text
+        backgroundColor
+        buttonText
+        buttonLink
+      }
+    }
   }
 }

@@ -10,71 +10,30 @@ blocks:
     buttonLink: /contact
     src: /hero.jpg
     _template: hero
-  - heading: How It Works
-    subheading: Start your journey to healing today
-    features:
-      - src: /undraw_professional-woman-avatar_ivds.svg
-        title: Book an assessment
-        description: >
-          Fill out our form and book in your assessment at a convenient time for
-          you
-      - src: /undraw_avatars_xsfb.svg
-        title: We match you with a therapist
-        description: >
-          After your assessment and service selection, we will match you with
-          the right therapist for your particular needs
-      - src: /undraw_coffee-time_98vi.svg
-        title: Start Healing
-        description: >
-          Once you’ve been matched, you can begin regular therapy sessions for
-          as long as needed
-    _template: richTextBlock
-  - heading: Don’t just aim to survive. Thrive.
-    content: >
-      At PTWD Mental Health, we support you through all of life's fluctuations.
-      Navigate toward wellbeing and self-development with guidance from our
-      empathetic counseling professionals.
-    buttonText: Start Healing Today
-    buttonLink: /quick-start
-    imageLeft: false
-    imageSrc: ''
-    imageAlt: Healing is a Journey
-    backgroundColor: bg-bg
-    _template: ctaBlock
-  - title: 'We have therapists that specialize in:'
-    services:
-      - name: Organizations & Groups
-        slug: /services/group-therapy
-      - name: Anger Management
-        slug: /services/anger-management
-      - name: Children's Therapy
-        slug: /services/child-therapy
-      - name: EMDR Therapy
-        slug: /services/emdr
-      - name: Therapy For Military
-        slug: /services/military-therapy
-      - name: Trauma
-        slug: /services/trauma
-      - name: Stress & Burnout
-        slug: /services/stress
-      - name: Family Therapy
-        slug: /services/family-therapy
-      - name: Depression
-        slug: /services/depression
-      - name: Couples Therapy
-        slug: /services/couples-therapy
-      - name: Anxiety
-        slug: /services/anxiety
-      - name: Individual Therapy
-        slug: /services/individual-therapy
-    ctaText: Find Your Therapist
-    ctaLink: /about/staff
-    ctaContent: >-
-      Don’t see what you’re looking for? We can help with a wide variety of
-      challenges. Find your PTWD location to learn what your local PTWD
-      therapists specialize in and more!
-    backgroundColor: bg-calming-blue-dark
-    _template: serviceListingBlock
+  - title: Benefits of PTWD
+    subtitle: '  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, Charlie Health is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success.'
+    benefits:
+      - icon: DollarSign
+        heading: Affordable Care
+        text: Receive affordable and High Quality Mental Health Care
+        backgroundColor: bg-secondary-hover
+        buttonText: Learn More
+      - icon: Building
+        heading: Customizable Experience
+        text: 'Custom Build your therapeutic experience '
+        backgroundColor: bg-accent
+        buttonText: Learn More
+      - icon: SwitchCamera
+        heading: Easy Therapist Search
+        text: Easy Search to find your best fit Therapist
+        backgroundColor: bg-tertiary-hover
+        buttonText: Learn More
+      - icon: FastForward
+        heading: Quick Booking
+        text: Eliminate Scheduling Hassles with Quick Book
+        backgroundColor: bg-primary-hover
+        buttonText: Learn More
+    _template: bannerBlock
   - blockTitle: 'Finding Your Path: Client Stories'
     blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:
@@ -121,3 +80,68 @@ blocks:
         clientType: Individual Therapy
     options.loop: false
     _template: carouselBlock
+  - heading: How It Works
+    subheading: Start your journey to healing today
+    features:
+      - src: /undraw_professional-woman-avatar_ivds.svg
+        title: Book an assessment
+        description: >
+          Fill out our form and book in your assessment at a convenient time for
+          you
+      - src: /undraw_avatars_xsfb.svg
+        title: We match you with a therapist
+        description: >
+          After your assessment and service selection, we will match you with
+          the right therapist for your particular needs
+      - src: /undraw_coffee-time_98vi.svg
+        title: Start Healing
+        description: >
+          Once you’ve been matched, you can begin regular therapy sessions for
+          as long as needed
+    _template: richTextBlock
+  - title: 'We have therapists that specialize in:'
+    services:
+      - name: Organizations & Groups
+        slug: /services/group-therapy
+      - name: Anger Management
+        slug: /services/anger-management
+      - name: Children's Therapy
+        slug: /services/child-therapy
+      - name: EMDR Therapy
+        slug: /services/emdr
+      - name: Therapy For Military
+        slug: /services/military-therapy
+      - name: Trauma
+        slug: /services/trauma
+      - name: Stress & Burnout
+        slug: /services/stress
+      - name: Family Therapy
+        slug: /services/family-therapy
+      - name: Depression
+        slug: /services/depression
+      - name: Couples Therapy
+        slug: /services/couples-therapy
+      - name: Anxiety
+        slug: /services/anxiety
+      - name: Individual Therapy
+        slug: /services/individual-therapy
+    ctaText: Find Your Therapist
+    ctaLink: /about/staff
+    ctaContent: >-
+      Don’t see what you’re looking for? We can help with a wide variety of
+      challenges. Find your PTWD location to learn what your local PTWD
+      therapists specialize in and more!
+    backgroundColor: bg-calming-blue-dark
+    _template: serviceListingBlock
+  - heading: Don’t just aim to survive. Thrive.
+    content: >
+      At PTWD Mental Health, we support you through all of life's fluctuations.
+      Navigate toward wellbeing and self-development with guidance from our
+      empathetic counseling professionals.
+    buttonText: Start Healing Today
+    buttonLink: /quick-start
+    imageLeft: false
+    imageSrc: ''
+    imageAlt: Healing is a Journey
+    backgroundColor: bg-bg
+    _template: ctaBlock
