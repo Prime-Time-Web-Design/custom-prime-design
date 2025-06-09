@@ -32,7 +32,13 @@ export default function PeopleTemplate({
   const title = data?.title || "Our Team";
   const description =
     data?.description || "Meet the people behind our organization";
-  const peopleType = data?.peopleType || "practitioners"; // Default to practitioners if not specified
+
+  const peopleType =
+    data?.peopleType === "practitioners" ||
+    data?.peopleType === "clients" ||
+    data?.peopleType === "team"
+      ? data.peopleType
+      : "practitioners";
 
   return (
     <div className="people-template">
