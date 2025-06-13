@@ -95,6 +95,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
     mainImage: 0,
     circleTopLeft: 0,
     circleBottomRight: 0,
+    // We'll use mainImage + 1 % length for the right main image, so no need for another state
   });
 
   useEffect(() => {
@@ -184,103 +185,152 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                 />
               </div>
             ) : (
-              /* Multiple images - carousel layout */
-              <div className="relative w-full h-[480px] md:h-[580px] flex items-center justify-center">
-                {/* Healthcare cross layout */}
+              /* Multiple images - grid layout with 4 positions and color blocks */
+              <div className="relative w-full h-[500px] md:h-[600px]">
+                <div className="grid grid-cols-3 grid-rows-3 gap-4 h-full w-full">
+                  {/* Top row with purple block (left), image (center), purple block (right) */}
+                  <div className="bg-[var(--color-soft-light-purple)] rounded-xl shadow-md" />
 
-                {/* Top image */}
-                <div className="absolute top-0 left-[50%] transform -translate-x-1/2 w-[165px] h-[165px] rounded-xl outline-2 outline-tertiary overflow-hidden shadow-md z-20">
-                  <AnimatePresence initial={false}>
-                    {collageImages?.map(
-                      (image, index) =>
-                        index === activeIndexes.circleTopLeft && (
-                          <motion.div
-                            key={`top-${index}`}
-                            className="absolute inset-0"
-                            initial={{ opacity: 0, scale: 1.1 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <Image
-                              src={image?.src ?? ""}
-                              alt={`Hero top image ${index}`}
-                              fill
-                              className="object-cover"
-                              quality={90}
-                              placeholder="blur"
-                              blurDataURL={heroImagePlaceholder}
-                            />
-                          </motion.div>
-                        )
-                    )}
-                  </AnimatePresence>
-                </div>
+                  <div className="relative rounded-xl shadow-md overflow-hidden">
+                    <AnimatePresence initial={false}>
+                      {collageImages?.map(
+                        (image, index) =>
+                          index === activeIndexes.circleTopLeft && (
+                            <motion.div
+                              key={`top-${index}`}
+                              className="absolute inset-0"
+                              initial={{ opacity: 0, scale: 1.1 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.9 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              <Image
+                                src={image?.src ?? ""}
+                                alt={`Hero top image ${index}`}
+                                fill
+                                className="object-cover"
+                                quality={90}
+                                placeholder="blur"
+                                blurDataURL={heroImagePlaceholder}
+                              />
+                            </motion.div>
+                          )
+                      )}
+                    </AnimatePresence>
+                  </div>
 
-                {/* Main image (center) */}
-                <div className="absolute top-[50%] left-[50%] outline-2 outline-tertiary transform -translate-x-1/2 -translate-y-1/2 w-[70%] h-[230px] rounded-xl overflow-hidden shadow-lg z-30">
-                  <AnimatePresence initial={false}>
-                    {collageImages?.map(
-                      (image, index) =>
-                        index === activeIndexes.mainImage && (
-                          <motion.div
-                            key={`main-${index}`}
-                            className="absolute inset-0"
-                            initial={{ opacity: 0, scale: 1.05 }}
-                            animate={{
-                              opacity: 1,
-                              scale: 1,
-                              transition: { duration: 0.7 },
-                            }}
-                            exit={{
-                              opacity: 0,
-                              scale: 0.95,
-                              transition: { duration: 0.5 },
-                            }}
-                          >
-                            <Image
-                              src={image?.src ?? ""}
-                              alt={`Hero main image ${index}`}
-                              fill
-                              className="object-cover"
-                              quality={90}
-                              priority={true}
-                              placeholder="blur"
-                              blurDataURL={heroImagePlaceholder}
-                            />
-                          </motion.div>
-                        )
-                    )}
-                  </AnimatePresence>
-                </div>
+                  <div className="bg-bg-contrast rounded-xl shadow-md" />
 
-                {/* Bottom image */}
-                <div className="absolute bottom-0 left-[50%] outline-2 outline-tertiary transform -translate-x-1/2 w-[165px] h-[165px] rounded-xl overflow-hidden shadow-md z-20">
-                  <AnimatePresence initial={false}>
-                    {collageImages?.map(
-                      (image, index) =>
-                        index === activeIndexes.circleBottomRight && (
-                          <motion.div
-                            key={`bottom-${index}`}
-                            className="absolute inset-0"
-                            initial={{ opacity: 0, scale: 1.1 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <Image
-                              src={image?.src ?? ""}
-                              alt={`Hero bottom image ${index}`}
-                              fill
-                              className="object-cover"
-                              quality={90}
-                              placeholder="blur"
-                              blurDataURL={heroImagePlaceholder}
-                            />
-                          </motion.div>
-                        )
-                    )}
-                  </AnimatePresence>
+                  {/* Middle row with two main images side by side */}
+                  <div className="col-span-3 grid grid-cols-2 gap-4">
+                    {/* Left main image */}
+                    <div className="relative rounded-xl shadow-md overflow-hidden">
+                      <AnimatePresence initial={false}>
+                        {collageImages?.map(
+                          (image, index) =>
+                            index === activeIndexes.mainImage && (
+                              <motion.div
+                                key={`main-left-${index}`}
+                                className="absolute inset-0"
+                                initial={{ opacity: 0, scale: 1.05 }}
+                                animate={{
+                                  opacity: 1,
+                                  scale: 1,
+                                  transition: { duration: 0.7 },
+                                }}
+                                exit={{
+                                  opacity: 0,
+                                  scale: 0.95,
+                                  transition: { duration: 0.5 },
+                                }}
+                              >
+                                <Image
+                                  src={image?.src ?? ""}
+                                  alt={`Hero main left image ${index}`}
+                                  fill
+                                  className="object-cover"
+                                  quality={90}
+                                  priority={true}
+                                  placeholder="blur"
+                                  blurDataURL={heroImagePlaceholder}
+                                />
+                              </motion.div>
+                            )
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Right main image */}
+                    <div className="relative rounded-xl shadow-md overflow-hidden">
+                      <AnimatePresence initial={false}>
+                        {collageImages?.map(
+                          (image, index) =>
+                            index ===
+                              (activeIndexes.mainImage + 1) %
+                                collageImages.length && (
+                              <motion.div
+                                key={`main-right-${index}`}
+                                className="absolute inset-0"
+                                initial={{ opacity: 0, scale: 1.05 }}
+                                animate={{
+                                  opacity: 1,
+                                  scale: 1,
+                                  transition: { duration: 0.7 },
+                                }}
+                                exit={{
+                                  opacity: 0,
+                                  scale: 0.95,
+                                  transition: { duration: 0.5 },
+                                }}
+                              >
+                                <Image
+                                  src={image?.src ?? ""}
+                                  alt={`Hero main right image ${index}`}
+                                  fill
+                                  className="object-cover"
+                                  quality={90}
+                                  placeholder="blur"
+                                  blurDataURL={heroImagePlaceholder}
+                                />
+                              </motion.div>
+                            )
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+
+                  {/* Bottom row with purple block (left), image (center), purple block (right) */}
+                  <div className="bg-bg-contrast rounded-xl shadow-md" />
+
+                  <div className="relative rounded-xl shadow-md overflow-hidden">
+                    <AnimatePresence initial={false}>
+                      {collageImages?.map(
+                        (image, index) =>
+                          index === activeIndexes.circleBottomRight && (
+                            <motion.div
+                              key={`bottom-${index}`}
+                              className="absolute inset-0"
+                              initial={{ opacity: 0, scale: 1.1 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.9 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              <Image
+                                src={image?.src ?? ""}
+                                alt={`Hero bottom image ${index}`}
+                                fill
+                                className="object-cover"
+                                quality={90}
+                                placeholder="blur"
+                                blurDataURL={heroImagePlaceholder}
+                              />
+                            </motion.div>
+                          )
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <div className="bg-[var(--color-soft-light-purple)] rounded-xl shadow-md" />
                 </div>
               </div>
             )}

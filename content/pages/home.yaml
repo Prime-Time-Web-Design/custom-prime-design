@@ -9,8 +9,8 @@ blocks:
     buttonText: Book a Free Consultation
     buttonLink: /contact
     collageImages:
-      - src: /optimized/featuredCardImage.webp
-      - src: /optimized/christina-wocintechchat-com-50TkCaP8M3A-unsplash.webp
+      - src: /optimized/noemi-macavei-katocz-or6mrFMVmHM-unsplash.webp
+      - src: /optimized/elizeu-dias-2EGNqazbAMk-unsplash.webp
       - src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
       - src: /optimized/hero.webp
     _template: hero
