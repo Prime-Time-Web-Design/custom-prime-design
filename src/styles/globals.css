@@ -67,6 +67,7 @@
   --color-soft-lighter-purple: #E0D2F3;
 
   --color-very-light-gray: #F8F8FF;
+  --color-light-beige: #F7F5F1;
   --color-medium-slate: #828CA9;
   --color-deep-slate: #232344;
   --color-deep-slate-light: #62629E;
@@ -74,6 +75,7 @@
   /* Semantic roles for convenience */
   --color-bg: var(--color-very-light-gray);
   --color-bg-light: var(--color-very-light-gray);
+  --color-bg-beige: var(--color-light-beige);
   --color-bg-medium: var(--color-medium-slate);
   --color-bg-contrast: var(--color-deep-slate);
   --color-bg-contrast-light: var(--color-deep-slate-light);

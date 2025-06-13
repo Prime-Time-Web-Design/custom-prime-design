@@ -17,7 +17,7 @@ blocks:
   - title: Benefits of PTWD
     subtitle: '  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, PTWD is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success.'
     benefits:
-      - icon: DollarSignIcon
+      - icon: EqualSquare
         heading: Affordable Care
         text: Receive affordable and High Quality Mental Health Care
         backgroundColor: bg-secondary-hover
@@ -27,15 +27,10 @@ blocks:
         text: 'Custom Build your therapeutic experience '
         backgroundColor: bg-accent
         buttonText: Learn More
-      - icon: SwitchCameraIcon
+      - icon: PersonStanding
         heading: Easy Therapist Search
         text: Easy Search to find your best fit Therapist
         backgroundColor: bg-tertiary-hover
-        buttonText: Learn More
-      - icon: FastForward
-        heading: Quick Booking
-        text: Eliminate Scheduling Hassles with Quick Book
-        backgroundColor: bg-primary-hover
         buttonText: Learn More
     _template: bannerBlock
   - blockTitle: 'Finding Your Path: Client Stories'
@@ -103,6 +98,18 @@ blocks:
           Once you’ve been matched, you can begin regular therapy sessions for
           as long as needed
     _template: richTextBlock
+  - heading: Don’t just aim to survive. Thrive.
+    content: >
+      At PTWD Mental Health, we support you through all of life's fluctuations.
+      Navigate toward wellbeing and self-development with guidance from our
+      empathetic counseling professionals.
+    buttonText: Start Healing Today
+    buttonLink: /quick-start
+    imageLeft: false
+    imageSrc: /optimized/nighttimecontrast.webp
+    imageAlt: Healing is a Journey
+    backgroundColor: bg-bg
+    _template: ctaBlock
   - title: 'We have therapists that specialize in:'
     services:
       - name: Organizations & Groups
@@ -137,15 +144,3 @@ blocks:
       therapists specialize in and more!
     backgroundColor: bg-calming-blue-dark
     _template: serviceListingBlock
-  - heading: Don’t just aim to survive. Thrive.
-    content: >
-      At PTWD Mental Health, we support you through all of life's fluctuations.
-      Navigate toward wellbeing and self-development with guidance from our
-      empathetic counseling professionals.
-    buttonText: Start Healing Today
-    buttonLink: /quick-start
-    imageLeft: false
-    imageSrc: ''
-    imageAlt: Healing is a Journey
-    backgroundColor: bg-bg
-    _template: ctaBlock

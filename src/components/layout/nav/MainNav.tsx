@@ -65,11 +65,53 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                           />
                         </div>
                       </PopoverButton>
-                      <PopoverPanel className="absolute z-10 mt-2 left-0 rounded-2xl bg-bg shadow-2xl focus:outline-none">
-                        <div className="p-4 flex flex-row gap-x-4 relative">
-                          <div className="flex flex-col gap-2 flex-1">
+                      <PopoverPanel className="absolute z-10 mt-2 left-0 rounded-2xl bg-bg shadow-2xl focus:outline-none overflow-hidden">
+                        <div className="flex flex-row relative">
+                          <div className="p-4 flex flex-col gap-2 flex-1">
                             {renderSubItems(item.subItems, close)}
                           </div>
+
+                          {/* Conditions We Treat section */}
+                          {item.label === "Our Programs" ||
+                          item.label === "Services" ? (
+                            <div className="flex flex-col min-w-[220px] bg-bg-contrast p-4">
+                              <h3 className="text-base font-bold mb-2 text-bg">
+                                What We Treat
+                              </h3>
+                              <div className="h-1 w-30 mb-2 rounded bg-tertiary" />
+                              <ul className="space-y-3">
+                                {[
+                                  "Anxiety",
+                                  "Depression",
+                                  "Trauma",
+                                  "Self-Harm",
+                                  "Substance Use Disorders",
+                                  "Eating Disorders",
+                                ].map((condition) => (
+                                  <li key={condition}>
+                                    <Link
+                                      href={`/conditions/${condition
+                                        .toLowerCase()
+                                        .replace(/\s+/g, "-")}`}
+                                      className="text-bg hover:text-secondary transition-colors"
+                                      onClick={() => close()}
+                                    >
+                                      {condition}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="mt-4 pt-2 border-tertiary border-t-2">
+                                <Link
+                                  href="/conditions"
+                                  className="text-sm text-bg hover:underline"
+                                  onClick={() => close()}
+                                >
+                                  Explore All
+                                </Link>
+                              </div>
+                            </div>
+                          ) : null}
                         </div>
                       </PopoverPanel>
                     </>

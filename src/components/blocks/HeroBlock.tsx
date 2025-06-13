@@ -145,12 +145,9 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
           <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
-              {heading?.split(" ").slice(0, -1).join(" ")}
-              <span className="block italic">
-                {heading?.split(" ").slice(-1)[0]}.
-              </span>
+              {heading}
             </h1>
-            <div className="prose prose-lg text-[var(--color-deep-slate)]">
+            <div className="text-lg text-[var(--color-deep-slate)]">
               {subheading}
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -180,8 +177,8 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                   className="w-full h-auto object-cover rounded-xl shadow-xl"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={90}
-                  placeholder="blur"
-                  blurDataURL={heroImagePlaceholder}
+                  // placeholder="blur"
+                  // blurDataURL={heroImagePlaceholder}
                 />
               </div>
             ) : (

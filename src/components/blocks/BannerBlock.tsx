@@ -16,7 +16,7 @@ export const BannerBlock: React.FC<BannerBlockProps> = ({ data }) => {
         <div className="flex flex-col lg:flex-row items-start justify-between mb-16">
           <div className="lg:w-1/3 mb-10 lg:mb-0">
             {title && (
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
+              <h2 className="text-3xl md:text-6xl font-bold text-white">
                 {title}
               </h2>
             )}

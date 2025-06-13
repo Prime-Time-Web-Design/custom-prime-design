@@ -578,10 +578,11 @@ var pageSchema = defineSchema2({
                   },
                   fields: [
                     {
-                      type: "image",
-                      name: "src",
-                      label: "illustration",
-                      description: "Image for the feature (optional)"
+                      type: "string",
+                      name: "icon",
+                      label: "Icon",
+                      required: false,
+                      options: lucideIconNames
                     },
                     { type: "string", name: "title", label: "Title" },
                     {

@@ -18,7 +18,7 @@ const StarRating = ({ rating = 5 }: { rating?: number }) => {
           key={i}
           xmlns="http://www.w3.org/2000/svg"
           className={`h-4 w-4 ${
-            i < safeRating ? "text-tertiary" : "text-gray-300"
+            i < safeRating ? "text-[#ffd9a3]" : "text-gray-300"
           }`}
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -137,21 +137,23 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   }
 
   return (
-    <div className={`relative py-12 sm:py-16 bg-bg ${className}`}>
-      {(blockTitle || blockSubtitle) && (
-        <div className="text-center mb-10 max-w-3xl mx-auto px-4">
-          {blockTitle && (
-            <h2 className="text-3xl md:text-4xl font-bold text-text mb-4">
-              {blockTitle}
-            </h2>
-          )}
-          {blockSubtitle && (
-            <p className="text-lg text-accent-dark">{blockSubtitle}</p>
-          )}
-        </div>
-      )}
-
+    <div className={`relative py-12 sm:py-16 bg-bg-beige ${className}`}>
       <div className="relative mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {(blockTitle || blockSubtitle) && (
+          <div className="mb-10">
+            {blockTitle && (
+              <>
+                <h2 className="text-3xl md:text-5xl font-bold text-text mb-2">
+                  {blockTitle}
+                </h2>
+              </>
+            )}
+            {blockSubtitle && (
+              <p className="text-lg text-accent-dark">{blockSubtitle}</p>
+            )}
+          </div>
+        )}
+
         <div
           className="embla__viewport overflow-hidden w-full"
           ref={emblaRef}
@@ -209,12 +211,12 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                         />
                       )}
                       {slide.clientType && (
-                        <div className="absolute bottom-2 right-2 bg-primary text-bg px-2 py-1 rounded text-xs font-medium shadow-md">
+                        <div className="absolute bottom-2 right-2 bg-tertiary text-bg px-2 py-1 rounded text-xs font-medium shadow-md">
                           {slide.clientType}
                         </div>
                       )}
                     </div>
-                    <div className="flex flex-col flex-1 p-5 text-text relative bg-bg bg-opacity-95">
+                    <div className="flex flex-col flex-1 p-5 text-bg-beige bg-bg-contrast bg-opacity-95">
                       {slide.testimonialText && (
                         <p className="mb-4 text-sm font-medium leading-relaxed text-center">
                           “{slide.testimonialText}”
@@ -238,65 +240,65 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
             })}
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-center items-center mt-8 space-x-4">
-        <button
-          onClick={scrollPrev}
-          className="w-10 h-10 rounded-full bg-primary-hover text-bg-medium flex items-center justify-center shadow-md hover:bg-primary focus:outline-none focus:ring focus:ring-bg-medium focus:ring-opacity-50 transition-colors"
-          aria-label="Previous slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <div className="flex justify-center items-center mt-8 space-x-4">
+          <button
+            onClick={scrollPrev}
+            className="w-10 h-10 rounded-full bg-primary-hover text-bg-medium flex items-center justify-center shadow-md hover:bg-primary focus:outline-none focus:ring focus:ring-bg-medium focus:ring-opacity-50 transition-colors"
+            aria-label="Previous slide"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
 
-        <div className="flex space-x-2">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 ${
-                index === selectedIndex
-                  ? "bg-secondary"
-                  : "bg-accent-hover hover:opacity-75"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          <div className="flex space-x-2">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={`w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 ${
+                  index === selectedIndex
+                    ? "bg-secondary"
+                    : "bg-accent-hover hover:opacity-75"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={scrollNext}
+            className="w-10 h-10 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 transition-colors"
+            aria-label="Next slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         </div>
-
-        <button
-          onClick={scrollNext}
-          className="w-10 h-10 rounded-full bg-accent text-bg-medium flex items-center justify-center shadow-md hover:bg-tertiary focus:outline-none focus:ring focus:ring-tertiary-dark focus:ring-opacity-50 transition-colors"
-          aria-label="Next slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
       </div>
     </div>
   );

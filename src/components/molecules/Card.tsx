@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({
   variant = "small",
 }) => {
   const baseStyles =
-    "rounded-lg flex items-start w-full transition-colors duration-200 border-2 border-[var(--color-accent-hover)] hover:border-[var(--color-bg-medium)]";
+    "rounded-lg flex items-start w-full transition-colors duration-200 border-2 border-accent hover:border-[var(--color-bg-medium)]";
   const largeStyles =
     "bg-[var(--color-bg)] text-[var(--color-text)] flex-col p-6 min-h-[120px] text-lg hover:text-[var(--color-text)] gap-3 min-w-[300px] max-w-[340px]";
   const smallStyles =
@@ -35,16 +35,16 @@ const Card: React.FC<CardProps> = ({
         variant === "large" ? largeStyles : smallStyles
       } ${className}`}
     >
-      <div className="bg-[var(--color-primary)] rounded-2xl flex items-center justify-center w-8 h-8 shrink-0">
+      <div className="flex items-center justify-center shrink-0">
         {iconComponent &&
           React.cloneElement(iconComponent, {
-            className: "h-4 w-4 text-[var(--color-text)]",
+            className: "h-6 w-6 text-text",
           })}
       </div>
-      <div className="flex flex-col gap-0.5 min-w-0">
+      <div className="flex flex-col gap-1 min-w-0">
         <h3
           className={`font-semibold ${
-            variant === "large" ? "text-lg" : "text-base"
+            variant === "large" ? "text-xl" : "text-base"
           } truncate`}
         >
           {title}

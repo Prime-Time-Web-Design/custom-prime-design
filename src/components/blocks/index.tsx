@@ -13,7 +13,6 @@ import {
 // This is better for core/essential components that appear above the fold
 import { HeroBlock } from "./HeroBlock";
 import { CarouselBlock } from "./CarouselBlock";
-// import { HowItWorksBlock } from "./HowItWorksBlock";
 import RichTextBlock from "./RichTextBlock";
 import { CTABlock } from "./CTABlock";
 import ServiceListingBlock from "./ServiceListingBlock";
