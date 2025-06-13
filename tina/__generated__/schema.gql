@@ -334,6 +334,8 @@ type PageBlocksCarouselBlock {
 type PageBlocksServiceListingBlockServices {
   name: String!
   slug: String!
+  examples: String
+  description: String
 }
 
 type PageBlocksServiceListingBlock {
@@ -505,6 +507,8 @@ input PageBlocksCarouselBlockFilter {
 input PageBlocksServiceListingBlockServicesFilter {
   name: StringFilter
   slug: StringFilter
+  examples: StringFilter
+  description: StringFilter
 }
 
 input PageBlocksServiceListingBlockFilter {
@@ -748,6 +752,8 @@ input PageBlocksCarouselBlockMutation {
 input PageBlocksServiceListingBlockServicesMutation {
   name: String
   slug: String
+  examples: String
+  description: String
 }
 
 input PageBlocksServiceListingBlockMutation {

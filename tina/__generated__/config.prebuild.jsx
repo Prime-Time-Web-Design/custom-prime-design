@@ -700,6 +700,24 @@ var pageSchema = defineSchema2({
                       label: "Service Page Link",
                       description: "URL to the service page (e.g., /services/anxiety)",
                       required: true
+                    },
+                    {
+                      type: "string",
+                      name: "examples",
+                      label: "Examples",
+                      description: "Examples of this condition (e.g., Generalized anxiety, social anxiety, panic attacks)",
+                      ui: {
+                        component: "textarea"
+                      }
+                    },
+                    {
+                      type: "string",
+                      name: "description",
+                      label: "Treatment Description",
+                      description: "Description of how you treat this condition",
+                      ui: {
+                        component: "textarea"
+                      }
                     }
                   ]
                 },

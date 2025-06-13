@@ -142,5 +142,5 @@ blocks:
       Don’t see what you’re looking for? We can help with a wide variety of
       challenges. Find your PTWD location to learn what your local PTWD
       therapists specialize in and more!
-    backgroundColor: bg-calming-blue-dark
+    backgroundColor: bg-bg-beige
     _template: serviceListingBlock

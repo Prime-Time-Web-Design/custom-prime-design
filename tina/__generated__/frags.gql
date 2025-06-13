@@ -152,6 +152,8 @@ fragment PageParts on Page {
         __typename
         name
         slug
+        examples
+        description
       }
       ctaText
       ctaLink
