@@ -1,8 +1,7 @@
 import React from "react";
 import { PageBlocksRichTextBlock } from "../../../tina/__generated__/types";
-import Image from "next/image";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { normalizeSrc } from "@/lib/utils";
+import { getIconComponent } from "@/lib/utils";
 
 interface RichTextBlockProps {
   data: PageBlocksRichTextBlock;
@@ -28,9 +27,8 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto space-y-4 sm:space-y-0">
         {features?.map((f, idx) => {
-          const hasValidImage =
-            f?.src && typeof f.src === "string" && f.src.trim() !== "";
-
+          const hasIcon =
+            f?.icon && typeof f.icon === "string" && f.icon.trim() !== "";
           return (
             <div
               key={idx}
@@ -41,32 +39,22 @@ export const RichTextBlock = ({ data }: RichTextBlockProps) => {
                 {String(idx + 1).padStart(2, "0")}
               </div>
 
-              {/* Icon/Shape - outside/overlapping card, fixed size, styled, now transitions with card */}
-              <div className="absolute -top-6 left-4 z-30 group-hover:-translate-y-2 group-hover:shadow-2xl transition-all duration-300 rounded-xl">
-                <div className="h-16 w-16 flex items-center justify-center bg-bg shadow-lg rounded-xl border border-gray-200 overflow-hidden">
-                  {hasValidImage ? (
-                    <Image
-                      alt={f.title || "Illustration"}
-                      src={normalizeSrc(f.src ?? "")}
-                      height={50}
-                      width={50}
-                      className="object-contain"
-                    />
+              {/* Main Card - compact, no min-h, less padding, cursor-pointer */}
+              <div
+                className="relative flex flex-col justify-between bg-secondary-hover bg-opacity-20 rounded-xl shadow-lg p-6 h-full overflow-hidden border border-[var(--color-primary-hover)] z-10 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2  select-none"
+                style={{ minHeight: "unset" }}
+              >
+                {/* Card Content */}
+                <div className="relative z-10">
+                  {hasIcon ? (
+                    <div className="text-bg mb-4">
+                      {getIconComponent(f?.icon ?? "")}
+                    </div>
                   ) : (
                     <div className="h-10 w-10 flex items-center justify-center text-2xl text-[var(--color-primary)]">
                       ✦
                     </div>
                   )}
-                </div>
-              </div>
-
-              {/* Main Card - compact, no min-h, less padding, cursor-pointer */}
-              <div
-                className="relative flex flex-col justify-between bg-secondary-hover bg-opacity-20 rounded-xl shadow-lg p-6 pt-12 h-full overflow-hidden border border-[var(--color-primary-hover)] z-10 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2  select-none"
-                style={{ minHeight: "unset" }}
-              >
-                {/* Card Content */}
-                <div className="relative z-10">
                   <h3 className="text-lg font-bold mb-1 text-[var(--color-text)] text-left select-none">
                     {f?.title}
                   </h3>

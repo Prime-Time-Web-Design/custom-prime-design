@@ -33,7 +33,7 @@ export const getIconComponent = (
 
   return (
     <IconComponent
-      className={`inline h-5 w-5 ${
+      className={`inline h-7 w-7 ${
         backgroundColor ? `bg-[${backgroundColor}]` : ""
       }`}
     />

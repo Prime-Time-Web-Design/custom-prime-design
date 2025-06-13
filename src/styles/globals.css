@@ -73,7 +73,7 @@
   --color-deep-slate-light: #62629E;
 
   /* Semantic roles for convenience */
-  --color-bg: var(--color-very-light-gray);
+  --color-bg: var(--color-light-blue-white);
   --color-bg-light: var(--color-very-light-gray);
   --color-bg-beige: var(--color-light-beige);
   --color-bg-medium: var(--color-medium-slate);

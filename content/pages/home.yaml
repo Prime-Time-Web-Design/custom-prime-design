@@ -82,17 +82,17 @@ blocks:
   - heading: How It Works
     subheading: Start your journey to healing today
     features:
-      - src: /undraw_professional-woman-avatar_ivds.svg
+      - icon: Book
         title: Book an assessment
         description: >
           Fill out our form and book in your assessment at a convenient time for
           you
-      - src: /undraw_avatars_xsfb.svg
+      - icon: Magnet
         title: We match you with a therapist
         description: >
           After your assessment and service selection, we will match you with
           the right therapist for your particular needs
-      - src: /undraw_coffee-time_98vi.svg
+      - icon: Bandage
         title: Start Healing
         description: >
           Once you’ve been matched, you can begin regular therapy sessions for
