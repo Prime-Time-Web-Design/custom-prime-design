@@ -137,7 +137,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
   }
 
   return (
-    <div className={`relative py-12 sm:py-16 bg-secondary-hover ${className}`}>
+    <div className={`relative py-12 sm:py-16 bg-bg ${className}`}>
       {(blockTitle || blockSubtitle) && (
         <div className="text-center mb-10 max-w-3xl mx-auto px-4">
           {blockTitle && (

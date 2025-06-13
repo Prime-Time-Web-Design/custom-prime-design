@@ -432,6 +432,19 @@ var pageSchema = defineSchema2({
                   type: "string",
                   name: "buttonLink",
                   label: "Button Link"
+                },
+                {
+                  type: "object",
+                  list: true,
+                  name: "collageImages",
+                  label: "Collage Images",
+                  fields: [
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "Image"
+                    }
+                  ]
                 }
               ]
             }

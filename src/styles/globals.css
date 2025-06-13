@@ -32,7 +32,7 @@
 
 
 @theme {
-  --color-light-blue-white: #EFF6FF;
+  --color-light-blue-white: #FAFAFC;
   --color-calming-blue: #A7C7E7;
   --color-calming-blue-light: #D1E9FF;
   --color-calming-blue-dark: #7895B2;
@@ -45,14 +45,13 @@
   --color-soft-lavender-light: #E8E8F5;
   --color-soft-lavender-dark: #A6A6C0;
 
-  --color-soft-apricot: #FFCBA4; /* Soft, muted apricot */
-  --color-soft-apricot-light: #FFD8B8;
-  --color-soft-apricot-dark: #E6B380;
+  --color-soft-light-purple: #DBCDEE; 
+  --color-soft-lighter-purple: #E0D2F3;
 
   --color-very-light-gray: #F8F8FF;
   --color-medium-slate: #828CA9;
-  --color-deep-slate: #2F4F4F;
-  --color-deep-slate-light: #426F6F;
+  --color-deep-slate: #232344;
+  --color-deep-slate-light: #62629E;
 
   /* Semantic roles for convenience */
   --color-bg: var(--color-very-light-gray);
@@ -67,8 +66,8 @@
   --color-secondary-hover: var(--color-soft-turquoise-light);
   --color-accent: var(--color-soft-lavender);
   --color-accent-hover: var(--color-soft-lavender-light);
-  --color-tertiary: var(--color-soft-apricot);
-  --color-tertiary-hover: var(--color-soft-apricot-light);
+  --color-tertiary: var(--color-soft-light-purple);
+  --color-tertiary-hover: var(--color-soft-lighter-purple);
 }
 
 [data-theme="light"] {

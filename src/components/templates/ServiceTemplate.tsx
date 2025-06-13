@@ -21,7 +21,7 @@ export default function ServiceTemplate({
         {data?.headerBlocks && data.headerBlocks.length > 0 ? (
           <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
         ) : (
-          <div className="bg-primary overflow-hidden">
+          <div className="bg-bg-contrast overflow-hidden">
             <Section className="flex items-center px-8 py-4 text-left">
               <span className="inline-block px-3 py-1 rounded-full bg-tertiary text-[var(--color-deep-slate)] text-sm font-medium shadow-lg tracking-wide">
                 Services
@@ -30,7 +30,7 @@ export default function ServiceTemplate({
                 <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-bg leading-tight">
                   {data?.title || "Our Services"}
                 </h1>
-                <p className="text-sm md:text-base text-[var(--color-deep-slate)] font-medium opacity-80">
+                <p className="text-sm md:text-base text-bg font-medium opacity-90">
                   {data?.description || ""}
                 </p>
               </div>

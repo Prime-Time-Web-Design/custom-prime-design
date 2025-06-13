@@ -55,7 +55,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <PopoverButton className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none">
+                      <PopoverButton className="text-base font-semibold text-[var(--color-text)] px-4 py-2 rounded-lg hover:bg-[var(--color-accent-hover)] transition duration-200 cursor-pointer focus:outline-none">
                         <div className="flex items-center gap-2">
                           {item.label}
                           <ChevronDown
@@ -65,7 +65,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                           />
                         </div>
                       </PopoverButton>
-                      <PopoverPanel className="absolute z-10 mt-4 left-0 rounded-2xl bg-[var(--color-bg)] shadow-2xl focus:outline-none">
+                      <PopoverPanel className="absolute z-10 mt-2 left-0 rounded-2xl bg-bg shadow-2xl focus:outline-none">
                         <div className="p-4 flex flex-row gap-x-4 relative">
                           <div className="flex flex-col gap-2 flex-1">
                             {renderSubItems(item.subItems, close)}
@@ -80,7 +80,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
               <Link
                 key={item.label}
                 href={item.href ?? "#"}
-                className="text-base font-semibold text-[var(--color-text)] p-[1rem_0.875rem_1rem_1rem] rounded-xl hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
+                className="text-base font-semibold text-[var(--color-text)] px-4 py-2 rounded-lg hover:bg-[var(--color-accent-hover)]  transition duration-200 focus-visible:outline-none"
               >
                 {item.label}
               </Link>
@@ -90,7 +90,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
         <div className="flex items-center gap-x-4">
           <Link
             href="/log-in"
-            className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
+            className="rounded-lg bg-transparent px-4 py-2 text-base font-semibold text-[var(--color-text)]  hover:bg-[var(--color-accent-hover)] transition duration-200 focus:outline-none focus:text-[var(--color-primary)]"
           >
             Log in
           </Link>

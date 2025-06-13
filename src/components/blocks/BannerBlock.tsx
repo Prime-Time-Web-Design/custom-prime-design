@@ -11,7 +11,7 @@ export const BannerBlock: React.FC<BannerBlockProps> = ({ data }) => {
   const { title, subtitle, benefits } = data;
 
   return (
-    <Section className="py-20 bg-[#1e1e3f] text-white">
+    <Section className="py-20 bg-bg-contrast text-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-start justify-between mb-16">
           <div className="lg:w-1/3 mb-10 lg:mb-0">

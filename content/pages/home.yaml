@@ -11,19 +11,19 @@ blocks:
     src: /hero.jpg
     _template: hero
   - title: Benefits of PTWD
-    subtitle: "  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, PTWD is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success."
+    subtitle: '  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, PTWD is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success.'
     benefits:
-      - icon: DollarSign
+      - icon: DollarSignIcon
         heading: Affordable Care
         text: Receive affordable and High Quality Mental Health Care
         backgroundColor: bg-secondary-hover
         buttonText: Learn More
       - icon: Building
         heading: Customizable Experience
-        text: "Custom Build your therapeutic experience "
+        text: 'Custom Build your therapeutic experience '
         backgroundColor: bg-accent
         buttonText: Learn More
-      - icon: SwitchCamera
+      - icon: SwitchCameraIcon
         heading: Easy Therapist Search
         text: Easy Search to find your best fit Therapist
         backgroundColor: bg-tertiary-hover
@@ -34,8 +34,8 @@ blocks:
         backgroundColor: bg-primary-hover
         buttonText: Learn More
     _template: bannerBlock
-  - blockTitle: "Finding Your Path: Client Stories"
-    blockSubtitle: "Real experiences of hope, healing, and positive change."
+  - blockTitle: 'Finding Your Path: Client Stories'
+    blockSubtitle: 'Real experiences of hope, healing, and positive change.'
     slides:
       - src: /optimized/cecep-rahmat-yKQe3Rtemqs-unsplash.webp
         alt: Happy Wins
@@ -53,7 +53,7 @@ blocks:
           have joy, purpose, and the strength to keep moving forward. It's been
           life-changing.
         clientName: Jonah Ferguson
-        clientType: "Individual Therapy "
+        clientType: 'Individual Therapy '
       - src: /optimized/mina-rad-AEVUFpDGxZM-unsplash.webp
         alt: Glad to be here
         testimonialText: >-
@@ -99,7 +99,7 @@ blocks:
           Once you’ve been matched, you can begin regular therapy sessions for
           as long as needed
     _template: richTextBlock
-  - title: "We have therapists that specialize in:"
+  - title: 'We have therapists that specialize in:'
     services:
       - name: Organizations & Groups
         slug: /services/group-therapy
@@ -141,7 +141,7 @@ blocks:
     buttonText: Start Healing Today
     buttonLink: /quick-start
     imageLeft: false
-    imageSrc: ""
+    imageSrc: ''
     imageAlt: Healing is a Journey
     backgroundColor: bg-bg
     _template: ctaBlock

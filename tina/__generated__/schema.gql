@@ -265,11 +265,16 @@ type PagePeople {
   location: String
 }
 
+type PageHeaderBlocksHeroCollageImages {
+  src: String
+}
+
 type PageHeaderBlocksHero {
   heading: String
   subheading: String
   buttonText: String
   buttonLink: String
+  collageImages: [PageHeaderBlocksHeroCollageImages]
 }
 
 union PageHeaderBlocks = PageHeaderBlocksHero
@@ -404,11 +409,16 @@ input PagePeopleFilter {
   location: StringFilter
 }
 
+input PageHeaderBlocksHeroCollageImagesFilter {
+  src: ImageFilter
+}
+
 input PageHeaderBlocksHeroFilter {
   heading: StringFilter
   subheading: StringFilter
   buttonText: StringFilter
   buttonLink: StringFilter
+  collageImages: PageHeaderBlocksHeroCollageImagesFilter
 }
 
 input PageHeaderBlocksFilter {
@@ -659,11 +669,16 @@ input PagePeopleMutation {
   location: String
 }
 
+input PageHeaderBlocksHeroCollageImagesMutation {
+  src: String
+}
+
 input PageHeaderBlocksHeroMutation {
   heading: String
   subheading: String
   buttonText: String
   buttonLink: String
+  collageImages: [PageHeaderBlocksHeroCollageImagesMutation]
 }
 
 input PageHeaderBlocksMutation {

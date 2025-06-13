@@ -7,7 +7,7 @@ import AlertBanner from "./AlertBanner";
 import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
-import mobileLogo from "../../../../public/logo.svg";
+import mobileLogo from "../../../../public/mobileLogo.svg";
 import HamburgerMenu from "@/components/molecules/HamburgerMenu";
 
 export const Header = () => {

@@ -4,41 +4,10 @@ alertBanner:
   alertLinkText: Learn More
 navigation:
   mainNav:
-    - label: About
+    - label: Home
       href: /
-      featuredCards:
-        - image:
-            src: /optimized/featuredCardImage.webp
-            alt: Featured Card Image
-          title: See How Therapists Like You Are Growing
-          description: >-
-            Read success stories from therapists who have used our templates to
-            attract more clients and save time.
-          ctaText: Read Success Stories
-          ctaLink: /testimonials
-          layout: vertical
-      subItems:
-        - label: Our Mission
-          href: /about/our-mission
-          icon: Shrub
-          variant: small
-          description: >-
-            Transforming mental healthcare through personalized therapy
-            solutions
-        - label: Our Philosophy
-          href: /about/philosophy
-          icon: Omega
-          variant: small
-          description: >-
-            Combining the power of evidence-based practice with compassionate
-            support
-        - label: Meet Our Team
-          href: /meet-our-team
-          icon: Users
-          variant: small
-          description: >-
-            Get to know our dedicated team of experienced mental health
-            professionals
+    - label: About
+      href: /meet-our-team
     - label: Services
       href: /services
       subItems:
@@ -80,5 +49,4 @@ navigation:
           description: >-
             We work with major insurance providers to make therapy more
             accessible.
-    - label: Blog
     - label: Quick Start
