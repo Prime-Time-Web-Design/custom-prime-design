@@ -112,30 +112,140 @@ blocks:
     _template: ctaBlock
   - title: 'We have therapists that specialize in:'
     services:
-      - name: Organizations & Groups
-        slug: /services/group-therapy
-      - name: Anger Management
-        slug: /services/anger-management
-      - name: Children's Therapy
-        slug: /services/child-therapy
-      - name: EMDR Therapy
-        slug: /services/emdr
-      - name: Therapy For Military
-        slug: /services/military-therapy
       - name: Trauma
-        slug: /services/trauma
-      - name: Stress & Burnout
-        slug: /services/stress
-      - name: Family Therapy
-        slug: /services/family-therapy
+        slug: /trauma
+        examples: >
+          * Acute Trauma: Results from a single event
+
+          * Chronic Trauma: Results from repeated and prolonged exposure to
+          highly stressful events
+
+          * Complex Trauma: Results from exposure to multiple and varied
+          traumatic events, often of an invasive, interpersonal nature, and
+          having wide-ranging, long-term effects.
+        description: >
+          **Trauma-Focused Cognitive Behavioral Therapy (TF-CBT)**
+
+          TF-CBT is a components-based model that integrates trauma-sensitive
+          interventions with cognitive-behavioral principles. The theory is that
+          by addressing distorted thoughts and beliefs related to the trauma and
+          gradually exposing the individual to the traumatic memory in a safe
+          environment, the associated negative emotions and maladaptive
+          behaviors can be reduced
       - name: Depression
         slug: /services/depression
-      - name: Couples Therapy
-        slug: /services/couples-therapy
+        examples: >
+          * Persistent low mood, sadness, or a feeling of emptiness.
+
+          * Loss of interest or pleasure in activities you once enjoyed.
+
+          * Significant changes in appetite or sleep patterns.
+
+          * Constant fatigue and lack of energy.
+
+          * Difficulty concentrating, making decisions, or feelings of
+          worthlessness.
+
+          * Unexplained physical aches and pains.
+        description: >
+          Treatment typically involves psychotherapy, medication, or a
+          combination of both. Therapeutic approaches like Cognitive Behavioral
+          Therapy (CBT) focus on identifying and modifying negative thought
+          patterns and behaviors. The goal is to develop healthy coping
+          strategies, process underlying emotions, and restore a sense of
+          well-being and function.
       - name: Anxiety
         slug: /services/anxiety
-      - name: Individual Therapy
-        slug: /services/individual-therapy
+        examples: >
+          * Excessive, persistent worry and fear about everyday situations.
+
+          * Sudden, intense episodes of fear known as panic attacks.
+
+          * Physical symptoms like a racing heart, sweating, trembling, and
+          shortness of breath.
+
+          * Avoidance of places or situations that trigger anxious feelings.
+
+          * Feeling restless, on-edge, or easily fatigued.
+        description: >
+          Effective treatment often combines therapy with skill-building.
+          Cognitive Behavioral Therapy (CBT) is highly effective, helping
+          individuals challenge irrational fears and thought patterns. A key
+          component is often exposure therapy, which involves gradually and
+          safely confronting feared situations to reduce avoidance. Treatment
+          focuses on learning relaxation techniques and coping mechanisms to
+          manage physical symptoms and regain a sense of control.
+      - name: Stress & Burnout
+        slug: /services/stress
+        examples: >
+          * Feelings of energy depletion or emotional and physical exhaustion.
+
+          * Increased mental distance from one's job, or feelings of cynicism
+          and negativity related to it.
+
+          * A sense of ineffectiveness and lack of accomplishment.
+
+          * Physical symptoms like headaches, stomach issues, and sleep
+          disturbances.
+
+          * Irritability, difficulty concentrating, and loss of motivation.
+        description: >
+          Treatment focuses on identifying sources of stress and developing
+          practical strategies for management. This includes learning to set
+          firm boundaries (e.g., saying "no," disconnecting from work),
+          improving time management, and prioritizing self-care. The goal is to
+          implement restorative practices like mindfulness, exercise, and
+          adequate sleep to replenish physical and emotional energy and create a
+          more sustainable work-life balance.
+      - name: Anger Management
+        slug: /services/anger-management
+        examples: >
+          * Frequent, intense outbursts of anger that feel uncontrollable.
+
+          * Physical aggression, such as hitting walls or becoming physically
+          confrontational.
+
+          * Chronic irritability, impatience, and frustration.
+
+          * Engaging in threatening or intimidating behavior.
+
+          * Experiencing negative consequences in relationships or at work due
+          to anger.
+        description: >
+          Treatment is a proactive process focused on skill development. It
+          involves identifying the triggers and underlying reasons for anger.
+          Individuals learn emotional regulation techniques to calm down in the
+          moment and cognitive restructuring to change thought patterns that
+          lead to rage. The core goal is to develop healthier communication
+          skills and constructive problem-solving strategies to express feelings
+          and needs effectively without resorting to destructive anger.
+      - name: Children's Therapy
+        slug: /services/child-therapy
+        examples: >
+          * Significant changes in mood, like unusual sadness, anxiety, or
+          irritability.
+
+          * Sudden behavioral shifts, such as increased aggression, tantrums, or
+          acting out at school or home.
+
+          * Difficulty making or keeping friends, social withdrawal, or
+          challenges with cooperation.
+
+          * Struggling to cope with major life events like a family divorce, a
+          move, or the loss of a loved one.
+
+          * Expressing feelings of low self-worth, persistent worry, or
+          displaying a sharp decline in academic performance.
+        description: >
+          Children's therapy is tailored to the child's developmental stage and
+          unique personality. Instead of just talk therapy, counselors use a
+          child's natural language: play. Through activities like drawing, using
+          puppets, playing with sand trays, and board games, children can safely
+          express feelings and work through challenges they don't have the words
+          for. The therapist creates a safe, supportive space for the child to
+          build coping skills, enhance self-esteem, and learn to manage big
+          emotions. Treatment is collaborative and often involves parents to
+          ensure support continues at home.
     ctaText: Find Your Therapist
     ctaLink: /about/staff
     ctaContent: >-

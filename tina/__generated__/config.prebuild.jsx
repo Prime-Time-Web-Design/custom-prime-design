@@ -702,22 +702,16 @@ var pageSchema = defineSchema2({
                       required: true
                     },
                     {
-                      type: "string",
+                      type: "rich-text",
                       name: "examples",
                       label: "Examples",
-                      description: "Examples of this condition (e.g., Generalized anxiety, social anxiety, panic attacks)",
-                      ui: {
-                        component: "textarea"
-                      }
+                      description: "Examples of this condition (e.g., Generalized anxiety, social anxiety, panic attacks)"
                     },
                     {
-                      type: "string",
+                      type: "rich-text",
                       name: "description",
                       label: "Treatment Description",
-                      description: "Description of how you treat this condition",
-                      ui: {
-                        component: "textarea"
-                      }
+                      description: "Description of how you treat this condition"
                     }
                   ]
                 },

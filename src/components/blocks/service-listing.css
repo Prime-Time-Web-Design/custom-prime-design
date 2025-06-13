@@ -1,0 +1,62 @@
+/* Custom styles for service listing block */
+
+/* Bullet styling */
+.prose ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-secondary, #4B6BFB);
+  left: -1rem;
+  top: 0.5rem;
+  display: block;
+}
+
+/* Mobile tab styling */
+.service-tabs-mobile {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.service-tabs-mobile::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+.service-tab-button {
+  scroll-snap-align: start;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.service-tab-active {
+  position: relative;
+}
+
+.service-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-secondary, #4B6BFB);
+  border-radius: 2px;
+}

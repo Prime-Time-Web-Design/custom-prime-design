@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import "./service-listing.css";
 
 import {
   PageBlocksServiceListingBlock,
@@ -35,25 +37,65 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
 
       // For backward compatibility with existing data
       // If the fields aren't in Tina yet, provide defaults
-      const examples =
-        service.examples ||
-        (service.name === "Anxiety"
-          ? "Generalized anxiety, social anxiety, panic attacks, panic disorder, agoraphobia"
-          : service.name === "Depression"
-          ? "Major depression, melancholic depression, atypical depression, seasonal affective disorder"
-          : service.name === "Trauma"
-          ? "Acute trauma, chronic trauma, complex trauma, post-traumatic stress disorder"
-          : service.name === "Self-harm"
-          ? "Self-harm, self-injury, suicidal ideation, suicide survival"
-          : service.name === "Substance use disorders"
-          ? "Alcohol, marijuana, prescription drugs, opioids, amphetamines, cocaine"
-          : service.name === "Eating disorders"
-          ? "Anorexia, bulimia, binge eating disorder, rumination disorder, orthorexia"
-          : "Various types and manifestations");
+      // Convert string values to rich text format if needed
+      let examples = service.examples;
 
-      const description =
-        service.description ||
-        "Our therapists use evidence-based approaches tailored to address your specific needs.";
+      // If examples is a string (old format) or doesn't exist, convert to rich text format
+      if (!examples || typeof examples === "string") {
+        const defaultExamples =
+          service.examples ||
+          (service.name === "Anxiety"
+            ? "Generalized anxiety, social anxiety, panic attacks, panic disorder, agoraphobia"
+            : service.name === "Depression"
+            ? "Major depression, melancholic depression, atypical depression, seasonal affective disorder"
+            : service.name === "Trauma"
+            ? "Acute trauma, chronic trauma, complex trauma, post-traumatic stress disorder"
+            : service.name === "Self-harm"
+            ? "Self-harm, self-injury, suicidal ideation, suicide survival"
+            : service.name === "Substance use disorders"
+            ? "Alcohol, marijuana, prescription drugs, opioids, amphetamines, cocaine"
+            : service.name === "Eating disorders"
+            ? "Anorexia, bulimia, binge eating disorder, rumination disorder, orthorexia"
+            : "Various types and manifestations");
+
+        // Convert string to rich text format with bullet points
+
+        examples = {
+          type: "root",
+          children: [
+            {
+              type: "p",
+              children: [{ type: "text", text: "" }],
+            },
+            {
+              type: "ul",
+              children: defaultExamples.split(",").map((item: string) => ({
+                type: "li",
+                children: [{ type: "text", text: item.trim() }],
+              })),
+            },
+          ],
+        };
+      }
+
+      // Handle description in the same way
+      let description = service.description;
+
+      if (!description || typeof description === "string") {
+        const defaultDescription =
+          service.description ||
+          "Our therapists use evidence-based approaches tailored to address your specific needs.";
+
+        description = {
+          type: "root",
+          children: [
+            {
+              type: "p",
+              children: [{ type: "text", text: defaultDescription }],
+            },
+          ],
+        };
+      }
 
       return {
         ...service,
@@ -65,10 +107,12 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
     .filter(Boolean) as EnhancedService[];
 
   // State to track which tab is active
+  // Initialize with the first service if available
   const [activeTab, setActiveTab] = useState<string>(
     enhancedServices.length > 0 ? enhancedServices[0]?.name || "" : ""
   );
 
+  // Find the currently active service
   const activeService = enhancedServices.find((s) => s.name === activeTab);
 
   return (
@@ -80,30 +124,51 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
           </h2>
         )}
 
-        <div className="flex flex-col md:flex-row">
-          {/* Left side - tabs */}
-          <div className="md:w-1/3 md:pr-0">
+        {/* Mobile Tabs - Horizontal scrollable tabs */}
+        <div className="md:hidden mb-4">
+          {enhancedServices.length > 0 && (
+            <div className="service-tabs-mobile">
+              {enhancedServices.map((service) => (
+                <button
+                  key={service.name}
+                  onClick={() => setActiveTab(service.name)}
+                  className={`service-tab-button py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                    activeTab === service.name
+                      ? "service-tab-active bg-bg-contrast text-bg shadow-sm"
+                      : "text-bg-contrast hover:bg-gray-100"
+                  }`}
+                >
+                  {service.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col md:flex-row md:min-h-[520px]">
+          {/* Left side - tabs (desktop only) */}
+          <div className="hidden md:block md:w-1/3 md:pr-0">
             {enhancedServices.length > 0 && (
-              <div className="flex flex-col">
+              <div className="flex flex-col h-full">
                 {enhancedServices.map((service) => (
                   <button
                     key={service.name}
                     onClick={() => setActiveTab(service.name)}
-                    className={`text-left py-5 px-6 flex rounded-l-lg items-center justify-between border-b border-gray-200 group transition-all cursor-pointer duration-300 ${
+                    className={`text-left h-[60px] py-5 px-6 flex rounded-l-lg items-center justify-between border-b border-gray-200 group transition-all cursor-pointer duration-300 ${
                       activeTab === service.name
                         ? "bg-bg-contrast text-bg font-medium"
-                        : "text-bg-contrast hover:text-text hover:bg-gray-50 bg-bg"
+                        : "text-bg-contrast hover:text-text hover:bg-gray-50 bg-tertiary"
                     }`}
                   >
                     <span
-                      className={`text-lg ${
+                      className={`text-lg whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%] ${
                         activeTab === service.name ? "font-medium" : ""
                       }`}
                     >
                       {service.name}
                     </span>
                     {activeTab === service.name && (
-                      <ArrowRight className="h-5 w-5 text-primary" />
+                      <ArrowRight className="h-5 w-5 text-primary flex-shrink-0" />
                     )}
                   </button>
                 ))}
@@ -112,47 +177,63 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
           </div>
 
           {/* Right side - Content for active tab */}
-          {activeService && (
-            <div className="md:w-2/3 bg-bg-contrast rounded-r-lg p-6 md:p-8">
-              <div className="border-b border-gray-200 mb-6">
-                <h3 className="text-2xl font-bold mb-4 text-bg">
-                  {activeService.name}
-                </h3>
-                <div className="text-bg mb-6">{activeService.examples}</div>
-              </div>
-
-              <div className="prose prose-lg max-w-none mb-8">
-                {activeService.description && (
-                  <div className="mb-6 text-bg">
-                    <h4 className="text-lg font-medium mb-2 ">
-                      How we treat it
-                    </h4>
-                    <p>{activeService.description}</p>
+          <div className="w-full md:w-2/3 bg-bg-contrast rounded-lg md:rounded-r-lg p-6 md:p-8 min-h-[420px] md:min-h-[520px] flex flex-col">
+            {activeService ? (
+              <>
+                <div className="border-b border-gray-200 mb-6">
+                  <h3 className="text-2xl font-bold mb-4 text-bg">
+                    {activeService.name}
+                  </h3>
+                  <div className="text-bg mb-6">
+                    {activeService.examples && (
+                      <div className="prose prose-sm max-w-none text-bg">
+                        <TinaMarkdown content={activeService.examples} />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
 
-              <div className="mt-8">
-                <Link
-                  href={activeService.slug || ctaLink || "#"}
-                  className="inline-flex items-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-medium py-3 px-6 rounded-md transition-all duration-300 group"
-                >
-                  <span>
-                    {ctaText || `Find a therapist for ${activeService.name}`}
-                  </span>
-                  <span className="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
+                <div className="prose prose-lg max-w-none mb-8 flex-grow">
+                  {activeService.description && (
+                    <div className="mb-6 text-bg">
+                      <h4 className="text-2xl font-medium mb-2">
+                        How we treat it
+                      </h4>
+                      <div className="h-[200px] overflow-y-auto pr-2 prose prose-sm max-w-none text-bg">
+                        <TinaMarkdown content={activeService.description} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-auto pt-4">
+                  <Link
+                    href={activeService.slug || ctaLink || "#"}
+                    className="inline-flex items-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-medium py-3 px-6 rounded-md transition-all duration-300 group"
+                  >
+                    <span>
+                      {ctaText || `Find a therapist for ${activeService.name}`}
+                    </span>
+                    <span className="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
+                      <ArrowRight size={18} />
+                    </span>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full">
+                <p className="text-bg text-lg">
+                  Select a condition to view details
+                </p>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {(ctaContent || ctaText) && !activeService && (
-          <div className="mt-12 text-center">
+          <div className="mt-6 text-center">
             {ctaContent && (
-              <p className="text-text text-lg mb-5 max-w-2xl mx-auto">
+              <p className="text-text text-lg mb-2 max-w-2xl mx-auto">
                 {ctaContent}
               </p>
             )}

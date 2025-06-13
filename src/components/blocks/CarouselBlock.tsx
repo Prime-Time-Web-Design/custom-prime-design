@@ -196,7 +196,7 @@ export const CarouselBlock: React.FC<CarouselBlockProps> = ({
                   <div
                     className={`h-full flex flex-col rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ${bgColor}`}
                   >
-                    <div className="w-full aspect-[3/2] relative">
+                    <div className="w-full md:aspect-[3/2] aspect-[16/9] relative">
                       {slide.src && (
                         <Image
                           src={normalizeSrc(slide.src)}
