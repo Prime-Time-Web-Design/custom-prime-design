@@ -315,10 +315,17 @@ export const pageSchema = defineSchema({
                   label: "Button Link",
                 },
                 {
-                  type: "image",
-                  name: "src",
-                  label: "Hero Image",
-                  description: "Image for the hero section (optional)",
+                  type: "object",
+                  list: true,
+                  name: "collageImages",
+                  label: "Collage Images",
+                  fields: [
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "Image",
+                    },
+                  ],
                 },
               ],
             },

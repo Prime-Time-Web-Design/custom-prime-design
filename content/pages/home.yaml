@@ -8,7 +8,11 @@ blocks:
       We craft websites that reflect your mission…
     buttonText: Book a Free Consultation
     buttonLink: /contact
-    src: /hero.jpg
+    collageImages:
+      - src: /optimized/featuredCardImage.webp
+      - src: /optimized/christina-wocintechchat-com-50TkCaP8M3A-unsplash.webp
+      - src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
+      - src: /optimized/hero.webp
     _template: hero
   - title: Benefits of PTWD
     subtitle: '  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, PTWD is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success.'

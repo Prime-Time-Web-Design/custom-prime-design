@@ -117,7 +117,10 @@ fragment PageParts on Page {
       subheading
       buttonText
       buttonLink
-      src
+      collageImages {
+        __typename
+        src
+      }
     }
     ... on PageBlocksRichTextBlock {
       heading

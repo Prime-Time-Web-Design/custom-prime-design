@@ -291,12 +291,16 @@ type PageBlocksCtaBlock {
   backgroundColor: String
 }
 
+type PageBlocksHeroCollageImages {
+  src: String
+}
+
 type PageBlocksHero {
   heading: String
   subheading: String
   buttonText: String
   buttonLink: String
-  src: String
+  collageImages: [PageBlocksHeroCollageImages]
 }
 
 type PageBlocksRichTextBlockFeatures {
@@ -448,12 +452,16 @@ input PageBlocksCtaBlockFilter {
   backgroundColor: StringFilter
 }
 
+input PageBlocksHeroCollageImagesFilter {
+  src: ImageFilter
+}
+
 input PageBlocksHeroFilter {
   heading: StringFilter
   subheading: StringFilter
   buttonText: StringFilter
   buttonLink: StringFilter
-  src: ImageFilter
+  collageImages: PageBlocksHeroCollageImagesFilter
 }
 
 input PageBlocksRichTextBlockFeaturesFilter {
@@ -697,12 +705,16 @@ input PageBlocksCtaBlockMutation {
   backgroundColor: String
 }
 
+input PageBlocksHeroCollageImagesMutation {
+  src: String
+}
+
 input PageBlocksHeroMutation {
   heading: String
   subheading: String
   buttonText: String
   buttonLink: String
-  src: String
+  collageImages: [PageBlocksHeroCollageImagesMutation]
 }
 
 input PageBlocksRichTextBlockFeaturesMutation {
