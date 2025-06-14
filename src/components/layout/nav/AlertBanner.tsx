@@ -18,13 +18,13 @@ const AlertBanner: React.FC<AlertBannerProps> = (props) => {
     <div
       className={`relative bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] py-2 px-4 text-white transition-all duration-300 shadow-sm`}
     >
-      <div className="flex sm:items-center sm:justify-center gap-3 max-w-screen-xl mx-auto px-2 relative">
+      <div className="flex sm:items-center sm:justify-center gap-2 max-w-screen-xl mx-auto px-2 relative">
         <span className="font-medium text-bg-contrast sm:text-center sm:mb-0 text-sm sm:max-w-full">
           {alertBanner?.alertLabel}
         </span>
         <Link
           href={alertBanner?.alertLink ?? ""}
-          className="bg-bg-contrast hover:bg-bg-contrast-light text-bg hover:text-shadow-bg-contrast font-medium sm:py-1 px-3 rounded-md transition duration-200 text-sm flex items-center gap-3 whitespace-nowrap shadow-sm mr-2"
+          className="bg-bg-contrast hover:bg-bg-contrast-light text-bg hover:text-shadow-bg-contrast sm:py-1 font-medium max-h-8 sm:max-h-none px-3 rounded-md transition duration-200 text-xs sm:text-sm flex items-center gap-3 whitespace-nowrap shadow-sm mr-2"
         >
           <div>{alertBanner?.alertLinkText}</div>
           <MoveRight className="h-4 w-4" />
