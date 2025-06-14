@@ -1,82 +1,49 @@
-// import Image from "next/image";
-// import { PageBlocksHero } from "../../../tina/__generated__/types";
-// import { Section } from "../layout/Section";
-// import { heroImagePlaceholder } from "@/lib/preload-utils";
-// import { useEffect, useState } from "react";
-
-// interface HeroBlockProps {
-//   data: PageBlocksHero;
-// }
-
-// export const HeroBlock = ({ data }: HeroBlockProps) => {
-//   const { heading, subheading, buttonText, buttonLink, src } = data;
-//   const [isDownloadLink, setIsDownloadLink] = useState(false);
-//   useEffect(() => {
-//     if (buttonLink?.endsWith(".pdf")) {
-//       setIsDownloadLink(true);
-//     }
-//   }, [buttonLink]);
-
-//   return (
-//     <Section
-//       background="bg-bg"
-//       className="py-16 md:py-20 relative overflow-hidden"
-//     >
-//       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-//         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-//           <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-//             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
-//               {heading?.split(" ").slice(0, -1).join(" ")}
-//               <span className="block italic">
-//                 {heading?.split(" ").slice(-1)[0]}.
-//               </span>
-//             </h1>
-//             <div className="prose prose-lg text-[var(--color-deep-slate)]">
-//               {subheading}
-//             </div>
-//             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-//               <a
-//                 href={buttonLink ?? "#"}
-//                 download={isDownloadLink}
-//                 className="px-8 py-3 rounded-xl bg-primary hover:bg-primary-hover text-[var(--color-deep-slate)] font-medium transition-colors"
-//               >
-//                 {buttonText}
-//               </a>
-//             </div>
-//           </div>
-//           <div className="w-full md:w-1/2">
-//             <div className="relative">
-//               {src ? (
-//                 <Image
-//                   src={src}
-//                   alt="Hero illustration"
-//                   width={1200}
-//                   height={800}
-//                   priority={true}
-//                   loading="eager"
-//                   className="w-full h-auto object-cover rounded-xl shadow-xl"
-//                   sizes="(max-width: 768px) 100vw, 50vw"
-//                   quality={90}
-//                   placeholder="blur"
-//                   blurDataURL={heroImagePlaceholder}
-//                 />
-//               ) : null}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </Section>
-//   );
-// };
-
-// export default HeroBlock;
-
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageBlocksHero } from "../../../tina/__generated__/types";
 import { Section } from "../layout/Section";
 import { heroImagePlaceholder } from "@/lib/preload-utils";
 import { useEffect, useState } from "react";
+import { normalizeSrc } from "@/lib/utils";
+
+// Function to calculate the right image index based on other active indexes
+// This helps ensure we show different images in each position when possible
+const calculateRightImageIndex = (
+  mainIndex: number,
+  topLeftIndex: number,
+  bottomRightIndex: number,
+  totalImages: number
+): number => {
+  // Empty or single image case
+  if (totalImages <= 1) return 0;
+
+  // For exactly 2 images, just use the opposite of main image
+  if (totalImages === 2) {
+    return mainIndex === 0 ? 1 : 0;
+  }
+
+  // For 3+ images, we can show a unique image in each position
+  // First, collect indexes that are already in use
+  const usedIndexes = [mainIndex, topLeftIndex, bottomRightIndex];
+
+  // Find the first available index that isn't used
+  for (let i = 0; i < totalImages; i++) {
+    if (!usedIndexes.includes(i)) {
+      return i;
+    }
+  }
+
+  // If all indexes are already used (can happen with 3 images),
+  // pick an index that's different from main image at minimum
+  let rightIdx = (mainIndex + 1) % totalImages;
+
+  // If this index happens to be the same as main image, find another
+  while (rightIdx === mainIndex) {
+    rightIdx = (rightIdx + 1) % totalImages;
+  }
+
+  return rightIdx;
+};
 
 interface HeroBlockProps {
   data: PageBlocksHero;
@@ -91,11 +58,30 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
     collageImages = [],
   } = data;
   const [isDownloadLink, setIsDownloadLink] = useState(false);
-  const [activeIndexes, setActiveIndexes] = useState({
-    mainImage: 0,
-    circleTopLeft: 0,
-    circleBottomRight: 0,
-    // We'll use mainImage + 1 % length for the right main image, so no need for another state
+  // Initialize with staggered indexes to ensure different images are shown
+  const [activeIndexes, setActiveIndexes] = useState(() => {
+    const imageCount = collageImages?.length || 0;
+
+    // If no images or just one image
+    if (imageCount <= 1) {
+      return { mainImage: 0, circleTopLeft: 0, circleBottomRight: 0 };
+    }
+
+    // For exactly 2 images
+    if (imageCount === 2) {
+      return {
+        mainImage: 0,
+        circleTopLeft: 1,
+        circleBottomRight: 0,
+      };
+    }
+
+    // For 3 or more images, start with fully distinct images
+    return {
+      mainImage: 0,
+      circleTopLeft: 1,
+      circleBottomRight: 2,
+    };
   });
 
   useEffect(() => {
@@ -104,35 +90,204 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
     }
   }, [buttonLink]);
 
-  // Rotate through images for each position
+  // Rotate through images for each position with staggered timing
   useEffect(() => {
     if (!collageImages || collageImages.length <= 1) return;
 
-    const mainInterval = setInterval(() => {
-      setActiveIndexes((prev) => ({
-        ...prev,
-        mainImage: (prev.mainImage + 1) % collageImages.length,
-      }));
-    }, 6000);
+    const imageCount = collageImages.length;
 
-    const circleTopLeftInterval = setInterval(() => {
-      setActiveIndexes((prev) => ({
-        ...prev,
-        circleTopLeft: (prev.circleTopLeft + 1) % collageImages.length,
-      }));
-    }, 7000);
+    // Helper function to find next unique index
+    const getNextUniqueIndex = (
+      currentIndex: number,
+      otherPositions: number[]
+    ): number => {
+      // Try each index in sequence until finding one not used elsewhere
+      for (let i = 1; i <= imageCount; i++) {
+        const candidateIdx = (currentIndex + i) % imageCount;
+        if (!otherPositions.includes(candidateIdx)) {
+          return candidateIdx;
+        }
+      }
 
-    const circleBottomRightInterval = setInterval(() => {
-      setActiveIndexes((prev) => ({
-        ...prev,
-        circleBottomRight: (prev.circleBottomRight + 1) % collageImages.length,
-      }));
-    }, 8000);
+      // If all indices are used (can happen with exactly 3 images),
+      // just return the next index that's not the current one
+      return (currentIndex + 1) % imageCount;
+    };
+
+    // Start rotations very quickly with minimal initial delay
+    const initialDelay = 800;
+
+    // Initialize timers for each image position
+    let mainTimer: NodeJS.Timeout;
+    let topLeftTimer: NodeJS.Timeout;
+    let bottomRightTimer: NodeJS.Timeout;
+
+    // Create more gradual rotation timing with staggered intervals
+    // First rotation happens quickly, subsequent rotations happen more gradually
+    const mainFirstInterval = 5000; // 5 seconds for first rotation
+    const mainSubsequentInterval = 8000; // 8 seconds for subsequent rotations
+
+    const topLeftFirstInterval = 5500; // 5.5 seconds for first rotation
+    const topLeftSubsequentInterval = 9000; // 9 seconds for subsequent rotations
+
+    const bottomRightFirstInterval = 6000; // 6 seconds for first rotation
+    const bottomRightSubsequentInterval = 10000; // 10 seconds for subsequent rotations
+
+    // For the main image rotation - start very soon
+    mainTimer = setTimeout(() => {
+      // Update immediately after initial delay
+      setActiveIndexes((prev) => {
+        const usedPositions = [prev.circleTopLeft, prev.circleBottomRight];
+        const nextMainIndex = getNextUniqueIndex(prev.mainImage, usedPositions);
+        return { ...prev, mainImage: nextMainIndex };
+      });
+
+      // Wait for the first rotation interval
+      const firstRotationTimeout = setTimeout(() => {
+        // For the first rotation after initial display
+        setActiveIndexes((prev) => {
+          const usedPositions = [prev.circleTopLeft, prev.circleBottomRight];
+          const nextMainIndex = getNextUniqueIndex(
+            prev.mainImage,
+            usedPositions
+          );
+          return { ...prev, mainImage: nextMainIndex };
+        });
+
+        // Then set up the more gradual subsequent interval
+        const mainIntervalId = setInterval(() => {
+          setActiveIndexes((prev) => {
+            // Find a unique index for the main image
+            const usedPositions = [prev.circleTopLeft, prev.circleBottomRight];
+            const nextMainIndex = getNextUniqueIndex(
+              prev.mainImage,
+              usedPositions
+            );
+
+            return {
+              ...prev,
+              mainImage: nextMainIndex,
+            };
+          });
+        }, mainSubsequentInterval);
+
+        // Store the interval ID for cleanup
+        mainTimer = mainIntervalId;
+      }, mainFirstInterval);
+
+      // Store the timeout ID for cleanup
+      mainTimer = firstRotationTimeout;
+    }, initialDelay);
+
+    // For the top-left circle - start with slightly longer delay
+    topLeftTimer = setTimeout(() => {
+      setActiveIndexes((prev) => {
+        const usedPositions = [prev.mainImage, prev.circleBottomRight];
+        const nextTopLeftIndex = getNextUniqueIndex(
+          prev.circleTopLeft,
+          usedPositions
+        );
+        return { ...prev, circleTopLeft: nextTopLeftIndex };
+      });
+
+      // Wait for the first rotation interval
+      const firstTopLeftTimeout = setTimeout(() => {
+        // First rotation after initial display
+        setActiveIndexes((prev) => {
+          const usedPositions = [prev.mainImage, prev.circleBottomRight];
+          const nextTopLeftIndex = getNextUniqueIndex(
+            prev.circleTopLeft,
+            usedPositions
+          );
+          return { ...prev, circleTopLeft: nextTopLeftIndex };
+        });
+
+        // Then set up the more gradual subsequent interval
+        const topLeftIntervalId = setInterval(() => {
+          setActiveIndexes((prev) => {
+            // Find a unique index for the top-left circle
+            const usedPositions = [prev.mainImage, prev.circleBottomRight];
+            const nextTopLeftIndex = getNextUniqueIndex(
+              prev.circleTopLeft,
+              usedPositions
+            );
+
+            return {
+              ...prev,
+              circleTopLeft: nextTopLeftIndex,
+            };
+          });
+        }, topLeftSubsequentInterval);
+
+        topLeftTimer = topLeftIntervalId;
+      }, topLeftFirstInterval);
+
+      topLeftTimer = firstTopLeftTimeout;
+    }, initialDelay + 400); // Shorter stagger time (0.4s)
+
+    // For the bottom-right circle - start with the longest delay
+    bottomRightTimer = setTimeout(() => {
+      setActiveIndexes((prev) => {
+        const usedPositions = [prev.mainImage, prev.circleTopLeft];
+        const nextBottomRightIndex = getNextUniqueIndex(
+          prev.circleBottomRight,
+          usedPositions
+        );
+        return { ...prev, circleBottomRight: nextBottomRightIndex };
+      });
+
+      // Wait for the first rotation interval
+      const firstBottomRightTimeout = setTimeout(() => {
+        // First rotation after initial display
+        setActiveIndexes((prev) => {
+          const usedPositions = [prev.mainImage, prev.circleTopLeft];
+          const nextBottomRightIndex = getNextUniqueIndex(
+            prev.circleBottomRight,
+            usedPositions
+          );
+          return { ...prev, circleBottomRight: nextBottomRightIndex };
+        });
+
+        // Then set up the more gradual subsequent interval
+        const bottomRightIntervalId = setInterval(() => {
+          setActiveIndexes((prev) => {
+            // Find a unique index for the bottom-right circle
+            const usedPositions = [prev.mainImage, prev.circleTopLeft];
+            const nextBottomRightIndex = getNextUniqueIndex(
+              prev.circleBottomRight,
+              usedPositions
+            );
+
+            return {
+              ...prev,
+              circleBottomRight: nextBottomRightIndex,
+            };
+          });
+        }, bottomRightSubsequentInterval);
+
+        bottomRightTimer = bottomRightIntervalId;
+      }, bottomRightFirstInterval);
+
+      bottomRightTimer = firstBottomRightTimeout;
+    }, initialDelay + 800); // Shorter stagger time (0.8s)
 
     return () => {
-      clearInterval(mainInterval);
-      clearInterval(circleTopLeftInterval);
-      clearInterval(circleBottomRightInterval);
+      // Fixed cleanup function to properly clear all timers
+      // Each timer could be either a timeout or interval depending on state when component unmounts
+      if (mainTimer) {
+        clearTimeout(mainTimer);
+        clearInterval(mainTimer);
+      }
+
+      if (topLeftTimer) {
+        clearTimeout(topLeftTimer);
+        clearInterval(topLeftTimer);
+      }
+
+      if (bottomRightTimer) {
+        clearTimeout(bottomRightTimer);
+        clearInterval(bottomRightTimer);
+      }
     };
   }, [collageImages]);
 
@@ -168,7 +323,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
               /* Single image display - no carousel */
               <div className="relative max-w-[600px] mx-auto">
                 <Image
-                  src={collageImages[0]?.src ?? ""}
+                  src={normalizeSrc(collageImages[0]?.src ?? "")}
                   alt="Hero illustration"
                   width={1200}
                   height={800}
@@ -202,7 +357,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                               transition={{ duration: 0.5 }}
                             >
                               <Image
-                                src={image?.src ?? ""}
+                                src={normalizeSrc(image?.src ?? "")}
                                 alt={`Hero top image ${index}`}
                                 fill
                                 className="object-cover"
@@ -242,7 +397,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                                 }}
                               >
                                 <Image
-                                  src={image?.src ?? ""}
+                                  src={normalizeSrc(image?.src ?? "")}
                                   alt={`Hero main left image ${index}`}
                                   fill
                                   className="object-cover"
@@ -262,9 +417,14 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                       <AnimatePresence initial={false}>
                         {collageImages?.map(
                           (image, index) =>
+                            // Use an offset from the main image index for the right image
                             index ===
-                              (activeIndexes.mainImage + 1) %
-                                collageImages.length && (
+                              calculateRightImageIndex(
+                                activeIndexes.mainImage,
+                                activeIndexes.circleTopLeft,
+                                activeIndexes.circleBottomRight,
+                                collageImages.length
+                              ) && (
                               <motion.div
                                 key={`main-right-${index}`}
                                 className="absolute inset-0"
@@ -281,7 +441,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                                 }}
                               >
                                 <Image
-                                  src={image?.src ?? ""}
+                                  src={normalizeSrc(image?.src ?? "")}
                                   alt={`Hero main right image ${index}`}
                                   fill
                                   className="object-cover"
@@ -313,7 +473,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                               transition={{ duration: 0.5 }}
                             >
                               <Image
-                                src={image?.src ?? ""}
+                                src={normalizeSrc(image?.src ?? "")}
                                 alt={`Hero bottom image ${index}`}
                                 fill
                                 className="object-cover"

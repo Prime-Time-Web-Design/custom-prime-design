@@ -73,7 +73,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
                             />
                           </div>
                         </PopoverButton>
-                        <PopoverPanel className="absolute z-10 mt-2 left-0 rounded-xl bg-bg shadow-xl focus:outline-none overflow-hidden">
+                        <PopoverPanel className="absolute z-10 mt-2 left-0 rounded-lg bg-bg shadow-xl focus:outline-none overflow-hidden">
                           <div className="flex flex-row relative">
                             <div className="p-4 flex flex-col gap-2 flex-1">
                               {renderSubItems(item.subItems, close)}

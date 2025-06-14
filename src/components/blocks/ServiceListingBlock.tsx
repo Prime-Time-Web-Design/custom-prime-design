@@ -132,10 +132,10 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
                 <button
                   key={service.name}
                   onClick={() => setActiveTab(service.name)}
-                  className={`service-tab-button py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                  className={`service-tab-button text-sm cursor-pointer transition-all ${
                     activeTab === service.name
-                      ? "service-tab-active bg-bg-contrast text-bg shadow-sm"
-                      : "text-bg-contrast hover:bg-gray-100"
+                      ? "service-tab-active bg-bg-contrast text-bg"
+                      : "bg-tertiary text-bg-contrast hover:opacity-90"
                   }`}
                 >
                   {service.name}
@@ -145,7 +145,7 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
           )}
         </div>
 
-        <div className="flex flex-col md:flex-row md:min-h-[520px]">
+        <div className="flex flex-col md:flex-row md:h-[480px]">
           {/* Left side - tabs (desktop only) */}
           <div className="hidden md:block md:w-1/3 md:pr-0">
             {enhancedServices.length > 0 && (
@@ -177,14 +177,14 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
           </div>
 
           {/* Right side - Content for active tab */}
-          <div className="w-full md:w-2/3 bg-bg-contrast  md:rounded-r-lg p-6 md:p-8 min-h-[420px] md:min-h-[520px] flex flex-col">
+          <div className="w-full md:w-2/3 bg-bg-contrast md:rounded-r-lg p-6 md:p-8 h-[420px] md:h-[480px] flex flex-col">
             {activeService ? (
-              <>
-                <div className="border-b border-gray-200 mb-6">
-                  <h3 className="text-2xl font-bold mb-4 text-bg">
+              <div className="flex flex-col h-full">
+                <div className="border-b border-gray-200 mb-4">
+                  <h3 className="text-2xl font-bold mb-2 text-bg">
                     {activeService.name}
                   </h3>
-                  <div className="text-bg mb-6">
+                  <div className="text-bg mb-3 max-h-[100px] overflow-y-auto">
                     {activeService.examples && (
                       <div className="prose prose-sm max-w-none text-bg">
                         <TinaMarkdown content={activeService.examples} />
@@ -193,20 +193,20 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
                   </div>
                 </div>
 
-                <div className="prose prose-lg max-w-none mb-8 flex-grow">
+                <div className="prose prose-lg max-w-none mb-4 flex-grow overflow-hidden">
                   {activeService.description && (
-                    <div className="mb-6 text-bg">
+                    <div className="text-bg h-full flex flex-col">
                       <h4 className="text-2xl font-medium mb-2">
                         How we treat it
                       </h4>
-                      <div className="h-[200px] overflow-y-auto pr-2 prose prose-sm max-w-none text-bg">
+                      <div className="flex-grow overflow-y-auto pr-2 prose prose-sm max-w-none text-bg">
                         <TinaMarkdown content={activeService.description} />
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="mt-auto pt-4">
+                <div className="mt-auto pt-2">
                   <Link
                     href={activeService.slug || ctaLink || "#"}
                     className="inline-flex items-center gap-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-medium py-3 px-6 rounded-md transition-all duration-300 group"
@@ -219,9 +219,9 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
                     </span>
                   </Link>
                 </div>
-              </>
+              </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full">
+              <div className="flex flex-col items-center justify-center h-full p-4">
                 <p className="text-bg text-lg">
                   Select a condition to view details
                 </p>
