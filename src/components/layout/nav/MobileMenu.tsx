@@ -40,11 +40,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   }, [isOpen]);
 
   return (
-    <div className="px-6 py-4">
-      <nav className="mt-8 flow-root">
-        <div className="space-y-3">
+    <div>
+      <nav className="flow-root">
+        <div>
           {navItems.map((item) => (
-            <div key={item?.label} className="py-2">
+            <div key={item?.label}>
               {item?.subItems && item?.subItems.length > 0 ? (
                 <details
                   ref={(el: HTMLDetailsElement | null) => {
@@ -52,7 +52,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                       detailsRefs.current[item.label] = el;
                     }
                   }}
-                  className="group"
+                  className="group border-b border-[#ffffff30]"
                   onClick={(e) => {
                     handleDetailsClick(item.label);
 
@@ -67,13 +67,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     }
                   }}
                 >
-                  <summary className="list-none flex cursor-pointer items-center rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200">
+                  <summary className="list-none flex justify-between cursor-pointer items-center px-6 py-4 text-xl font-semibold text-white hover:text-white transition duration-200">
                     {item?.label}
                     <ChevronDown
-                      className={`ml-2 h-5 w-5 text-primary transition-transform duration-200 group-open:rotate-180`}
+                      className={`h-6 w-6 text-white transition-transform duration-200 group-open:rotate-180`}
                     />
                   </summary>
-                  <div className="mt-3 pl-6 space-y-3">
+                  <div className="bg-[#ffffff10]">
                     {item?.subItems.map((subItem) => (
                       <Link
                         key={subItem?.label}
@@ -82,7 +82,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                           closeMenu(); // Close the hamburger menu using context
                           onClose(); // Also call the original onClose for compatibility
                         }}
-                        className="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                        className="block px-6 py-4 text-base font-medium text-white hover:bg-[#ffffff20] transition duration-200"
                       >
                         {subItem?.label}
                       </Link>
@@ -96,9 +96,23 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     closeMenu(); // Close the hamburger menu using context
                     onClose(); // Also call the original onClose for compatibility
                   }}
-                  className="block rounded-lg px-4 py-3 text-base font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+                  className="flex justify-between items-center px-6 py-4 text-xl font-semibold text-white hover:bg-[#ffffff10] transition duration-200 border-b border-[#ffffff30]"
                 >
                   {item?.label}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="chevron-right"
+                  >
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
                 </Link>
               )}
             </div>

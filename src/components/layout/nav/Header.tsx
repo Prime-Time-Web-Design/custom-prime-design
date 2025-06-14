@@ -39,7 +39,7 @@ export const Header = () => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-3">
           <Link
             href="/log-in"
             className="hidden lg:block rounded-lg bg-transparent px-3 py-1.5 text-sm font-semibold text-bg hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
@@ -48,7 +48,7 @@ export const Header = () => {
           </Link>
           <Link
             href="/book-now"
-            className="rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-sm font-semibold text-[#252042] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200 flex items-center"
+            className="rounded bg-[var(--color-primary)] px-4 py-1.5 text-sm font-semibold text-[#252042] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200 flex items-center"
           >
             Book Now
           </Link>

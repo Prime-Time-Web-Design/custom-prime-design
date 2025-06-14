@@ -63,11 +63,11 @@ function HamburgerMenu({
           style={{
             top: headerHeight,
             height: `calc(100vh - ${headerHeight}px)`,
-            background: "var(--color-bg)", // Ensure solid background
+            background: "var(--color-bg-contrast)", // Dark background like in the screenshot
           }}
         >
-          <nav className="w-full h-full overflow-y-auto flex flex-col justify-start items-stretch px-6 py-8">
-            {children}
+          <nav className="w-full h-full overflow-y-auto flex flex-col justify-between items-stretch">
+            <div className="flex-1">{children}</div>
           </nav>
         </aside>
       </div>
