@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useLayout } from "../layout-context";
 import Image from "next/image";
+import primeLogo from "../../../../public/optimized/primeLogo-trimmed.webp";
 
 const SocialIcon = ({ platform }: { platform: string }) => {
   switch (platform) {
@@ -38,47 +39,113 @@ export const Footer = () => {
 
   return (
     <footer className="bg-bg-contrast text-secondary relative overflow-hidden">
-      {/* Concentric circles background */}
-      <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 pointer-events-none z-0">
+      {/* Grid pattern background with rounded squares */}
+      <div className="hidden lg:block absolute right-0 top-0 h-full w-1/4 pointer-events-none z-0">
         <svg
-          viewBox="0 0 800 800"
+          viewBox="0 0 300 300"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
+          style={{ opacity: 0.8 }}
         >
-          <circle
-            cx="800"
-            cy="0"
-            r="400"
-            fill="var(--color-secondary)"
-            fillOpacity="0.7"
-          />
-          <circle
-            cx="800"
-            cy="0"
-            r="320"
-            fill="var(--color-secondary)"
-            fillOpacity="0.5"
-          />
-          <circle
-            cx="800"
-            cy="0"
-            r="240"
-            fill="var(--color-secondary)"
-            fillOpacity="0.3"
-          />
+          <g transform="translate(30, 40)">
+            {/* 3x3 Grid of rounded squares with gaps */}
+            {/* Row 1 */}
+            <rect
+              x="0"
+              y="0"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-tertiary)"
+            />
+            <rect
+              x="60"
+              y="0"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-secondary)"
+            />
+            <rect
+              x="120"
+              y="0"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-tertiary)"
+            />
+
+            {/* Row 2 */}
+            <rect
+              x="0"
+              y="60"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-secondary)"
+            />
+            <rect
+              x="60"
+              y="60"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-tertiary)"
+            />
+            <rect
+              x="120"
+              y="60"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-secondary)"
+            />
+
+            {/* Row 3 */}
+            <rect
+              x="0"
+              y="120"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-tertiary)"
+            />
+            <rect
+              x="60"
+              y="120"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-secondary)"
+            />
+            <rect
+              x="120"
+              y="120"
+              width="50"
+              height="50"
+              rx="8"
+              fill="var(--color-tertiary)"
+            />
+          </g>
         </svg>
       </div>
-      <div className="relative z-10 mx-auto py-12 px-4 w-full max-w-7xl flex flex-col lg:flex-row items-start justify-center gap-12 lg:gap-16">
+      <div className="relative z-10 mx-auto py-12 px-4 md:pl-8 lg:pl-16 w-full max-w-7xl flex flex-col lg:flex-row items-start justify-start gap-12 lg:gap-16">
         {/* Logo and Social */}
         <div className="flex flex-col items-center gap-4 flex-shrink-0 w-full lg:w-auto mb-8 lg:mb-0">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={120}
-            height={80}
-            className="h-20 w-auto mx-auto"
-          />
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center">
+              <Image
+                src={primeLogo}
+                width={120}
+                height={21}
+                alt="Logo"
+                style={{ height: "auto" }}
+                priority
+                className="py-1"
+              />
+            </Link>
+          </div>
           <div className="flex gap-4 mt-2">
             {footer?.social?.map((social, idx) => (
               <a
@@ -108,7 +175,7 @@ export const Footer = () => {
                     <li key={subItem?.label}>
                       <Link
                         href={subItem?.href || "#"}
-                        className="block font-medium text-base text-secondary hover:text-white transition-colors pl-1 py-1 rounded"
+                        className="block font-medium text-base text-secondary hover:text-bg transition-colors pl-1 py-1 rounded"
                       >
                         {subItem?.label}
                       </Link>
@@ -118,7 +185,7 @@ export const Footer = () => {
                   <li>
                     <Link
                       href={navItem?.href || "#"}
-                      className="block font-medium text-base text-secondary hover:text-white transition-colors pl-1 py-1 rounded"
+                      className="block font-medium text-base text-secondary hover:text-bg transition-colors pl-1 py-1 rounded"
                     >
                       {navItem?.label}
                     </Link>

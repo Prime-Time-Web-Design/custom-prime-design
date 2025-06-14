@@ -26,13 +26,13 @@ export const CTABlock = ({ data }: CTABlockProps) => {
     imageSrc && typeof imageSrc === "string" && imageSrc.trim() !== "";
 
   return (
-    <div className={`px-4 py-16 ${backgroundColor} border-b border-gray-200`}>
+    <div className={`px-4 md:px-8 lg:px-16 py-20 ${backgroundColor}`}>
       <div className="max-w-7xl mx-auto">
         {/* Two-column layout container */}
-        <div className="flex flex-col md:flex-row items-center gap-5">
+        <div className="flex flex-col md:flex-row justify-evenly">
           {/* Left column - Card with image and text */}
           {hasImage && (
-            <div className="w-full md:w-1/2 mb-8 md:mb-0 flex justify-center md:justify-end pr-0 md:pr-12">
+            <div className="w-full md:w-1/2 mb-8 md:mb-0 flex justify-center md:justify-end pr-0 md:pr-6">
               <div className="bg-[#1A1E43] rounded-lg p-8 text-white max-w-md w-full">
                 <div className="flex items-start mb-4">
                   <div className="relative overflow-hidden">
@@ -66,7 +66,7 @@ export const CTABlock = ({ data }: CTABlockProps) => {
           {/* Right column - Content area */}
           <div
             className={`w-full ${
-              hasImage ? "md:w-1/2" : "md:w-2/3 mx-auto"
+              hasImage ? "md:w-1/2 md:pl-8 lg:pl-12" : "md:w-2/3 mx-auto"
             } text-left`}
           >
             {heading && (

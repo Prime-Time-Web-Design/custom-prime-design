@@ -139,11 +139,11 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
   return (
     <Section
       background="bg-bg"
-      className="py-16 md:py-20 relative overflow-hidden"
+      className="py-16 md:py-20 relative overflow-hidden md:flex md:items-center md:min-h-[75vh]"
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
-          <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
+          <div className="w-full md:w-[45%] space-y-6 text-center md:text-left md:self-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-deep-slate)]">
               {heading}
             </h1>
@@ -161,12 +161,12 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-[55%] md:flex md:justify-end md:items-center">
             {!collageImages ||
             collageImages.length ===
               0 /* No images case */ ? null : collageImages.length === 1 ? (
               /* Single image display - no carousel */
-              <div className="relative">
+              <div className="relative max-w-[600px] mx-auto">
                 <Image
                   src={collageImages[0]?.src ?? ""}
                   alt="Hero illustration"
@@ -175,20 +175,20 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                   priority={true}
                   loading="eager"
                   className="w-full h-auto object-cover rounded-xl shadow-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 55vw"
                   quality={90}
-                  // placeholder="blur"
-                  // blurDataURL={heroImagePlaceholder}
+                  placeholder="blur"
+                  blurDataURL={heroImagePlaceholder}
                 />
               </div>
             ) : (
               /* Multiple images - grid layout with 4 positions and color blocks */
-              <div className="relative w-full h-[500px] md:h-[600px]">
-                <div className="grid grid-cols-3 grid-rows-3 gap-4 h-full w-full">
+              <div className="relative w-full aspect-square md:aspect-square lg:aspect-square max-h-[600px] max-w-[600px] mx-auto">
+                <div className="grid grid-cols-3 grid-rows-3 gap-2 sm:gap-3 md:gap-4 h-full w-full">
                   {/* Top row with purple block (left), image (center), purple block (right) */}
-                  <div className="bg-[var(--color-soft-light-purple)] rounded-xl shadow-md" />
+                  <div className="bg-[var(--color-soft-light-purple)] rounded-lg md:rounded-xl shadow-md" />
 
-                  <div className="relative rounded-xl shadow-md overflow-hidden">
+                  <div className="relative rounded-lg md:rounded-xl shadow-md overflow-hidden">
                     <AnimatePresence initial={false}>
                       {collageImages?.map(
                         (image, index) =>
@@ -216,12 +216,12 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                     </AnimatePresence>
                   </div>
 
-                  <div className="bg-bg-contrast rounded-xl shadow-md" />
+                  <div className="bg-bg-contrast rounded-lg md:rounded-xl shadow-md" />
 
                   {/* Middle row with two main images side by side */}
-                  <div className="col-span-3 grid grid-cols-2 gap-4">
+                  <div className="col-span-3 grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
                     {/* Left main image */}
-                    <div className="relative rounded-xl shadow-md overflow-hidden">
+                    <div className="relative rounded-lg md:rounded-xl shadow-md overflow-hidden">
                       <AnimatePresence initial={false}>
                         {collageImages?.map(
                           (image, index) =>
@@ -258,7 +258,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                     </div>
 
                     {/* Right main image */}
-                    <div className="relative rounded-xl shadow-md overflow-hidden">
+                    <div className="relative rounded-lg md:rounded-xl shadow-md overflow-hidden">
                       <AnimatePresence initial={false}>
                         {collageImages?.map(
                           (image, index) =>
@@ -297,9 +297,9 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                   </div>
 
                   {/* Bottom row with purple block (left), image (center), purple block (right) */}
-                  <div className="bg-bg-contrast rounded-xl shadow-md" />
+                  <div className="bg-bg-contrast rounded-lg md:rounded-xl shadow-md" />
 
-                  <div className="relative rounded-xl shadow-md overflow-hidden">
+                  <div className="relative rounded-lg md:rounded-xl shadow-md overflow-hidden">
                     <AnimatePresence initial={false}>
                       {collageImages?.map(
                         (image, index) =>
@@ -327,7 +327,7 @@ export const HeroBlock = ({ data }: HeroBlockProps) => {
                     </AnimatePresence>
                   </div>
 
-                  <div className="bg-[var(--color-soft-light-purple)] rounded-xl shadow-md" />
+                  <div className="bg-[var(--color-soft-light-purple)] rounded-lg md:rounded-xl shadow-md" />
                 </div>
               </div>
             )}

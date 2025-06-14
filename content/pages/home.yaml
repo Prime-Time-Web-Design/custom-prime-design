@@ -17,7 +17,7 @@ blocks:
   - title: Benefits of PTWD
     subtitle: '  People in crisis are struggling to find the treatment they need. With immediate access, flexible scheduling, and exceptional outcomes, PTWD is creating serious, effective, and accessible solutions.  Our mental health, substance use, and eating disorder treatment programs ensure every client receives personalized, whole-person care designed for long-term healing and success.'
     benefits:
-      - icon: EqualSquare
+      - icon: Book
         heading: Affordable Care
         text: Receive affordable and High Quality Mental Health Care
         backgroundColor: bg-secondary-hover
@@ -27,7 +27,7 @@ blocks:
         text: 'Custom Build your therapeutic experience '
         backgroundColor: bg-accent
         buttonText: Learn More
-      - icon: PersonStanding
+      - icon: Plane
         heading: Easy Therapist Search
         text: Easy Search to find your best fit Therapist
         backgroundColor: bg-tertiary-hover
@@ -254,3 +254,11 @@ blocks:
       therapists specialize in and more!
     backgroundColor: bg-bg-beige
     _template: serviceListingBlock
+  - title: Subscribe To Our Thrive Monthly Newsletter
+    description: >-
+      Insightful mental health tips, powerful stories, and practical
+      tools—delivered monthly to help you heal, grow, and thrive.
+    backgroundColor: ''
+    textColor: ''
+    buttonBgColor: ''
+    _template: newsletterSignupBlock

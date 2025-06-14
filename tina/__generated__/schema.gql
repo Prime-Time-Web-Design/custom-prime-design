@@ -362,7 +362,16 @@ type PageBlocksBannerBlock {
   benefits: [PageBlocksBannerBlockBenefits]
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock
+type PageBlocksNewsletterSignupBlock {
+  title: String
+  description: String
+  backgroundColor: String
+  textColor: String
+  buttonBgColor: String
+  buttonTextColor: String
+}
+
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock
 
 type Page implements Node & Document {
   title: String!
@@ -535,6 +544,15 @@ input PageBlocksBannerBlockFilter {
   benefits: PageBlocksBannerBlockBenefitsFilter
 }
 
+input PageBlocksNewsletterSignupBlockFilter {
+  title: StringFilter
+  description: StringFilter
+  backgroundColor: StringFilter
+  textColor: StringFilter
+  buttonBgColor: StringFilter
+  buttonTextColor: StringFilter
+}
+
 input PageBlocksFilter {
   ctaBlock: PageBlocksCtaBlockFilter
   hero: PageBlocksHeroFilter
@@ -542,6 +560,7 @@ input PageBlocksFilter {
   carouselBlock: PageBlocksCarouselBlockFilter
   serviceListingBlock: PageBlocksServiceListingBlockFilter
   bannerBlock: PageBlocksBannerBlockFilter
+  newsletterSignupBlock: PageBlocksNewsletterSignupBlockFilter
 }
 
 input PageFilter {
@@ -780,6 +799,15 @@ input PageBlocksBannerBlockMutation {
   benefits: [PageBlocksBannerBlockBenefitsMutation]
 }
 
+input PageBlocksNewsletterSignupBlockMutation {
+  title: String
+  description: String
+  backgroundColor: String
+  textColor: String
+  buttonBgColor: String
+  buttonTextColor: String
+}
+
 input PageBlocksMutation {
   ctaBlock: PageBlocksCtaBlockMutation
   hero: PageBlocksHeroMutation
@@ -787,6 +815,7 @@ input PageBlocksMutation {
   carouselBlock: PageBlocksCarouselBlockMutation
   serviceListingBlock: PageBlocksServiceListingBlockMutation
   bannerBlock: PageBlocksBannerBlockMutation
+  newsletterSignupBlock: PageBlocksNewsletterSignupBlockMutation
 }
 
 input PageMutation {

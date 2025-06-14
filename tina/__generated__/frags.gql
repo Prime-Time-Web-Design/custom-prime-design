@@ -173,5 +173,13 @@ fragment PageParts on Page {
         buttonLink
       }
     }
+    ... on PageBlocksNewsletterSignupBlock {
+      title
+      description
+      backgroundColor
+      textColor
+      buttonBgColor
+      buttonTextColor
+    }
   }
 }

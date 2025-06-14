@@ -824,6 +824,67 @@ var pageSchema = defineSchema2({
                   ]
                 }
               ]
+            },
+            {
+              name: "newsletterSignupBlock",
+              label: "Newsletter Signup Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "title",
+                  label: "Title",
+                  description: "Main heading for the newsletter signup",
+                  ui: {
+                    defaultValue: "Sign up for our email newsletter"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "description",
+                  label: "Description",
+                  description: "Descriptive text about the newsletter",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Sign up for free and stay up to date on research advancements, mental health tips, mental health in the news, and expertise on managing mental health."
+                  }
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description: "CSS class or color value for the background",
+                  ui: {
+                    defaultValue: "bg-[#252042]"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "textColor",
+                  label: "Text Color",
+                  description: "CSS class or color value for the text",
+                  ui: {
+                    defaultValue: "text-white"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "buttonBgColor",
+                  label: "Button Background Color",
+                  description: "CSS class or color value for the button background",
+                  ui: {
+                    defaultValue: "bg-[#cd98d8]"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "buttonTextColor",
+                  label: "Button Text Color",
+                  description: "CSS class or color value for the button text",
+                  ui: {
+                    defaultValue: "text-[#252042]"
+                  }
+                }
+              ]
             }
           ]
         }

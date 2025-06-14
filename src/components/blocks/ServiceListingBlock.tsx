@@ -177,7 +177,7 @@ const ServiceListingBlock: React.FC<ServiceListingBlockProps> = ({ data }) => {
           </div>
 
           {/* Right side - Content for active tab */}
-          <div className="w-full md:w-2/3 bg-bg-contrast rounded-lg md:rounded-r-lg p-6 md:p-8 min-h-[420px] md:min-h-[520px] flex flex-col">
+          <div className="w-full md:w-2/3 bg-bg-contrast  md:rounded-r-lg p-6 md:p-8 min-h-[420px] md:min-h-[520px] flex flex-col">
             {activeService ? (
               <>
                 <div className="border-b border-gray-200 mb-6">

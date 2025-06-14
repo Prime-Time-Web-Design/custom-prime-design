@@ -7,7 +7,7 @@ import AlertBanner from "./AlertBanner";
 import { MobileMenu } from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
-import mobileLogo from "../../../../public/mobileLogo.svg";
+import mobileLogo from "../../../../public/optimized/primeLogo-trimmed.webp";
 import HamburgerMenu from "@/components/molecules/HamburgerMenu";
 
 export const Header = () => {
@@ -21,56 +21,50 @@ export const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 shadow-md bg-[var(--color-bg)] transition-all duration-300`}
+      className={`sticky top-0 z-50 shadow-md bg-[#252042] transition-all duration-300`}
     >
       {alertBanner && <AlertBanner alertBanner={alertBanner} />}
-      <div className="flex items-center justify-between px-4 py-2 lg:hidden">
-        <div className="flex-shrink-0">
-          <span className="text-2xl font-semibold text-[var(--color-text)] ">
-            <Link href="/">
-              <Image src={mobileLogo} width={140} height={60} alt="Logo" />
-            </Link>
-          </span>
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-8 lg:px-16 pb-1.5 pt-4 lg:hidden bg-[#252042] text-white">
+        <div className="flex items-center flex-shrink-0">
+          <Link href="/" className="flex items-center">
+            <Image
+              src={mobileLogo}
+              width={120}
+              height={21}
+              alt="Logo"
+              style={{ height: "auto" }}
+              priority
+              className="py-1"
+            />
+          </Link>
         </div>
 
         <div className="flex items-center gap-x-2">
           <Link
             href="/log-in"
-            className="hidden lg:block rounded-lg bg-transparent px-3 py-1.5 text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
+            className="hidden lg:block rounded-lg bg-transparent px-3 py-1.5 text-sm font-semibold text-bg hover:bg-[var(--color-bg-primary-hover)] hover:text-[var(--color-primary)] transition duration-200"
           >
             Log in
           </Link>
           <Link
             href="/book-now"
-            className="rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200"
+            className="rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-sm font-semibold text-[#252042] hover:bg-[var(--color-primary-hover)] shadow-sm focus:outline-none transition duration-200 flex items-center"
           >
             Book Now
           </Link>
-          {/* <button
-            type="button"
-            className="cursor-pointer inline-flex items-center justify-center rounded-xl p-2 text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] transition duration-200"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <Menu className="h-5 w-5" aria-hidden="true" />
-          </button> */}
-          <HamburgerMenu>
-            <MobileMenu
-              navigation={navigation}
-              isOpen={mobileMenuOpen}
-              onClose={() => setMobileMenuOpen(false)}
-            />
-          </HamburgerMenu>
+          <div className="flex items-center">
+            <HamburgerMenu>
+              <MobileMenu
+                navigation={navigation}
+                isOpen={mobileMenuOpen}
+                onClose={() => setMobileMenuOpen(false)}
+              />
+            </HamburgerMenu>
+          </div>
         </div>
       </div>
 
       <MainNav navigation={navigation} />
-
-      {/* <MobileMenu
-        navigation={navigation}
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-      /> */}
     </header>
   );
 };
