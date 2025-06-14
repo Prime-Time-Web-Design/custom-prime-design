@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { MoveRight, X } from "lucide-react";
 import { GlobalAlertBanner } from "../../../../tina/__generated__/types";
@@ -9,7 +9,7 @@ interface AlertBannerProps {
 }
 
 const AlertBanner: React.FC<AlertBannerProps> = (props) => {
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   if (!isVisible) return null;
 
   const { alertBanner } = props;
@@ -18,13 +18,13 @@ const AlertBanner: React.FC<AlertBannerProps> = (props) => {
     <div
       className={`relative bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] py-2 px-4 text-white transition-all duration-300 shadow-sm`}
     >
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-screen-xl mx-auto px-2 relative">
-        <span className="font-medium text-bg-contrast text-center sm:mb-0 text-sm ">
+      <div className="flex sm:items-center sm:justify-center gap-5 max-w-screen-xl mx-auto px-2 relative">
+        <span className="font-medium text-bg-contrast sm:text-center sm:mb-0 text-sm max-w-1/2 sm:max-w-full">
           {alertBanner?.alertLabel}
         </span>
         <Link
           href={alertBanner?.alertLink ?? ""}
-          className="bg-bg-contrast hover:bg-bg-contrast-light text-bg-bg hover:text-shadow-bg-contrast font-medium py-1.5 px-4 rounded-md transition duration-200 text-sm flex items-center gap-2 whitespace-nowrap shadow-sm mb-2 sm:mb-0"
+          className="bg-bg-contrast hover:bg-bg-contrast-light text-bg hover:text-shadow-bg-contrast font-medium py-0.5 sm:py-1 px-4 rounded-md transition duration-200 text-sm flex items-center gap-2 whitespace-nowrap shadow-sm"
         >
           <div>{alertBanner?.alertLinkText}</div>
           <MoveRight className="h-4 w-4" />
@@ -32,10 +32,10 @@ const AlertBanner: React.FC<AlertBannerProps> = (props) => {
       </div>
       <button
         onClick={() => setIsVisible(false)}
-        className="absolute bottom-1 sm:bottom-auto right-2 sm:right-2 sm:top-1/2 sm:transform sm:-translate-y-1/2 text-bg-contrast hover:text-gray-200 cursor-pointer p-1.5"
+        className="absolute top-1/2 right-2 -translate-y-1/2 text-bg-contrast hover:text-gray-200 cursor-pointer p-1.5"
         aria-label="Close alert"
       >
-        <X className="h-4 w-4 sm:h-5 sm:w-5" />
+        <X className="h-5 w-5" />
       </button>
     </div>
   );
