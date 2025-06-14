@@ -132,7 +132,7 @@ export const Footer = () => {
       </div>
       <div className="relative z-10 mx-auto py-12 px-4 md:pl-8 lg:pl-16 w-full max-w-7xl flex flex-col lg:flex-row items-start justify-start gap-12 lg:gap-16">
         {/* Logo and Social */}
-        <div className="flex flex-col items-center gap-4 flex-shrink-0 w-full lg:w-auto mb-8 lg:mb-0">
+        <div className="flex flex-col items-start md:items-center lg:items-start gap-4 flex-shrink-0 w-full lg:w-auto mb-8 lg:mb-0 px-4">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
@@ -160,11 +160,11 @@ export const Footer = () => {
           </div>
         </div>
         {/* Navigation Columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 w-full max-w-3xl justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-10 sm:gap-10 w-full max-w-3xl">
           {navigation?.mainNav?.filter(Boolean).map((navItem) => (
             <div
               key={navItem?.label}
-              className="flex flex-col items-start w-full"
+              className="flex flex-col items-start w-full px-4 md:px-0"
             >
               <h2 className="text-xl font-extrabold mb-3 text-white tracking-wide uppercase">
                 {navItem?.label}
@@ -175,7 +175,7 @@ export const Footer = () => {
                     <li key={subItem?.label}>
                       <Link
                         href={subItem?.href || "#"}
-                        className="block font-medium text-base text-secondary hover:text-bg transition-colors pl-1 py-1 rounded"
+                        className="block font-medium text-base text-secondary hover:text-bg transition-colors py-1 rounded"
                       >
                         {subItem?.label}
                       </Link>
@@ -185,7 +185,7 @@ export const Footer = () => {
                   <li>
                     <Link
                       href={navItem?.href || "#"}
-                      className="block font-medium text-base text-secondary hover:text-bg transition-colors pl-1 py-1 rounded"
+                      className="block font-medium text-base text-secondary hover:text-bg transition-colors py-1 rounded"
                     >
                       {navItem?.label}
                     </Link>

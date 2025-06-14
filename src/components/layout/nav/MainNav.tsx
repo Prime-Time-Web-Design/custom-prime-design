@@ -41,7 +41,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
       className="w-full flex items-center text-[var(--color-text)] shadow-md"
       aria-label="Global"
     >
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 w-full py-2 lg:py-3">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 w-full py-2 lg:py-4">
         <div className="hidden lg:flex w-full items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
