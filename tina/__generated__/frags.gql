@@ -88,6 +88,27 @@ fragment PageParts on Page {
   }
   headerBlocks {
     __typename
+    ... on PageHeaderBlocksHeaderBlock {
+      heading
+      tagline
+      subtitle
+      logoImage {
+        __typename
+        src
+        alt
+      }
+      backgroundColor
+      highlightWords {
+        __typename
+        word
+        color
+      }
+      features {
+        __typename
+        title
+        content
+      }
+    }
     ... on PageHeaderBlocksHero {
       heading
       subheading
@@ -180,6 +201,27 @@ fragment PageParts on Page {
       textColor
       buttonBgColor
       buttonTextColor
+    }
+    ... on PageBlocksHeaderBlock {
+      heading
+      tagline
+      subtitle
+      logoImage {
+        __typename
+        src
+        alt
+      }
+      backgroundColor
+      highlightWords {
+        __typename
+        word
+        color
+      }
+      features {
+        __typename
+        title
+        content
+      }
     }
   }
 }

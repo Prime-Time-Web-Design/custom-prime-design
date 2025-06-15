@@ -177,6 +177,121 @@ export const pageSchema = defineSchema({
           list: true,
           templates: [
             {
+              name: "headerBlock",
+              label: "Header Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  description: "Main heading for the header section",
+                  ui: {
+                    defaultValue: "About Us",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "tagline",
+                  label: "Tagline",
+                  description: "A short tagline displayed below the heading",
+                  required: false,
+                },
+                {
+                  type: "string",
+                  name: "subtitle",
+                  label: "Subtitle",
+                  description: "Descriptive text below the tagline",
+                  ui: { component: "textarea" },
+                  required: false,
+                },
+                {
+                  type: "object",
+                  name: "logoImage",
+                  label: "Logo Image",
+                  fields: [
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "Image Source",
+                    },
+                    {
+                      type: "string",
+                      name: "alt",
+                      label: "Alt Text",
+                    },
+                  ],
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description:
+                    "CSS class for the background (e.g., bg-bg-contrast)",
+                  ui: {
+                    defaultValue: "bg-bg-contrast",
+                  },
+                },
+                {
+                  type: "object",
+                  name: "highlightWords",
+                  label: "Highlighted Words",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({
+                      label: item.word || "Highlighted Word",
+                    }),
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "word",
+                      label: "Word",
+                      description:
+                        "Word to highlight in the heading or tagline",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "color",
+                      label: "Color Scheme",
+                      options: [
+                        { label: "Primary", value: "primary" },
+                        { label: "Secondary", value: "secondary" },
+                        { label: "Tertiary", value: "tertiary" },
+                        { label: "Accent", value: "accent" },
+                      ],
+                      required: true,
+                      ui: {
+                        defaultValue: "primary",
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: "object",
+                  name: "features",
+                  label: "Feature Highlights",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({ label: item.title || "Feature" }),
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "title",
+                      label: "Title",
+                      required: true,
+                    },
+                    {
+                      type: "rich-text",
+                      name: "content",
+                      label: "Content",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               name: "hero",
               label: "Hero Section",
               fields: [
@@ -355,7 +470,12 @@ export const pageSchema = defineSchema({
                       required: false,
                       options: lucideIconNames,
                     },
-                    { type: "string", name: "title", label: "Title" },
+                    {
+                      type: "string",
+                      name: "title",
+                      label: "Title",
+                      required: true,
+                    },
                     {
                       type: "rich-text",
                       name: "description",
@@ -663,6 +783,121 @@ export const pageSchema = defineSchema({
                   ui: {
                     defaultValue: "text-[#252042]",
                   },
+                },
+              ],
+            },
+            {
+              name: "headerBlock",
+              label: "Header Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  description: "Main heading for the header section",
+                  ui: {
+                    defaultValue: "About Us",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "tagline",
+                  label: "Tagline",
+                  description: "A short tagline displayed below the heading",
+                  required: false,
+                },
+                {
+                  type: "string",
+                  name: "subtitle",
+                  label: "Subtitle",
+                  description: "Descriptive text below the tagline",
+                  ui: { component: "textarea" },
+                  required: false,
+                },
+                {
+                  type: "object",
+                  name: "logoImage",
+                  label: "Logo Image",
+                  fields: [
+                    {
+                      type: "image",
+                      name: "src",
+                      label: "Image Source",
+                    },
+                    {
+                      type: "string",
+                      name: "alt",
+                      label: "Alt Text",
+                    },
+                  ],
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description:
+                    "CSS class for the background (e.g., bg-bg-contrast)",
+                  ui: {
+                    defaultValue: "bg-bg-contrast",
+                  },
+                },
+                {
+                  type: "object",
+                  name: "highlightWords",
+                  label: "Highlighted Words",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({
+                      label: item.word || "Highlighted Word",
+                    }),
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "word",
+                      label: "Word",
+                      description:
+                        "Word to highlight in the heading or tagline",
+                      required: true,
+                    },
+                    {
+                      type: "string",
+                      name: "color",
+                      label: "Color Scheme",
+                      options: [
+                        { label: "Primary", value: "primary" },
+                        { label: "Secondary", value: "secondary" },
+                        { label: "Tertiary", value: "tertiary" },
+                        { label: "Accent", value: "accent" },
+                      ],
+                      required: true,
+                      ui: {
+                        defaultValue: "primary",
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: "object",
+                  name: "features",
+                  label: "Feature Highlights",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({ label: item.title || "Feature" }),
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "title",
+                      label: "Title",
+                      required: true,
+                    },
+                    {
+                      type: "rich-text",
+                      name: "content",
+                      label: "Content",
+                    },
+                  ],
                 },
               ],
             },

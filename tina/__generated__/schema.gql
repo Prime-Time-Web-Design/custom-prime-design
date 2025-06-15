@@ -265,6 +265,31 @@ type PagePeople {
   location: String
 }
 
+type PageHeaderBlocksHeaderBlockLogoImage {
+  src: String
+  alt: String
+}
+
+type PageHeaderBlocksHeaderBlockHighlightWords {
+  word: String!
+  color: String!
+}
+
+type PageHeaderBlocksHeaderBlockFeatures {
+  title: String!
+  content: JSON
+}
+
+type PageHeaderBlocksHeaderBlock {
+  heading: String
+  tagline: String
+  subtitle: String
+  logoImage: PageHeaderBlocksHeaderBlockLogoImage
+  backgroundColor: String
+  highlightWords: [PageHeaderBlocksHeaderBlockHighlightWords]
+  features: [PageHeaderBlocksHeaderBlockFeatures]
+}
+
 type PageHeaderBlocksHeroCollageImages {
   src: String
 }
@@ -277,7 +302,7 @@ type PageHeaderBlocksHero {
   collageImages: [PageHeaderBlocksHeroCollageImages]
 }
 
-union PageHeaderBlocks = PageHeaderBlocksHero
+union PageHeaderBlocks = PageHeaderBlocksHeaderBlock | PageHeaderBlocksHero
 
 type PageBlocksCtaBlock {
   heading: String
@@ -305,7 +330,7 @@ type PageBlocksHero {
 
 type PageBlocksRichTextBlockFeatures {
   icon: String
-  title: String
+  title: String!
   description: JSON
 }
 
@@ -371,7 +396,32 @@ type PageBlocksNewsletterSignupBlock {
   buttonTextColor: String
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock
+type PageBlocksHeaderBlockLogoImage {
+  src: String
+  alt: String
+}
+
+type PageBlocksHeaderBlockHighlightWords {
+  word: String!
+  color: String!
+}
+
+type PageBlocksHeaderBlockFeatures {
+  title: String!
+  content: JSON
+}
+
+type PageBlocksHeaderBlock {
+  heading: String
+  tagline: String
+  subtitle: String
+  logoImage: PageBlocksHeaderBlockLogoImage
+  backgroundColor: String
+  highlightWords: [PageBlocksHeaderBlockHighlightWords]
+  features: [PageBlocksHeaderBlockFeatures]
+}
+
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock
 
 type Page implements Node & Document {
   title: String!
@@ -424,6 +474,37 @@ input PagePeopleFilter {
   location: StringFilter
 }
 
+input PageHeaderBlocksHeaderBlockLogoImageFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input PageHeaderBlocksHeaderBlockHighlightWordsFilter {
+  word: StringFilter
+  color: StringFilter
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
+input PageHeaderBlocksHeaderBlockFeaturesFilter {
+  title: StringFilter
+  content: RichTextFilter
+}
+
+input PageHeaderBlocksHeaderBlockFilter {
+  heading: StringFilter
+  tagline: StringFilter
+  subtitle: StringFilter
+  logoImage: PageHeaderBlocksHeaderBlockLogoImageFilter
+  backgroundColor: StringFilter
+  highlightWords: PageHeaderBlocksHeaderBlockHighlightWordsFilter
+  features: PageHeaderBlocksHeaderBlockFeaturesFilter
+}
+
 input PageHeaderBlocksHeroCollageImagesFilter {
   src: ImageFilter
 }
@@ -437,13 +518,8 @@ input PageHeaderBlocksHeroFilter {
 }
 
 input PageHeaderBlocksFilter {
+  headerBlock: PageHeaderBlocksHeaderBlockFilter
   hero: PageHeaderBlocksHeroFilter
-}
-
-input RichTextFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
 }
 
 input BooleanFilter {
@@ -553,6 +629,31 @@ input PageBlocksNewsletterSignupBlockFilter {
   buttonTextColor: StringFilter
 }
 
+input PageBlocksHeaderBlockLogoImageFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input PageBlocksHeaderBlockHighlightWordsFilter {
+  word: StringFilter
+  color: StringFilter
+}
+
+input PageBlocksHeaderBlockFeaturesFilter {
+  title: StringFilter
+  content: RichTextFilter
+}
+
+input PageBlocksHeaderBlockFilter {
+  heading: StringFilter
+  tagline: StringFilter
+  subtitle: StringFilter
+  logoImage: PageBlocksHeaderBlockLogoImageFilter
+  backgroundColor: StringFilter
+  highlightWords: PageBlocksHeaderBlockHighlightWordsFilter
+  features: PageBlocksHeaderBlockFeaturesFilter
+}
+
 input PageBlocksFilter {
   ctaBlock: PageBlocksCtaBlockFilter
   hero: PageBlocksHeroFilter
@@ -561,6 +662,7 @@ input PageBlocksFilter {
   serviceListingBlock: PageBlocksServiceListingBlockFilter
   bannerBlock: PageBlocksBannerBlockFilter
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockFilter
+  headerBlock: PageBlocksHeaderBlockFilter
 }
 
 input PageFilter {
@@ -700,6 +802,31 @@ input PagePeopleMutation {
   location: String
 }
 
+input PageHeaderBlocksHeaderBlockLogoImageMutation {
+  src: String
+  alt: String
+}
+
+input PageHeaderBlocksHeaderBlockHighlightWordsMutation {
+  word: String
+  color: String
+}
+
+input PageHeaderBlocksHeaderBlockFeaturesMutation {
+  title: String
+  content: JSON
+}
+
+input PageHeaderBlocksHeaderBlockMutation {
+  heading: String
+  tagline: String
+  subtitle: String
+  logoImage: PageHeaderBlocksHeaderBlockLogoImageMutation
+  backgroundColor: String
+  highlightWords: [PageHeaderBlocksHeaderBlockHighlightWordsMutation]
+  features: [PageHeaderBlocksHeaderBlockFeaturesMutation]
+}
+
 input PageHeaderBlocksHeroCollageImagesMutation {
   src: String
 }
@@ -713,6 +840,7 @@ input PageHeaderBlocksHeroMutation {
 }
 
 input PageHeaderBlocksMutation {
+  headerBlock: PageHeaderBlocksHeaderBlockMutation
   hero: PageHeaderBlocksHeroMutation
 }
 
@@ -808,6 +936,31 @@ input PageBlocksNewsletterSignupBlockMutation {
   buttonTextColor: String
 }
 
+input PageBlocksHeaderBlockLogoImageMutation {
+  src: String
+  alt: String
+}
+
+input PageBlocksHeaderBlockHighlightWordsMutation {
+  word: String
+  color: String
+}
+
+input PageBlocksHeaderBlockFeaturesMutation {
+  title: String
+  content: JSON
+}
+
+input PageBlocksHeaderBlockMutation {
+  heading: String
+  tagline: String
+  subtitle: String
+  logoImage: PageBlocksHeaderBlockLogoImageMutation
+  backgroundColor: String
+  highlightWords: [PageBlocksHeaderBlockHighlightWordsMutation]
+  features: [PageBlocksHeaderBlockFeaturesMutation]
+}
+
 input PageBlocksMutation {
   ctaBlock: PageBlocksCtaBlockMutation
   hero: PageBlocksHeroMutation
@@ -816,6 +969,7 @@ input PageBlocksMutation {
   serviceListingBlock: PageBlocksServiceListingBlockMutation
   bannerBlock: PageBlocksBannerBlockMutation
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockMutation
+  headerBlock: PageBlocksHeaderBlockMutation
 }
 
 input PageMutation {

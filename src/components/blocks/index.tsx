@@ -4,6 +4,7 @@ import {
   PageBlocksBannerBlock,
   PageBlocksCarouselBlock,
   PageBlocksCtaBlock,
+  PageBlocksHeaderBlock,
   PageBlocksHero,
   PageBlocksNewsletterSignupBlock,
   PageBlocksRichTextBlock,
@@ -16,6 +17,7 @@ import { HeroBlock } from "./HeroBlock";
 import { CarouselBlock } from "./CarouselBlock";
 import RichTextBlock from "./RichTextBlock";
 import { CTABlock } from "./CTABlock";
+import { HeaderBlock } from "./HeaderBlock";
 import ServiceListingBlock from "./ServiceListingBlock";
 import BannerBlock from "./BannerBlock";
 import NewsletterSignupBlock from "./NewsletterSignupBlock";
@@ -26,6 +28,7 @@ type PageBlockMap = {
   PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
   PageBlocksCtaBlock: PageBlocksCtaBlock;
+  PageBlocksHeaderBlock: PageBlocksHeaderBlock;
   PageBlocksServiceListingBlock: PageBlocksServiceListingBlock;
   PageBlocksBannerBlock: PageBlocksBannerBlock;
   PageBlocksNewsletterSignupBlock: PageBlocksNewsletterSignupBlock;
@@ -42,6 +45,7 @@ const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksRichTextBlock: RichTextBlock,
   PageBlocksCarouselBlock: CarouselBlock,
   PageBlocksCtaBlock: CTABlock,
+  PageBlocksHeaderBlock: HeaderBlock,
   PageBlocksServiceListingBlock: ServiceListingBlock,
   PageBlocksBannerBlock: BannerBlock,
   PageBlocksNewsletterSignupBlock: NewsletterSignupBlock,

@@ -49,3 +49,14 @@ people:
     contact:
       email: taymarks@fakeemail.com
       phone: '5467384556'
+headerBlocks:
+  - heading: About Prime Health
+    tagline: ' Connecting you with industry leading mental health support'
+    subtitle: >-
+      Expanding access to mental health, substance use, and eating disorder
+      treatment to as many people struggling with serious challenges as
+      possible.
+    logoImage:
+      src: /optimized/primeLogo-trimmed.webp
+      alt: Prime Health
+    _template: headerBlock
