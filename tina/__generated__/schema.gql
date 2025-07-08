@@ -265,45 +265,6 @@ type PagePeople {
   location: String
 }
 
-type PageHeaderBlocksHeaderBlockLogoImage {
-  src: String
-  alt: String
-}
-
-type PageHeaderBlocksHeaderBlockHighlightWords {
-  word: String!
-  color: String!
-}
-
-type PageHeaderBlocksHeaderBlockFeatures {
-  title: String!
-  content: JSON
-}
-
-type PageHeaderBlocksHeaderBlock {
-  heading: String
-  tagline: String
-  subtitle: String
-  logoImage: PageHeaderBlocksHeaderBlockLogoImage
-  backgroundColor: String
-  highlightWords: [PageHeaderBlocksHeaderBlockHighlightWords]
-  features: [PageHeaderBlocksHeaderBlockFeatures]
-}
-
-type PageHeaderBlocksHeroCollageImages {
-  src: String
-}
-
-type PageHeaderBlocksHero {
-  heading: String
-  subheading: String
-  buttonText: String
-  buttonLink: String
-  collageImages: [PageHeaderBlocksHeroCollageImages]
-}
-
-union PageHeaderBlocks = PageHeaderBlocksHeaderBlock | PageHeaderBlocksHero
-
 type PageBlocksCtaBlock {
   heading: String
   subheading: String
@@ -311,8 +272,14 @@ type PageBlocksCtaBlock {
   buttonText: String
   buttonLink: String
   imageLeft: Boolean
+  mediaType: String
   imageSrc: String
   imageAlt: String
+  videoUrl: String
+  cardTitle: String
+  cardLinkText: String
+  cardLinkUrl: String
+  cardDescription: String
   backgroundColor: String
 }
 
@@ -430,7 +397,6 @@ type Page implements Node & Document {
   subtitle: String
   peopleType: String
   people: [PagePeople]
-  headerBlocks: [PageHeaderBlocks]
   blocks: [PageBlocks]
   id: ID!
   _sys: SystemInfo!
@@ -474,52 +440,10 @@ input PagePeopleFilter {
   location: StringFilter
 }
 
-input PageHeaderBlocksHeaderBlockLogoImageFilter {
-  src: ImageFilter
-  alt: StringFilter
-}
-
-input PageHeaderBlocksHeaderBlockHighlightWordsFilter {
-  word: StringFilter
-  color: StringFilter
-}
-
 input RichTextFilter {
   startsWith: String
   eq: String
   exists: Boolean
-}
-
-input PageHeaderBlocksHeaderBlockFeaturesFilter {
-  title: StringFilter
-  content: RichTextFilter
-}
-
-input PageHeaderBlocksHeaderBlockFilter {
-  heading: StringFilter
-  tagline: StringFilter
-  subtitle: StringFilter
-  logoImage: PageHeaderBlocksHeaderBlockLogoImageFilter
-  backgroundColor: StringFilter
-  highlightWords: PageHeaderBlocksHeaderBlockHighlightWordsFilter
-  features: PageHeaderBlocksHeaderBlockFeaturesFilter
-}
-
-input PageHeaderBlocksHeroCollageImagesFilter {
-  src: ImageFilter
-}
-
-input PageHeaderBlocksHeroFilter {
-  heading: StringFilter
-  subheading: StringFilter
-  buttonText: StringFilter
-  buttonLink: StringFilter
-  collageImages: PageHeaderBlocksHeroCollageImagesFilter
-}
-
-input PageHeaderBlocksFilter {
-  headerBlock: PageHeaderBlocksHeaderBlockFilter
-  hero: PageHeaderBlocksHeroFilter
 }
 
 input BooleanFilter {
@@ -534,8 +458,14 @@ input PageBlocksCtaBlockFilter {
   buttonText: StringFilter
   buttonLink: StringFilter
   imageLeft: BooleanFilter
+  mediaType: StringFilter
   imageSrc: ImageFilter
   imageAlt: StringFilter
+  videoUrl: StringFilter
+  cardTitle: StringFilter
+  cardLinkText: StringFilter
+  cardLinkUrl: StringFilter
+  cardDescription: StringFilter
   backgroundColor: StringFilter
 }
 
@@ -672,7 +602,6 @@ input PageFilter {
   subtitle: StringFilter
   peopleType: StringFilter
   people: PagePeopleFilter
-  headerBlocks: PageHeaderBlocksFilter
   blocks: PageBlocksFilter
 }
 
@@ -802,48 +731,6 @@ input PagePeopleMutation {
   location: String
 }
 
-input PageHeaderBlocksHeaderBlockLogoImageMutation {
-  src: String
-  alt: String
-}
-
-input PageHeaderBlocksHeaderBlockHighlightWordsMutation {
-  word: String
-  color: String
-}
-
-input PageHeaderBlocksHeaderBlockFeaturesMutation {
-  title: String
-  content: JSON
-}
-
-input PageHeaderBlocksHeaderBlockMutation {
-  heading: String
-  tagline: String
-  subtitle: String
-  logoImage: PageHeaderBlocksHeaderBlockLogoImageMutation
-  backgroundColor: String
-  highlightWords: [PageHeaderBlocksHeaderBlockHighlightWordsMutation]
-  features: [PageHeaderBlocksHeaderBlockFeaturesMutation]
-}
-
-input PageHeaderBlocksHeroCollageImagesMutation {
-  src: String
-}
-
-input PageHeaderBlocksHeroMutation {
-  heading: String
-  subheading: String
-  buttonText: String
-  buttonLink: String
-  collageImages: [PageHeaderBlocksHeroCollageImagesMutation]
-}
-
-input PageHeaderBlocksMutation {
-  headerBlock: PageHeaderBlocksHeaderBlockMutation
-  hero: PageHeaderBlocksHeroMutation
-}
-
 input PageBlocksCtaBlockMutation {
   heading: String
   subheading: String
@@ -851,8 +738,14 @@ input PageBlocksCtaBlockMutation {
   buttonText: String
   buttonLink: String
   imageLeft: Boolean
+  mediaType: String
   imageSrc: String
   imageAlt: String
+  videoUrl: String
+  cardTitle: String
+  cardLinkText: String
+  cardLinkUrl: String
+  cardDescription: String
   backgroundColor: String
 }
 
@@ -979,7 +872,6 @@ input PageMutation {
   subtitle: String
   peopleType: String
   people: [PagePeopleMutation]
-  headerBlocks: [PageHeaderBlocksMutation]
   blocks: [PageBlocksMutation]
 }
 

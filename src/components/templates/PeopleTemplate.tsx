@@ -40,20 +40,16 @@ export default function PeopleTemplate({
       ? data.peopleType
       : "practitioners";
 
+  console.log("headerBlocks", data?.headerBlocks);
+
   return (
     <div className="people-template">
       {/* Header section with header blocks or default */}
-      <div className="people-header bg-[var(--color-bg-contrast)] text-white">
-        {data?.headerBlocks && data.headerBlocks.length > 0 ? (
-          <Section className="header-blocks-section">
-            <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-          </Section>
-        ) : (
-          <Section className="py-16 text-center">
-            <h1 className="text-4xl font-bold mb-4">{title}</h1>
-            <p className="text-xl max-w-3xl mx-auto">{description}</p>
-          </Section>
-        )}
+      <div className="people-header bg-gradient-to-r from-bg-contrast to-bg-contrast-light text-white">
+        <Section className="py-16 text-center">
+          <h1 className="text-4xl font-bold mb-4">{title}</h1>
+          <p className="text-xl max-w-3xl mx-auto">{description}</p>
+        </Section>
       </div>
 
       {/* People listing section */}

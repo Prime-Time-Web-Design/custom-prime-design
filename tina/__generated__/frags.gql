@@ -86,40 +86,6 @@ fragment PageParts on Page {
     specialties
     location
   }
-  headerBlocks {
-    __typename
-    ... on PageHeaderBlocksHeaderBlock {
-      heading
-      tagline
-      subtitle
-      logoImage {
-        __typename
-        src
-        alt
-      }
-      backgroundColor
-      highlightWords {
-        __typename
-        word
-        color
-      }
-      features {
-        __typename
-        title
-        content
-      }
-    }
-    ... on PageHeaderBlocksHero {
-      heading
-      subheading
-      buttonText
-      buttonLink
-      collageImages {
-        __typename
-        src
-      }
-    }
-  }
   blocks {
     __typename
     ... on PageBlocksCtaBlock {
@@ -129,8 +95,14 @@ fragment PageParts on Page {
       buttonText
       buttonLink
       imageLeft
+      mediaType
       imageSrc
       imageAlt
+      videoUrl
+      cardTitle
+      cardLinkText
+      cardLinkUrl
+      cardDescription
       backgroundColor
     }
     ... on PageBlocksHero {

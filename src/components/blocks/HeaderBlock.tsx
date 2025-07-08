@@ -16,7 +16,7 @@ export const HeaderBlock = ({ data }: HeaderBlockProps) => {
     tagline = "",
     subtitle = "",
     logoImage = { src: "", alt: "" },
-    backgroundColor = "bg-bg-contrast",
+    backgroundColor = "bg-bg-contrast-light",
     highlightWords = [],
   } = data;
 
@@ -71,7 +71,7 @@ export const HeaderBlock = ({ data }: HeaderBlockProps) => {
   return (
     <Section
       className={`py-16 overflow-hidden ${backgroundColor}`}
-      background={backgroundColor ?? "bg-bg-contrast"}
+      // background={backgroundColor ?? "bg-bg-contrast-light"}
     >
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col items-center justify-center text-center">
@@ -108,9 +108,6 @@ export const HeaderBlock = ({ data }: HeaderBlockProps) => {
               <p className="text-xl text-white opacity-90">{subtitle}</p>
             </div>
           )}
-
-          {/* Decorative line */}
-          <div className="w-px h-20 bg-white opacity-50 my-6"></div>
 
           {/* Feature highlights */}
           <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">

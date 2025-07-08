@@ -374,51 +374,6 @@ export type PagePeople = {
   location?: Maybe<Scalars['String']['output']>;
 };
 
-export type PageHeaderBlocksHeaderBlockLogoImage = {
-  __typename?: 'PageHeaderBlocksHeaderBlockLogoImage';
-  src?: Maybe<Scalars['String']['output']>;
-  alt?: Maybe<Scalars['String']['output']>;
-};
-
-export type PageHeaderBlocksHeaderBlockHighlightWords = {
-  __typename?: 'PageHeaderBlocksHeaderBlockHighlightWords';
-  word: Scalars['String']['output'];
-  color: Scalars['String']['output'];
-};
-
-export type PageHeaderBlocksHeaderBlockFeatures = {
-  __typename?: 'PageHeaderBlocksHeaderBlockFeatures';
-  title: Scalars['String']['output'];
-  content?: Maybe<Scalars['JSON']['output']>;
-};
-
-export type PageHeaderBlocksHeaderBlock = {
-  __typename?: 'PageHeaderBlocksHeaderBlock';
-  heading?: Maybe<Scalars['String']['output']>;
-  tagline?: Maybe<Scalars['String']['output']>;
-  subtitle?: Maybe<Scalars['String']['output']>;
-  logoImage?: Maybe<PageHeaderBlocksHeaderBlockLogoImage>;
-  backgroundColor?: Maybe<Scalars['String']['output']>;
-  highlightWords?: Maybe<Array<Maybe<PageHeaderBlocksHeaderBlockHighlightWords>>>;
-  features?: Maybe<Array<Maybe<PageHeaderBlocksHeaderBlockFeatures>>>;
-};
-
-export type PageHeaderBlocksHeroCollageImages = {
-  __typename?: 'PageHeaderBlocksHeroCollageImages';
-  src?: Maybe<Scalars['String']['output']>;
-};
-
-export type PageHeaderBlocksHero = {
-  __typename?: 'PageHeaderBlocksHero';
-  heading?: Maybe<Scalars['String']['output']>;
-  subheading?: Maybe<Scalars['String']['output']>;
-  buttonText?: Maybe<Scalars['String']['output']>;
-  buttonLink?: Maybe<Scalars['String']['output']>;
-  collageImages?: Maybe<Array<Maybe<PageHeaderBlocksHeroCollageImages>>>;
-};
-
-export type PageHeaderBlocks = PageHeaderBlocksHeaderBlock | PageHeaderBlocksHero;
-
 export type PageBlocksCtaBlock = {
   __typename?: 'PageBlocksCtaBlock';
   heading?: Maybe<Scalars['String']['output']>;
@@ -427,8 +382,14 @@ export type PageBlocksCtaBlock = {
   buttonText?: Maybe<Scalars['String']['output']>;
   buttonLink?: Maybe<Scalars['String']['output']>;
   imageLeft?: Maybe<Scalars['Boolean']['output']>;
+  mediaType?: Maybe<Scalars['String']['output']>;
   imageSrc?: Maybe<Scalars['String']['output']>;
   imageAlt?: Maybe<Scalars['String']['output']>;
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  cardTitle?: Maybe<Scalars['String']['output']>;
+  cardLinkText?: Maybe<Scalars['String']['output']>;
+  cardLinkUrl?: Maybe<Scalars['String']['output']>;
+  cardDescription?: Maybe<Scalars['String']['output']>;
   backgroundColor?: Maybe<Scalars['String']['output']>;
 };
 
@@ -562,7 +523,6 @@ export type Page = Node & Document & {
   subtitle?: Maybe<Scalars['String']['output']>;
   peopleType?: Maybe<Scalars['String']['output']>;
   people?: Maybe<Array<Maybe<PagePeople>>>;
-  headerBlocks?: Maybe<Array<Maybe<PageHeaderBlocks>>>;
   blocks?: Maybe<Array<Maybe<PageBlocks>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -606,52 +566,10 @@ export type PagePeopleFilter = {
   location?: InputMaybe<StringFilter>;
 };
 
-export type PageHeaderBlocksHeaderBlockLogoImageFilter = {
-  src?: InputMaybe<ImageFilter>;
-  alt?: InputMaybe<StringFilter>;
-};
-
-export type PageHeaderBlocksHeaderBlockHighlightWordsFilter = {
-  word?: InputMaybe<StringFilter>;
-  color?: InputMaybe<StringFilter>;
-};
-
 export type RichTextFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type PageHeaderBlocksHeaderBlockFeaturesFilter = {
-  title?: InputMaybe<StringFilter>;
-  content?: InputMaybe<RichTextFilter>;
-};
-
-export type PageHeaderBlocksHeaderBlockFilter = {
-  heading?: InputMaybe<StringFilter>;
-  tagline?: InputMaybe<StringFilter>;
-  subtitle?: InputMaybe<StringFilter>;
-  logoImage?: InputMaybe<PageHeaderBlocksHeaderBlockLogoImageFilter>;
-  backgroundColor?: InputMaybe<StringFilter>;
-  highlightWords?: InputMaybe<PageHeaderBlocksHeaderBlockHighlightWordsFilter>;
-  features?: InputMaybe<PageHeaderBlocksHeaderBlockFeaturesFilter>;
-};
-
-export type PageHeaderBlocksHeroCollageImagesFilter = {
-  src?: InputMaybe<ImageFilter>;
-};
-
-export type PageHeaderBlocksHeroFilter = {
-  heading?: InputMaybe<StringFilter>;
-  subheading?: InputMaybe<StringFilter>;
-  buttonText?: InputMaybe<StringFilter>;
-  buttonLink?: InputMaybe<StringFilter>;
-  collageImages?: InputMaybe<PageHeaderBlocksHeroCollageImagesFilter>;
-};
-
-export type PageHeaderBlocksFilter = {
-  headerBlock?: InputMaybe<PageHeaderBlocksHeaderBlockFilter>;
-  hero?: InputMaybe<PageHeaderBlocksHeroFilter>;
 };
 
 export type BooleanFilter = {
@@ -666,8 +584,14 @@ export type PageBlocksCtaBlockFilter = {
   buttonText?: InputMaybe<StringFilter>;
   buttonLink?: InputMaybe<StringFilter>;
   imageLeft?: InputMaybe<BooleanFilter>;
+  mediaType?: InputMaybe<StringFilter>;
   imageSrc?: InputMaybe<ImageFilter>;
   imageAlt?: InputMaybe<StringFilter>;
+  videoUrl?: InputMaybe<StringFilter>;
+  cardTitle?: InputMaybe<StringFilter>;
+  cardLinkText?: InputMaybe<StringFilter>;
+  cardLinkUrl?: InputMaybe<StringFilter>;
+  cardDescription?: InputMaybe<StringFilter>;
   backgroundColor?: InputMaybe<StringFilter>;
 };
 
@@ -804,7 +728,6 @@ export type PageFilter = {
   subtitle?: InputMaybe<StringFilter>;
   peopleType?: InputMaybe<StringFilter>;
   people?: InputMaybe<PagePeopleFilter>;
-  headerBlocks?: InputMaybe<PageHeaderBlocksFilter>;
   blocks?: InputMaybe<PageBlocksFilter>;
 };
 
@@ -994,48 +917,6 @@ export type PagePeopleMutation = {
   location?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PageHeaderBlocksHeaderBlockLogoImageMutation = {
-  src?: InputMaybe<Scalars['String']['input']>;
-  alt?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageHeaderBlocksHeaderBlockHighlightWordsMutation = {
-  word?: InputMaybe<Scalars['String']['input']>;
-  color?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageHeaderBlocksHeaderBlockFeaturesMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  content?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-export type PageHeaderBlocksHeaderBlockMutation = {
-  heading?: InputMaybe<Scalars['String']['input']>;
-  tagline?: InputMaybe<Scalars['String']['input']>;
-  subtitle?: InputMaybe<Scalars['String']['input']>;
-  logoImage?: InputMaybe<PageHeaderBlocksHeaderBlockLogoImageMutation>;
-  backgroundColor?: InputMaybe<Scalars['String']['input']>;
-  highlightWords?: InputMaybe<Array<InputMaybe<PageHeaderBlocksHeaderBlockHighlightWordsMutation>>>;
-  features?: InputMaybe<Array<InputMaybe<PageHeaderBlocksHeaderBlockFeaturesMutation>>>;
-};
-
-export type PageHeaderBlocksHeroCollageImagesMutation = {
-  src?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageHeaderBlocksHeroMutation = {
-  heading?: InputMaybe<Scalars['String']['input']>;
-  subheading?: InputMaybe<Scalars['String']['input']>;
-  buttonText?: InputMaybe<Scalars['String']['input']>;
-  buttonLink?: InputMaybe<Scalars['String']['input']>;
-  collageImages?: InputMaybe<Array<InputMaybe<PageHeaderBlocksHeroCollageImagesMutation>>>;
-};
-
-export type PageHeaderBlocksMutation = {
-  headerBlock?: InputMaybe<PageHeaderBlocksHeaderBlockMutation>;
-  hero?: InputMaybe<PageHeaderBlocksHeroMutation>;
-};
-
 export type PageBlocksCtaBlockMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   subheading?: InputMaybe<Scalars['String']['input']>;
@@ -1043,8 +924,14 @@ export type PageBlocksCtaBlockMutation = {
   buttonText?: InputMaybe<Scalars['String']['input']>;
   buttonLink?: InputMaybe<Scalars['String']['input']>;
   imageLeft?: InputMaybe<Scalars['Boolean']['input']>;
+  mediaType?: InputMaybe<Scalars['String']['input']>;
   imageSrc?: InputMaybe<Scalars['String']['input']>;
   imageAlt?: InputMaybe<Scalars['String']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  cardTitle?: InputMaybe<Scalars['String']['input']>;
+  cardLinkText?: InputMaybe<Scalars['String']['input']>;
+  cardLinkUrl?: InputMaybe<Scalars['String']['input']>;
+  cardDescription?: InputMaybe<Scalars['String']['input']>;
   backgroundColor?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1171,13 +1058,12 @@ export type PageMutation = {
   subtitle?: InputMaybe<Scalars['String']['input']>;
   peopleType?: InputMaybe<Scalars['String']['input']>;
   people?: InputMaybe<Array<InputMaybe<PagePeopleMutation>>>;
-  headerBlocks?: InputMaybe<Array<InputMaybe<PageHeaderBlocksMutation>>>;
   blocks?: InputMaybe<Array<InputMaybe<PageBlocksMutation>>>;
 };
 
 export type GlobalPartsFragment = { __typename: 'Global', alertBanner?: { __typename: 'GlobalAlertBanner', alertLabel: string, alertLink: string, alertLinkText: string } | null, navigation?: { __typename: 'GlobalNavigation', mainNav?: Array<{ __typename: 'GlobalNavigationMainNav', label: string, href?: string | null, featuredCards?: Array<{ __typename: 'GlobalNavigationMainNavFeaturedCards', title: string, description: string, ctaText: string, ctaLink: string, layout?: string | null, image?: { __typename: 'GlobalNavigationMainNavFeaturedCardsImage', src: string, alt: string } | null } | null> | null, subItems?: Array<{ __typename: 'GlobalNavigationMainNavSubItems', label: string, href: string, icon?: string | null, variant?: string | null, description?: string | null } | null> | null } | null> | null, footer?: { __typename: 'GlobalNavigationFooter', companyName?: string | null, contact?: { __typename: 'GlobalNavigationFooterContact', phone?: string | null, textNumber?: string | null, email?: string | null } | null, social?: Array<{ __typename: 'GlobalNavigationFooterSocial', platform?: string | null, url?: string | null } | null> | null } | null } | null };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, headerBlocks?: Array<{ __typename: 'PageHeaderBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageHeaderBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | { __typename: 'PageHeaderBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageHeaderBlocksHeroCollageImages', src?: string | null } | null> | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, imageSrc?: string | null, imageAlt?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, mediaType?: string | null, imageSrc?: string | null, imageAlt?: string | null, videoUrl?: string | null, cardTitle?: string | null, cardLinkText?: string | null, cardLinkUrl?: string | null, cardDescription?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null };
 
 export type GlobalQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1203,7 +1089,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, headerBlocks?: Array<{ __typename: 'PageHeaderBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageHeaderBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | { __typename: 'PageHeaderBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageHeaderBlocksHeroCollageImages', src?: string | null } | null> | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, imageSrc?: string | null, imageAlt?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, mediaType?: string | null, imageSrc?: string | null, imageAlt?: string | null, videoUrl?: string | null, cardTitle?: string | null, cardLinkText?: string | null, cardLinkUrl?: string | null, cardDescription?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1215,7 +1101,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, headerBlocks?: Array<{ __typename: 'PageHeaderBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageHeaderBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageHeaderBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | { __typename: 'PageHeaderBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageHeaderBlocksHeroCollageImages', src?: string | null } | null> | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, imageSrc?: string | null, imageAlt?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, description: string, template: string, subtitle?: string | null, peopleType?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, people?: Array<{ __typename: 'PagePeople', id: string, name: string, title?: string | null, bio?: string | null, specialties?: Array<string | null> | null, location?: string | null, image?: { __typename: 'PagePeopleImage', src?: string | null, alt?: string | null } | null, contact?: { __typename: 'PagePeopleContact', email?: string | null, phone?: string | null, website?: string | null } | null, social?: { __typename: 'PagePeopleSocial', linkedin?: string | null, twitter?: string | null, instagram?: string | null, facebook?: string | null } | null } | null> | null, blocks?: Array<{ __typename: 'PageBlocksCtaBlock', heading?: string | null, subheading?: string | null, content?: any | null, buttonText?: string | null, buttonLink?: string | null, imageLeft?: boolean | null, mediaType?: string | null, imageSrc?: string | null, imageAlt?: string | null, videoUrl?: string | null, cardTitle?: string | null, cardLinkText?: string | null, cardLinkUrl?: string | null, cardDescription?: string | null, backgroundColor?: string | null } | { __typename: 'PageBlocksHero', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, collageImages?: Array<{ __typename: 'PageBlocksHeroCollageImages', src?: string | null } | null> | null } | { __typename: 'PageBlocksRichTextBlock', heading?: string | null, subheading?: string | null, features?: Array<{ __typename: 'PageBlocksRichTextBlockFeatures', icon?: string | null, title: string, description?: any | null } | null> | null } | { __typename: 'PageBlocksCarouselBlock', blockTitle?: string | null, blockSubtitle?: string | null, options_loop?: boolean | null, autoplayInterval?: number | null, slides?: Array<{ __typename: 'PageBlocksCarouselBlockSlides', src?: string | null, alt?: string | null, testimonialText: string, clientName: string, clientType?: string | null } | null> | null } | { __typename: 'PageBlocksServiceListingBlock', title?: string | null, ctaText?: string | null, ctaLink?: string | null, ctaContent?: string | null, backgroundColor?: string | null, services?: Array<{ __typename: 'PageBlocksServiceListingBlockServices', name: string, slug: string, examples?: any | null, description?: any | null } | null> | null } | { __typename: 'PageBlocksBannerBlock', title?: string | null, subtitle?: string | null, benefits?: Array<{ __typename: 'PageBlocksBannerBlockBenefits', icon?: string | null, heading: string, text: string, backgroundColor?: string | null, buttonText?: string | null, buttonLink?: string | null } | null> | null } | { __typename: 'PageBlocksNewsletterSignupBlock', title?: string | null, description?: string | null, backgroundColor?: string | null, textColor?: string | null, buttonBgColor?: string | null, buttonTextColor?: string | null } | { __typename: 'PageBlocksHeaderBlock', heading?: string | null, tagline?: string | null, subtitle?: string | null, backgroundColor?: string | null, logoImage?: { __typename: 'PageBlocksHeaderBlockLogoImage', src?: string | null, alt?: string | null } | null, highlightWords?: Array<{ __typename: 'PageBlocksHeaderBlockHighlightWords', word: string, color: string } | null> | null, features?: Array<{ __typename: 'PageBlocksHeaderBlockFeatures', title: string, content?: any | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const GlobalPartsFragmentDoc = gql`
     fragment GlobalParts on Global {
@@ -1307,40 +1193,6 @@ export const PagePartsFragmentDoc = gql`
     specialties
     location
   }
-  headerBlocks {
-    __typename
-    ... on PageHeaderBlocksHeaderBlock {
-      heading
-      tagline
-      subtitle
-      logoImage {
-        __typename
-        src
-        alt
-      }
-      backgroundColor
-      highlightWords {
-        __typename
-        word
-        color
-      }
-      features {
-        __typename
-        title
-        content
-      }
-    }
-    ... on PageHeaderBlocksHero {
-      heading
-      subheading
-      buttonText
-      buttonLink
-      collageImages {
-        __typename
-        src
-      }
-    }
-  }
   blocks {
     __typename
     ... on PageBlocksCtaBlock {
@@ -1350,8 +1202,14 @@ export const PagePartsFragmentDoc = gql`
       buttonText
       buttonLink
       imageLeft
+      mediaType
       imageSrc
       imageAlt
+      videoUrl
+      cardTitle
+      cardLinkText
+      cardLinkUrl
+      cardDescription
       backgroundColor
     }
     ... on PageBlocksHero {

@@ -11,8 +11,6 @@ import {
   PageBlocksServiceListingBlock,
 } from "../../../tina/__generated__/types";
 
-// Import all blocks directly to prevent flickering
-// This is better for core/essential components that appear above the fold
 import { HeroBlock } from "./HeroBlock";
 import { CarouselBlock } from "./CarouselBlock";
 import RichTextBlock from "./RichTextBlock";
@@ -75,9 +73,16 @@ export const Blocks: React.FC<BlocksProps> = ({ blocks }) => {
  */
 function renderBlock<T extends PageBlocks>(block: T, idx: number) {
   const typename = block.__typename as keyof BlockComponentMap;
+
   const Component = BLOCK_COMPONENTS[typename] as React.ComponentType<{
     data: T;
   }>;
+
+  // If the component is undefined, log for debugging and render nothing
+  if (!Component) {
+    console.warn(`No component found for block type: ${typename}`);
+    return null;
+  }
 
   return <Component key={idx} data={block} />;
 }

@@ -1,3 +1,14 @@
+headerBlocks:
+  - heading: About Prime Health
+    tagline: ' Connecting you with industry leading mental health support'
+    subtitle: >-
+      Expanding access to mental health, substance use, and eating disorder
+      treatment to as many people struggling with serious challenges as
+      possible.
+    logoImage:
+      src: /optimized/primeLogo-trimmed.webp
+      alt: Prime Health
+    _template: headerBlock
 title: Meet Our Team
 description: 'Our PTWD therapy team is equipped and eager to help. '
 template: people
@@ -49,14 +60,30 @@ people:
     contact:
       email: taymarks@fakeemail.com
       phone: '5467384556'
-headerBlocks:
-  - heading: About Prime Health
-    tagline: ' Connecting you with industry leading mental health support'
-    subtitle: >-
-      Expanding access to mental health, substance use, and eating disorder
-      treatment to as many people struggling with serious challenges as
-      possible.
-    logoImage:
-      src: /optimized/primeLogo-trimmed.webp
-      alt: Prime Health
-    _template: headerBlock
+blocks:
+  - title: Our Values
+    benefits:
+      - heading: Compassion
+        text: Caring deeply with understanding and support
+      - heading: Congruence
+        text: >-
+          Helping you heal with integrity to our principles and evidence based
+          therapy
+      - heading: Continuity
+        text: Smooth and cohesive therapeutic journey
+    _template: bannerBlock
+  - heading: How did Prime Therapy get its start?
+    content: >
+      At Prime Therapy, we believe that everyone deserves a supportive space to
+      explore, heal, and grow. Our practice was founded by Dr. Evelyn Reed, who
+      envisioned a sanctuary where genuine connection and personalized care lead
+      to lasting transformation. We're dedicated to providing a warm,
+      understanding environment where your unique journey is honored, and you
+      can confidently take the next steps toward a healthier, happier you.
+    buttonText: Ready to heal?
+    buttonLink: /booking
+    imageSrc: ''
+    imageAlt: Growth
+    videoUrl: >-
+      https://www.pexels.com/video/a-person-doing-meditation-exercises-on-the-mountain-side-2796307
+    _template: ctaBlock

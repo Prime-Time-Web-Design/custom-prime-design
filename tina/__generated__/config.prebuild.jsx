@@ -402,167 +402,8 @@ var pageSchema = defineSchema2({
             }
           ]
         },
-        {
-          name: "headerBlocks",
-          label: "Header Section Blocks",
-          type: "object",
-          list: true,
-          templates: [
-            {
-              name: "headerBlock",
-              label: "Header Block",
-              fields: [
-                {
-                  type: "string",
-                  name: "heading",
-                  label: "Heading",
-                  description: "Main heading for the header section",
-                  ui: {
-                    defaultValue: "About Us"
-                  }
-                },
-                {
-                  type: "string",
-                  name: "tagline",
-                  label: "Tagline",
-                  description: "A short tagline displayed below the heading",
-                  required: false
-                },
-                {
-                  type: "string",
-                  name: "subtitle",
-                  label: "Subtitle",
-                  description: "Descriptive text below the tagline",
-                  ui: { component: "textarea" },
-                  required: false
-                },
-                {
-                  type: "object",
-                  name: "logoImage",
-                  label: "Logo Image",
-                  fields: [
-                    {
-                      type: "image",
-                      name: "src",
-                      label: "Image Source"
-                    },
-                    {
-                      type: "string",
-                      name: "alt",
-                      label: "Alt Text"
-                    }
-                  ]
-                },
-                {
-                  type: "string",
-                  name: "backgroundColor",
-                  label: "Background Color",
-                  description: "CSS class for the background (e.g., bg-bg-contrast)",
-                  ui: {
-                    defaultValue: "bg-bg-contrast"
-                  }
-                },
-                {
-                  type: "object",
-                  name: "highlightWords",
-                  label: "Highlighted Words",
-                  list: true,
-                  ui: {
-                    itemProps: (item) => ({
-                      label: item.word || "Highlighted Word"
-                    })
-                  },
-                  fields: [
-                    {
-                      type: "string",
-                      name: "word",
-                      label: "Word",
-                      description: "Word to highlight in the heading or tagline",
-                      required: true
-                    },
-                    {
-                      type: "string",
-                      name: "color",
-                      label: "Color Scheme",
-                      options: [
-                        { label: "Primary", value: "primary" },
-                        { label: "Secondary", value: "secondary" },
-                        { label: "Tertiary", value: "tertiary" },
-                        { label: "Accent", value: "accent" }
-                      ],
-                      required: true,
-                      ui: {
-                        defaultValue: "primary"
-                      }
-                    }
-                  ]
-                },
-                {
-                  type: "object",
-                  name: "features",
-                  label: "Feature Highlights",
-                  list: true,
-                  ui: {
-                    itemProps: (item) => ({ label: item.title || "Feature" })
-                  },
-                  fields: [
-                    {
-                      type: "string",
-                      name: "title",
-                      label: "Title",
-                      required: true
-                    },
-                    {
-                      type: "rich-text",
-                      name: "content",
-                      label: "Content"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              name: "hero",
-              label: "Hero Section",
-              fields: [
-                {
-                  type: "string",
-                  name: "heading",
-                  label: "Heading"
-                },
-                {
-                  type: "string",
-                  name: "subheading",
-                  label: "Subheading",
-                  ui: { component: "textarea" }
-                },
-                {
-                  type: "string",
-                  name: "buttonText",
-                  label: "Button Text"
-                },
-                {
-                  type: "string",
-                  name: "buttonLink",
-                  label: "Button Link"
-                },
-                {
-                  type: "object",
-                  list: true,
-                  name: "collageImages",
-                  label: "Collage Images",
-                  fields: [
-                    {
-                      type: "image",
-                      name: "src",
-                      label: "Image"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
+        // We're removing the separate headerBlocks field since it's redundant
+        // and causes type conflicts with the headerBlock template in the regular blocks array
         {
           type: "object",
           list: true,
@@ -609,16 +450,69 @@ var pageSchema = defineSchema2({
                   }
                 },
                 {
+                  type: "string",
+                  name: "mediaType",
+                  label: "Media Type",
+                  description: "Choose whether to display an image or video",
+                  options: [
+                    { label: "Image", value: "image" },
+                    { label: "Video", value: "video" }
+                  ],
+                  ui: {
+                    defaultValue: "image"
+                  }
+                },
+                {
                   type: "image",
                   name: "imageSrc",
                   label: "Image",
-                  description: "Image for the CTA section (optional)"
+                  description: "Image for the CTA section (if Media Type is image)"
                 },
                 {
                   type: "string",
                   name: "imageAlt",
                   label: "Image Alt Text",
                   description: "Alternative text for the image"
+                },
+                {
+                  type: "string",
+                  name: "videoUrl",
+                  label: "Video URL",
+                  description: "URL to a video (YouTube, Vimeo, etc.) if Media Type is video"
+                },
+                {
+                  type: "string",
+                  name: "cardTitle",
+                  label: "Card Title",
+                  description: "Title displayed in the media card",
+                  ui: {
+                    defaultValue: "Prime Therapy Annual Outcomes"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "cardLinkText",
+                  label: "Card Link Text",
+                  description: "Text for the link in the media card",
+                  ui: {
+                    defaultValue: "Report"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "cardLinkUrl",
+                  label: "Card Link URL",
+                  description: "URL for the card's link (optional)"
+                },
+                {
+                  type: "string",
+                  name: "cardDescription",
+                  label: "Card Description",
+                  description: "Description text shown in the media card",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Read more about our latest clinical research and industry-leading outcomes"
+                  }
                 },
                 {
                   type: "string",
