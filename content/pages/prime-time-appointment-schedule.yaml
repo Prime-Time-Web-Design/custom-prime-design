@@ -1,0 +1,12 @@
+title: Prime Time Appointment Schedule
+description: >+
+  Taking the first step toward healing is powerful. Whether you're a new client
+  or returning, this is your space to schedule time with your therapist.
+
+  Use the calendar below to find a time that works for you. Choose between
+  in-person or virtual sessions based on your preference.
+
+template: standard
+subtitle: Start Healing Today
+blocks:
+  - _template: appointmentBookingBlock

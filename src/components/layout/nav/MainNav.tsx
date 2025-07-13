@@ -145,7 +145,7 @@ export const MainNav: React.FC<MainNavProps> = ({ navigation }) => {
               Log in
             </Link>
             <Link
-              href="/book-now"
+              href="/appointments"
               className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-base font-medium text-bg-contrast hover:bg-[var(--color-primary-hover)] shadow-sm transition duration-200 focus:outline-none focus:text-[var(--color-bg)]"
             >
               Book Now

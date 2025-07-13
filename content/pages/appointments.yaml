@@ -1,0 +1,44 @@
+title: Book an Appointment
+description: Schedule your consultation with our expert team
+template: standard
+blocks:
+  - _template: appointmentBookingBlock
+    title: Book Your Appointment
+    subtitle: Schedule a consultation with our expert team. We're here to help you on your journey to better health and wellness.
+    services:
+      - id: initial-consultation
+        name: Initial Consultation
+        duration: 60 minutes
+        price: $150
+      - id: follow-up
+        name: Follow-up Session
+        duration: 30 minutes
+        price: $100
+      - id: therapy-session
+        name: Therapy Session
+        duration: 50 minutes
+        price: $120
+      - id: assessment
+        name: Comprehensive Assessment
+        duration: 90 minutes
+        price: $200
+    backgroundColor: bg-bg
+    textColor: text-text
+    buttonText: Book Appointment
+    availableDays:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+    timeSlots:
+      - 9:00 AM
+      - 10:00 AM
+      - 11:00 AM
+      - 1:00 PM
+      - 2:00 PM
+      - 3:00 PM
+      - 4:00 PM
+    requiresPhone: true
+    requiresNotes: false
+    successMessage: Thank you! Your appointment request has been submitted. We'll contact you within 24 hours to confirm your appointment.

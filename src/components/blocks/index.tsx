@@ -1,6 +1,7 @@
 "use client";
 import {
   PageBlocks,
+  PageBlocksAppointmentBookingBlock,
   PageBlocksBannerBlock,
   PageBlocksCarouselBlock,
   PageBlocksCtaBlock,
@@ -11,6 +12,7 @@ import {
   PageBlocksServiceListingBlock,
 } from "../../../tina/__generated__/types";
 
+import { AppointmentBookingBlock } from "./AppointmentBookingBlock";
 import { HeroBlock } from "./HeroBlock";
 import { CarouselBlock } from "./CarouselBlock";
 import RichTextBlock from "./RichTextBlock";
@@ -22,6 +24,7 @@ import NewsletterSignupBlock from "./NewsletterSignupBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
+  PageBlocksAppointmentBookingBlock: PageBlocksAppointmentBookingBlock;
   PageBlocksHero: PageBlocksHero;
   PageBlocksRichTextBlock: PageBlocksRichTextBlock;
   PageBlocksCarouselBlock: PageBlocksCarouselBlock;
@@ -39,6 +42,7 @@ type BlockComponentMap = {
 // Use eagerly loaded components for above-the-fold content
 // This prevents flickering by ensuring components are available immediately
 const BLOCK_COMPONENTS: BlockComponentMap = {
+  PageBlocksAppointmentBookingBlock: AppointmentBookingBlock,
   PageBlocksHero: HeroBlock,
   PageBlocksRichTextBlock: RichTextBlock,
   PageBlocksCarouselBlock: CarouselBlock,

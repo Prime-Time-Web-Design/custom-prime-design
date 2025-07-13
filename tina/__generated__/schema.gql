@@ -388,7 +388,28 @@ type PageBlocksHeaderBlock {
   features: [PageBlocksHeaderBlockFeatures]
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock
+type PageBlocksAppointmentBookingBlockServices {
+  id: String!
+  name: String!
+  duration: String!
+  price: String
+}
+
+type PageBlocksAppointmentBookingBlock {
+  title: String
+  subtitle: String
+  services: [PageBlocksAppointmentBookingBlockServices]
+  backgroundColor: String
+  textColor: String
+  buttonText: String
+  availableDays: [String]
+  timeSlots: [String]
+  requiresPhone: Boolean
+  requiresNotes: Boolean
+  successMessage: String
+}
+
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock | PageBlocksAppointmentBookingBlock
 
 type Page implements Node & Document {
   title: String!
@@ -584,6 +605,27 @@ input PageBlocksHeaderBlockFilter {
   features: PageBlocksHeaderBlockFeaturesFilter
 }
 
+input PageBlocksAppointmentBookingBlockServicesFilter {
+  id: StringFilter
+  name: StringFilter
+  duration: StringFilter
+  price: StringFilter
+}
+
+input PageBlocksAppointmentBookingBlockFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  services: PageBlocksAppointmentBookingBlockServicesFilter
+  backgroundColor: StringFilter
+  textColor: StringFilter
+  buttonText: StringFilter
+  availableDays: StringFilter
+  timeSlots: StringFilter
+  requiresPhone: BooleanFilter
+  requiresNotes: BooleanFilter
+  successMessage: StringFilter
+}
+
 input PageBlocksFilter {
   ctaBlock: PageBlocksCtaBlockFilter
   hero: PageBlocksHeroFilter
@@ -593,6 +635,7 @@ input PageBlocksFilter {
   bannerBlock: PageBlocksBannerBlockFilter
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockFilter
   headerBlock: PageBlocksHeaderBlockFilter
+  appointmentBookingBlock: PageBlocksAppointmentBookingBlockFilter
 }
 
 input PageFilter {
@@ -854,6 +897,27 @@ input PageBlocksHeaderBlockMutation {
   features: [PageBlocksHeaderBlockFeaturesMutation]
 }
 
+input PageBlocksAppointmentBookingBlockServicesMutation {
+  id: String
+  name: String
+  duration: String
+  price: String
+}
+
+input PageBlocksAppointmentBookingBlockMutation {
+  title: String
+  subtitle: String
+  services: [PageBlocksAppointmentBookingBlockServicesMutation]
+  backgroundColor: String
+  textColor: String
+  buttonText: String
+  availableDays: [String]
+  timeSlots: [String]
+  requiresPhone: Boolean
+  requiresNotes: Boolean
+  successMessage: String
+}
+
 input PageBlocksMutation {
   ctaBlock: PageBlocksCtaBlockMutation
   hero: PageBlocksHeroMutation
@@ -863,6 +927,7 @@ input PageBlocksMutation {
   bannerBlock: PageBlocksBannerBlockMutation
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockMutation
   headerBlock: PageBlocksHeaderBlockMutation
+  appointmentBookingBlock: PageBlocksAppointmentBookingBlockMutation
 }
 
 input PageMutation {

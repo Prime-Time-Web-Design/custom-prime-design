@@ -195,5 +195,24 @@ fragment PageParts on Page {
         content
       }
     }
+    ... on PageBlocksAppointmentBookingBlock {
+      title
+      subtitle
+      services {
+        __typename
+        id
+        name
+        duration
+        price
+      }
+      backgroundColor
+      textColor
+      buttonText
+      availableDays
+      timeSlots
+      requiresPhone
+      requiresNotes
+      successMessage
+    }
   }
 }

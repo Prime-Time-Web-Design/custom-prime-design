@@ -1010,6 +1010,164 @@ var pageSchema = defineSchema2({
                   ]
                 }
               ]
+            },
+            {
+              name: "appointmentBookingBlock",
+              label: "Appointment Booking Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "title",
+                  label: "Title",
+                  description: "Main heading for the appointment booking section",
+                  ui: {
+                    defaultValue: "Book Your Appointment"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "subtitle",
+                  label: "Subtitle",
+                  description: "Descriptive text below the title",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Schedule a consultation with our team"
+                  }
+                },
+                {
+                  type: "object",
+                  list: true,
+                  name: "services",
+                  label: "Available Services",
+                  ui: {
+                    itemProps: (item) => ({ label: item.name || "Service" })
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "id",
+                      label: "Service ID",
+                      description: "Unique identifier for the service",
+                      required: true
+                    },
+                    {
+                      type: "string",
+                      name: "name",
+                      label: "Service Name",
+                      required: true
+                    },
+                    {
+                      type: "string",
+                      name: "duration",
+                      label: "Duration",
+                      description: "How long the service takes (e.g., '30 minutes', '1 hour')",
+                      required: true
+                    },
+                    {
+                      type: "string",
+                      name: "price",
+                      label: "Price",
+                      description: "Service price (optional, e.g., '$150', 'Contact for pricing')"
+                    }
+                  ]
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  description: "CSS class for the background",
+                  ui: {
+                    defaultValue: "bg-bg"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "textColor",
+                  label: "Text Color",
+                  description: "CSS class for the text color",
+                  ui: {
+                    defaultValue: "text-text"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "buttonText",
+                  label: "Submit Button Text",
+                  ui: {
+                    defaultValue: "Book Appointment"
+                  }
+                },
+                {
+                  type: "string",
+                  list: true,
+                  name: "availableDays",
+                  label: "Available Days",
+                  description: "Days of the week when appointments are available",
+                  options: [
+                    { label: "Monday", value: "Monday" },
+                    { label: "Tuesday", value: "Tuesday" },
+                    { label: "Wednesday", value: "Wednesday" },
+                    { label: "Thursday", value: "Thursday" },
+                    { label: "Friday", value: "Friday" },
+                    { label: "Saturday", value: "Saturday" },
+                    { label: "Sunday", value: "Sunday" }
+                  ],
+                  ui: {
+                    defaultValue: [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday"
+                    ]
+                  }
+                },
+                {
+                  type: "string",
+                  list: true,
+                  name: "timeSlots",
+                  label: "Available Time Slots",
+                  description: "Time slots available for booking",
+                  ui: {
+                    defaultValue: [
+                      "9:00 AM",
+                      "10:00 AM",
+                      "11:00 AM",
+                      "2:00 PM",
+                      "3:00 PM",
+                      "4:00 PM"
+                    ]
+                  }
+                },
+                {
+                  type: "boolean",
+                  name: "requiresPhone",
+                  label: "Require Phone Number",
+                  description: "Make phone number a required field",
+                  ui: {
+                    defaultValue: true
+                  }
+                },
+                {
+                  type: "boolean",
+                  name: "requiresNotes",
+                  label: "Show Notes Field",
+                  description: "Display an optional notes/comments field",
+                  ui: {
+                    defaultValue: false
+                  }
+                },
+                {
+                  type: "string",
+                  name: "successMessage",
+                  label: "Success Message",
+                  description: "Message shown after successful appointment submission",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Thank you! Your appointment request has been submitted."
+                  }
+                }
+              ]
             }
           ]
         }
