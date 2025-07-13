@@ -40,7 +40,7 @@ export default function PeopleTemplate({
       ? data.peopleType
       : "practitioners";
 
-  console.log("headerBlocks", data?.headerBlocks);
+  // headerBlocks have been removed
 
   return (
     <div className="people-template">

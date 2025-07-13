@@ -16,11 +16,8 @@ export default function ServiceTemplate({
 }: ServiceTemplateProps) {
   return (
     <div className="service-template">
-      {/* Header blocks or default header */}
+      {/* Default header */}
       <div className="service-header">
-        {data?.headerBlocks && data.headerBlocks.length > 0 ? (
-          <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-        ) : (
           <div className="bg-bg-contrast overflow-hidden">
             <Section className="flex items-center px-8 py-4 text-left">
               <span className="inline-block px-3 py-1 rounded-full bg-tertiary text-[var(--color-deep-slate)] text-sm font-medium shadow-lg tracking-wide">
@@ -36,7 +33,6 @@ export default function ServiceTemplate({
               </div>
             </Section>
           </div>
-        )}
       </div>
 
       {/* Dynamic blocks from Tina CMS */}

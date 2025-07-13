@@ -17,12 +17,8 @@ export default function LandingTemplate({
 }: LandingTemplateProps) {
   return (
     <div className="landing-template">
-      {/* Render the header blocks if they exist, otherwise use the fallback */}
-      {data?.headerBlocks && data.headerBlocks.length > 0 ? (
-        <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-      ) : (
-        <DefaultHeader />
-      )}
+      {/* Use default header as headerBlocks have been removed */}
+      <DefaultHeader />
 
       {/* Main content blocks - dynamic from Tina */}
       <Section className="main-content-section bg-gradient-to-b from-[var(--color-very-light-gray)] to-[var(--color-soft-lavender-light)]">

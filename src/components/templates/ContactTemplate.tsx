@@ -14,11 +14,8 @@ export default function ContactTemplate({
 }: ContactTemplateProps) {
   return (
     <div className="contact-template">
-      {/* Header section with header blocks or default */}
+      {/* Header section with default */}
       <div className="contact-header bg-teal-600 text-white">
-        {data?.headerBlocks && data.headerBlocks.length > 0 ? (
-          <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-        ) : (
           <Section className="py-16 text-center">
             <h1 className="text-4xl font-bold mb-4">
               {data?.title || "Contact Us"}
@@ -28,7 +25,6 @@ export default function ContactTemplate({
                 "We'd love to hear from you. Send us a message and we'll respond as soon as possible."}
             </p>
           </Section>
-        )}
       </div>
 
       {/* Contact information and form - static part of the template */}

@@ -19,7 +19,7 @@ export interface TemplateProps {
     title?: string;
     description?: string;
     template?: string;
-    headerBlocks?: Block[];
+    // headerBlocks property has been removed - all blocks are now in the blocks array
     blocks?: Block[];
     [key: string]: unknown;
   };

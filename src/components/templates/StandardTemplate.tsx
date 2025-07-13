@@ -14,13 +14,6 @@ export default function StandardTemplate({
 }: StandardTemplateProps) {
   return (
     <div className="standard-template">
-      {/* Optional header blocks section */}
-      {data?.headerBlocks && data.headerBlocks.length > 0 && (
-        <Section className="header-blocks-section">
-          <Blocks blocks={ensureValidBlocks(data.headerBlocks)} />
-        </Section>
-      )}
-
       {/* Main content blocks section */}
       <Section className="main-content-section">
         <Blocks blocks={ensureValidBlocks(data?.blocks)} />
