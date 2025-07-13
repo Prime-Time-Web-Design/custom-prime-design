@@ -11,7 +11,7 @@ interface PageData {
     title?: string;
     description?: string;
     blocks?: unknown[];
-    headerBlocks?: unknown[];
+    // headerBlocks has been removed
     [key: string]: unknown;
   } | null;
 }
@@ -57,8 +57,8 @@ export function PageClientWrapper({ data, children }: PageClientWrapperProps) {
 
   // Process the blocks to ensure they're valid
   const blocks = ensureValidBlocks(tinaData.page?.blocks);
-  const headerBlocks = ensureValidBlocks(tinaData.page?.headerBlocks);
-
+  // headerBlocks have been removed
+  
   // Apply a style to prevent content shift during hydration
   const hydrationStyle = !hasHydrated ? { opacity: 0.99 } : {};
 
@@ -69,7 +69,6 @@ export function PageClientWrapper({ data, children }: PageClientWrapperProps) {
           data={{
             ...tinaData.page,
             blocks,
-            headerBlocks,
           }}
         >
           {children}

@@ -176,14 +176,6 @@ query GetPage($relativePath: String!) {
     description
     template
     subtitle
-    headerBlocks {
-      ... on PageHeaderBlocksHero {
-        heading
-        subheading
-        buttonText
-        buttonLink
-      }
-    }
     blocks {
       ... on PageBlocksHero {
         ...PageHeroBlockFields

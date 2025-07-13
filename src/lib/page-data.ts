@@ -7,7 +7,7 @@ interface PageData {
     title?: string;
     description?: string;
     blocks?: unknown[];
-    headerBlocks?: unknown[];
+    // headerBlocks has been removed
     [key: string]: unknown;
   };
   [key: string]: unknown;
