@@ -409,7 +409,13 @@ type PageBlocksAppointmentBookingBlock {
   successMessage: String
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock | PageBlocksAppointmentBookingBlock
+type PageBlocksPricingBlock {
+  heading: String
+  subheading: String
+  backgroundColor: String
+}
+
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock | PageBlocksAppointmentBookingBlock | PageBlocksPricingBlock
 
 type Page implements Node & Document {
   title: String!
@@ -626,6 +632,12 @@ input PageBlocksAppointmentBookingBlockFilter {
   successMessage: StringFilter
 }
 
+input PageBlocksPricingBlockFilter {
+  heading: StringFilter
+  subheading: StringFilter
+  backgroundColor: StringFilter
+}
+
 input PageBlocksFilter {
   ctaBlock: PageBlocksCtaBlockFilter
   hero: PageBlocksHeroFilter
@@ -636,6 +648,7 @@ input PageBlocksFilter {
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockFilter
   headerBlock: PageBlocksHeaderBlockFilter
   appointmentBookingBlock: PageBlocksAppointmentBookingBlockFilter
+  pricingBlock: PageBlocksPricingBlockFilter
 }
 
 input PageFilter {
@@ -918,6 +931,12 @@ input PageBlocksAppointmentBookingBlockMutation {
   successMessage: String
 }
 
+input PageBlocksPricingBlockMutation {
+  heading: String
+  subheading: String
+  backgroundColor: String
+}
+
 input PageBlocksMutation {
   ctaBlock: PageBlocksCtaBlockMutation
   hero: PageBlocksHeroMutation
@@ -928,6 +947,7 @@ input PageBlocksMutation {
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockMutation
   headerBlock: PageBlocksHeaderBlockMutation
   appointmentBookingBlock: PageBlocksAppointmentBookingBlockMutation
+  pricingBlock: PageBlocksPricingBlockMutation
 }
 
 input PageMutation {

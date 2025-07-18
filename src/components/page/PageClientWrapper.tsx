@@ -58,7 +58,7 @@ export function PageClientWrapper({ data, children }: PageClientWrapperProps) {
   // Process the blocks to ensure they're valid
   const blocks = ensureValidBlocks(tinaData.page?.blocks);
   // headerBlocks have been removed
-  
+
   // Apply a style to prevent content shift during hydration
   const hydrationStyle = !hasHydrated ? { opacity: 0.99 } : {};
 

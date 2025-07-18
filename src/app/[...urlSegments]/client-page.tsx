@@ -35,7 +35,6 @@ export default function ClientPage(props: ClientPageProps) {
   const pageData = {
     ...data.page,
     blocks: ensureValidBlocks(data.page?.blocks),
-    // No need for headerBlocks as they've been moved to the regular blocks array
   };
 
   return (

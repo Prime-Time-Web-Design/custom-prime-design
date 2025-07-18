@@ -214,5 +214,10 @@ fragment PageParts on Page {
       requiresNotes
       successMessage
     }
+    ... on PageBlocksPricingBlock {
+      heading
+      subheading
+      backgroundColor
+    }
   }
 }

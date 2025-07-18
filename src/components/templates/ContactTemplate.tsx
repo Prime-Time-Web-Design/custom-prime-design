@@ -16,15 +16,15 @@ export default function ContactTemplate({
     <div className="contact-template">
       {/* Header section with default */}
       <div className="contact-header bg-teal-600 text-white">
-          <Section className="py-16 text-center">
-            <h1 className="text-4xl font-bold mb-4">
-              {data?.title || "Contact Us"}
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto">
-              {data?.description ||
-                "We'd love to hear from you. Send us a message and we'll respond as soon as possible."}
-            </p>
-          </Section>
+        <Section className="py-16 text-center">
+          <h1 className="text-4xl font-bold mb-4">
+            {data?.title || "Contact Us"}
+          </h1>
+          <p className="text-xl max-w-3xl mx-auto">
+            {data?.description ||
+              "We'd love to hear from you. Send us a message and we'll respond as soon as possible."}
+          </p>
+        </Section>
       </div>
 
       {/* Contact information and form - static part of the template */}

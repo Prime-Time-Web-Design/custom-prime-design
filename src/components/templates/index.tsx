@@ -6,6 +6,7 @@ import ServiceTemplate from "./ServiceTemplate";
 import ContactTemplate from "./ContactTemplate";
 import StandardTemplate from "./StandardTemplate";
 import PeopleTemplate from "./PeopleTemplate";
+import PricingTemplate from "./PricingTemplate";
 
 // Define more specific types for blocks
 export interface Block {
@@ -33,6 +34,7 @@ const TEMPLATE_COMPONENTS = {
   contact: ContactTemplate,
   standard: StandardTemplate,
   people: PeopleTemplate,
+  pricing: PricingTemplate,
 };
 
 // Template selection component

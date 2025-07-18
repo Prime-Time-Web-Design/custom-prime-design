@@ -36,14 +36,14 @@ navigation:
     - label: Pricing
       subItems:
         - label: Membership
-          href: /membership
+          href: /prime-time-therapy-investment
           icon: User2
           variant: large
           description: >-
             Flexible membership plans designed to fit your therapy needs and
             budget.
         - label: Insurance
-          href: /insurance
+          href: /prime-time-therapy-investment
           icon: Shield
           variant: large
           description: >-

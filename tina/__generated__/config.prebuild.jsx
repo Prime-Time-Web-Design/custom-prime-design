@@ -264,7 +264,8 @@ var pageSchema = defineSchema2({
             { label: "Landing Page", value: "landing" },
             { label: "Service Page", value: "service" },
             { label: "Contact Page", value: "contact" },
-            { label: "People Listing", value: "people" }
+            { label: "People Listing", value: "people" },
+            { label: "Pricing Page", value: "pricing" }
           ],
           description: "Select the template to use for this page",
           required: true
@@ -1165,6 +1166,55 @@ var pageSchema = defineSchema2({
                   ui: {
                     component: "textarea",
                     defaultValue: "Thank you! Your appointment request has been submitted."
+                  }
+                }
+              ]
+            },
+            {
+              name: "pricingBlock",
+              label: "Pricing Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  ui: {
+                    defaultValue: "Choose Your Plan"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "subheading",
+                  label: "Subheading",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Select the perfect plan for your mental health journey"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  options: [
+                    {
+                      label: "Default Background",
+                      value: "bg-[var(--color-bg)]"
+                    },
+                    {
+                      label: "Light Background",
+                      value: "bg-[var(--color-bg-light)]"
+                    },
+                    {
+                      label: "Beige Background",
+                      value: "bg-[var(--color-bg-beige)]"
+                    },
+                    {
+                      label: "Contrast Background",
+                      value: "bg-[var(--color-bg-contrast)]"
+                    }
+                  ],
+                  ui: {
+                    defaultValue: "bg-[var(--color-bg)]"
                   }
                 }
               ]

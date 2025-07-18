@@ -27,6 +27,11 @@ export const CTABlock = ({ data }: CTABlockProps) => {
     cardDescription = "Read more about our latest clinical research and industry-leading outcomes", // Make description dynamic
   } = data;
 
+  // Support additional props that may not be in the generated types yet
+  const additionalData = data as any;
+  const layout = additionalData?.layout || "default";
+  const showCard = additionalData?.showCard !== false; // Default to true
+
   // Check if we have a valid media source
   const hasMedia =
     (mediaType === "image" &&
@@ -38,13 +43,46 @@ export const CTABlock = ({ data }: CTABlockProps) => {
       typeof videoUrl === "string" &&
       videoUrl.trim() !== "");
 
+  // Define layout classes based on layout prop
+  const getLayoutClasses = () => {
+    switch (layout) {
+      case "centered":
+        return {
+          container: "max-w-4xl mx-auto text-center",
+          content: "w-full",
+          flexDirection: "flex-col",
+        };
+      case "fullwidth":
+        return {
+          container: "max-w-full",
+          content: "w-full",
+          flexDirection: "flex-col",
+        };
+      default:
+        return {
+          container: "max-w-7xl mx-auto",
+          content:
+            hasMedia && showCard
+              ? "md:w-1/2 md:pl-8 lg:pl-12"
+              : "md:w-2/3 mx-auto",
+          flexDirection: "flex-col md:flex-row justify-evenly",
+        };
+    }
+  };
+
+  const layoutClasses = getLayoutClasses();
+
   return (
     <div className={`px-4 md:px-8 lg:px-16 py-20 ${backgroundColor}`}>
-      <div className="max-w-7xl mx-auto">
-        {/* Two-column layout container */}
-        <div className="flex flex-col md:flex-row justify-evenly">
-          {/* Left column - Card with media and text */}
-          {hasMedia && (
+      <div className={layoutClasses.container}>
+        {/* Layout container */}
+        <div
+          className={`${layoutClasses.flexDirection} ${
+            layout === "centered" ? "items-center" : ""
+          }`}
+        >
+          {/* Card section - only show if showCard is true */}
+          {hasMedia && showCard && layout === "default" && (
             <div className="w-full md:w-1/2 mb-8 md:mb-0 flex justify-center md:justify-end pr-0 md:pr-6">
               <div className="bg-[#1A1E43] rounded-lg p-8 text-white max-w-md w-full shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="flex items-start mb-4">
@@ -96,26 +134,44 @@ export const CTABlock = ({ data }: CTABlockProps) => {
             </div>
           )}
 
-          {/* Right column - Content area */}
+          {/* Content area */}
           <div
-            className={`w-full ${
-              hasMedia ? "md:w-1/2 md:pl-8 lg:pl-12" : "md:w-2/3 mx-auto"
-            } text-left`}
+            className={`w-full ${layoutClasses.content} ${
+              layout === "centered" ? "text-center" : "text-left"
+            }`}
           >
             {heading && (
-              <h2 className="text-3xl sm:text-5xl font-bold mb-6 text-text">
+              <h2
+                className={`font-bold mb-6 text-text ${
+                  layout === "centered"
+                    ? "text-4xl md:text-5xl lg:text-6xl"
+                    : "text-3xl sm:text-5xl"
+                }`}
+              >
                 {heading}
               </h2>
             )}
 
             {subheading && (
-              <p className="text-lg mb-8 text-[var(--color-deep-slate-light)] max-w-xl">
+              <p
+                className={`mb-8 text-[var(--color-deep-slate-light)] ${
+                  layout === "centered"
+                    ? "text-xl md:text-2xl max-w-4xl mx-auto"
+                    : "text-lg max-w-xl"
+                }`}
+              >
                 {subheading}
               </p>
             )}
 
             {content && (
-              <div className="prose prose-lg text-text mb-8 max-w-xl">
+              <div
+                className={`prose text-text mb-8 ${
+                  layout === "centered"
+                    ? "prose-xl max-w-4xl mx-auto"
+                    : "prose-lg max-w-xl"
+                }`}
+              >
                 <TinaMarkdown content={content} />
               </div>
             )}

@@ -1,0 +1,10 @@
+title: Prime Time Therapy Investment
+description: >-
+  This page lays out the best plans to choose from for members and insurance
+  users. 
+template: pricing
+blocks:
+  - heading: Membership
+    subheading: Becoming a member entitles you to extra amenities.
+    backgroundColor: 'bg-[var(--color-bg-beige)]'
+    _template: pricingBlock
