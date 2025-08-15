@@ -1,11 +1,17 @@
 title: Professional Mental Health Therapy - Mindful Healing Therapy
-description: Licensed therapy for anxiety, depression, trauma & life transitions. Evidence-based treatment with experienced therapists. Schedule your consultation today.
+description: >-
+  Licensed therapy for anxiety, depression, trauma & life transitions.
+  Evidence-based treatment with experienced therapists. Schedule your
+  consultation today.
 template: standard
 blocks:
   - heading: Find Your Path to Healing & Growth
-    subheading: |
-      Licensed therapists specializing in anxiety, depression, and trauma recovery.
-      Take the first step toward feeling like yourself again with personalized, evidence-based care.
+    subheading: >
+      Licensed therapists specializing in anxiety, depression, and trauma
+      recovery.
+
+      Take the first step toward feeling like yourself again with personalized,
+      evidence-based care.
     buttonText: Schedule Free Consultation
     buttonLink: /appointments
     collageImages:
@@ -14,6 +20,38 @@ blocks:
       - src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
       - src: /optimized/hero.webp
     _template: hero
+  - title: Why Choose Mindful Healing Therapy?
+    subtitle: >
+      We understand that seeking therapy takes courage. That's why we've created
+      a safe, professional environment where healing happens naturally. With
+      specialized expertise, flexible options, and proven results, we make
+      quality mental health care both accessible and effective.
+    benefits:
+      - icon: Heart
+        heading: Specialized Expertise
+        text: >-
+          Licensed therapists with advanced training in anxiety, depression,
+          trauma, and life transitions
+        backgroundColor: bg-secondary-hover
+        buttonText: Learn More
+        buttonLink: /about
+      - icon: Shield
+        heading: Insurance Accepted
+        text: >-
+          We work with most major insurance plans including Aetna, BCBS,
+          UnitedHealth, and more
+        backgroundColor: bg-accent
+        buttonText: Verify Coverage
+        buttonLink: /insurance
+      - icon: Calendar
+        heading: Flexible & Convenient
+        text: >-
+          Evening and weekend appointments available, plus secure telehealth
+          sessions
+        backgroundColor: bg-tertiary-hover
+        buttonText: Schedule Now
+        buttonLink: /appointments
+    _template: bannerBlock
   - heading: Licensed & Experienced
     subheading: Professional qualifications and expertise you can trust
     credentials:
@@ -31,46 +69,27 @@ blocks:
         description: Ongoing training in latest evidence-based techniques
     backgroundColor: bg-bg
     _template: credentialsBlock
-  - title: Why Choose Mindful Healing Therapy?
-    subtitle: >
-      We understand that seeking therapy takes courage. That's why we've created a safe, professional environment where healing happens naturally. With specialized expertise, flexible options, and proven results, we make quality mental health care both accessible and effective.
-    benefits:
-      - icon: Heart
-        heading: Specialized Expertise
-        text: Licensed therapists with advanced training in anxiety, depression, trauma, and life transitions
-        backgroundColor: bg-secondary-hover
-        buttonText: Learn More
-        buttonLink: /about
-      - icon: Shield
-        heading: Insurance Accepted
-        text: We work with most major insurance plans including Aetna, BCBS, UnitedHealth, and more
-        backgroundColor: bg-accent
-        buttonText: Verify Coverage
-        buttonLink: /insurance
-      - icon: Calendar
-        heading: Flexible & Convenient
-        text: Evening and weekend appointments available, plus secure telehealth sessions
-        backgroundColor: bg-tertiary-hover
-        buttonText: Schedule Now
-        buttonLink: /appointments
-    _template: bannerBlock
-  - blockTitle: 'Real Stories of Healing & Growth'
-    blockSubtitle: 'Discover how our clients found their path to mental wellness and lasting change.'
+  - blockTitle: Real Stories of Healing & Growth
+    blockSubtitle: >-
+      Discover how our clients found their path to mental wellness and lasting
+      change.
     slides:
       - src: /optimized/cecep-rahmat-yKQe3Rtemqs-unsplash.webp
         alt: Anxiety Recovery Success
         testimonialText: >-
           I was drowning in anxiety and couldn't see a way forward. Through 
           evidence-based therapy and genuine support, I've learned to manage my 
-          anxiety and reclaimed my life. I actually feel hopeful about my future again.
+          anxiety and reclaimed my life. I actually feel hopeful about my future
+          again.
         clientName: Sarah M.
         clientType: Anxiety & Depression Treatment
       - src: /optimized/0b747951-c3ad-4d16-b4d6-eb6b871fb382.webp
         alt: Trauma Recovery Journey
         testimonialText: >-
           After years of struggling with trauma, I finally found the right 
-          therapist. The EMDR sessions were life-changing. I'm not just surviving 
-          anymore - I'm truly living and feeling connected to myself again.
+          therapist. The EMDR sessions were life-changing. I'm not just
+          surviving  anymore - I'm truly living and feeling connected to myself
+          again.
         clientName: Michael R.
         clientType: EMDR Trauma Therapy
       - src: /optimized/mina-rad-AEVUFpDGxZM-unsplash.webp
@@ -120,9 +139,9 @@ blocks:
     _template: richTextBlock
   - heading: Don’t just aim to survive. Thrive.
     content: >
-      At Mindful Healing Therapy, we support you through all of life's fluctuations.
-      Navigate toward wellbeing and self-development with guidance from our
-      empathetic counseling professionals.
+      At Mindful Healing Therapy, we support you through all of life's
+      fluctuations. Navigate toward wellbeing and self-development with guidance
+      from our empathetic counseling professionals.
     buttonText: Start Healing Today
     buttonLink: /quick-start
     imageLeft: false
