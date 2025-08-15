@@ -839,6 +839,66 @@ var pageSchema = defineSchema2({
               ]
             },
             {
+              name: "credentialsBlock",
+              label: "Credentials Block",
+              fields: [
+                {
+                  type: "string",
+                  name: "heading",
+                  label: "Heading",
+                  ui: {
+                    defaultValue: "Licensed & Experienced"
+                  }
+                },
+                {
+                  type: "string",
+                  name: "subheading",
+                  label: "Subheading",
+                  ui: {
+                    component: "textarea",
+                    defaultValue: "Professional qualifications and expertise you can trust"
+                  }
+                },
+                {
+                  type: "object",
+                  name: "credentials",
+                  label: "Credentials",
+                  list: true,
+                  ui: {
+                    itemProps: (item) => ({ label: item.title || "Credential" })
+                  },
+                  fields: [
+                    {
+                      type: "string",
+                      name: "icon",
+                      label: "Icon",
+                      options: lucideIconNames
+                    },
+                    {
+                      type: "string",
+                      name: "title",
+                      label: "Title",
+                      required: true
+                    },
+                    {
+                      type: "string",
+                      name: "description",
+                      label: "Description",
+                      ui: { component: "textarea" }
+                    }
+                  ]
+                },
+                {
+                  type: "string",
+                  name: "backgroundColor",
+                  label: "Background Color",
+                  ui: {
+                    defaultValue: "bg-bg"
+                  }
+                }
+              ]
+            },
+            {
               name: "newsletterSignupBlock",
               label: "Newsletter Signup Block",
               fields: [

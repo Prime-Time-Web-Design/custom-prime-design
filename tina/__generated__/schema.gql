@@ -354,6 +354,19 @@ type PageBlocksBannerBlock {
   benefits: [PageBlocksBannerBlockBenefits]
 }
 
+type PageBlocksCredentialsBlockCredentials {
+  icon: String
+  title: String!
+  description: String
+}
+
+type PageBlocksCredentialsBlock {
+  heading: String
+  subheading: String
+  credentials: [PageBlocksCredentialsBlockCredentials]
+  backgroundColor: String
+}
+
 type PageBlocksNewsletterSignupBlock {
   title: String
   description: String
@@ -415,7 +428,7 @@ type PageBlocksPricingBlock {
   backgroundColor: String
 }
 
-union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock | PageBlocksAppointmentBookingBlock | PageBlocksPricingBlock
+union PageBlocks = PageBlocksCtaBlock | PageBlocksHero | PageBlocksRichTextBlock | PageBlocksCarouselBlock | PageBlocksServiceListingBlock | PageBlocksBannerBlock | PageBlocksCredentialsBlock | PageBlocksNewsletterSignupBlock | PageBlocksHeaderBlock | PageBlocksAppointmentBookingBlock | PageBlocksPricingBlock
 
 type Page implements Node & Document {
   title: String!
@@ -577,6 +590,19 @@ input PageBlocksBannerBlockFilter {
   benefits: PageBlocksBannerBlockBenefitsFilter
 }
 
+input PageBlocksCredentialsBlockCredentialsFilter {
+  icon: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageBlocksCredentialsBlockFilter {
+  heading: StringFilter
+  subheading: StringFilter
+  credentials: PageBlocksCredentialsBlockCredentialsFilter
+  backgroundColor: StringFilter
+}
+
 input PageBlocksNewsletterSignupBlockFilter {
   title: StringFilter
   description: StringFilter
@@ -645,6 +671,7 @@ input PageBlocksFilter {
   carouselBlock: PageBlocksCarouselBlockFilter
   serviceListingBlock: PageBlocksServiceListingBlockFilter
   bannerBlock: PageBlocksBannerBlockFilter
+  credentialsBlock: PageBlocksCredentialsBlockFilter
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockFilter
   headerBlock: PageBlocksHeaderBlockFilter
   appointmentBookingBlock: PageBlocksAppointmentBookingBlockFilter
@@ -876,6 +903,19 @@ input PageBlocksBannerBlockMutation {
   benefits: [PageBlocksBannerBlockBenefitsMutation]
 }
 
+input PageBlocksCredentialsBlockCredentialsMutation {
+  icon: String
+  title: String
+  description: String
+}
+
+input PageBlocksCredentialsBlockMutation {
+  heading: String
+  subheading: String
+  credentials: [PageBlocksCredentialsBlockCredentialsMutation]
+  backgroundColor: String
+}
+
 input PageBlocksNewsletterSignupBlockMutation {
   title: String
   description: String
@@ -944,6 +984,7 @@ input PageBlocksMutation {
   carouselBlock: PageBlocksCarouselBlockMutation
   serviceListingBlock: PageBlocksServiceListingBlockMutation
   bannerBlock: PageBlocksBannerBlockMutation
+  credentialsBlock: PageBlocksCredentialsBlockMutation
   newsletterSignupBlock: PageBlocksNewsletterSignupBlockMutation
   headerBlock: PageBlocksHeaderBlockMutation
   appointmentBookingBlock: PageBlocksAppointmentBookingBlockMutation

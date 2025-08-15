@@ -166,6 +166,17 @@ fragment PageParts on Page {
         buttonLink
       }
     }
+    ... on PageBlocksCredentialsBlock {
+      heading
+      subheading
+      credentials {
+        __typename
+        icon
+        title
+        description
+      }
+      backgroundColor
+    }
     ... on PageBlocksNewsletterSignupBlock {
       title
       description

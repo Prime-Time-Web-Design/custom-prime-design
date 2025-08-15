@@ -24,6 +24,7 @@ import BannerBlock from "./BannerBlock";
 import NewsletterSignupBlock from "./NewsletterSignupBlock";
 import PricingBlock from "./PricingBlock";
 import ServiceContentBlock from "./ServiceContentBlock";
+import CredentialsBlock from "./CredentialsBlock";
 
 // 1) Map each __typename to its data type
 type PageBlockMap = {
@@ -38,6 +39,7 @@ type PageBlockMap = {
   PageBlocksNewsletterSignupBlock: PageBlocksNewsletterSignupBlock;
   PageBlocksPricingBlock: PageBlocksPricingBlock;
   PageBlocksServiceContentBlock: any; // Will be defined in tina config
+  PageBlocksCredentialsBlock: any; // Will be defined in tina config
 };
 
 type BlockComponentMap = {
@@ -58,6 +60,7 @@ const BLOCK_COMPONENTS: BlockComponentMap = {
   PageBlocksNewsletterSignupBlock: NewsletterSignupBlock,
   PageBlocksPricingBlock: PricingBlock,
   PageBlocksServiceContentBlock: ServiceContentBlock,
+  PageBlocksCredentialsBlock: CredentialsBlock,
 };
 
 interface BlocksProps {
